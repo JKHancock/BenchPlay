@@ -74,7 +74,7 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 ### 阶段 4 · 预检与清场（preflight/clean）
 **门禁**：端口/显存/残留进程全零。清场必须连杀 `vllm serve`/`RayWorkerProc`/`EngineCore` 三种进程（只杀 serve 会留 worker 占 103GB 显存——实测教训）。
 
-### 阶段 M0 · 模型调研（任何 serve 之前的硬门禁）★
+### 阶段 2a · 模型画像（并入底座阶段，任何 serve 之前的硬门禁）★
 `scripts/model_profile.py <model_dir>` 四层证据链：
 1. **权重实证**（safetensors 索引）：MTP 层有无与层数（**config 不声明 ≠ 没有**——Qwen3.6 实测 config 无键但权重里 19 个）、视觉塔、专家结构、精确权重量 GB（喂屋顶线）；
 2. **config 形态**：model_type→方法映射、原生上下文、rope 形态（mrope 混合→直接给出外拓配方提示）；
@@ -82,11 +82,12 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 4. **容器注册表核对**（只读）：该 vLLM 版本的 MTP 方法表/tool parser 名——方法名是版本耦合的。
 **门禁**：无 profile 不得 serve。**产物**：`models/{name}.profile.json`（含 k 建议、parser_must_probe 标记）。已夹具化单测（9 断言）。
 
-### 阶段 M0.5 · 联网调研（Agent 职责）
+### 阶段 2b · 联网调研（Agent 职责）
 五条检索模板：`<model_type> vllm <版本> recommended flags` / 投机参数 / tool parser 选型 / 已知坑 / 平台专属问题。结果连同来源 URL/日期/版本号写入 profile 的 `external_research`。
 **铁律**（知识获取链 local→web→test→distill）：web 结论只是假设，必须本环境试启实测才能写 verified；**三重判定**（文档说的+注册表有的+实测能跑的→以实测为准）三者不一致全记 version_notes；断网降级本地+容器证据并如实标注。
 
 ### 阶段 5 · 组网（cluster）
+（注：任何阶段失败遵循**归因回溯**——先判断是否上游阶段假设错误（凭据→0、环境突变→1、镜像/内核→2、文件→3、分布式→5），幂等重入断点续跑，同根因最多两轮，禁止原地重试掩盖上游问题）
 `cluster.sh`：QSFP 段 awk 状态机探测（grep -B 会跨块误抓 lo，实测坑）→ 容器内 ray head/worker 双机起。
 **门禁**：ray status 必须 2 节点且 2 GPU。幂等（已就绪直接 PASS）。
 
