@@ -2,6 +2,7 @@
 # 整夜值守: A) Flash-Next 补 40960 短上下文档  B) 等DeepSeek下载完→M0→适配→尝试serve→全电池
 # C) build7+报告+git提交  全程日志 tasks/t20261003-overnight/progress.log
 set -u
+SKIP_DS="${2:-}"
 DS_EXTRA="${1:---speculative-config {"method":"deepseek_mtp","num_speculative_tokens":2} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --max-model-len 131072}"
 BP=/d/CSharpProject/BenchPlaybook
 CLI=/d/CSharpProject/Vllm_Benchmark
@@ -96,7 +97,8 @@ if launch Qwen3.8-Flash-Next-NVFP4 flashnext-40k \
 else log "A) serve发起失败"; fi
 cleanup
 
-# ═══ B) DeepSeek: 等下载(≤8h) → M0 → 适配 → serve → 电池 ═══
+# ═══ B) DeepSeek: 等下载(≤8h) [SKIP_DS=skip-ds 时跳过本节] → M0 → 适配 → serve → 电池 ═══
+if [ "$SKIP_DS" = "skip-ds" ]; then log "B) 按裁决跳过DeepSeek段"; else
 log "B) 等待 DeepSeek-V4-Flash-0731-NVFP4 下载完成(双机)"
 DSOK=0
 for i in $(seq 1 480); do
@@ -134,6 +136,7 @@ print('MTP权重:',len(mtp),'| 总GB:',round(idx['metadata']['total_size']/1e9,1
   else log "B) serve发起失败"; fi
 else
   log "B) 下载8小时未完成, 放弃本轮(已存进度)"
+fi
 fi
 
 # ═══ C) 汇编+报告+提交 ═══
