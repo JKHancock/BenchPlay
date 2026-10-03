@@ -113,16 +113,33 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 ### 阶段 9 · 沉淀
 经验条目（现象/真因/修复/来源任务 ID/命中计数）append 到对应主题文件并更新 INDEX；达到晋升条件的经 `kb.py` 提名入知识库。
 
-## 6. 四个指标集合（每场景必挂）
+## 6. 三大 Benchmark 与指标集合（每场景必挂）
 
-| 集合 | P0 内容 | 主要来源 |
-|---|---|---|
-| vllm_metrics | KV 池容量/最大并发×、投机接受率、负载中 running/waiting/kv 峰值、分段成功(stop+len)/失败(abort+err)计数、prompt/gen tokens、前缀命中 q/h、服务端 TTFT/TPOT/ITL/排队 p99 | /metrics 三时点差值+GaugePoller+启动日志 |
-| perf_metrics | 六工作负载全指标族+舒适度扫描+SLO goodput+屋顶线+两探针 | track1/probes（逐请求 SSE 计时） |
-| capability_scores | 八套件 acc+截断率+维度分+C-Score（权重：数学.18 知识.22 常识.18 科学.12 诚实.18 共指.12） | track2 |
-| agent_metrics | BFCL 五类、循环 pass@1/并行调用率/克制/步数预算、toolcall TTFT、思考 on/off A/B、A-Score（克制.25 结构.25 循环.30 选择.20） | track3/bfcl |
+每个场景（= 一组 vLLM 参数/集群组合）都跑**三大 benchmark**，每个 benchmark 有**自己专属的指标集合**；另有一套 **vLLM 服务指标集合**贯穿全程同步采集。
 
-打分规则：**原始 acc → 维度分（成员等权）→ 总分（Σ权重×维度分）×100**；原始>维度>总分，总分是派生视图，权重表随报告公示可复算。
+### 6.1 Benchmark 一 · 性能（Track1 + 探针）→ 性能指标集合
+- 工作负载矩阵：随机吞吐档 / 真实分布(ShareGPT) / 短对话 / 长文预填 / 输出阶梯 / 满序列批 / 舒适度扫描 / 超长上下文探针
+- 指标族：TTFT·TPOT·ITL·E2E{mean,p50,p90,p99,max}、单流出流、聚合吞吐/QPS、SLO goodput、屋顶线利用率、前缀缓存复用(长度阶梯)、容量阶梯、档内失败补跑计数
+- 来源：SSE 流式逐请求计时（bench/track1、bench/probes）
+
+### 6.2 Benchmark 二 · 模型能力（Track2）→ 能力指标集合
+- 套件：数学(gsm8k)·知识(mmlu)·科学(arc)·常识(hellaswag/openbookqa)·共指(winogrande)·诚实性(truthfulqa)·阅读理解(race)，统一口径 0-shot·关思考链·temp=0·固定种子分层抽样；发布卡级套件(MMLU-Pro/MATH-500/AIME/IFEval 等)按 docs/BATTERY.md 排期接入
+- 指标族：各套件 acc/截断率/失败数 → 维度分 → **C-Score 总分**（权重表随报告公示可复算）
+- 来源：bench/track2
+
+### 6.3 Benchmark 三 · 智能体场景（Track3 + BFCL）→ 智能体指标集合
+- 组分：工具选择（含不调用克制）/参数抽取/多轮回环(调用→回灌→作答)/BFCL 函数调用/思考链 on-off A/B
+- 指标族：selection/args/loop pass@1、并行调用率、toolcall TTFT、循环 E2E、token 代价 → **A-Score 总分**
+- 来源：bench/track3_agent、bench/bfcl
+
+### 6.4 ＋ vLLM 服务指标集合（贯穿三大 benchmark 同步采集）
+- 启动态：KV 池容量/最大并发倍数、投机开关、加载与就绪耗时
+- 运行态：投机接受率、负载中 running/waiting/KV 峰值（轮询采样）
+- 分段差值：每相位成功(stop+len)/失败(abort+err)、prompt/gen tokens、前缀命中 q/h
+- 服务端分位：TTFT/TPOT/ITL/排队 p99（直方图内插）
+- 主机层：每节点 GPU 利用率/显存负载中采样
+- 来源：/metrics 三时点差值 + GaugePoller + 启动日志两行落档
+
 
 ## 7. 三个库（数据→教训→知识阶梯）
 
