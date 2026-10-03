@@ -93,8 +93,8 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 `cluster.sh`：QSFP 段 awk 状态机探测（grep -B 会跨块误抓 lo，实测坑）→ 容器内 ray head/worker 双机起。
 **门禁**：ray status 必须 2 节点且 2 GPU。幂等（已就绪直接 PASS）。
 
-### 阶段 6 · 场景生成（三维正交）
-**模型轴**（M0 能力）× **服务轴**（TP/EP/spec-k/rope/autotune + parser/reasoning-parser/structured-output）× **用途轴**（chat/agent/长文）。一个场景 = 一组完整 vLLM argv = `sha1(argv+model+tp)[:8]` 场景 ID；agent 用途必含能力 flags 开/关两档对比。报告按模型分组，组内即参数组合矩阵。
+### 阶段 6 · 场景生成（三维正交，`gen_scenarios.py` 代码化）
+**模型轴**（M0 能力）× **服务轴**（TP/EP/spec-k/rope/autotune + parser/reasoning-parser/structured-output）× **用途轴**（chat/agent/长文）。一个场景 = 一组完整 vLLM argv = `sha1(argv+model+tp)[:8]` 场景 ID；agent 用途必含能力 flags 开/关两档对比。生成器读取 `models/*.profile.json`（含模型专用参数）自动展开组合矩阵并输出 cell 执行命令。报告按模型分组，组内即参数组合矩阵。
 
 ### 阶段 6 执行循环（每场景，cell*.sh 编排）
 1. **清场**（双节点 GPU 归零门禁）
