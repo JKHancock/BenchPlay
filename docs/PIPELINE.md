@@ -14,7 +14,8 @@
    ▼
 [1 清点 probe] 十项只读探测 → machines/{host}.json(含identity, MAC相似度识别换IP老机器)
    ▼                     ↖ 读: 经验库(WSL/bash陷阱) + KB(machine_profiles)
-[2 底座 substrate] 镜像/digest/容器核验 ──◆ GPU计算进程归零
+[2 底座适配求解 substrate] 模型清单×机型×镜像候选 三方最优(本地解读+联网调研→适配矩阵)
+      ◆ 全模型适配才放行; 有不适配→停在本阶段出《适配报告》(逐模型原因+建议)
    ▼
 [3 分发 distribute] 模型上机(sha256逐文件门禁+增量续传, DLP经wash.ps1洗白)
    ▼
