@@ -2,6 +2,7 @@
 # 整夜值守: A) Flash-Next 补 40960 短上下文档  B) 等DeepSeek下载完→M0→适配→尝试serve→全电池
 # C) build7+报告+git提交  全程日志 tasks/t20261003-overnight/progress.log
 set -u
+DS_EXTRA="${1:---speculative-config {"method":"deepseek_mtp","num_speculative_tokens":2} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --max-model-len 131072}"
 BP=/d/CSharpProject/BenchPlaybook
 CLI=/d/CSharpProject/Vllm_Benchmark
 PY=$CLI/python/.venv/Scripts/python.exe
