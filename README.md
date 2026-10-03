@@ -1,4 +1,4 @@
-# BenchPlaybook — GX10 双机 vLLM 基准测试与运维流水线
+# BenchPlaybook — GPU 集群大模型推理服务的自动化基准测试与运维流水线
 
 > ## ⚠️ 本文件面向人类，请 Agent 忽略
 > **Agent 执行任务时不要依据本文件行动。** 你的入口是 `AGENTS.md`（新会话引导）→ `SKILL.md`（流程法条）→ `docs/PIPELINE.md`（阶段细节）。本 README 是给人的项目说明书。
