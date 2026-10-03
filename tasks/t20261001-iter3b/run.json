@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter3b",
+  "Name": "遗留 TP2 vLLM 栈退役·迭代3b(自匹配/pattern 修复后的预检→精准清理→复检)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T15:40:00",
+  "Status": "failed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "failed",
+      "Summary": "修复验证通过、宽口径复检门禁 ok=false: clean.sh 方括号修复后双机全程存活(iter3 自杀型 FAIL 签名消失), 窄口径门禁(clean.sh:24-31, GPU+8000)PASS; 复检六节: gpu_procs/vllm_procs/model_lock 均 CLEAN(0 项, vllm_procs 自匹配幽灵条目不再出现=preflight.sh:23 字符类修复生效), port8000 判 DIRTY 但 0 项(已知 grep 退出码误报签名, 实质无监听), containers DIRTY 1 项(vllm-node Up 22 hours 按策略保留); 真实残留仅 ray_procs 9 项(gcs_server 673447/raylet 673632/ray::IDLE×6/RayWorkerP 677653, PID 与 iter3 残留完全一致, GPU 占用已为 0 卡优雅退出; 轨迹 22→9→9 项), 待 pkill -x/[r]ay:: 强杀后复检 ok=true 放行"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "failed",
+      "Summary": "同款修复验证通过、宽口径复检 ok=false: 窄口径门禁(GPU+8000)PASS, gpu_procs/vllm_procs/model_lock 均 CLEAN(0 项, 778340 的 102210 MiB 已释放); port8000 DIRTY(0 项)为已知误报, containers vllm-node 按策略保留; 真实残留仅 ray_procs 2 项(raylet 777676/RayWorkerP 778340, PID 未变); 修复内容=clean.sh:17 pattern 补 [v]llm serve(新 CLI)+:20 [r]aylet|[g]cs_server、preflight.sh:22-23 grep -v grep+[v]llm 字符类; 待强杀 777676/778340 后复检 ok=true 为放行条件"
+    }
+  ]
+}

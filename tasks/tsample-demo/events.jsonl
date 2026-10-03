@@ -1,0 +1,6 @@
+{"Ts": "2026-10-01T11:20:01", "Machine": "192.168.199.129", "Level": "info", "Source": "task", "Message": "任务开始: 示例数据(可删) (1 台机器, 模型 1 个)"}
+{"Ts": "2026-10-01T11:20:03", "Machine": "192.168.199.129", "Level": "kb", "Source": "qdrant", "Message": "知识库: 新机器(无历史档案)"}
+{"Ts": "2026-10-01T11:20:05", "Machine": "192.168.199.129", "Level": "gate", "Source": "bootstrap", "Message": "PASS 密钥复验通过 (whoami=syspetro)"}
+{"Ts": "2026-10-01T11:20:30", "Machine": "192.168.199.129", "Level": "gate", "Source": "probe", "Message": "档案证据完整(12 字段)"}
+{"Ts": "2026-10-01T11:21:00", "Machine": "192.168.199.129", "Level": "tool", "Source": "distribute", "Message": "PASS Qwen3.6-35B -> 129 (传 39 跳过 0, 21GB)"}
+{"Ts": "2026-10-01T11:21:05", "Machine": "192.168.199.129", "Level": "gate", "Source": "report", "Message": "报告已通过门禁"}

@@ -1,0 +1,102 @@
+{
+  "track": "track1",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "bench",
+  "dataset": "random-512",
+  "params": {
+    "input_len": 512,
+    "output_len": 256,
+    "levels": [
+      1,
+      8,
+      32
+    ],
+    "num_prompts": [
+      8,
+      32,
+      48
+    ],
+    "seed": 20260930,
+    "temperature": 0.0,
+    "ignore_eos": true,
+    "no_think": true,
+    "warmup": 1,
+    "cooldown_s": 10
+  },
+  "phases": [
+    {
+      "concurrency": 1,
+      "num_prompts": 8,
+      "ttft_ms": {
+        "p50": 143.22165001067333,
+        "p90": 154.28890001494437,
+        "p99": 170.82577000721358
+      },
+      "tpot_ms": {
+        "p50": 10.73945431379994,
+        "p90": 10.849037686278406,
+        "p99": 10.852028827437465
+      },
+      "output_tok_s": 88.9,
+      "total_tok_s": 348.53,
+      "qps": 0.3473,
+      "avg_completion_tokens": 256.0,
+      "completed": 8,
+      "failed": 0,
+      "wall_s": 23.0,
+      "retried": 0
+    },
+    {
+      "concurrency": 8,
+      "num_prompts": 32,
+      "ttft_ms": {
+        "p50": 519.617300000391,
+        "p90": 688.9298999973107,
+        "p99": 720.5837190014427
+      },
+      "tpot_ms": {
+        "p50": 21.061296862728128,
+        "p90": 22.1502278039378,
+        "p99": 22.29647036860172
+      },
+      "output_tok_s": 348.72,
+      "total_tok_s": 1366.86,
+      "qps": 1.3622,
+      "avg_completion_tokens": 256.0,
+      "completed": 32,
+      "failed": 0,
+      "wall_s": 23.5,
+      "retried": 0
+    },
+    {
+      "concurrency": 32,
+      "num_prompts": 48,
+      "ttft_ms": {
+        "p50": 790.3615499817533,
+        "p90": 2191.867969997111,
+        "p99": 2515.867276000208
+      },
+      "tpot_ms": {
+        "p50": 43.61357431369149,
+        "p90": 44.16394188240006,
+        "p99": 45.081320431319696
+      },
+      "output_tok_s": 614.2,
+      "total_tok_s": 2405.51,
+      "qps": 2.3992,
+      "avg_completion_tokens": 256.0,
+      "completed": 48,
+      "failed": 0,
+      "wall_s": 20.0,
+      "retried": 0
+    }
+  ],
+  "duration_s": 86.5,
+  "roofline": {
+    "ceiling_tok_s": 321.2,
+    "c1_output_tok_s": 88.9,
+    "utilization": 0.277,
+    "warning": null
+  },
+  "gate_pass": true
+}

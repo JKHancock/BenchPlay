@@ -1,0 +1,11 @@
+  gsm8k: 抽样 200 条(有效 200, 并发 8, max_tokens 1024)
+  gsm8k: acc=0.955 (191/200) 失败请求=0 平均输出=276.8 tokens 用时=113s
+  mmlu: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  mmlu: acc=0.82 (164/200) 失败请求=0 平均输出=2.6 tokens 用时=8s
+  arc: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  arc: acc=0.96 (192/200) 失败请求=0 平均输出=2.1 tokens 用时=6s
+  hellaswag: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  hellaswag: acc=0.97 (194/200) 失败请求=0 平均输出=2.0 tokens 用时=8s
+  winogrande: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  winogrande: acc=0.82 (164/200) 失败请求=0 平均输出=2.0 tokens 用时=6s
+PASS Track2 完成: {'gsm8k': 0.955, 'mmlu': 0.82, 'arc': 0.96, 'hellaswag': 0.97, 'winogrande': 0.82}

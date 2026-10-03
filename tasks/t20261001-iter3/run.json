@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter3",
+  "Name": "遗留 TP2 vLLM 栈进程级退役(预检→精准清理→复检)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T15:00:00",
+  "Status": "failed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "failed",
+      "Summary": "清理门禁不通过(clean.sh:22 执行段 FAIL, 根因=宿主 pkill -f 'raylet|gcs_server' 的 pattern 文本命中远程 shell 自身 cmdline, 父 shell 被杀 → ssh 255, 已在 129 用探针实测复现); 报告员只读复检: vllm serve(677390, Qwen3.8-27B-NVFP4 TP2)已消失、8000 端口无监听、GPU 计算进程清零(102210 MiB 已释放)、容器 vllm-node 内部仅剩 sleep infinity(容器/镜像/模型按要求保留); 残留=宿主级 ray 进程 9 项(gcs_server 673447/raylet 673632/ray::IDLE×6/RayWorkerP 677653, PID 未变, 卡优雅退出), 待 pkill -x 强杀收尾"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "failed",
+      "Summary": "清理门禁不通过(与 129 同签名 FAIL, 同根因); 报告员只读复检(benchpilot_ed25519 被 134 拒绝, 改用 NVIDIA Sync config 的 nvsync.key 直连): GPU 计算进程清零(778340 的 102210 MiB 已释放)、容器 vllm-node 内部仅剩 sleep infinity(保留)、无真实 vllm 进程(预检唯一条目系探测自匹配)、8000 无监听、model_lock CLEAN; 残留=宿主级 raylet 777676 + RayWorkerProc 778340(PID 未变), 待强杀收尾; 附带发现: preflight.sh 以 grep 收尾的段无匹配时误判 DIRTY(0 项)(本机清理前 port8000 即误报)"
+    }
+  ]
+}

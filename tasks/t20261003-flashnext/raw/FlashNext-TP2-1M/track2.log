@@ -1,0 +1,17 @@
+  gsm8k: 抽样 200 条(有效 200, 并发 8, max_tokens 1024)
+  gsm8k: acc=0.965 (193/200) 失败请求=0 平均输出=232.7 tokens 用时=288s
+  mmlu: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  mmlu: acc=0.895 (179/200) 失败请求=0 平均输出=2.0 tokens 用时=16s
+  arc: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  arc: acc=0.97 (194/200) 失败请求=0 平均输出=2.0 tokens 用时=16s
+  hellaswag: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  hellaswag: acc=0.96 (192/200) 失败请求=0 平均输出=2.0 tokens 用时=25s
+  winogrande: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  winogrande: acc=0.865 (173/200) 失败请求=0 平均输出=2.0 tokens 用时=10s
+  truthfulqa: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  truthfulqa: acc=0.905 (181/200) 失败请求=0 平均输出=2.0 tokens 用时=13s
+  openbookqa: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  openbookqa: acc=0.97 (194/200) 失败请求=0 平均输出=2.0 tokens 用时=15s
+  race: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  race: acc=0.93 (186/200) 失败请求=0 平均输出=2.0 tokens 用时=39s
+PASS Track2 完成: {'gsm8k': 0.965, 'mmlu': 0.895, 'arc': 0.97, 'hellaswag': 0.96, 'winogrande': 0.865, 'truthfulqa': 0.905, 'openbookqa': 0.97, 'race': 0.93}

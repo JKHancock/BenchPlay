@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter2",
+  "Name": "双机双模型分发",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T13:06:48",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "分发 allOk=true; du 复核 Qwen3.6-35B-A3B-NVFP4-Fast=20G(量级吻合,判完整), Qwen3.8-27B-NVFP4=16K(疑似存根/未落盘权重); ls 实际复核 6 个模型目录(含本迭代新增 Qwen3.8-27B-NVFP4, 另有小写 qwen3.8-nvfp4 疑似重复目录未测体积); machines 档案 Models 10→6 项(去 hub/models--* 5 条), 仅改 Models 字段其余保持原值; gate 级疑点见 events.jsonl 第 4 行"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "分发 allOk=true; 但 du 复核两目标模型均仅 16K(Qwen3.6-35B-A3B-NVFP4-Fast=16K vs 129 同模型 20G, Qwen3.8-27B-NVFP4=16K) — 目录近乎为空, 分发完整性待复查; ls 实际复核 5 个模型目录(两目标目录均本迭代新增, 迭代1时 134 无 Qwen3.6 顶层目录); machines 档案 Models 更新为 5 项(移除 2 条 hub/models--*); gate 级疑点见 events.jsonl 第 2 行"
+    }
+  ]
+}

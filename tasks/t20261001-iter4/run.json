@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter4",
+  "Name": "部署段全链贯通(substrate→cluster→serve→verify 四门禁, 首次全脚本化部署 TP2 服务)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T15:29:00",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "首次全脚本化部署全链 PASS: substrate-head 门禁 PASS(容器 vllm-node 六必备 flag + ray==2.44.0 + Qwen3.6-35B-A3B-NVFP4-Fast 容器内可见) → cluster 门禁 PASS(ray 双机就绪 Active=2, GPU 2.0/2.0; QSFP 自动探测 head 192.168.100.10=enp1s0f1np1 ↔ worker 192.168.100.11) → serve 段 vllm serve TP2 起服(GLOO/NCCL 钉定 enp1s0f1np1, --served-model-name bench, --max-model-len 40960 < 模型上限 262144) → verify 门禁 PASS(URL 三关全过: /v1/models 含 bench / 对话冒烟良构补全 / 375 个 vllm: 指标); 服务地址 http://192.168.199.129:8000; 容器复用 iter3c 保留的 vllm-node 未重启, ray Z 尸体按 3c 口径推断仍在(不阻塞); 五坑(网卡 grep -B 误抓 lo/正则 ^inet 漏空格/容器无 ip 无 python/Git Bash curl 中文 GBK/推理型 300 token 全耗思考)已修复落盘并沉淀 gb10.md"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "substrate-worker 门禁 PASS(容器 vllm-node 六必备 flag + ray==2.44.0 + 模型容器内可见); 以 ray worker 身份经 cluster.sh 加入集群(--address=192.168.100.10:6379 --node-ip-address=192.168.100.11, cluster.sh:37), 集群门禁 Active=2 节点含本机; 不直接起服(vLLM TP2 worker 经 ray 自动调度); 管理面 192.168.199.134(gx10-9c05), 数据面 enp1s0f1np1=192.168.100.11"
+    }
+  ]
+}

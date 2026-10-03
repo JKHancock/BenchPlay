@@ -1,0 +1,148 @@
+{
+  "Host": "192.168.199.134",
+  "DeclaredModel": "GB10",
+  "Os": "Ubuntu 24.04.5 LTS (Noble Numbat)",
+  "Arch": "aarch64",
+  "Kernel": "Linux 7.0.0-1019-nvidia",
+  "Cpu": "20",
+  "Memory": "121Gi",
+  "Gpu": "NVIDIA GB10",
+  "Driver": "580.178.04",
+  "DockerVersion": "29.6.2",
+  "Images": [
+    "vllm/vllm-openai:latest|22.1GB",
+    "docker.m.daocloud.io/vllm/vllm-openai:latest|22.1GB",
+    "nvcr.m.daocloud.io/nvidia/vllm:26.08-py3|25.5GB"
+  ],
+  "Models": [
+    "Nemotron-3-Super-120B-NVFP4",
+    "Qwen3.8-Flash-Next-NVFP4",
+    "Qwen3.5-122B-A10B-NVFP4",
+    "hub/models--nvidia--Qwen3.5-122B-A10B-NVFP4",
+    "hub/models--nvidia--NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4"
+  ],
+  "Disks": [
+    "tmpfs 13G 9.0M 13G 1% /run",
+    "efivarfs 256K 35K 222K 14% /sys/firmware/efi/efivars",
+    "/dev/nvme0n1p2 916G 420G 450G 49% /",
+    "tmpfs 61G 33M 61G 1% /dev/shm",
+    "tmpfs 5.0M 8.0K 5.0M 1% /run/lock",
+    "/dev/nvme0n1p1 511M 6.4M 505M 2% /boot/efi",
+    "tmpfs 13G 100K 13G 1% /run/user/126",
+    "tmpfs 13G 92K 13G 1% /run/user/1000"
+  ],
+  "Nics": [
+    { "Name": "lo", "State": "UNKNOWN", "Ips": ["127.0.0.1", "::1"] },
+    { "Name": "enP7s7", "State": "UP", "Ips": [] },
+    { "Name": "enp1s0f0np0", "State": "DOWN", "Ips": [] },
+    { "Name": "enp1s0f1np1", "State": "UP", "Ips": ["192.168.100.11", "fe80::32c5:99ff:fe3d:9c07"] },
+    { "Name": "enP2p1s0f0np0", "State": "DOWN", "Ips": [] },
+    { "Name": "enP2p1s0f1np1", "State": "UP", "Ips": ["192.168.101.11", "fe80::32c5:99ff:fe3d:9c0b"] },
+    { "Name": "wlP9s9", "State": "UP", "Ips": ["192.168.199.134", "fe80::5523:454c:9c7f:d277"] },
+    { "Name": "docker0", "State": "DOWN", "Ips": ["172.17.0.1"] }
+  ],
+  "Hostname": "gx10-9c05",
+  "Macs": [
+    "00:00:00:00:00:00",
+    "30:c5:99:3d:9c:05",
+    "30:c5:99:3d:9c:06",
+    "30:c5:99:3d:9c:07",
+    "30:c5:99:3d:9c:0a",
+    "30:c5:99:3d:9c:0b",
+    "46:6a:dc:c1:17:d1",
+    "50:bb:b5:a2:00:8e",
+    "ff:ff:ff:ff:ff:ff"
+  ],
+  "IdentityDisks": [
+    { "Name": "/dev/loop0", "Size": "4K", "Serial": "" },
+    { "Name": "/dev/loop1", "Size": "69M", "Serial": "" },
+    { "Name": "/dev/loop2", "Size": "61.8M", "Serial": "" },
+    { "Name": "/dev/loop3", "Size": "249.7M", "Serial": "" },
+    { "Name": "/dev/loop4", "Size": "503.1M", "Serial": "" },
+    { "Name": "/dev/loop5", "Size": "552.9M", "Serial": "" },
+    { "Name": "/dev/loop6", "Size": "10.2M", "Serial": "" },
+    { "Name": "/dev/loop7", "Size": "188.2M", "Serial": "" },
+    { "Name": "/dev/loop8", "Size": "91.7M", "Serial": "" },
+    { "Name": "/dev/loop9", "Size": "73.7M", "Serial": "" },
+    { "Name": "/dev/loop10", "Size": "74.4M", "Serial": "" },
+    { "Name": "/dev/loop11", "Size": "43.5M", "Serial": "" },
+    { "Name": "/dev/loop12", "Size": "552K", "Serial": "" },
+    { "Name": "/dev/loop13", "Size": "804K", "Serial": "" },
+    { "Name": "/dev/loop14", "Size": "215.2M", "Serial": "" },
+    { "Name": "/dev/loop15", "Size": "215.2M", "Serial": "" },
+    { "Name": "/dev/loop16", "Size": "73.7M", "Serial": "" },
+    { "Name": "/dev/loop17", "Size": "38.6M", "Serial": "" },
+    { "Name": "/dev/nvme0n1", "Size": "931.5G", "Serial": "511250619080002242" }
+  ],
+  "Evidence": {
+    "Host": {
+      "Command": "probe.sh <host> 目标参数 + ip -j addr",
+      "Excerpt": "\"ifname\":\"wlP9s9\" ... \"local\":\"192.168.199.134\",\"prefixlen\":24,\"broadcast\":\"192.168.199.255\",\"scope\":\"global\",\"dynamic\":true"
+    },
+    "DeclaredModel": {
+      "Command": "nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader",
+      "Excerpt": "NVIDIA GB10, 580.178.04, [N/A]"
+    },
+    "Os": {
+      "Command": "cat /etc/os-release",
+      "Excerpt": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu"
+    },
+    "Arch": {
+      "Command": "uname -srm",
+      "Excerpt": "Linux 7.0.0-1019-nvidia aarch64"
+    },
+    "Kernel": {
+      "Command": "uname -srm",
+      "Excerpt": "Linux 7.0.0-1019-nvidia aarch64"
+    },
+    "Cpu": {
+      "Command": "nproc",
+      "Excerpt": "20"
+    },
+    "Memory": {
+      "Command": "free -h | awk 'NR==2{print $2}'",
+      "Excerpt": "121Gi"
+    },
+    "Gpu": {
+      "Command": "nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader",
+      "Excerpt": "NVIDIA GB10, 580.178.04, [N/A]"
+    },
+    "Driver": {
+      "Command": "nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader",
+      "Excerpt": "NVIDIA GB10, 580.178.04, [N/A]"
+    },
+    "DockerVersion": {
+      "Command": "docker version --format '{{.Server.Version}}'",
+      "Excerpt": "29.6.2"
+    },
+    "Images": {
+      "Command": "docker images --format '{{.Repository}}:{{.Tag}}|{{.Size}}'",
+      "Excerpt": "vllm/vllm-openai:latest|22.1GB\ndocker.m.daocloud.io/vllm/vllm-openai:latest|22.1GB\nnvcr.m.daocloud.io/nvidia/vllm:26.08-py3|25.5GB"
+    },
+    "Models": {
+      "Command": "find $MODELS_ROOT -maxdepth 2 -mindepth 1 -type d -printf '%P\\n' 2>/dev/null",
+      "Excerpt": "Nemotron-3-Super-120B-NVFP4\nNemotron-3-Super-120B-NVFP4/.cache\n.cache\n.cache/huggingface\nhub\nhub/models--nvidia--Qwen3.5-122B-A10B-NVFP4\nhub/models--nvidia--NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4\nQwen3.8-Flash-Next-NVFP4\nQwen3.5-122B-A10B-NVFP4\nQwen3.5-122B-A10B-NVFP4/.cache"
+    },
+    "Disks": {
+      "Command": "df -h",
+      "Excerpt": "文件系统        大小  已用  可用 已用% 挂载点\ntmpfs            13G  9.0M   13G    1% /run\nefivarfs        256K   35K  222K   14% /sys/firmware/efi/efivars\n/dev/nvme0n1p2  916G  420G  450G   49% /\ntmpfs            61G   33M   61G    1% /dev/shm\ntmpfs           5.0M  8.0K  5.0M    1% /run/lock\n/dev/nvme0n1p1  511M  6.4M  505M    2% /boot/efi\ntmpfs            13G  100K   13G    1% /run/user/126\ntmpfs            13G   92K   13G    1% /run/user/1000"
+    },
+    "Nics": {
+      "Command": "ip -j addr",
+      "Excerpt": "{\"ifindex\":7,\"ifname\":\"wlP9s9\",\"flags\":[\"BROADCAST\",\"MULTICAST\",\"UP\",\"LOWER_UP\"],\"mtu\":1500,\"qdisc\":\"noqueue\",\"operstate\":\"UP\",\"group\":\"default\",\"txqlen\":1000,\"link_type\":\"ether\",\"address\":\"50:bb:b5:a2:00:8e\",\"broadcast\":\"ff:ff:ff:ff:ff:ff\",\"altnames\":[\"wlP9p1s0\"],\"addr_info\":[{\"family\":\"inet\",\"local\":\"192.168.199.134\",\"prefixlen\":24,\"broadcast\":\"192.168.199.255\",\"scope\":\"global\",\"dynamic\":true,\"noprefixroute\":true,\"label\":\"wlP9s9\""
+    },
+    "Hostname": {
+      "Command": "hostname",
+      "Excerpt": "gx10-9c05"
+    },
+    "Macs": {
+      "Command": "ip -j link | grep -oE '([0-9a-f]{2}:){5}[0-9a-f]{2}' | sort -u",
+      "Excerpt": "00:00:00:00:00:00\n30:c5:99:3d:9c:05\n30:c5:99:3d:9c:06\n30:c5:99:3d:9c:07\n30:c5:99:3d:9c:0a\n30:c5:99:3d:9c:0b\n46:6a:dc:c1:17:d1\n50:bb:b5:a2:00:8e\nff:ff:ff:ff:ff:ff"
+    },
+    "IdentityDisks": {
+      "Command": "lsblk -dp -o NAME,SIZE,SERIAL 2>/dev/null",
+      "Excerpt": "NAME           SIZE SERIAL\n/dev/loop0       4K \n/dev/loop1      69M \n/dev/loop2    61.8M \n/dev/loop3   249.7M \n/dev/loop4   503.1M \n/dev/loop5   552.9M \n/dev/loop6    10.2M \n/dev/loop7   188.2M \n/dev/loop8    91.7M \n/dev/loop9    73.7M \n/dev/loop10   74.4M \n/dev/loop11   43.5M \n/dev/loop12    552K \n/dev/loop13    804K \n/dev/loop14  215.2M \n/dev/loop15  215.2M \n/dev/loop16   73.7M \n/dev/loop17   38.6M \n/dev/nvme0n1 931.5G 511250619080002242"
+    }
+  },
+  "Summary": "声明机型 GB10 与探测一致(nvidia-smi 报 NVIDIA GB10, 驱动 580.178.04, memory.total=[N/A]); /proc/device-tree/model 返回 n/a, 设备树机型不可得。Ubuntu 24.04.5, aarch64, kernel Linux 7.0.0-1019-nvidia, 20 核 / 121Gi 内存, NVMe nvme0n1 931.5G(根分区 420G/916G 已用 49%), Docker 29.6.2, vLLM 相关镜像 3 个。模型目录: 顶层 3 个(Nemotron-3-Super-120B-NVFP4 / Qwen3.8-Flash-Next-NVFP4 / Qwen3.5-122B-A10B-NVFP4)+ HF hub 缓存 2 个(均 NVFP4)。管理 IP 192.168.199.134 来自 wlP9s9(WiFi, DHCP 动态), 另有 enp1s0f1np1=192.168.100.11、enP2p1s0f1np1=192.168.101.11; 主机名 gx10-9c05。probe 14 节全部 [OK], 无 ABSENT 项。"
+}

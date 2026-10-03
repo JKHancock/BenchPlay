@@ -1,0 +1,16 @@
+{
+  "Id": "t20261001-iter3c",
+  "Name": "遗留 TP2 vLLM 栈退役·迭代3c 终验(空输出=CLEAN + ray 僵尸降级 INFO 修复后复检)",
+  "CreatedAt": "2026-10-01",
+  "Status": "completed",
+  "MachineHosts": [
+    "192.168.199.129",
+    "192.168.199.134"
+  ],
+  "Models": [],
+  "RemoteModelsRoot": "~/.cache/huggingface",
+  "MachineStatus": {
+    "192.168.199.129": "completed",
+    "192.168.199.134": "completed"
+  }
+}

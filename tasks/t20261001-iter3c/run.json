@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter3c",
+  "Name": "遗留 TP2 vLLM 栈退役·迭代3c 终验(空输出=CLEAN + ray 僵尸降级 INFO 修复后复检)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T15:05:00",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "终验 ok=true, 迭代门禁(预检 DIRTY→精准清理→复检 CLEAN)达成: 七节复检中关键清理段全 CLEAN——port8000 0 项(对照 3b 同节 [DIRTY](0 项), preflight.sh:15-16 空输出即 CLEAN 修复生效的直接证据)、gpu_procs 0 项(102210 MiB 此前已释放)、ray_procs 0 项(对照 3b 9 项, 活进程口径清零=preflight.sh:25 排除 Z 态生效且原 9 项已全部死亡)、vllm_procs 0 项(无自匹配幽灵条目)、model_lock 0 项; ray_zombies INFO 8 项(Z 态尸体=raylet 673632+ray::IDLE×6+RayWorkerP 677653, gcs_server 673447 同为尸体但 comm 不以 ray 开头未计入, 故较 3b 的 9 项差一; 无端口/GPU 不阻塞部署, 根治=重启容器); containers DIRTY 1 项(vllm-node Up 22 hours 按策略保留供部署段复用); 129 手工 TP2 vLLM 栈(Qwen3.8-27B-NVFP4, TP2+ray)进程级退役完成, 容器/镜像/模型数据保留"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "终验 ok=true, 同款修复链验证生效: port8000 0 项(3b 误报标签翻正)、gpu_procs 0 项、ray_procs 0 项(对照 3b 2 项)、vllm_procs 0 项、model_lock 0 项; ray_zombies INFO 2 项(与 3b ray_procs 的 raylet 777676+RayWorkerP 778340 PID 一一对应, 已死转 Z 尸体, 无害不阻塞); containers DIRTY 1 项(vllm-node Up 22 hours 保留); iter3 自杀型 FAIL/幽灵条目/空输出误报/僵尸混入活残留四类签名全部消失, 双机回到 iter2b 后干净基线, 可进入部署段"
+    }
+  ]
+}

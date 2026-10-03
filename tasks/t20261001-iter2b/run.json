@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter2b",
+  "Name": "双机双模型分发重跑(修复stdin饿死, 三重门禁)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T14:15:58",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "分发重跑 allOk=true; 三重门禁逐模型 PASS: Qwen3.6-35B-A3B-NVFP4-Fast 23690108390/23690108390 字节, Qwen3.8-27B-NVFP4 23444515546/23444515546 字节(合计 47134623936, ≈43.9GiB); 报告员本会话 SSH 独立复核 du -sb 字节级一致, 文件数 39/29, du -sh 23G/22G; iter2 的 Qwen3.8-27B-NVFP4 16K 存根已补全; 遗留小写 qwen3.8-nvfp4 实测 0 文件 0 字节(空壳, 可清理, 非权重错放); 档案 Models 6 项已含两模型无需修正"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "分发重跑 allOk=true; 三重门禁逐模型 PASS: Qwen3.6-35B-A3B-NVFP4-Fast 23690108390/23690108390 字节, Qwen3.8-27B-NVFP4 23444515546/23444515546 字节; 报告员本会话 SSH 独立复核 du -sb 字节级一致, 文件数 39/29, du -sh 23G/22G; iter2 双 16K 存根(Qwen3.6 仅 16K + Qwen3.8 仅 16K)均已补全; 档案 Models 5 项与远端 ls 实测一致无需修正; 远端无字面量 Qwen3 目录, 回传目标字符串中的截断/简写为显示瑕疵不影响落盘"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+Track1: http://192.168.199.129:8000/v1 model=bench levels=[1, 8, 32] n=[8, 32, 48] in=512 out=256
+  warmup ok (ttft=302ms)
+  c=1   n=8   TTFT p50/p99=281.6/299.9 ms TPOT p50/p99=90.2/90.2 ms out=11.0 tok/s qps=0.0 ok/failed=8/0
+  c=8   n=32  TTFT p50/p99=1418.3/2103.8 ms TPOT p50/p99=103.0/105.8 ms out=73.8 tok/s qps=0.3 ok/failed=32/0
+  c=32  n=48  TTFT p50/p99=2607.3/8664.4 ms TPOT p50/p99=157.5/162.6 ms out=161.8 tok/s qps=0.6 ok/failed=48/0
+PASS Track1 3档完成, 产物: D:/CSharpProject/BenchPlaybook/tasks/t20260930-matrix-full/raw/TP1-Qwen3.8/perf.json

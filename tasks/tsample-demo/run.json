@@ -1,0 +1,16 @@
+{
+ "Id": "tsample-demo",
+ "Name": "示例数据(可删)",
+ "StartedAt": "2026-10-01T11:20:00",
+ "EndedAt": "2026-10-01T11:21:06",
+ "Status": "completed",
+ "InputTokens": 13987,
+ "OutputTokens": 3282,
+ "Machines": [
+  {
+   "Host": "192.168.199.129",
+   "Status": "completed",
+   "Summary": "GB10 完成"
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+{
+  "track": "track2",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "bench",
+  "params": {
+    "n_per_suite": 200,
+    "concurrency": 8,
+    "seed": 20260930,
+    "mode": "0-shot,no-think,temp=0",
+    "gsm8k_max_tokens": 1024,
+    "mc_max_tokens": 32
+  },
+  "suites": {
+    "gsm8k": {
+      "suite": "gsm8k",
+      "n": 200,
+      "acc": 0.94,
+      "correct": 188,
+      "requests_failed": 0,
+      "avg_completion_tokens": 280.4,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 237.1
+    },
+    "mmlu": {
+      "suite": "mmlu",
+      "n": 200,
+      "acc": 0.82,
+      "correct": 164,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.5,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 9.2
+    },
+    "arc": {
+      "suite": "arc",
+      "n": 200,
+      "acc": 0.97,
+      "correct": 194,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.1,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 6.6
+    }
+  }
+}

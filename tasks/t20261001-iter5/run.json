@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter5",
+  "Name": "测试段对接(双实现握手): BenchPlaybook 部署的 TP2 服务 × 孪生 C# llm-bench CLI 完成 Track1 基准(bench.sh 门禁 PASS)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T15:47:00",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "双实现握手 PASS: iter4 部署的 vllm serve TP2(served-model-name=bench, http://192.168.199.129:8000)承接孪生 C# 实现 llm-bench CLI 的 Track1 快速档基准——bench.sh(BenchPlaybook 封装, 门禁=每层 completed>0 且 failed=0, bench.sh:22-35)经 dotnet run 调 CLI(随机数据集 512in/256out, temp=0, ignore_eos, seed=20260924)三连跑全过(153546/154115/154442), 档案取 154442: TTFT_p50=94.19ms(p99=113.49) TPOT_p50=10.44ms 出流=92.74tok/s 成8/败0; 服务端侧证=perf_run_result.json 内嵌 /metrics 快照 vllm:num_requests_running{model_name=bench} 1→0 与 prefix_cache_queries 13177→14226; Track2 质量通道本轮在 lm_eval 任务加载期被 HF Hub 直连阻断(WinError 10054/10060, capability_result.json tasks=[]), 修复通道 HF_ENDPOINT=https://hf-mirror.com 已验证(驱动 agent 实测 gsm8k 可达 + 报告员 curl 复核 final=200), 完整档执行; 教训两条沉淀 experience/gb10.md"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "以 ray worker 身份参与本轮基准: TP2 的另一半算力(iter4 组网 Active=2 节点, 数据面 enp1s0f1np1=192.168.100.11), 基准流量经 head 的 ray 调度分摊至本机 GPU; 本轮无直接下发动作(与 iter4 部署段同构: worker 不直接起服, 不直接承接 HTTP)"
+    }
+  ]
+}

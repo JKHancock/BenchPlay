@@ -1,0 +1,12 @@
+  w1  sel=True  args=True   1473ms
+  w2  sel=True  args=True   1490ms
+  w3  sel=True  args=True   2621ms
+  w4  sel=True  args=True   2030ms
+  w5  sel=True  args=True   2529ms
+  n1  sel=True  args=None   6504ms
+  n2  sel=True  args=None   3469ms
+  w6  sel=True  args=True   2837ms
+  l1  loop=True  e2e=3684ms 答:
+
+当前深圳天气多云，气温 28°C。
+Track3: selection=1.000 args=0.750 loop=0.5 → D:/CSharpProject/BenchPlaybook/tasks/t20261003-flashnext/raw/FlashNext-TP2-1M/agent.json [FAIL]

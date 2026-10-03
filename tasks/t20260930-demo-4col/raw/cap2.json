@@ -1,0 +1,45 @@
+{
+  "track": "track2",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "qwen3.6-35b-a3b",
+  "params": {
+    "n_per_suite": 200,
+    "concurrency": 8,
+    "seed": 20260930,
+    "mode": "0-shot,no-think,temp=0",
+    "gsm8k_max_tokens": 1024,
+    "mc_max_tokens": 32
+  },
+  "suites": {
+    "truthfulqa": {
+      "suite": "truthfulqa",
+      "n": 200,
+      "acc": 0.845,
+      "correct": 169,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 6.2
+    },
+    "openbookqa": {
+      "suite": "openbookqa",
+      "n": 200,
+      "acc": 0.975,
+      "correct": 195,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 5.8
+    },
+    "race": {
+      "suite": "race",
+      "n": 200,
+      "acc": 0.895,
+      "correct": 179,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.1,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 12.4
+    }
+  }
+}

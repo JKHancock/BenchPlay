@@ -1,0 +1,7 @@
+  gsm8k: 抽样 200 条(有效 200, 并发 8, max_tokens 1024)
+  gsm8k: acc=0.945 (189/200) 失败请求=0 平均输出=281.0 tokens 用时=765s
+  mmlu: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  mmlu: acc=0.82 (164/200) 失败请求=0 平均输出=2.0 tokens 用时=17s
+  arc: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  arc: acc=0.965 (193/200) 失败请求=0 平均输出=2.0 tokens 用时=13s
+PASS Track2 完成: {'gsm8k': 0.945, 'mmlu': 0.82, 'arc': 0.965}

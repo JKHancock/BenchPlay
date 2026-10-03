@@ -1,0 +1,16 @@
+{
+  "Id": "t20261001-iter1",
+  "Name": "双机引导探测建档",
+  "CreatedAt": "2026-10-01",
+  "Status": "completed",
+  "MachineHosts": [
+    "192.168.199.129",
+    "192.168.199.134"
+  ],
+  "Models": [],
+  "RemoteModelsRoot": "~/.cache/huggingface",
+  "MachineStatus": {
+    "192.168.199.129": "completed",
+    "192.168.199.134": "completed"
+  }
+}

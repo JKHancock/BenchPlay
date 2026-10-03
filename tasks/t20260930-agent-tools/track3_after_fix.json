@@ -1,0 +1,84 @@
+{
+  "track": "track3",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "qwen3.6-35b-a3b",
+  "metrics": {
+    "selection_acc": 1.0,
+    "args_acc": 0.75,
+    "restraint_included": true,
+    "n": 8,
+    "loop_success": 1.0,
+    "n_loops": 2
+  },
+  "details": [
+    {
+      "id": "w1",
+      "sel": true,
+      "args": true,
+      "ms": 2937.0,
+      "got": "get_weather"
+    },
+    {
+      "id": "w2",
+      "sel": true,
+      "args": true,
+      "ms": 7531.0,
+      "got": "search_docs"
+    },
+    {
+      "id": "w3",
+      "sel": true,
+      "args": true,
+      "ms": 1667.0,
+      "got": "calc"
+    },
+    {
+      "id": "w4",
+      "sel": true,
+      "args": true,
+      "ms": 1325.0,
+      "got": "get_weather"
+    },
+    {
+      "id": "w5",
+      "sel": true,
+      "args": true,
+      "ms": 6355.0,
+      "got": "send_email"
+    },
+    {
+      "id": "n1",
+      "sel": true,
+      "args": null,
+      "ms": 3612.0,
+      "got": null
+    },
+    {
+      "id": "n2",
+      "sel": true,
+      "args": null,
+      "ms": 5717.0,
+      "got": null
+    },
+    {
+      "id": "w6",
+      "sel": true,
+      "args": true,
+      "ms": 2738.0,
+      "got": "search_docs"
+    }
+  ],
+  "loops": [
+    {
+      "id": "l1",
+      "loop_ok": true,
+      "e2e_ms": 2529.0
+    },
+    {
+      "id": "l2",
+      "loop_ok": true,
+      "e2e_ms": 1041.0
+    }
+  ],
+  "gate_pass": true
+}

@@ -1,0 +1,19 @@
+{
+  "Id": "t20261001-iter2",
+  "Name": "双机双模型分发",
+  "CreatedAt": "2026-10-01",
+  "Status": "completed",
+  "MachineHosts": [
+    "192.168.199.129",
+    "192.168.199.134"
+  ],
+  "Models": [
+    "Qwen3.6-35B-A3B-NVFP4-Fast",
+    "Qwen3.8-27B-NVFP4"
+  ],
+  "RemoteModelsRoot": "~/.cache/huggingface",
+  "MachineStatus": {
+    "192.168.199.129": "completed",
+    "192.168.199.134": "completed"
+  }
+}

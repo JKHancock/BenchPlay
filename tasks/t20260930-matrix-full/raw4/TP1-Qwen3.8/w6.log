@@ -1,0 +1,2 @@
+  w6 c=64  n=64  TTFT 9284.1/18417.6 TPOT 217.1/239.3 ITLp99 628.9 out 246.4 tok/s goodput 0.0% ok/f=64/0
+PASS w6 1档 → D:/CSharpProject/BenchPlaybook/tasks/t20260930-matrix-full/raw4/TP1-Qwen3.8/w6.json

@@ -1,0 +1,20 @@
+[22:40:31] TP1-Qwen3.8 Track1 开始(bw=273 active=15.5 GB)
+[22:56:03] TP1-Qwen3.8 TRACK1-FAIL
+[22:56:05] TP1-Qwen3.8 Track2 开始(gsm8k/mmlu/arc n=200)
+[23:09:22] TP1-Qwen3.8 DONE
+[23:11:41] TP2-Qwen3.8 serve失败→重启ray重试一次
+[23:14:08] TP2-Qwen3.8 Track1 开始(bw=546 active=15.5 GB)
+[23:18:25] TP2-Qwen3.8 Track2 开始(gsm8k/mmlu/arc n=200)
+[23:26:53] TP2-Qwen3.8 DONE
+[00:00:26] TP2-Qwen3.6 serve失败→重启ray重试一次
+[00:34:12] TP2-Qwen3.6 SERVE-FAIL
+[00:37:24] TP1-Qwen3.6 Track1 开始(bw=273 active=1.7 GB)
+[00:39:22] TP1-Qwen3.6 Track2 开始(gsm8k/mmlu/arc n=200)
+[00:43:39] TP1-Qwen3.6 DONE
+[00:43:39] ALL-DONE
+[01:20:47] TP2-Qwen3.6 serve失败→重启ray重试
+[01:31:17] TP2-Qwen3.6-round5 开始: ray重启...
+[01:31:28] TP2-Qwen3.6-round5 双节点清场完成, serve发起(关自调优)...
+[01:34:21] TP2-Qwen3.6-round5 serve就绪(约150s, 关自调优口径)
+[01:39:02] TP2-Qwen3.6-round5 DONE(round5)
+[02:09:46] TP1-Qwen3.8 DONE

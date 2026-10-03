@@ -1,0 +1,14 @@
+[
+  {
+    "ok": true,
+    "ttft_ms": 222.32800000347197,
+    "tpot_ms": null,
+    "itl_ms": [],
+    "e2e_ms": 222.47400000924245,
+    "completion_tokens": 1,
+    "prompt_tokens": 5903,
+    "wall_ms": 222.47400000924245,
+    "finish": "length",
+    "error": null
+  }
+]

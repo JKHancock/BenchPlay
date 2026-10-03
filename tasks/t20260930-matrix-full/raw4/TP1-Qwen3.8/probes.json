@@ -1,0 +1,84 @@
+{
+  "track": "probes",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "prefix_cache": {
+    "n": 64,
+    "fail_round1": 0,
+    "fail_round2": 0,
+    "ttft_cold_p50_ms": 1601.4,
+    "ttft_warm_p50_ms": 1607.0,
+    "speedup_x": 1.0,
+    "note": "加速比>1 且服务端 prefix_hits 增加 → 前缀缓存生效"
+  },
+  "capacity": {
+    "ladder": [
+      {
+        "concurrency": 8,
+        "n": 8,
+        "completed": 8,
+        "failed": 0,
+        "wall_s": 8.4,
+        "out_tok_s": 60.6,
+        "mode": "ok"
+      },
+      {
+        "concurrency": 16,
+        "n": 16,
+        "completed": 16,
+        "failed": 0,
+        "wall_s": 11.3,
+        "out_tok_s": 90.3,
+        "mode": "ok"
+      },
+      {
+        "concurrency": 32,
+        "n": 24,
+        "completed": 24,
+        "failed": 0,
+        "wall_s": 14.2,
+        "out_tok_s": 108.1,
+        "mode": "ok"
+      },
+      {
+        "concurrency": 48,
+        "n": 24,
+        "completed": 24,
+        "failed": 0,
+        "wall_s": 14.2,
+        "out_tok_s": 107.9,
+        "mode": "ok"
+      },
+      {
+        "concurrency": 64,
+        "n": 24,
+        "completed": 24,
+        "failed": 0,
+        "wall_s": 14.2,
+        "out_tok_s": 107.9,
+        "mode": "ok"
+      },
+      {
+        "concurrency": 72,
+        "n": 24,
+        "completed": 24,
+        "failed": 0,
+        "wall_s": 14.2,
+        "out_tok_s": 108.0,
+        "mode": "ok"
+      },
+      {
+        "concurrency": 80,
+        "n": 24,
+        "completed": 24,
+        "failed": 0,
+        "wall_s": 14.3,
+        "out_tok_s": 107.7,
+        "mode": "ok"
+      }
+    ],
+    "max_ok_conc": 80,
+    "first_failure": null,
+    "note": "上限=max_num_seqs(64)约束下的实测可用并发"
+  },
+  "duration_s": 197.8
+}

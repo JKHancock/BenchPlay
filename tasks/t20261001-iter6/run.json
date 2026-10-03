@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter6",
+  "Name": "条件组合矩阵: 并行度{TP1,TP2} × 模型{Qwen3.6-35B-A3B-NVFP4-Fast, Qwen3.8-27B-NVFP4} 四组 serve→verify→bench 快速档横比(3过1败, TP2-Qwen3.6 serve 起服失败如实记败)",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T17:03:00",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "条件组合矩阵本轮主战场(依 playbook 惯例 serve 在 head 发起, 逐组主机为口径推断非实测): 4 组 {TP1,TP2}×{Qwen3.6,Qwen3.8} 快速档(并发1×8条, max-model-len 40960, served-model-name=bench) 3 过 1 败——TP1-Qwen3.6 PASS(TTFT_p50=117ms TPOT_p50=14.4ms 出流=67.7tok/s 成8败0), TP2-Qwen3.8 PASS(183ms/50.2ms/19.7tok/s 成8败0), TP1-Qwen3.8 PASS(267ms/89.6ms/11.1tok/s 成8败0), TP2-Qwen3.6 FAIL(serve FAIL: KeyboardInterrupt terminated + resource_tracker leaked 1 shared_memory, verify/bench 未执行, 无指标); 报告员 node 实算自洽校验: 各 PASS 组 1/TPOT_p50 vs 出流偏差 0.5%~2.6% 全自洽; Qwen3.8 同轮 TP2/TP1=出流 1.78× TPOT 1.78× TTFT 1.46×, TP1 口径 Qwen3.6/Qwen3.8 出流 6.10×; TP2-Qwen3.6 对照 iter5 档案(20261001-154442, 94.19ms/10.44ms/92.74tok/s)曾 PASS, 排除组合不可行, 遗留复跑 1 次定偶发 vs 通道不稳; 教训两条沉淀 experience/gb10.md 条目23/24"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "TP2 组的另一半算力(ray worker, 数据面 enp1s0f1np1=192.168.100.11, 与 iter4/iter5 组网同构): TP2-Qwen3.8(19.7tok/s)与失败组 TP2-Qwen3.6 的 vllm serve TP2 均按 ray 调度分摊至本机 GPU, 基准流量经 head 汇聚; TP1 组与 worker 无关(单机部署); 本轮无直接下发动作(worker 不直接起服, 不直接承接 HTTP); TP2-Qwen3.6 组失败发生在 serve 段, 该组 ray 双机通道整体未就绪"
+    }
+  ]
+}

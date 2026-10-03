@@ -1,0 +1,87 @@
+{
+  "workload_id": "w6",
+  "spec": {
+    "input_len": 512,
+    "output_len": 256,
+    "dataset": "random-512",
+    "levels": [
+      64
+    ],
+    "np": [
+      64
+    ],
+    "seed": 20260930,
+    "temperature": 0.0,
+    "ignore_eos": true,
+    "no_think": true,
+    "warmup": 1,
+    "cooldown_s": 10
+  },
+  "levels": [
+    {
+      "concurrency": 64,
+      "num_prompts": 64,
+      "retried": 0,
+      "ttft_ms": {
+        "p50": 50682.916,
+        "p90": 92231.024,
+        "p99": 99598.059,
+        "mean": 49410.322,
+        "max": 100046.456
+      },
+      "tpot_ms": {
+        "p50": 51.848,
+        "p90": 59.739,
+        "p99": 65.526,
+        "mean": 51.454,
+        "max": 65.873
+      },
+      "itl_ms": {
+        "p50": 122.146,
+        "p99": 422.668,
+        "max": 1311.438
+      },
+      "e2e_ms": {
+        "p50": 64536.689,
+        "p90": 108273.889,
+        "p99": 112350.957
+      },
+      "per_stream_out_tok_s": {
+        "p50": 3.981,
+        "p99": 19.512
+      },
+      "agg": {
+        "output_tok_s": 145.66,
+        "total_tok_s": 570.93,
+        "qps": 0.569
+      },
+      "slo": {
+        "ttft_le_ms": 500.0,
+        "tpot_le_ms": 100.0,
+        "goodput_pct": 1.6,
+        "met": false
+      },
+      "reliability": {
+        "completed": 64,
+        "failed": 0,
+        "rejected": 0,
+        "timeout": 0
+      },
+      "wall_s": 112.5,
+      "gauge_peaks": {
+        "kv_peak": 0.092,
+        "gpu_cache_peak": 0.0,
+        "running_peak": 8.0,
+        "samples": 55
+      }
+    }
+  ],
+  "duration_s": 112.5,
+  "roofline": {
+    "ceiling_tok_s": 136.5,
+    "c1_output_tok_s": null,
+    "utilization": null,
+    "warning": null
+  },
+  "gate_pass": true
+}

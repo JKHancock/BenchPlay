@@ -1,0 +1,25 @@
+┌──────────┬───────────────────────────────────────────────────────────────────┐
+│ field    │ value                                                             │
+├──────────┼───────────────────────────────────────────────────────────────────┤
+│ config   │ D:\CSharpProject\Vllm_Benchmark\configs\cap-gsm8k.yaml            │
+│ engine   │ vllm                                                              │
+│ model    │ qwen3.5-122b-a10b (served as bench)                               │
+│ endpoint │ http://192.168.199.129:8000/v1                                    │
+│ track1   │ skipped                                                           │
+│ track2   │ lm_eval: 1 task(s) - gsm8k                                        │
+│ run id   │ 20261001-211136-qwen3.5-122b-a10b                                 │
+│ output   │ D:\CSharpProject\Vllm_Benchmark\results\20261001-211136-qwen3.5-1 │
+│          │ 22b-a10b                                                          │
+└──────────┴───────────────────────────────────────────────────────────────────┘
+running: the lm_eval task list.
+┌───────┬─────────────┬───────┬────────┬─────────┬───────────┐
+│ task  │ metric      │ value │ stderr │ samples │ elapsed s │
+├───────┼─────────────┼───────┼────────┼─────────┼───────────┤
+│ gsm8k │ exact_match │ 0.020 │ 0.0039 │ 1319    │ 613.0     │
+└───────┴─────────────┴───────┴────────┴─────────┴───────────┘
+wrote 
+D:\CSharpProject\Vllm_Benchmark\results\20261001-211136-qwen3.5-122b-a10b\capabi
+lity_result.json
+wrote 
+D:\CSharpProject\Vllm_Benchmark\results\20261001-211136-qwen3.5-122b-a10b\summar
+y.json

@@ -1,0 +1,11 @@
+probe: prefix-cache ...
+  cold/warm p50 = 598.7/707.4 ms, speedup 0.85x
+probe: capacity ladder ...
+  ladder c=8   ok=8/8 ok (2s)
+  ladder c=16  ok=16/16 ok (3s)
+  ladder c=32  ok=24/24 ok (4s)
+  ladder c=48  ok=24/24 ok (4s)
+  ladder c=64  ok=24/24 ok (4s)
+  ladder c=72  ok=24/24 ok (4s)
+  ladder c=80  ok=24/24 ok (4s)
+PASS probes → D:/CSharpProject/BenchPlaybook/tasks/t20260930-matrix-full/raw4/TP2-Qwen3.6/probes.json (max_ok_conc=80, speedup=0.85x)

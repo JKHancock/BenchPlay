@@ -1,0 +1,4 @@
+  w1 c=1   n=8   TTFT 128.3/141.1 TPOT 8.0/8.3 ITLp99 25.3 out 119.4 tok/s goodput 100.0% ok/f=8/0
+  w1 c=8   n=32  TTFT 265.1/703.8 TPOT 16.2/18.9 ITLp99 130.6 out 447.0 tok/s goodput 84.4% ok/f=32/0
+  w1 c=32  n=48  TTFT 11321.9/14262.0 TPOT 16.2/18.5 ITLp99 119.9 out 461.4 tok/s goodput 6.2% ok/f=48/0
+PASS w1 3档 → D:/CSharpProject/BenchPlaybook/tasks/t20260930-demo-4col/raw/perf_w1.json

@@ -1,0 +1,13 @@
+  数据面: head 192.168.100.10 ↔ worker 192.168.100.11
+======== Autoscaler status: 2026-10-01 12:30:32.312487 ========
+Node status
+---------------------------------------------------------------
+Active:
+ 1 node_fb5a7a1da7deb4d7871d7661f0af8e5d0e02dd35de7957bd72da9084
+ 1 node_e69e023b22804b8813588ef8102c43b3d1f09fd82a2d787e0db64dab
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+PASS ray 双机集群就绪 (Active=2, GPU 0.0/2.0 GPU)
+  (head 192.168.100.10)

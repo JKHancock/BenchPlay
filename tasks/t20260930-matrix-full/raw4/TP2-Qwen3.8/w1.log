@@ -1,0 +1,4 @@
+  w1 c=1   n=8   TTFT 221.4/232.4 TPOT 50.6/50.6 ITLp99 57.3 out 19.5 tok/s goodput 100.0% ok/f=8/0
+  w1 c=8   n=32  TTFT 812.6/1613.3 TPOT 63.5/65.6 ITLp99 202.0 out 119.9 tok/s goodput 12.5% ok/f=32/0
+  w1 c=32  n=48  TTFT 1738.6/6215.1 TPOT 101.3/105.4 ITLp99 397.8 out 256.2 tok/s goodput 2.1% ok/f=48/0
+PASS w1 3档 → D:/CSharpProject/BenchPlaybook/tasks/t20260930-matrix-full/raw4/TP2-Qwen3.8/w1.json

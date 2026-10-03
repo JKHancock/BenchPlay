@@ -1,0 +1,16 @@
+{
+  "Id": "t20261001-iter6",
+  "Name": "条件组合矩阵: 并行度{TP1,TP2} × 模型{Qwen3.6-35B-A3B-NVFP4-Fast, Qwen3.8-27B-NVFP4} 四组 serve→verify→bench 快速档横比(3过1败, TP2-Qwen3.6 serve 起服失败如实记败)",
+  "CreatedAt": "2026-10-01",
+  "Status": "completed",
+  "MachineHosts": [
+    "192.168.199.129",
+    "192.168.199.134"
+  ],
+  "Models": ["Qwen3.6-35B-A3B-NVFP4-Fast", "Qwen3.8-27B-NVFP4"],
+  "RemoteModelsRoot": "~/.cache/huggingface",
+  "MachineStatus": {
+    "192.168.199.129": "completed",
+    "192.168.199.134": "completed"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "track": "track2",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "flash-next",
+  "params": {
+    "n_per_suite": 200,
+    "concurrency": 8,
+    "seed": 20260930,
+    "mode": "0-shot,no-think,temp=0",
+    "gsm8k_max_tokens": 1024,
+    "mc_max_tokens": 32
+  },
+  "suites": {
+    "gsm8k": {
+      "suite": "gsm8k",
+      "n": 200,
+      "acc": 0.965,
+      "correct": 193,
+      "requests_failed": 0,
+      "avg_completion_tokens": 232.7,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 288.1
+    },
+    "mmlu": {
+      "suite": "mmlu",
+      "n": 200,
+      "acc": 0.895,
+      "correct": 179,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 16.5
+    },
+    "arc": {
+      "suite": "arc",
+      "n": 200,
+      "acc": 0.97,
+      "correct": 194,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 15.5
+    },
+    "hellaswag": {
+      "suite": "hellaswag",
+      "n": 200,
+      "acc": 0.96,
+      "correct": 192,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 25.2
+    },
+    "winogrande": {
+      "suite": "winogrande",
+      "n": 200,
+      "acc": 0.865,
+      "correct": 173,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 9.9
+    },
+    "truthfulqa": {
+      "suite": "truthfulqa",
+      "n": 200,
+      "acc": 0.905,
+      "correct": 181,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 12.5
+    },
+    "openbookqa": {
+      "suite": "openbookqa",
+      "n": 200,
+      "acc": 0.97,
+      "correct": 194,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 14.6
+    },
+    "race": {
+      "suite": "race",
+      "n": 200,
+      "acc": 0.93,
+      "correct": 186,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 38.9
+    }
+  }
+}

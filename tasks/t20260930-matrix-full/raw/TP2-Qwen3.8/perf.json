@@ -1,0 +1,102 @@
+{
+  "track": "track1",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "bench",
+  "dataset": "random-512",
+  "params": {
+    "input_len": 512,
+    "output_len": 256,
+    "levels": [
+      1,
+      8,
+      32
+    ],
+    "num_prompts": [
+      8,
+      32,
+      48
+    ],
+    "seed": 20260930,
+    "temperature": 0.0,
+    "ignore_eos": true,
+    "no_think": true,
+    "warmup": 1,
+    "cooldown_s": 10
+  },
+  "phases": [
+    {
+      "concurrency": 1,
+      "num_prompts": 8,
+      "ttft_ms": {
+        "p50": 239.2624999920372,
+        "p90": 245.54103000555187,
+        "p99": 247.54764299315866
+      },
+      "tpot_ms": {
+        "p50": 50.302556078474716,
+        "p90": 50.38462607845135,
+        "p99": 50.39418849026255
+      },
+      "output_tok_s": 19.59,
+      "total_tok_s": 76.81,
+      "qps": 0.0765,
+      "avg_completion_tokens": 256.0,
+      "completed": 8,
+      "failed": 0,
+      "wall_s": 104.5,
+      "retried": 0
+    },
+    {
+      "concurrency": 8,
+      "num_prompts": 32,
+      "ttft_ms": {
+        "p50": 815.7977500086417,
+        "p90": 1191.985350017785,
+        "p99": 1565.8577520059773
+      },
+      "tpot_ms": {
+        "p50": 63.057140196107476,
+        "p90": 64.74311372550551,
+        "p99": 65.20725078436583
+      },
+      "output_tok_s": 120.73,
+      "total_tok_s": 473.24,
+      "qps": 0.4716,
+      "avg_completion_tokens": 256.0,
+      "completed": 32,
+      "failed": 0,
+      "wall_s": 67.9,
+      "retried": 0
+    },
+    {
+      "concurrency": 32,
+      "num_prompts": 48,
+      "ttft_ms": {
+        "p50": 1833.2017999928212,
+        "p90": 5458.393260012962,
+        "p99": 6262.309223004559
+      },
+      "tpot_ms": {
+        "p50": 101.19461098037587,
+        "p90": 103.31184952945549,
+        "p99": 104.89565317257417
+      },
+      "output_tok_s": 255.8,
+      "total_tok_s": 1001.86,
+      "qps": 0.9992,
+      "avg_completion_tokens": 256.0,
+      "completed": 48,
+      "failed": 0,
+      "wall_s": 48.0,
+      "retried": 0
+    }
+  ],
+  "duration_s": 240.4,
+  "roofline": {
+    "ceiling_tok_s": 35.2,
+    "c1_output_tok_s": 19.59,
+    "utilization": 0.556,
+    "warning": null
+  },
+  "gate_pass": true
+}

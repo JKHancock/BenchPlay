@@ -1,0 +1,7 @@
+  wsweep c=1   n=8   TTFT 125.9/132.7 TPOT 7.8/8.6 ITLp99 25.6 out 121.4 tok/s goodput 100.0% ok/f=8/0
+  wsweep c=2   n=8   TTFT 166.1/254.0 TPOT 9.1/10.1 ITLp99 40.2 out 200.4 tok/s goodput 100.0% ok/f=8/0
+  wsweep c=4   n=16  TTFT 188.9/450.1 TPOT 12.0/13.7 ITLp99 111.8 out 299.3 tok/s goodput 100.0% ok/f=16/0
+  wsweep c=8   n=16  TTFT 346.2/758.4 TPOT 15.8/18.2 ITLp99 117.9 out 440.2 tok/s goodput 68.8% ok/f=16/0
+  wsweep c=16  n=32  TTFT 444.8/1365.9 TPOT 21.9/26.8 ITLp99 174.7 out 641.6 tok/s goodput 59.4% ok/f=32/0
+  wsweep c=32  n=48  TTFT 769.1/2677.4 TPOT 32.9/40.6 ITLp99 225.4 out 768.1 tok/s goodput 31.2% ok/f=48/0
+PASS wsweep 6档 → D:/CSharpProject/BenchPlaybook/tasks/t20260930-matrix-full/raw4/TP2EP2MTP-1M-Qwen3.6/wsweep.json

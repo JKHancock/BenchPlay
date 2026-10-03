@@ -1,0 +1,16 @@
+{
+  "Id": "t20261001-iter5",
+  "Name": "测试段对接(双实现握手): BenchPlaybook 部署的 TP2 服务 × 孪生 C# llm-bench CLI 完成 Track1 基准(bench.sh 门禁 PASS)",
+  "CreatedAt": "2026-10-01",
+  "Status": "completed",
+  "MachineHosts": [
+    "192.168.199.129",
+    "192.168.199.134"
+  ],
+  "Models": ["Qwen3.6-35B-A3B-NVFP4-Fast"],
+  "RemoteModelsRoot": "~/.cache/huggingface",
+  "MachineStatus": {
+    "192.168.199.129": "completed",
+    "192.168.199.134": "completed"
+  }
+}

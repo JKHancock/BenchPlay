@@ -1,0 +1,8 @@
+lity_result.json
+warning: no score for mmlu_pro_physics, mmlu_pro_chemistry, mmlu_pro_biology, 
+gsm8k, ifeval, humaneval; the task counts as failed (DD §9).
+wrote 
+D:\CSharpProject\Vllm_Benchmark\results\20261001-213500-qwen3.5-122b-a10b\summar
+y.json
+  并发1 x 8条: TTFT_p50=437ms TTFT_p99=440ms TPOT_p50=114.6ms TPOT_p99=116.3ms 出流=8.6tok/s (成8/败0)
+PASS Track1 基准完成, 产物: /d/CSharpProject/Vllm_Benchmark/results/20261001-213500-qwen3.5-122b-a10b/perf_run_result.json

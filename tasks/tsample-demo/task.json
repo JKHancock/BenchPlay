@@ -1,0 +1,16 @@
+{
+ "Id": "tsample-demo",
+ "Name": "示例数据(可删)",
+ "CreatedAt": "2026-10-01T11:20:00",
+ "Status": "completed",
+ "MachineHosts": [
+  "192.168.199.129"
+ ],
+ "Models": [
+  "Qwen3.6-35B-A3B-NVFP4-Fast"
+ ],
+ "RemoteModelsRoot": "~/.cache/huggingface",
+ "MachineStatus": {
+  "192.168.199.129": "completed"
+ }
+}

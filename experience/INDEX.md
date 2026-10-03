@@ -1,0 +1,43 @@
+# 经验库索引(自动生成)
+
+- workflow/自动化执行环境里裸 "bash" 解析到 WSL2 → Windows 路径全不认 → os-network.md
+- 运行结果的 verified/notCovered 必须从证据推导 → os-network.md
+- GB10 不自报机型且 nvidia-smi 无显存容量, 机型认定只能"声明+nvidia-smi 名"交叉佐证 → testing-bench.md
+- GB10 管理 IP 走 WiFi DHCP(不保证稳定, 属风险推断非实测)——跨任务识别钉 hostname/MAC/NVMe 序列号 → os-network.md
+- GX10 双机数据面候选: 每台两个 UP 以太口分属 192.168.100.0/24 与 192.168.101.0/24 → serve-vllm.md
+- 分发 allOk=true ≠ 权重落盘完整: 完成判定必须加远端 du/文件数对账, 16K 目录=骨架存根 → process-governance.md
+- ssh 吃掉 while-read 循环 stdin 造成假阳性: 循环内调 ssh 必加 -n; 复核必须固化成门禁, 只记证据防不住下一次 → os-network.md
+- 远程 pkill -f 的 pattern 文本会匹配调用它的 shell 自身 → "自杀型 FAIL"; 用 pkill -x 或 [r] 字符类防自匹配 → serve-vllm.md
+- 预检判脏混用"输出为空"与"退出码 0": grep 收尾的段无匹配时被误判 DIRTY(0 项) → serve-vllm.md
+- 双机 SSH 密钥面不对称(129 认引导密钥, 134 只认 nvsync.key); KEYFLAG 未加引号遇含空格路径即断 → os-network.md
+- pgrep -f 预检同样自匹配: 探测把远程 shell 自身记成"真实进程"(幽灵 DIRTY), 方括号 trick 对 pgrep 同样适用 → serve-vllm.md
+- 清理/探测 pattern 必须随目标 CLI 演进更新: vLLM 启动已从 python -m 入口变为 `vllm serve` → serve-vllm.md
+- pkill/pgrep -f 自匹配陷阱弧线闭环: 同一根因两侧表现, 方括号字符类两侧通用(修复终验生效) → serve-vllm.md
+- ray 僵尸 = 容器未收割的 Z 态尸体: kill 无效『不可杀』, 无端口/GPU 不阻塞部署, 根治 = 重启容器 → serve-vllm.md
+- 探测脚本"空输出"语义 = 无发现而非失败: 判定与退出码语义必须分离(grep 无匹配 exit 1 曾误判 DIRTY) → os-network.md
+- 部署段五坑之一: 网卡探测 grep -B 上下文跨块误抓 lo → GLOO_SOCKET_IFNAME=lo 引擎初始化失败, awk 状态机按块配对 → serve-vllm.md
+- 部署段五坑之二: 探测正则 ^inet 漏前导空格 → 匹配恒空; ip 输出缩进行不能锚行首 → serve-vllm.md
+- 部署段五坑之三: 容器内无 ip 命令也无 python(只有 python3) → 网络探测走宿主(--network host 视图等价) → serve-vllm.md
+- 部署段五坑之四: Git Bash curl 发中文 body 变 GBK → 服务端 UTF-8 解析失败; 冒烟提示词纯 ASCII → serve-vllm.md
+- 部署段五坑之五: 推理型模型冒烟 300 token 全耗思考正文空 → 门禁语义=良构补全而非精确答案 → testing-bench.md
+- HF_ENDPOINT 是两台机器两个通道: 服务端设了镜像不等于评测机设了, lm_eval/datasets 任务加载期必挂直连 → serve-vllm.md
+- 快速档只跑 Track1 的取舍: 配置 track2.enabled=true 时 CLI 默认 --track both 仍会起 lm_eval, 封装不传开关则"失败"≠"跳过" → os-network.md
+- TP1/TP2 部署差异: TP2 多一层 ray 双机依赖, serve 中断形态=KeyboardInterrupt+leaked shared_memory; TP1 单机是现成降级路径 → serve-vllm.md
+- 组合矩阵性能事实: 并行度增益 ~1.8×(dense 27B) < 模型差异 ~6×(MoE-A3B vs dense); 并发1 下出流≈1/TPOT_p50 可作自洽速检 → testing-bench.md
+- MoE 模型(NVFP4) TP 首次加载必经 FlashInfer 自调优, 时长远超常规加载门禁 → serve-vllm.md
+- [开放] 134 节点 FlashInfer MoE 自调优后 EngineCore 初始化不稳定 → serve-vllm.md
+- 门禁陷阱: ok=$(cmd) 后 echo "$ok" || ... 测的是 echo 的退出码, 门禁形同虚设 → testing-bench.md
+- [已缓解] FlashInfer MoE 自调优跨会话确定性死亡(~33min) — 关调优 flag 150s 就绪且代价 <1% → serve-vllm.md
+- 能力评测必须显式关思考链: gsm8k 2.05% → 94.5% 只差一个 chat_template_kwargs → testing-bench.md
+- 管理面 WiFi 瞬断会废掉整个性能档 — 档内失败条目自动补跑 → os-network.md
+- vLLM 0.30 服务端指标计数器名(实测勘误) + 相位后 gauge 已回落无峰值意义 → serve-vllm.md
+- 数据集陷阱: HF parquet 的 answer 字段形态不一, falsy-zero 会吞掉 answer=0 → process-governance.md
+- 引号地狱第二课 + 运行中编辑脚本两连坑 → serve-vllm.md
+- vLLM 0.30 上下文外拓(YaRN)配方 — 三次失败换来的正解 → serve-vllm.md
+- Qwen3.6-35B-A3B-NVFP4-Fast 自带 MTP 权重 — 判断模型能力要看权重不能只看 config 键 → serve-vllm.md
+- spec解码模式会把 max_num_scheduled_tokens 压到 2048 — 长预填大幅变慢 → serve-vllm.md
+- [重要纠错] 前缀缓存完全有效 — 我此前"命中为0/无效"的结论是探针伪影, 已收回 → serve-vllm.md
+- [致命流程教训] 两次事故同根: 场景缺"模型能力轴"与"用途轴" → serve-vllm.md
+- [开放→已定位] tool_choice=auto 全灭: hermes parser 与 Qwen3.5系XML语法不匹配 → serve-vllm.md
+- [实测纠偏] 调大 max_num_batched_tokens 并未加速 GB10 长文冷预填 — 预填是算力瓶颈 → serve-vllm.md
+- hf-mirror 下载 nvidia 仓库必须禁 xet + Flash-Next 首测画像 → serve-vllm.md

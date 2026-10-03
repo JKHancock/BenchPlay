@@ -1,0 +1,2 @@
+  并发1 x 8条: TTFT_p50=478ms TTFT_p99=630ms TPOT_p50=109.5ms TPOT_p99=176.9ms 出流=8.3tok/s (成8/败0)
+PASS Track1 基准完成, 产物: /d/CSharpProject/Vllm_Benchmark/results/20261001-225250-qwen3.5-122b-a10b/perf_run_result.json

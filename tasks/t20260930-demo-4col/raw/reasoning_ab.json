@@ -1,0 +1,14 @@
+{
+ "thinking_off": {
+  "called": true,
+  "wall_ms": 314.0,
+  "completion_tokens": 26,
+  "reasoning_tokens": 0
+ },
+ "thinking_on": {
+  "called": true,
+  "wall_ms": 599.0,
+  "completion_tokens": 62,
+  "reasoning_tokens": 34
+ }
+}

@@ -1,0 +1,79 @@
+[10:06:52] TP2-Qwen3.8 serve发起失败
+[10:06:56] TP2-Qwen3.6 serve发起失败
+[10:06:58] TP1-Qwen3.6 serve发起失败
+[10:07:01] TP1-Qwen3.8 serve发起失败
+[10:07:01] ALL-DONE-V4
+[10:16:33] TP2-Qwen3.8 serve已发起(TP2 extra=none), 等就绪...
+[10:18:39] TP2-Qwen3.8 serve就绪(约110s)
+[10:18:43] TP2-Qwen3.8 w1 开始
+[10:22:50] TP2-Qwen3.8 w2 开始
+[10:28:10] TP2-Qwen3.8 w3 开始
+[10:28:42] TP2-Qwen3.8 w4 开始
+[10:30:38] TP2-Qwen3.8 w5 开始
+[10:31:56] TP2-Qwen3.8 w6 开始
+[10:32:47] TP2-Qwen3.8 probes 开始
+[10:35:14] TP2-Qwen3.8 track2 开始(5套件 n=200)
+[10:44:02] TP2-Qwen3.8 DONE
+[10:44:13] TP2-Qwen3.6 serve已发起(TP2 extra=--kernel-config {"enable_flashinfer_autotune":false}), 等就绪...
+[10:44:25] TP2-Qwen3.6 serve进程退出
+[10:44:28] TP1-Qwen3.6 serve已发起(TP1 extra=none), 等就绪...
+[10:47:45] TP1-Qwen3.6 serve就绪(约170s)
+[10:47:49] TP1-Qwen3.8 serve已发起(TP1 extra=none), 等就绪...
+[10:51:06] TP1-Qwen3.8 serve就绪(约170s)
+[10:51:11] TP1-Qwen3.8 w1 开始
+[10:57:49] TP1-Qwen3.8 w2 开始
+[11:06:49] TP1-Qwen3.8 w3 开始
+[11:07:30] TP1-Qwen3.8 w4 开始
+[11:10:34] TP1-Qwen3.8 w5 开始
+[11:12:47] TP1-Qwen3.8 w6 开始
+[11:14:00] TP1-Qwen3.8 probes 开始
+[11:17:22] TP1-Qwen3.8 track2 开始(5套件 n=200)
+[11:31:10] TP1-Qwen3.8 DONE
+[11:31:10] ALL-DONE-V4
+[11:38:18] TP2-Qwen3.6 serve已发起(TP2 extra=--kernel-config {"enable_flashinfer_autotune":false}), 等就绪...
+[11:41:01] TP2-Qwen3.6 serve就绪(约140s)
+[11:41:07] TP2-Qwen3.6 w1 开始
+[11:42:38] TP2-Qwen3.6 w2 开始
+[11:44:15] TP2-Qwen3.6 w3 开始
+[11:44:35] TP2-Qwen3.6 w4 开始
+[11:45:18] TP2-Qwen3.6 w5 开始
+[11:45:40] TP2-Qwen3.6 w6 开始
+[11:46:04] TP2-Qwen3.6 probes 开始
+[11:47:18] TP2-Qwen3.6 track2 开始(5套件 n=200)
+[11:50:51] TP2-Qwen3.6 DONE
+[11:51:00] TP1-Qwen3.6 serve已发起(TP1 extra=none), 等就绪...
+[11:54:18] TP1-Qwen3.6 serve就绪(约170s)
+[11:54:22] TP1-Qwen3.6 w1 开始
+[11:56:18] TP1-Qwen3.6 w2 开始
+[11:58:25] TP1-Qwen3.6 w3 开始
+[11:58:46] TP1-Qwen3.6 w4 开始
+[11:59:36] TP1-Qwen3.6 w5 开始
+[12:00:04] TP1-Qwen3.6 w6 开始
+[12:00:36] TP1-Qwen3.6 probes 开始
+[12:02:02] TP1-Qwen3.6 track2 开始(5套件 n=200)
+[12:06:49] TP1-Qwen3.6 DONE
+[12:24:51] TP2EP2-Qwen3.6 serve已发起(TP2 extra=--enable-expert-parallel --kernel-config {"enable_flashinfer_autotune":false}), 等就绪...
+[12:28:08] TP2EP2-Qwen3.6 serve就绪(约170s)
+[12:28:12] TP2EP2-Qwen3.6 w1 开始
+[12:29:46] TP2EP2-Qwen3.6 w2 开始
+[12:31:24] TP2EP2-Qwen3.6 w3 开始
+[12:31:44] TP2EP2-Qwen3.6 w4 开始
+[12:32:26] TP2EP2-Qwen3.6 w5 开始
+[12:32:48] TP2EP2-Qwen3.6 w6 开始
+[12:33:12] TP2EP2-Qwen3.6 probes 开始
+[12:34:22] TP2EP2-Qwen3.6 track2 开始(5套件 n=200)
+[12:37:42] TP2EP2-Qwen3.6 DONE
+[12:47:30] TP2EP2MTP-1M-Qwen3.6 serve已发起(EP+spec-ngram2+yarn4x+1M), 等就绪...
+[12:47:42] TP2EP2MTP-1M-Qwen3.6 serve进程退出, 尾部:
+[12:52:06] TP2EP2MTP-1M-Qwen3.6 serve已发起(EP+qwen3_5_mtp-k2+yarn4x+1M), 等就绪...
+[12:52:18] TP2EP2MTP-1M-Qwen3.6 serve进程退出, 尾部:
+[12:59:46] TP2EP2MTP-1M-Qwen3.6 serve已发起(EP+qwen3_5_mtp-k2+yarn4x+1M), 等就绪...
+[12:59:58] TP2EP2MTP-1M-Qwen3.6 serve进程退出, 尾部:
+[13:08:20] TP2EP2MTP-1M-Qwen3.6 serve已发起(EP+qwen3_5_mtp-k2+yarn4x+1M), 等就绪...
+[13:12:45] TP2EP2MTP-1M-Qwen3.6 serve就绪(约230s)
+[13:12:48] TP2EP2MTP-1M-Qwen3.6 wsweep 开始
+[13:15:03] TP2EP2MTP-1M-Qwen3.6 w2s 开始
+[13:17:20] TP2EP2MTP-1M-Qwen3.6 w7-long128k 开始
+[13:18:24] TP2EP2MTP-1M-Qwen3.6 probes 开始
+[13:19:36] TP2EP2MTP-1M-Qwen3.6 gsm8k验证开始(n=200)
+[13:21:47] TP2EP2MTP-1M-Qwen3.6 DONE

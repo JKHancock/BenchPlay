@@ -1,0 +1,42 @@
+{
+ "Host": "192.168.199.129",
+ "DeclaredModel": "GB10",
+ "Os": "Ubuntu 24.04.5 LTS",
+ "Arch": "aarch64",
+ "Kernel": "7.0.0-1019-nvidia",
+ "Cpu": "20 cores",
+ "Memory": "121Gi",
+ "Gpu": "NVIDIA GB10 ([N/A])",
+ "Driver": "580.178.04",
+ "DockerVersion": "29.6.2",
+ "Images": [
+  "vllm/vllm-openai:latest|22.1GB"
+ ],
+ "Models": [
+  "Qwen3.6-35B-A3B-NVFP4-Fast",
+  "Qwen3.5-122B-A10B-NVFP4"
+ ],
+ "Disks": [
+  "/ (916G, 可用 423G)"
+ ],
+ "Nics": [
+  {
+   "Name": "enp1s0f1np1",
+   "State": "UP",
+   "Ips": [
+    "192.168.100.10"
+   ]
+  }
+ ],
+ "Evidence": {
+  "gpu": {
+   "Command": "nvidia-smi --query-gpu=...",
+   "Excerpt": "NVIDIA GB10, 580.178.04, [N/A]"
+  },
+  "models": {
+   "Command": "find ~/.cache/huggingface ...",
+   "Excerpt": "2 项"
+  }
+ },
+ "Summary": "GB10, aarch64, 20核121Gi; 驱动580.178.04; Docker29.6.2; 模型2项就绪"
+}

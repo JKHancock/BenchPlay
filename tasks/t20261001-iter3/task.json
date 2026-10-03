@@ -1,0 +1,16 @@
+{
+  "Id": "t20261001-iter3",
+  "Name": "遗留 TP2 vLLM 栈进程级退役(预检→精准清理→复检)",
+  "CreatedAt": "2026-10-01",
+  "Status": "failed",
+  "MachineHosts": [
+    "192.168.199.129",
+    "192.168.199.134"
+  ],
+  "Models": [],
+  "RemoteModelsRoot": "~/.cache/huggingface",
+  "MachineStatus": {
+    "192.168.199.129": "failed",
+    "192.168.199.134": "failed"
+  }
+}

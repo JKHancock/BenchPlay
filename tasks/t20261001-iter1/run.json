@@ -1,0 +1,21 @@
+{
+  "Id": "t20261001-iter1",
+  "Name": "双机引导探测建档",
+  "StartedAt": "",
+  "EndedAt": "2026-10-01T12:26:53",
+  "Status": "completed",
+  "InputTokens": 0,
+  "OutputTokens": 0,
+  "Machines": [
+    {
+      "Host": "192.168.199.129",
+      "Status": "completed",
+      "Summary": "gx10-9f5c: GB10 (aarch64, Ubuntu 24.04.5, 内核 7.0.0-1019-nvidia, 20 核/121Gi, NVMe 931.5G 用 49%), Docker 29.6.2, 已备 vllm 镜像(22.1GB+25.5GB)与 Nemotron/Qwen NVFP4 模型及 gsm8k/mmlu-pro/gpqa/IFEval/cmmlu 数据集, 管理口为 WiFi 192.168.199.129(DHCP), 双以太口 192.168.100.10/101.10 UP; probe 14/14 节 [OK], 新机器首次建档 RecognizedAs=''"
+    },
+    {
+      "Host": "192.168.199.134",
+      "Status": "completed",
+      "Summary": "gx10-9c05: 声明 GB10 与探测一致(nvidia-smi NVIDIA GB10, 驱动 580.178.04, memory.total=[N/A]); Ubuntu 24.04.5 aarch64, 内核 7.0.0-1019-nvidia, 20 核/121Gi, nvme0n1 931.5G(根分区 49% 已用), Docker 29.6.2, NVFP4 模型 3 顶层+2 hub 缓存, 管理 IP 192.168.199.134 为 WiFi DHCP(租期 74445s), 有线口 192.168.100.11/101.11 UP; probe 14 节全 [OK], 新机器首次建档 RecognizedAs=''"
+    }
+  ]
+}

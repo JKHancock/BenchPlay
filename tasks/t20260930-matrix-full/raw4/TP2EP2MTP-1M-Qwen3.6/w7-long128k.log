@@ -1,0 +1,2 @@
+  w7-long128k c=1   n=1   TTFT 57650.1/57650.1 TPOT 11.0/11.0 ITLp99 33.8 out 1.1 tok/s goodput 0.0% ok/f=1/0
+PASS w7-long128k 1档 → D:/CSharpProject/BenchPlaybook/tasks/t20260930-matrix-full/raw4/TP2EP2MTP-1M-Qwen3.6/w7-long128k.json

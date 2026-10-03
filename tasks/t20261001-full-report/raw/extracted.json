@@ -1,0 +1,1 @@
+{"TP1-Qwen3.6": {"idle": {"prefix_hits": "0.0", "prefix_q": "23.0", "prompt_tok": "23.0"}, "loaded": {"prefix_hits": "0.0", "prefix_q": "9484.0", "prompt_tok": "9484.0"}}, "TP2-Qwen3.8": {"idle": {"prefix_hits": "0.0", "prefix_q": "46.0", "prompt_tok": "46.0"}, "loaded": {"prefix_hits": "0.0", "prefix_q": "9484.0", "prompt_tok": "9484.0"}}}

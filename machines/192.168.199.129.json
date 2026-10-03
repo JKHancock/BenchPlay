@@ -1,0 +1,77 @@
+{
+  "Host": "192.168.199.129",
+  "RecognizedAs": "",
+  "RecognizedNote": "machines/ 目录在建档时为空(0 个已有档案), 无 MAC 集合/主机名/机型可比对, 判定为新机器首次建档",
+  "DeclaredModel": "GB10",
+  "Os": "Ubuntu 24.04.5 LTS (Noble Numbat)",
+  "Arch": "aarch64",
+  "Kernel": "7.0.0-1019-nvidia",
+  "Cpu": "20",
+  "Memory": "121Gi",
+  "Gpu": "NVIDIA GB10",
+  "Driver": "580.178.04",
+  "DockerVersion": "29.6.2",
+  "Images": [
+    "docker.m.daocloud.io/prom/prometheus:latest|250MB",
+    "vllm/vllm-openai:latest|22.1GB",
+    "docker.m.daocloud.io/vllm/vllm-openai:latest|22.1GB",
+    "docker.m.daocloud.io/grafana/grafana:latest|1.31GB",
+    "nvcr.m.daocloud.io/nvidia/vllm:26.08-py3|25.5GB"
+  ],
+  "Models": [
+    "Nemotron-3-Super-120B-NVFP4",
+    "Qwen3.5-122B-A10B-NVFP4",
+    "Qwen3.6-35B-A3B-NVFP4-Fast",
+    "Qwen3.8-27B-NVFP4",
+    "Qwen3.8-Flash-Next-NVFP4",
+    "qwen3.8-nvfp4"
+  ],
+  "Disks": [
+    { "Filesystem": "tmpfs", "Size": "13G", "Used": "2.7M", "Avail": "13G", "UsePct": "1%", "MountedOn": "/run" },
+    { "Filesystem": "efivarfs", "Size": "256K", "Used": "35K", "Avail": "222K", "UsePct": "14%", "MountedOn": "/sys/firmware/efi/efivars" },
+    { "Filesystem": "/dev/nvme0n1p2", "Size": "916G", "Used": "423G", "Avail": "447G", "UsePct": "49%", "MountedOn": "/" },
+    { "Filesystem": "tmpfs", "Size": "61G", "Used": "33M", "Avail": "61G", "UsePct": "1%", "MountedOn": "/dev/shm" },
+    { "Filesystem": "tmpfs", "Size": "5.0M", "Used": "8.0K", "Avail": "5.0M", "UsePct": "1%", "MountedOn": "/run/lock" },
+    { "Filesystem": "/dev/nvme0n1p1", "Size": "511M", "Used": "7.4M", "Avail": "504M", "UsePct": "2%", "MountedOn": "/boot/efi" },
+    { "Filesystem": "tmpfs", "Size": "13G", "Used": "104K", "Avail": "13G", "UsePct": "1%", "MountedOn": "/run/user/126" },
+    { "Filesystem": "tmpfs", "Size": "13G", "Used": "92K", "Avail": "13G", "UsePct": "1%", "MountedOn": "/run/user/1000" }
+  ],
+  "Nics": [
+    { "Name": "lo", "State": "UNKNOWN", "Ips": ["127.0.0.1", "::1"] },
+    { "Name": "enP7s7", "State": "DOWN", "Ips": [] },
+    { "Name": "enp1s0f0np0", "State": "DOWN", "Ips": [] },
+    { "Name": "enp1s0f1np1", "State": "UP", "Ips": ["192.168.100.10", "fe80::32c5:99ff:fe3d:9f5e"] },
+    { "Name": "enP2p1s0f0np0", "State": "DOWN", "Ips": [] },
+    { "Name": "enP2p1s0f1np1", "State": "UP", "Ips": ["192.168.101.10", "fe80::32c5:99ff:fe3d:9f62"] },
+    { "Name": "wlP9s9", "State": "UP", "Ips": ["192.168.199.129", "fe80::a8ae:7f5f:d62c:28b0"] },
+    { "Name": "docker0", "State": "DOWN", "Ips": ["172.17.0.1"] }
+  ],
+  "Hostname": "gx10-9f5c",
+  "Macs": [
+    "00:00:00:00:00:00",
+    "30:c5:99:3d:9f:5c",
+    "30:c5:99:3d:9f:5d",
+    "30:c5:99:3d:9f:5e",
+    "30:c5:99:3d:9f:61",
+    "30:c5:99:3d:9f:62",
+    "50:bb:b5:a2:00:48",
+    "aa:bb:a5:d7:fc:29",
+    "ff:ff:ff:ff:ff:ff"
+  ],
+  "BlockDevices": [
+    { "Name": "/dev/nvme0n1", "Size": "931.5G", "Serial": "511250619080002301" }
+  ],
+  "Evidence": {
+    "Kernel": { "Command": "uname -srm", "Excerpt": "Linux 7.0.0-1019-nvidia aarch64" },
+    "Os": { "Command": "cat /etc/os-release", "Excerpt": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\" / VERSION=\"24.04.5 LTS (Noble Numbat)\"" },
+    "Gpu": { "Command": "nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader", "Excerpt": "NVIDIA GB10, 580.178.04, [N/A]" },
+    "DockerVersion": { "Command": "docker version --format '{{.Server.Version}}'", "Excerpt": "29.6.2" },
+    "Hostname": { "Command": "hostname", "Excerpt": "gx10-9f5c" },
+    "DeclaredModel": { "Command": "cat /proc/device-tree/model 2>/dev/null || echo n/a", "Excerpt": "n/a (GB10 为声明值, nvidia-smi 的 NVIDIA GB10 佐证)" },
+    "Macs": { "Command": "ip -j link | grep -oE '([0-9a-f]{2}:){5}[0-9a-f]{2}' | sort -u", "Excerpt": "30:c5:99:3d:9f:5c/5d/5e/61/62, 50:bb:b5:a2:00:48, aa:bb:a5:d7:fc:29 (+00:00:00:00:00:00, ff:ff:ff:ff:ff:ff)" },
+    "BlockDevices": { "Command": "lsblk -dp -o NAME,SIZE,SERIAL 2>/dev/null", "Excerpt": "/dev/nvme0n1 931.5G 511250619080002301" }
+  },
+  "Summary": "gx10-9f5c: GB10 (aarch64, Ubuntu 24.04.5, 121Gi, 931.5G NVMe), Docker 29.6.2, vllm 镜像与 NVFP4 模型缓存已就位; 管理口为 WiFi 192.168.199.129, 双以太口 192.168.100.10/192.168.101.10 UP。完整档案见 tasks/t20261001-iter1/profiles/192_168_199_129.json",
+  "UpdatedAt": "2026-10-01T12:24:16",
+  "SourceTask": "t20261001-iter1"
+}
