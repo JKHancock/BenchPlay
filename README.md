@@ -113,7 +113,7 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 ### 阶段 9 · 沉淀
 经验条目（现象/真因/修复/来源任务 ID/命中计数）append 到对应主题文件并更新 INDEX；达到晋升条件的经 `kb.py` 提名入知识库。
 
-## 6. 三大 Benchmark 与指标集合（每场景必挂）
+## 6. 三大 Benchmark（每场景各产一套专属指标集合）
 
 每个场景（= 一组 vLLM 参数/集群组合）都跑**三大 benchmark**，每个 benchmark 有**自己专属的指标集合**；另有一套 **vLLM 服务指标集合**贯穿全程同步采集。
 
@@ -132,7 +132,9 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 - 指标族：selection/args/loop pass@1、并行调用率、toolcall TTFT、循环 E2E、token 代价 → **A-Score 总分**
 - 来源：bench/track3_agent、bench/bfcl
 
-### 6.4 ＋ vLLM 服务指标集合（贯穿三大 benchmark 同步采集）
+## 7. vLLM 服务指标集合（与三大 benchmark 同步采集）
+
+> 三大 benchmark 是"考卷"；本节是"监考仪"——不是第四个 benchmark，而是在每个 benchmark 运行的全过程中对服务端的同步观测，与三个考卷的成绩一一对应。
 - 启动态：KV 池容量/最大并发倍数、投机开关、加载与就绪耗时
 - 运行态：投机接受率、负载中 running/waiting/KV 峰值（轮询采样）
 - 分段差值：每相位成功(stop+len)/失败(abort+err)、prompt/gen tokens、前缀命中 q/h
@@ -141,7 +143,7 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 - 来源：/metrics 三时点差值 + GaugePoller + 启动日志两行落档
 
 
-## 7. 三个库（数据→教训→知识阶梯）
+## 8. 三个库（数据→教训→知识阶梯）
 
 | | 档案库 | 经验库 | 知识库 |
 |---|---|---|---|
@@ -151,7 +153,7 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 
 **总检索协议（§5）**：新机/新模入场按 档案原始数据 → 经验叙事 → KB 结论 的顺序（原始>叙事>结论），三层全空才联网。
 
-## 8. 目录结构
+## 9. 目录结构
 
 ```
 AGENTS.md/SKILL.md/README.md   入口三件（Agent 入口/法条/人类说明）
@@ -166,7 +168,7 @@ tasks/              每任务 raw 全量证据 + 报告（按模型分组）
 viewer/             Streamlit 浏览器
 ```
 
-## 9. 快速开始（人类操作员）
+## 10. 快速开始（人类操作员）
 
 1. **首次**：在目标集群就绪后，让任意 Agent 读 `AGENTS.md`，提供机器清单（`host|user|password|机型`）+ 模型清单 + 用途声明(chat/agent)
 2. **产出**：`tasks/<id>/report_<模型>.md` —— 按模型分组、每参数组合四指标集合、C/A-Score、带数值理由的推荐
@@ -174,11 +176,11 @@ viewer/             Streamlit 浏览器
 4. **复跑**：所有编排脚本幂等，断点续跑安全
 
 
-## 10. 红线与安全
+## 11. 红线与安全
 
 SSH 密码一次性使用后永存盘/日志/回复；一切结论证据绑定；缺格如实标「—未采集」禁止臆造；报告仅适用指纹匹配环境；经验库纠错必须立纠偏条目（错误知识比没有知识危险）。
 
-## 11. 版本
+## 12. 版本
 
 - **Main/V1.0（2026-10-03）**：首个定版——四角色流程、M0/M0.5、三维场景、四指标集合、三库治理、七场景实测、打分体系、按模型分组报告
 - 历史：v3（单档性能+单套件）→ v3.1（四条采集义务）→ v4（场景化+schema 校验+推荐引擎）→ v4.1（M0/Track3/四关）→ v4.2（agent_metrics+打分）→ v4.3（权重公示+套件扩容）
