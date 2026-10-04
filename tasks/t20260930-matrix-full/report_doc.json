@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-04T19:08:23",
+  "generated_at": "2026-10-04T19:30:53",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-overnight",
@@ -8115,7 +8115,7 @@
      "weights_gb": 19.0,
      "gpu_mem_reserved_gb": null,
      "max_num_seqs": 64,
-     "max_model_len": 40960,
+     "max_model_len": 1048576,
      "gpu_mem_util": 0.85
     },
     "gauges_peak": {
@@ -9483,7 +9483,7 @@
     "weights_gb": 132.6,
     "context_len": 1048576,
     "native_context": 262144,
-    "served_name": "bench"
+    "served_name": "flash-next"
    },
    "deployment": {
     "mode": "ray-tp2-2node",
@@ -9534,12 +9534,12 @@
      "tensor_parallel": 2,
      "pipeline_parallel": 1,
      "cudagraph_mode": "PIECEWISE",
-     "flashinfer_autotune": true,
+     "flashinfer_autotune": false,
      "compile_cache": "hit",
      "weights_gb": 132.6,
      "gpu_mem_reserved_gb": null,
-     "max_num_seqs": 64,
-     "max_model_len": 40960,
+     "max_num_seqs": 8,
+     "max_model_len": 1048576,
      "gpu_mem_util": 0.85
     },
     "gauges_peak": {
@@ -9619,7 +9619,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 89.0,
       "requests_failed": 0.0
      },
      "phase:w2": {
@@ -9630,7 +9630,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 65.0,
       "requests_failed": 0.0
      },
      "phase:w3": {
@@ -9641,7 +9641,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 73.0,
       "requests_failed": 0.0
      },
      "phase:w4": {
@@ -9652,7 +9652,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 13.0,
       "requests_failed": 0.0
      },
      "phase:w5": {
@@ -9663,7 +9663,7 @@
       "prompt_tokens_cached": 3200.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 5.0,
       "requests_failed": 0.0
      },
      "phase:w6": {
@@ -9674,7 +9674,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 65.0,
       "requests_failed": 0.0
      },
      "phase:probe": {
@@ -9696,8 +9696,8 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 5298.0,
-      "requests_failed": 5298.0
+      "requests_success": 2700.0,
+      "requests_failed": 0.0
      },
      "phase:agent": {
       "prompt_tokens": 78628.0,
@@ -9707,8 +9707,8 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 418.0,
-      "requests_failed": 418.0
+      "requests_success": 212.0,
+      "requests_failed": 0.0
      }
     },
     "histograms": {
@@ -11230,8 +11230,8 @@
     },
     "weights_gb": 132.6,
     "context_len": 40960,
-    "native_context": 40960,
-    "served_name": "bench"
+    "native_context": 262144,
+    "served_name": "flash-next"
    },
    "deployment": {
     "mode": "ray-tp2-2node",
@@ -11282,11 +11282,11 @@
      "tensor_parallel": 2,
      "pipeline_parallel": 1,
      "cudagraph_mode": "PIECEWISE",
-     "flashinfer_autotune": true,
+     "flashinfer_autotune": false,
      "compile_cache": "hit",
      "weights_gb": 132.6,
      "gpu_mem_reserved_gb": null,
-     "max_num_seqs": 64,
+     "max_num_seqs": 8,
      "max_model_len": 40960,
      "gpu_mem_util": 0.85
     },
@@ -11367,7 +11367,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 89.0,
       "requests_failed": 0.0
      },
      "phase:w2": {
@@ -11378,7 +11378,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 65.0,
       "requests_failed": 0.0
      },
      "phase:w3": {
@@ -11389,7 +11389,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 73.0,
       "requests_failed": 0.0
      },
      "phase:w4": {
@@ -11400,7 +11400,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 13.0,
       "requests_failed": 0.0
      },
      "phase:w5": {
@@ -11411,7 +11411,7 @@
       "prompt_tokens_cached": 3200.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 5.0,
       "requests_failed": 0.0
      },
      "phase:w6": {
@@ -11422,7 +11422,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 65.0,
       "requests_failed": 0.0
      },
      "phase:probe": {
@@ -11444,8 +11444,8 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 3200.0,
-      "requests_failed": 3200.0
+      "requests_success": 1600.0,
+      "requests_failed": 0.0
      },
      "phase:agent": {
       "prompt_tokens": 78480.0,
@@ -11455,8 +11455,8 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 422.0,
-      "requests_failed": 422.0
+      "requests_success": 211.0,
+      "requests_failed": 0.0
      }
     },
     "histograms": {
@@ -12877,8 +12877,8 @@
     },
     "weights_gb": 159.6,
     "context_len": 1048576,
-    "native_context": 262144,
-    "served_name": "bench"
+    "native_context": 1048576,
+    "served_name": "ds-flash"
    },
    "deployment": {
     "mode": "ray-tp2-2node",
@@ -12929,12 +12929,12 @@
      "tensor_parallel": 2,
      "pipeline_parallel": 1,
      "cudagraph_mode": "PIECEWISE",
-     "flashinfer_autotune": true,
+     "flashinfer_autotune": false,
      "compile_cache": "hit",
      "weights_gb": 159.6,
      "gpu_mem_reserved_gb": null,
-     "max_num_seqs": 64,
-     "max_model_len": 40960,
+     "max_num_seqs": 8,
+     "max_model_len": 1048576,
      "gpu_mem_util": 0.85
     },
     "gauges_peak": {
@@ -13014,7 +13014,7 @@
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 89.0,
       "requests_failed": 0.0
      },
      "phase:w2": {
@@ -13025,7 +13025,7 @@
       "prompt_tokens_cached": 512.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 65.0,
       "requests_failed": 0.0
      },
      "phase:w3": {
@@ -13036,7 +13036,7 @@
       "prompt_tokens_cached": 512.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 73.0,
       "requests_failed": 0.0
      },
      "phase:w4": {
@@ -13047,7 +13047,7 @@
       "prompt_tokens_cached": 6656.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 13.0,
       "requests_failed": 0.0
      },
      "phase:w5": {
@@ -13058,7 +13058,7 @@
       "prompt_tokens_cached": 6400.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 5.0,
       "requests_failed": 0.0
      },
      "phase:w6": {
@@ -13069,7 +13069,7 @@
       "prompt_tokens_cached": 4352.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 0.0,
+      "requests_success": 65.0,
       "requests_failed": 0.0
      },
      "phase:probe": {
@@ -13091,8 +13091,8 @@
       "prompt_tokens_cached": 512.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 5218.0,
-      "requests_failed": 5218.0
+      "requests_success": 2700.0,
+      "requests_failed": 0.0
      },
      "phase:agent": {
       "prompt_tokens": 79984.0,
@@ -13102,8 +13102,8 @@
       "prompt_tokens_cached": 1280.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 424.0,
-      "requests_failed": 424.0
+      "requests_success": 212.0,
+      "requests_failed": 0.0
      },
      "phase:soak": {
       "prompt_tokens": 26613101.0,
@@ -13113,8 +13113,8 @@
       "prompt_tokens_cached": 25010176.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 132.0,
-      "requests_failed": 132.0
+      "requests_success": 99.0,
+      "requests_failed": 0.0
      }
     },
     "histograms": {

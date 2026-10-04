@@ -13,7 +13,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, "D:/CSharpProject/Vllm_Benchmark")
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))  # 仓库内 bench 正本(旧位置 Vllm_Benchmark 仅历史档案)
 from bench.common import metrics_delta, METRIC_KEYS
 
 BP = Path("D:/CSharpProject/BenchPlaybook")
@@ -298,8 +298,11 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
                                                 "params_b": m["params_b"],
                                                 "active_b": m["active_b"]},
                   "weights_gb": m["weights_gb"], "context_len": max_len,
-                  "native_context": 262144 if max_len > 262144 else max_len,
-                  "served_name": "bench"},
+                  # 原生上下文以模型档案为准(此前硬编码 262144 把原生 1M 的 deepseek_v4 误标成 YaRN 外拓)
+                  "native_context": m.get("native_context",
+                                          262144 if max_len > 262144 else max_len),
+                  "served_name": (argv[argv.index("--served-model-name") + 1]
+                                  if "--served-model-name" in argv else "bench")},
         "deployment": {"mode": "single-node" if tp == 1 else f"ray-tp{tp}-2node",
                        "machines": dep_machines,
                        "data_plane": ({"topology": "无(仅管理口)", "iface": "—"}
@@ -314,8 +317,10 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
                         "flashinfer_autotune": not noauto,
                         "compile_cache": "hit" if not noauto else "n.a.",
                         "weights_gb": m["weights_gb"], "gpu_mem_reserved_gb": None,
-                        "max_num_seqs": 64, "max_model_len": 40960,
-                        "gpu_mem_util": 0.85},
+                        # 从实际 argv 派生(此前硬编码 64/40960 污染了所有非默认场景 — 2026-10-04 复核揪出)
+                        "max_num_seqs": int(argv[argv.index("--max-num-seqs") + 1]) if "--max-num-seqs" in argv else None,
+                        "max_model_len": int(argv[argv.index("--max-model-len") + 1]) if "--max-model-len" in argv else None,
+                        "gpu_mem_util": float(argv[argv.index("--gpu-memory-utilization") + 1]) if "--gpu-memory-utilization" in argv else None},
             "gauges_peak": gauges, "counters": counters,
             "histograms": histograms, "host_per_machine": host},
         "perf_metrics": {"workloads": workloads,
@@ -424,7 +429,10 @@ def recommend(scs):
     if ok:
         def z(vals, i):
             vs = [num(v) for v in vals]
-            return (vs[i] - min(vs)) / (max(vs) - min(vs)) if max(vs) > min(vs) else 0.0
+            if max(vs) > min(vs):
+                return (vs[i] - min(vs)) / (max(vs) - min(vs))
+            return 1.0 if len(vs) == 1 else 0.0  # 单场景: 无跨场景基准, 记满分并降格为基线
+        single_note = "(单场景无可比基准, 综合分仅为基线记录, 非跨场景优选)" if len(ok) == 1 else ""
         c32s = [c32(s)["agg"]["output_tok_s"] for s in ok]
         c1s = [c1(s)["agg"]["output_tok_s"] for s in ok]
         caps = [cap_avg(s, SUITES_P0) for s in ok]
@@ -444,7 +452,7 @@ def recommend(scs):
             "profile": "综合推荐",
             "winner": win["scenario_id"], "winner_label": label_of(win),
             "reasons": [
-                {"text": f"综合分 {scores[bi]:.3f}(权重 c32吞吐{W['c32_tput']}/c1吞吐{W['c1_tput']}/能力{W['capability']}/KV容量{W['kv_capacity']}/省一机{W['single_node_saving']})",
+                {"text": f"综合分 {scores[bi]:.3f}(权重 c32吞吐{W['c32_tput']}/c1吞吐{W['c1_tput']}/能力{W['capability']}/KV容量{W['kv_capacity']}/省一机{W['single_node_saving']}){single_note}",
                  "check": {"scenario": win["scenario_id"],
                            "path": "score", "value": round(scores[bi], 3)}},
                 {"text": f"c32 出流 {c32s[bi]:.1f} tok/s, c1 出流 {c1s[bi]:.1f} tok/s, 三套件均分 {caps[bi]:.3f}",

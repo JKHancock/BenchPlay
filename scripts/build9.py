@@ -10,9 +10,11 @@ B.TAGS = list(B.TAGS) + [
     ("FlashNext-TP2-40960", "Qwen3.8-Flash-Next-NVFP4", 2, False, [], 40960),
     ("DsFlash-TP2-1M", "DeepSeek-V4-Flash-fp8", 2, False, [], 1048576)]
 B.MODELS["Qwen3.8-Flash-Next-NVFP4"] = {"quant": "NVFP4", "type": "moe", "params_b": 230,
-                                        "active_b": 4, "weights_gb": 132.6, "ctx": 1048576}
+                                        "active_b": 4, "weights_gb": 132.6, "ctx": 1048576,
+                                        "native_context": 262144}
 B.MODELS["DeepSeek-V4-Flash-fp8"] = {"quant": "FP8", "type": "moe", "params_b": 160,
-                                     "active_b": 6, "weights_gb": 159.6, "ctx": 1048576}
+                                     "active_b": 6, "weights_gb": 159.6, "ctx": 1048576,
+                                     "native_context": 1048576}
 
 RAW_FLASH_1M = "D:/CSharpProject/BenchPlaybook/tasks/t20260930-flashnext-c12/raw"
 RAW_FLASH_40K = "D:/CSharpProject/BenchPlaybook/tasks/t20261003-overnight"
@@ -73,6 +75,14 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
     row["vllm_args"] = argv
     row["scenario_id"] = hashlib.sha1(
         (" ".join(argv) + model + str(tp)).encode()).hexdigest()[:8]
+    # 启动态以最终 argv 回填(通用分支用默认参数算过一遍, 与真实 serve 不符)
+    st = row["vllm_metrics"]["startup"]
+    st["max_num_seqs"] = int(argv[argv.index("--max-num-seqs") + 1]) if "--max-num-seqs" in argv else None
+    st["max_model_len"] = int(argv[argv.index("--max-model-len") + 1]) if "--max-model-len" in argv else None
+    st["gpu_mem_util"] = float(argv[argv.index("--gpu-memory-utilization") + 1]) if "--gpu-memory-utilization" in argv else None
+    st["flashinfer_autotune"] = "--kernel-config" not in " ".join(argv)
+    row["model"]["served_name"] = (argv[argv.index("--served-model-name") + 1]
+                                   if "--served-model-name" in argv else row["model"].get("served_name"))
     return row
 
 

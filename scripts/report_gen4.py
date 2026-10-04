@@ -109,7 +109,7 @@ def _vcols(sc, ph):
 
 def _vc_header():
     return ["成功", "失败", "prompt tok", "gen tok", "前缀q/h",
-            "TTFT p99", "TPOT p99", "ITL p99", "排队 p99"]
+            "服端TTFTp99(s)", "服端TPOTp99(s)", "服端ITLp99(s)", "服端排队p99(s)"]
 
 
 def _vc_divider():
@@ -199,9 +199,14 @@ def main():
                  + ("混合架构：部分层用线性注意力（Mamba/GDN），部分用标准注意力——前缀缓存粒度由 Mamba 检查点决定" if arch.get("type") == "moe" else "标准 Transformer"))
         L.append(f"| 参数量 | {arch.get('params_b','—')}B（激活 {arch.get('active_b','—')}B） | "
                  + (f"每 token 只激活 {arch.get('active_b','—')}B（{arch.get('active_b',0)*100//max(arch.get('params_b',1),1)}%），其余休眠——MoE 省算力但费显存" if arch.get("type") == "moe" else "全参数激活——每 token 都要读完整模型"))
-        L.append(f"| 量化 | {md.get('quant','—')} | 权重按 4bit 浮点存储，读带宽减半以上；精度损失实测 <1%")
-        L.append(f"| 上下文 | 原生 {c(md.get('native_context','—'), '{:,.0f}')} | "
-                 + (f"部署时可外拓到 {c(md.get('context_len','—'), '{:,.0f}')}（YaRN 4×）" if md.get("context_len", 0) > md.get("native_context", 0) else "原生即部署上限"))
+        _q = str(md.get("quant", "")).upper()
+        _qdesc = ("权重按 8bit 浮点(FP8)存储，带宽较 BF16 减半" if "FP8" in _q
+                  else "权重按 4bit 浮点(NVFP4)存储，读带宽减半以上" if "FP4" in _q
+                  else "量化方式见 M0 档案")
+        L.append(f"| 量化 | {md.get('quant','—')} | {_qdesc}；量化精度影响以本报告能力套件横向对比为准")
+        _nc, _cl = md.get("native_context"), md.get("context_len")
+        L.append(f"| 上下文 | 原生 {c(_nc, '{:,.0f}')} | "
+                 + (f"部署时外拓到 {c(_cl, '{:,.0f}')}（YaRN {_cl//max(_nc,1)}×）" if _cl and _nc and _cl > _nc else "原生即部署上限"))
         L.append(f"| 权重量 | {c(md.get('weights_gb','—'), '{:.1f}')} GB | "
                  + (f"双机 TP2 各持 {c(md.get('weights_gb',0)/2, '{:.1f}')} GB，剩余给 KV 缓存" if arch.get("type") else ""))
 
@@ -217,77 +222,83 @@ def main():
         _vocab = 248320 if "Flash" in mn else 152064
         _arch = "Qwen4ExpForConditionalGeneration" if "Flash" in mn else "Qwen3_5MoeForConditionalGeneration" if _e else "Qwen3_5ForCausalLM"
         L.append("")
-        L.append("**模型结构树（print(model) 等效，由 M0 权重文件逐名推导）：**")
-        L.append("")
-        L.append("```python")
-        L.append(f"# ── 模型结构: 每行注释说明该组件做什么、对推理性能/能力的影响 ──")
-        L.append(f"{_arch}(  # 顶层: 条件生成(支持文+图输入)")
-        L.append(f"  (model): {_arch.replace('ForConditionalGeneration','Model').replace('ForCausalLM','Model')}(")
-        L.append(f"    (embed_tokens): Embedding({_vocab}, {_h})  # 词嵌入: {_vocab}个token→{_h}维向量; 词表越大中文/代码覆盖越好")
-        if "Flash" in mn:
-            L.append(f"    (layers): ModuleList(")
-            L.append(f"      (0-{_nl-1}): {_nl} x DecoderLayer(  # {_nl}层堆叠; 每层=注意力+FFN+归一化")
-            L.append(f"        (linear_attn): GatedDeltaNet(  # 线性注意力(Mamba/GDN系)")
-            L.append(f"          (in_proj_qkv): Linear  # 输入投影: 把token映射到QKV空间")
-            L.append(f"          (conv1d): Conv1d  # 1D卷积做局部上下文感知")
-            L.append(f"          (A_log): Parameter  # 状态衰减系数(决定'记忆'多长)")
-            L.append(f"          (dt_bias): Parameter  # 时间步偏置")
-            L.append(f"          (out_proj): Linear  # 输出投影回隐藏维")
-            L.append(f"        )  # ← 复杂度O(n)不看全历史, 但状态是滚动的→前缀缓存粒度由检查点间隔决定")
+        if not ("Flash" in mn or "Qwen" in mn):
+            # 结构树生成器仅覆盖 Qwen 系——其他模型如实标注并指向 M0 档案, 不渲染假树
+            L.append(f"**模型结构树**：本渲染器当前仅覆盖 Qwen 系结构推导；`{mn}`（{md.get('quant','')}）"
+                     f"的逐层结构、MTP/专家/KV 形态以 M0 权重档案为准：`models/{mn}.profile.json`"
+                     f"（MLA 单 KV 头、{arch.get('params_b','?')}B 总参/激活 {arch.get('active_b','?')}B 等关键事实见上表）。")
+            L.append("")
         else:
-            L.append(f"    (layers): ModuleList(")
-            L.append(f"      (0-{_nl-1}): {_nl} x DecoderLayer(  # {_nl}层堆叠; 每层=注意力+FFN+归一化")
-        L.append(f"        (self_attn): Attention(  # 标准自注意力: 每个token'看'所有前文")
-        L.append(f"          (q_proj): Linear({_h}, {_h})  # Query: {_nh}个头, 每个{_h//_nh}维; 决定'我在找什么'")
-        L.append(f"          (k_proj): Linear({_h}, {_h*_nkv//_nh})  # Key: 仅{_nkv}个KV头(GQA)→KV缓存缩小{_nh//_nkv}倍")
-        L.append(f"          (v_proj): Linear({_h}, {_h*_nkv//_nh})  # Value: 同KV头数; 存'我找到了什么'")
-        L.append(f"          (o_proj): Linear({_h}, {_h})  # 输出: 拼接所有头的结果投影回去")
-        L.append(f"          (rotary_emb): RotaryEmbedding()  # 位置编码: 让模型知道token的先后顺序")
-        L.append(f"        )  # ← 复杂度O(n²); KV头越少, 推理时能缓存的上下文越多")
-        if _e:
-            L.append(f"        (mlp): MoE(  # 混合专家FFN: 并非所有参数都参与计算")
-            L.append(f"          (gate): Linear({_h}, {_lexp})  # 路由器: 给每个token打分, 选最相关的{_lact}个专家")
-            L.append(f"          (experts): ModuleList({_lexp} x Expert(  # {_lexp}个独立FFN")
-            L.append(f"            (gate_proj): Linear({_h}, 640)  # 升维: {_h}→640 (SwiGLU的gate分支)")
-            L.append(f"            (up_proj): Linear({_h}, 640)  # 升维: {_h}→640 (SwiGLU的up分支)")
-            L.append(f"            (down_proj): Linear(640, {_h})  # 降维: 640→{_h} (输出)")
-            L.append(f"          ))  # ← 每 token 仅激活 {_lact}/{_lexp} ({_lact*100//_lexp}%): 省算力但全量权重都驻显存")
-            L.append(f"        )")
-        else:
-            L.append(f"        (mlp): MLP(  # 稠密FFN: 所有参数都参与计算")
-            L.append(f"          (gate_proj): Linear({_h}, {_h*4})  # 升维×4: SwiGLU gate分支")
-            L.append(f"          (up_proj): Linear({_h}, {_h*4})  # 升维×4: SwiGLU up分支")
-            L.append(f"          (down_proj): Linear({_h*4}, {_h})  # 降维回隐藏维")
-            L.append(f"          (activation): SiLU()  # 激活函数: x·sigmoid(x)")
-            L.append(f"        )  # ← 每 token 读全量FFN权重; 稠密模型速度受限于显存带宽÷权重GB")
-        L.append(f"        (input_layernorm): RMSNorm()  # 注意力前归一化: 稳定数值分布")
-        L.append(f"        (post_attention_layernorm): RMSNorm()  # FFN前归一化")
-        L.append(f"      )")
-        L.append(f"    )")
-        L.append(f"    (norm): RMSNorm()  # 最终层归一化")
-        L.append(f"  )")
-        L.append(f"  (lm_head): Linear({_h}, {_vocab}, bias=False)  # 输出层: 隐藏向量→{_vocab}个token的概率分布")
-        # MTP
-        mtp_has = "--speculative-config" in " ".join(sc["vllm_args"])
-        if mtp_has:
-            L.append(f"  (mtp): MTPHead(  # 投机解码头(MTP): 一次预测多个token再由主模型验证")
-            L.append(f"    (fc): Linear({_h}, {_h*2})  # 投影: 把当前隐状态映射到MTP空间")
-            L.append(f"    (layers): ModuleList(1 x DecoderLayer(...))  # 单层递归起草: 同一层反复调用k次")
-            L.append(f"  )  # ← 开启后单流提速37-97%(接受率60-83%); k=2是精度/速度实测最优")
-        # Vision
-        if "Flash" in mn or "image_token" in str(sc.get("notes", "")):
-            L.append(f"  (visual): VisionTower(  # 视觉编码器(ViT): 把图片转为token序列")
-            L.append(f"    (patch_embed): Conv2d  # 图片切块→初始特征(如14×14像素块)")
-            L.append(f"    (blocks): ModuleList(N x VisionBlock())  # 视觉Transformer层: 提取图像特征")
-            L.append(f"  )  # ← 使模型能看图回答; 图片折算~146 token/张, 预填开销极小")
-        L.append(f")")
-        L.append(f"#")
-        L.append(f"# 总参数: ~{n_l}B | 权重: {c(md.get('weights_gb',0), '{:.1f}')}GB (NVFP4=4bit浮点+两级缩放)")
-        L.append(f"# 层数: {_nl} | 隐藏维: {_h} | 注意力: {_nh}头(查询)/{_nkv}头(KV缓存) | 词表: {_vocab}")
-        if _e:
-            L.append(f"# 专家: {_lexp}个(每token激活{_lact}个) → 单token计算量≈{arch.get('active_b','?')}B参数的稠密模型")
-            L.append(f"# KV缓存: 每token每层约占{_h//_nh*2*2}字节(仅{_nkv}个KV头) → 双机可缓存数百万token")
-        L.append("```")
+            L.append("**模型结构树（print(model) 等效，由 M0 权重文件逐名推导）：**")
+            L.append("```python")
+            L.append(f"# ── 模型结构: 每行注释说明该组件做什么、对推理性能/能力的影响 ──")
+            L.append(f"{_arch}(  # 顶层: 条件生成(支持文+图输入)")
+            L.append(f"  (model): {_arch.replace('ForConditionalGeneration','Model').replace('ForCausalLM','Model')}(")
+            L.append(f"    (embed_tokens): Embedding({_vocab}, {_h})  # 词嵌入: {_vocab}个token→{_h}维向量; 词表越大中文/代码覆盖越好")
+            if "Flash" in mn:
+                L.append(f"    (layers): ModuleList(")
+                L.append(f"      (0-{_nl-1}): {_nl} x DecoderLayer(  # {_nl}层堆叠; 每层=注意力+FFN+归一化")
+                L.append(f"        (linear_attn): GatedDeltaNet(  # 线性注意力(Mamba/GDN系)")
+                L.append(f"          (in_proj_qkv): Linear  # 输入投影: 把token映射到QKV空间")
+                L.append(f"          (conv1d): Conv1d  # 1D卷积做局部上下文感知")
+                L.append(f"          (A_log): Parameter  # 状态衰减系数(决定'记忆'多长)")
+                L.append(f"          (dt_bias): Parameter  # 时间步偏置")
+                L.append(f"          (out_proj): Linear  # 输出投影回隐藏维")
+                L.append(f"        )  # ← 复杂度O(n)不看全历史, 但状态是滚动的→前缀缓存粒度由检查点间隔决定")
+            else:
+                L.append(f"    (layers): ModuleList(")
+                L.append(f"      (0-{_nl-1}): {_nl} x DecoderLayer(  # {_nl}层堆叠; 每层=注意力+FFN+归一化")
+            L.append(f"        (self_attn): Attention(  # 标准自注意力: 每个token'看'所有前文")
+            L.append(f"          (q_proj): Linear({_h}, {_h})  # Query: {_nh}个头, 每个{_h//_nh}维; 决定'我在找什么'")
+            L.append(f"          (k_proj): Linear({_h}, {_h*_nkv//_nh})  # Key: 仅{_nkv}个KV头(GQA)→KV缓存缩小{_nh//_nkv}倍")
+            L.append(f"          (v_proj): Linear({_h}, {_h*_nkv//_nh})  # Value: 同KV头数; 存'我找到了什么'")
+            L.append(f"          (o_proj): Linear({_h}, {_h})  # 输出: 拼接所有头的结果投影回去")
+            L.append(f"          (rotary_emb): RotaryEmbedding()  # 位置编码: 让模型知道token的先后顺序")
+            L.append(f"        )  # ← 复杂度O(n²); KV头越少, 推理时能缓存的上下文越多")
+            if _e:
+                L.append(f"        (mlp): MoE(  # 混合专家FFN: 并非所有参数都参与计算")
+                L.append(f"          (gate): Linear({_h}, {_lexp})  # 路由器: 给每个token打分, 选最相关的{_lact}个专家")
+                L.append(f"          (experts): ModuleList({_lexp} x Expert(  # {_lexp}个独立FFN")
+                L.append(f"            (gate_proj): Linear({_h}, 640)  # 升维: {_h}→640 (SwiGLU的gate分支)")
+                L.append(f"            (up_proj): Linear({_h}, 640)  # 升维: {_h}→640 (SwiGLU的up分支)")
+                L.append(f"            (down_proj): Linear(640, {_h})  # 降维: 640→{_h} (输出)")
+                L.append(f"          ))  # ← 每 token 仅激活 {_lact}/{_lexp} ({_lact*100//_lexp}%): 省算力但全量权重都驻显存")
+                L.append(f"        )")
+            else:
+                L.append(f"        (mlp): MLP(  # 稠密FFN: 所有参数都参与计算")
+                L.append(f"          (gate_proj): Linear({_h}, {_h*4})  # 升维×4: SwiGLU gate分支")
+                L.append(f"          (up_proj): Linear({_h}, {_h*4})  # 升维×4: SwiGLU up分支")
+                L.append(f"          (down_proj): Linear({_h*4}, {_h})  # 降维回隐藏维")
+                L.append(f"          (activation): SiLU()  # 激活函数: x·sigmoid(x)")
+                L.append(f"        )  # ← 每 token 读全量FFN权重; 稠密模型速度受限于显存带宽÷权重GB")
+            L.append(f"        (input_layernorm): RMSNorm()  # 注意力前归一化: 稳定数值分布")
+            L.append(f"        (post_attention_layernorm): RMSNorm()  # FFN前归一化")
+            L.append(f"      )")
+            L.append(f"    )")
+            L.append(f"    (norm): RMSNorm()  # 最终层归一化")
+            L.append(f"  )")
+            L.append(f"  (lm_head): Linear({_h}, {_vocab}, bias=False)  # 输出层: 隐藏向量→{_vocab}个token的概率分布")
+            # MTP
+            mtp_has = "--speculative-config" in " ".join(sc["vllm_args"])
+            if mtp_has:
+                L.append(f"  (mtp): MTPHead(  # 投机解码头(MTP): 一次预测多个token再由主模型验证")
+                L.append(f"    (fc): Linear({_h}, {_h*2})  # 投影: 把当前隐状态映射到MTP空间")
+                L.append(f"    (layers): ModuleList(1 x DecoderLayer(...))  # 单层递归起草: 同一层反复调用k次")
+                L.append(f"  )  # ← 加速幅度以服务端·投机接受率·指标为准(经验库参考: 同集群 Flash-Next 接受率 60-83%)")
+            # Vision
+            if "Flash" in mn or "image_token" in str(sc.get("notes", "")):
+                L.append(f"  (visual): VisionTower(  # 视觉编码器(ViT): 把图片转为token序列")
+                L.append(f"    (patch_embed): Conv2d  # 图片切块→初始特征(如14×14像素块)")
+                L.append(f"    (blocks): ModuleList(N x VisionBlock())  # 视觉Transformer层: 提取图像特征")
+                L.append(f"  )  # ← 使模型能看图回答; 图片折算~146 token/张, 预填开销极小")
+            L.append(f")")
+            L.append(f"#")
+            L.append(f"# 总参数: ~{n_l}B | 权重: {c(md.get('weights_gb',0), '{:.1f}')}GB (NVFP4=4bit浮点+两级缩放)")
+            L.append(f"# 层数: {_nl} | 隐藏维: {_h} | 注意力: {_nh}头(查询)/{_nkv}头(KV缓存) | 词表: {_vocab}")
+            if _e:
+                L.append(f"# 专家: {_lexp}个(每token激活{_lact}个) → 单token计算量≈{arch.get('active_b','?')}B参数的稠密模型")
+                L.append(f"# KV缓存: 每token每层约占{_h//_nh*2*2}字节(仅{_nkv}个KV头) → 双机可缓存数百万token")
+            L.append("```")
         L.append("")
 
         # 解读表
@@ -295,7 +306,7 @@ def main():
         # MTP
         mtp_has = "--speculative-config" in " ".join(sc["vllm_args"])
         L.append(f"| MTP 投机 | {'✅ 开启' if mtp_has else '— 未开/不适用'} | "
-                 + ("模型自带 MTP 头，预测+验证加速解码；实测接受率 60-83%，单流提速 37-97%" if mtp_has else "模型无 MTP 权重或未开启"))
+                 + ("模型自带 MTP 头，预测+验证加速解码；本场景接受率看服务端指标列(经验库参考: Flash-Next 同集群 60-83%)" if mtp_has else "模型无 MTP 权重或未开启"))
         # 工具调用
         tool_has = "--tool-call-parser" in " ".join(sc["vllm_args"])
         L.append(f"| 工具调用 | {'✅ 开启' if tool_has else '— 未开'} | "
@@ -503,7 +514,7 @@ def main():
             "--tensor-parallel-size": ("张量并行", "把模型切成几份分到几张 GPU 上同时算", "TP=2 用满双机；TP=1 单机跑"),
             "--distributed-executor-backend": ("分布式后端", "跨机通信框架", "ray 是双机集群标准选择"),
             "--enable-expert-parallel": ("专家并行", "MoE 专家分组到不同节点", "MoE 双机可选；实测收益 <1%"),
-            "--speculative-config": ("投机解码(MTP)", "用模型 MTP 头预测多个 token 一次验证", "模型自带 MTP 权重即可开；k=2 实测最优"),
+            "--speculative-config": ("投机解码(MTP)", "用模型 MTP 头预测多个 token 一次验证", "模型自带 MTP 权重即可开；k 取值以 M0 档案建议为准(1 与 2 均应实测)"),
             "--hf-overrides": ("模型配置覆写", "运行时覆盖上下文长度（YaRN 外拓）", "原生 262K 不够用时外拓到 1M"),
             "--enable-auto-tool-choice": ("自动工具调用", "允许模型自动决定是否调工具", "智能体用途必须开"),
             "--tool-call-parser": ("工具调用解析器", "识别模型输出的工具语法转 JSON", "须匹配模型格式；Qwen 用 qwen3_xml"),
@@ -589,8 +600,11 @@ def main():
                      f"{'是' if sk.get('preempted') else '无'}/{sk.get('failed_turns', 0)} | "
                      + " | ".join(_sk) + " |")
             L.append("")
-            L.append(f"  解读：增长比≈1× 表示前缀缓存把“每轮全量重发历史”救回（多轮聊天不随上下文劣化）；"
-                     f"KV 峰对照启动日志池上限判容量口径。用时 {c(sk.get('wall_s'), '{:.0f}')}s。")
+            _ratio = sk.get("ttft_growth_ratio")
+            _verdict = ("多轮基本不劣化（前缀缓存有效救回全量重发）" if (_ratio or 9) <= 1.5
+                        else f"**存在多轮劣化（×{_ratio}）**——残余未命中与调度成本随上下文累积")
+            L.append(f"  本次判定：{_verdict}；KV 峰对照启动日志池上限判容量口径（注意: kv_peak=0 为已知采集坑, 真实值以引擎日志为准）。"
+                     f"用时 {c(sk.get('wall_s'), '{:.0f}')}s。")
             L.append("")
         L.extend(_emit_vllm(sc, ["phase:w1", "phase:w2", "phase:w3", "phase:w4",
                                  "phase:w5", "phase:w6", "phase:probe"],

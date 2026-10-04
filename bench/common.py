@@ -217,9 +217,17 @@ def _lookup(metrics, key):
     v = metrics.get(key)
     if v is not None or "{q=" in key:
         return v
-    name = key.split("{")[0]
+    # 回退匹配: 忽略 model_name/engine 标签(served 名随场景变), 但保留区分性标签
+    # (教训 2026-10-04: 此前按裸名回退, request_success_total 的 stop/abort/error
+    #  四键全部命中第一个 stop 变体 → 成功=失败 的假数据进了报告, 独立复核员揪出)
+    def sig(k):
+        name, _, inner = k.partition("{")
+        labels = sorted(p.strip() for p in inner.rstrip("}").split(",")
+                        if p and not p.strip().startswith(("model_name=", "engine=")))
+        return (name, ",".join(labels))
+    s = sig(key)
     for k, val in metrics.items():
-        if k.split("{")[0] == name:
+        if sig(k) == s:
             return val
     return None
 
