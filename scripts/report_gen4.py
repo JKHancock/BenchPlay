@@ -569,6 +569,29 @@ def main():
                      + (f"（首败 {cp['first_failure']['concurrency']}路@{cp['first_failure']['mode']}）"
                         if cp.get("first_failure") else "（阶梯全过）"))
             L.append("")
+        sk = sc["perf_metrics"].get("soak")
+        if sk:
+            _sk = _vcols(sc, "phase:soak")
+            L.append("**长会话浸泡（soak：N 路持久会话逐轮增长到目标上下文，验证多轮全量重发下前缀缓存与 KV 增长）**")
+            L.append("")
+            L.extend(["| 路数 | 每轮+tok | 目标ctx | 轮数 | 终态ctx(tok) | TTFT首3轮 | TTFT末3轮 | 增长比 | KV峰 | 前缀命中 | 抢占/失败 | "
+                      + " | ".join(_vc_header()) + " |",
+                      "|---|" + "---|" * 11 + "---|" * 9])
+            fin = sk.get("final_ctx_tokens") or []
+            L.append(f"| {sk.get('sessions')} | {sk.get('chunk_tokens')} | "
+                     f"{c(sk.get('target_context'), '{:,.0f}')} | {sk.get('rounds')} | "
+                     f"{'/'.join(str(x) for x in fin)} | "
+                     f"{c(sk.get('ttft_first3_avg_ms'), '{:.0f}')}ms | "
+                     f"{c(sk.get('ttft_last3_avg_ms'), '{:.0f')}ms | "
+                     f"×{c(sk.get('ttft_growth_ratio'), '{:.2f}')} | "
+                     f"{c(sk.get('kv_peak_perc'), '{:.1%}')} | "
+                     f"{c(sk.get('prefix_hit_rate'), '{:.1%}')} | "
+                     f"{'是' if sk.get('preempted') else '无'}/{sk.get('failed_turns', 0)} | "
+                     + " | ".join(_sk) + " |")
+            L.append("")
+            L.append(f"  解读：增长比≈1× 表示前缀缓存把“每轮全量重发历史”救回（多轮聊天不随上下文劣化）；"
+                     f"KV 峰对照启动日志池上限判容量口径。用时 {c(sk.get('wall_s'), '{:.0f}')}s。")
+            L.append("")
         L.extend(_emit_vllm(sc, ["phase:w1", "phase:w2", "phase:w3", "phase:w4",
                                  "phase:w5", "phase:w6", "phase:probe"],
                             "性能测试期间的服务端指标"))

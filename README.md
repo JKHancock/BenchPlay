@@ -104,6 +104,7 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 3. **四关验收** verify.sh：①身份（/v1/models）②功能（对话冒烟）③可观测（metrics≥10 条）④**智能体**（工具调用回环；用途=agent 时 FAIL 级——对话绿≠agent 可用，实测事故教训）
 4. **Track1 性能**（bench/track1.py）：w1 随机 512×c1/8/32 · w2 真实 ShareGPT · w3 短对话 · w4 长文 4096 · w5 输出阶梯 · w6 c64 · wsweep 舒适度扫描 · w7 128K 探针；指标族 TTFT/TPOT/ITL/E2E{mean,p50,p90,p99,max}+单流出流+goodput(SLO:TTFT≤500&TPOT≤100)+屋顶线(c1)+**负载中 gauge 峰值轮询**+档内失败自动补跑（WiFi 瞬断免疫，retried 计数）
 5. **探针**（bench/probes.py）：前缀缓存（冷/热加速比+命中计数；**复用率是长度函数** 1.5K→0%/4K→37%/16K→83%/64K→97%，探针必扫长度阶梯）+容量阶梯（最大可用并发/首败模式）
+5a. **长会话浸泡**（bench/soak.py，2026-10-04 新增）：N 路持久会话逐轮增长到目标上下文（如 3×500K=产品口径），每轮全量重发真实历史+流式计时+轮级 /metrics 差值；回答"多轮聊天随 KV 增长 TTFT 是否劣化（前缀缓存能否救回全量重发）/KV 峰值/抢占第一发生点"——一次性请求模式（w1-w6）测不到；门禁=零失败零抢占
 6. **Track2 能力**（bench/track2.py）：十二套件——gsm8k/mmlu/arc/hellaswag/winogrande/truthfulqa/openbookqa/race（各 n=200）+ **math500**（竞赛数学 500 题全集，开思考链=公开榜口径，LaTex 归一化容差比对）+ **cmmlu/ceval**（中文知识与中国特色考试，各 n=200）+ **ifeval**（指令遵循，22 种可编程校验器，全部指令通过才计对，另报指令级口径）；统一口径 0-shot·temp=0·固定种子分层抽样，除 math500 外关思考链（**不关思考链会耗尽 max_tokens 出假分**：gsm8k 2%→94.5% 的教训）；截断率>10% 标⚠
 7. **Track3 智能体**（bench/track3_agent.py + bench/bfcl.py）：工具选择（含不调用克制）/参数抽取/多轮回环/循环时延；BFCL v3（irrelevance 精确分、simple 结构分下界——HF 版真值脱敏如实标注）；思考链 on/off A/B
 8. **三时点 metrics**：每相位 idle→after 差值（vLLM 0.30 计数器名勘误在案：request_success_total{finished_reason}等）+ 每机 nvidia-smi 负载中采样
@@ -126,7 +127,7 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 
 ### 6.1 Benchmark 一 · 性能（Track1 + 探针）→ 性能指标集合
 - 工作负载矩阵：随机吞吐档 / 真实分布(ShareGPT) / 短对话 / 长文预填 / 输出阶梯 / 满序列批 / 舒适度扫描 / 超长上下文探针
-- 指标族：TTFT·TPOT·ITL·E2E{mean,p50,p90,p99,max}、单流出流、聚合吞吐/QPS、SLO goodput、屋顶线利用率、前缀缓存复用(长度阶梯)、容量阶梯、档内失败补跑计数
+- 指标族：TTFT·TPOT·ITL·E2E{mean,p50,p90,p99,max}、单流出流、聚合吞吐/QPS、SLO goodput、屋顶线利用率、前缀缓存复用(长度阶梯)、容量阶梯、档内失败补跑计数、**长会话浸泡（soak）：TTFT 增长比(末3轮/首3轮)、KV 峰值、多轮前缀命中率、抢占第一发生点**
 - 来源：SSE 流式逐请求计时（bench/track1、bench/probes）
 
 ### 6.2 Benchmark 二 · 模型能力（Track2）→ 能力指标集合
@@ -183,7 +184,7 @@ scripts/                              全部执行脚本（30 个，按阶段分
   配置: excluded_scenarios.json(不可行组合清单)
   legacy/                             已废弃脚本（7 个，保留供考古）
 bench/                                跑分工具（六轨, 克隆即带）【静态】
-  track1.py(性能) track2.py(能力12套,含4新套) track2_extra.py(新4套加载器/校验器)
+  track1.py(性能) soak.py(长会话浸泡) track2.py(能力12套,含4新套) track2_extra.py(新4套加载器/校验器)
   track3_agent.py(智能体) bfcl.py(函数调用) probes.py(探针) common.py(客户端/指标)
 data/cap/                             12 套件数据集（parquet/jsonl/csv, 克隆即带）【静态】
 requirements.txt                      Python 依赖声明【静态】

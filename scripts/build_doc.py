@@ -180,7 +180,7 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
     # vllm_metrics
     kv_tok, mx_x = parse_kv_lines(d / "startup.log")
     gauges, counters, histograms = {}, {}, {}
-    for w in wl_stems + ["probe", "cap", "agent"]:
+    for w in wl_stems + ["probe", "cap", "agent", "soak"]:
         fa, fb = d / f"metrics_{w}_a.json", d / f"metrics_{w}_b.json"
         if fa.exists() and fb.exists():
             delta = metrics_delta(load(fb), load(fa), METRIC_KEYS)
@@ -320,7 +320,8 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
             "histograms": histograms, "host_per_machine": host},
         "perf_metrics": {"workloads": workloads,
                          "probes": probes and {"prefix_cache": probes["prefix_cache"],
-                                               "capacity": probes["capacity"]}},
+                                               "capacity": probes["capacity"]},
+                         "soak": load(d / "soak.json") if (d / "soak.json").exists() else None},
         "capability_scores": {"suites": cap_suites},
         "agent_metrics": agent_metrics,
         "status": "complete" if p0_ok else "partial",

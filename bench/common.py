@@ -65,7 +65,7 @@ class Client:
     def _one_stream(self, body):
         t0 = time.perf_counter()
         first_t = None
-        text_len = 0
+        text_parts = []
         chunk_times = []  # 每个含content块的到达时刻(ITL样本源)
         usage = None
         finish = None
@@ -98,13 +98,14 @@ class Client:
                     if first_t is None:
                         first_t = now
                     chunk_times.append(now)
-                    text_len += len(c)
+                    text_parts.append(c)
         t_end = time.perf_counter()
         if first_t is None:
             raise RuntimeError("no content chunk (empty stream)")
+        text = "".join(text_parts)
         comp = (usage or {}).get("completion_tokens")
         if comp is None:
-            comp = max(1, text_len // 4)  # 无 usage 时按字符近似, 仅为兜底
+            comp = max(1, len(text) // 4)  # 无 usage 时按字符近似, 仅为兜底
         wall_ms = (t_end - t0) * 1000.0
         ttft_ms = (first_t - t0) * 1000.0
         gen_ms = (t_end - first_t) * 1000.0
@@ -115,7 +116,8 @@ class Client:
                 "itl_ms": itl_ms, "e2e_ms": wall_ms,
                 "completion_tokens": comp,
                 "prompt_tokens": (usage or {}).get("prompt_tokens"),
-                "wall_ms": wall_ms, "finish": finish or "stop", "error": None}
+                "wall_ms": wall_ms, "finish": finish or "stop", "error": None,
+                "text": text}
 
 
 def pct(sorted_vals, p):

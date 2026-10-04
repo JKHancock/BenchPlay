@@ -87,5 +87,5 @@
 1. **按阶段查此表选脚本**——不要凭记忆调脚本名
 2. **先看门禁列**——门禁不过不进下一步
 3. **cell4/5/6/7 是编排脚本**——它们内部调 serve/verify/bench 工具链
-4. **bench/ 工具与数据集已收编进本仓库**（`bench/` + `data/cap/`）——track1(性能) track2(能力12套) track2_extra(新四套) track3(智能体) bfcl(函数调用) probes(探针)；依赖 `pip install -r requirements.txt`。旧位置 `../Vllm_Benchmark/bench/` 仅作历史运行档案(cell7 前)的路径参考
+4. **bench/ 工具与数据集已收编进本仓库**（`bench/` + `data/cap/`）——track1(性能) **soak(长会话浸泡: N路持久会话逐轮增长, TTFT增长比/KV峰/前缀命中/抢占点)** track2(能力12套) track2_extra(新四套) track3(智能体) bfcl(函数调用) probes(探针)；依赖 `pip install -r requirements.txt`。旧位置 `../Vllm_Benchmark/bench/` 仅作历史运行档案(cell7 前)的路径参考
 5. **DLP 注意**：Python 写文件可能触发 DLP 加密；**git 提交前先洗白**（Python 新写的 JSON/log 用 PowerShell Copy-Item 通道过一遍再 add，git 仓库内保持明文），如遇"文件不可读"用 `wash.ps1`

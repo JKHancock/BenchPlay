@@ -288,6 +288,7 @@
 | 服务 | argv 原文、launch_env、启动两行(KV容量/最大并发×)、就绪耗时 | vllm_args + vllm_metrics.startup |
 | 验证 | /metrics 三时点快照(每工作负载一相) | counters/histograms |
 | 基准 | w1-w6 工作负载 × 档 + GaugePoller 峰值 + 探针 | perf_metrics + gauges_peak |
+| 浸泡 | soak.json(soak.py: N路持久会话增长到目标ctx) + metrics_soak_a/b 相位快照 | perf_metrics.soak( TTFT增长比/KV峰/前缀命中/抢占点, 报告 Benchmark 一渲染专属段) |
 | 能力 | 套件全清单(按级) 统一口径 | capability_scores |
 | 主机 | 负载中 nvidia-smi 采样(每机) | host_per_machine |
 | 推理 | 规则引擎跑分 | recommendation |
