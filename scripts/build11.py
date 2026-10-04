@@ -125,11 +125,14 @@ machines = B.machines_part()
 scs = []
 for t in B.TAGS:
     tag = t[0]
+    _saved2 = B.RAW2  # build_doc 对 FlashNext 标签内部硬编码走 RAW2(无视 B.RAW), EP2 标签须临时改指
     if tag.startswith("FlashNext"):
         if "ep2" in tag:
             B.RAW = _P(RAW_FEP)
+            B.RAW2 = _P(RAW_FEP)
         else:
             B.RAW = _P(RAW_FLASH_1M if "1M" in tag else RAW_FLASH_40K)
+            B.RAW2 = _P(RAW_FLASH_1M)
     elif tag.endswith("-ep2"):
         B.RAW = _P(RAW_DSEP)
     elif tag.startswith("DsFlashN"):
@@ -139,8 +142,10 @@ for t in B.TAGS:
     else:
         B.RAW = PATH_RAW
     if not (B.RAW / tag).exists():
+        B.RAW2 = _saved2
         continue
     scs.append(B.scenario(*t))
+    B.RAW2 = _saved2
 doc = {"meta": {"contract_version": "4",
                 "generated_at": datetime.now().isoformat(timespec="seconds"),
                 "source_artifacts": ["tasks/t20260930-matrix-full/raw4",
