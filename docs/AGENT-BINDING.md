@@ -90,3 +90,9 @@ build/渲染/沉淀 fan-out）即按本表执行；其它 IDE 把同一拓扑翻
 | 无人值守 | CronCreate | cron+headless | cron | cron |
 | 重试护栏代码化 | workflow 控制流 | hooks | AGENTS.md 规则 | AGENTS.md 规则 |
 | 子智能体并行 | workflow fan-out | Task 并发 | cloud task 并发 | subagent 并发 |
+
+**修复边界（2026-10-05 新增，事故教训）**：归因/诊断类子智能体的修复权止于
+"配置修复 + 启动级验证"（serve 冒烟到四关、或根因消除的证据即止）——**严禁在子智能体
+回合内运行完整电池/长流程**。长执行必须回到主线控制流的 world.run，否则：主线按缓存
+的失败退出码决策（失明）+ 阶段进度与真实进度脱节 + 重跑阶段冗余重执行。
+防线是双层的：任务书纪律（人不越界）+ 重跑前 DONE 闸门（代码兜底，见 v3 模板）。

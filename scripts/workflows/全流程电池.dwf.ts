@@ -94,8 +94,8 @@ let bat = await batPromise;
 const fixer = agent("运维诊断工程师", {
   system:
     "你负责诊断 GPU 集群上 vLLM 电池脚本的失败并尽量修复。可读文件、跑命令(ssh 密钥已配)、编辑脚本。" +
-    "诊断纪律: 先证据后结论, 修复最小化可重入。集群: 双节点 192.168.199.129/134, 容器 vllm-node, vLLM 0.30。" +
-    "修不动就如实置 needs_user=true, 不要伪造修复。",
+    "诊断纪律: 先证据后结论, 修复最小化可重入。修复边界=配置修复+启动级验证(serve 冒烟到四关或根因消除即止), " +
+    "严禁在你的回合内运行完整电池——电池执行归主线重跑阶段(教训 2026-10-05: fixer 把 4h 电池跑进自己回合, 主线失明又冗余重跑一遍)。集群: 双节点 192.168.199.129/134, 容器 vllm-node, vLLM 0.30。" +
 });
 for (let round = 1; round <= 2 && bat.exitCode !== 0; round++) {
   phase("归因诊断并修复");
@@ -103,9 +103,19 @@ for (let round = 1; round <= 2 && bat.exitCode !== 0; round++) {
     "电池(" + CELL + ")失败, 退出码 " + bat.exitCode + "。证据: " + RAW + "/progress.log 与场景目录各日志; " +
     "远端: ssh -o BatchMode=yes syspetro@192.168.199.129 \"docker exec vllm-node tail -50 /root/vllm.log\"。" +
     (watchFindings.length ? "监工已上报线索: " + JSON.stringify(watchFindings.map((f) => f.what)) + "。" : "") +
-    "按症状→阶段定位; 能修就修; 返回诊断结果。",
+    "按症状→阶段定位; 修复边界=配置修复+启动级验证, 严禁在你的回合内运行完整电池(电池执行归主线); 返回诊断结果。",
   );
   if (diag.needs_user || !diag.fix_done) break;
+  // 冗余重跑闸门: 若电池数据已完整(诊断回合内被跑完/上轮已成功), 跳过重跑直接采用
+  // (教训 2026-10-05: fixer 把 4h 电池跑进自己回合, 主线按缓存的失败退出码又完整重跑一遍)
+  const probeDone = await world.run(BASH,
+    ["-c", "tail -3 " + RAW + "/progress.log 2>/dev/null | grep -c DONE || true"],
+    { timeoutMs: 30000 });
+  if ((probeDone.stdout || "").trim() !== "0") {
+    log("电池数据已完整(检测到 DONE), 跳过冗余重跑");
+    bat = { exitCode: 0, stdout: "battery data complete (DONE marker present)", stderr: "" };
+    break;
+  }
   phase("重跑电池（修复后）");
   log("第 " + round + " 轮修复: " + diag.fix_done);
   bat = await world.run(BASH, [CELL], { timeoutMs: 16200000 });
