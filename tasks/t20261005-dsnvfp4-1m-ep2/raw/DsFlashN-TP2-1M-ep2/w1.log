@@ -1,0 +1,4 @@
+  w1 c=1   n=8   TTFT 459.2/485.4 TPOT 38.1/38.8 ITLp99 100.5 out 25.8 tok/s goodput 100.0% ok/f=8/0
+  w1 c=8   n=32  TTFT 1015.2/3325.8 TPOT 92.1/111.0 ITLp99 460.2 out 80.3 tok/s goodput 0.0% ok/f=32/0
+  w1 c=32  n=48  TTFT 63329.7/82451.5 TPOT 95.3/116.3 ITLp99 459.9 out 79.3 tok/s goodput 2.1% ok/f=48/0
+PASS w1 3档 → D:/CSharpProject/BenchPlaybook/tasks/t20261005-dsnvfp4-1m-ep2/raw/DsFlashN-TP2-1M-ep2/w1.json

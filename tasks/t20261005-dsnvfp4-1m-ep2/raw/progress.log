@@ -1,0 +1,15 @@
+[10-05 02:43:02] DsFlashN-TP2-1M-ep2 清场+ray完成, serve发起(166.9GB加载预计10-20min)...
+[10-05 02:53:21] DsFlashN-TP2-1M-ep2 serve就绪(约530s)
+[10-05 02:53:25] DsFlashN-TP2-1M-ep2 四关全过
+[10-05 02:53:28] DsFlashN-TP2-1M-ep2 电池开始
+[10-05 02:53:29] DsFlashN-TP2-1M-ep2 w1 开始
+[10-05 02:59:33] DsFlashN-TP2-1M-ep2 w2 开始
+[10-05 03:05:03] DsFlashN-TP2-1M-ep2 w3 开始
+[10-05 03:05:40] DsFlashN-TP2-1M-ep2 w4 开始
+[10-05 03:07:41] DsFlashN-TP2-1M-ep2 w5 开始
+[10-05 03:08:41] DsFlashN-TP2-1M-ep2 w6 开始
+[10-05 03:12:12] DsFlashN-TP2-1M-ep2 probes 开始
+[10-05 03:15:42] DsFlashN-TP2-1M-ep2 soak 开始(3路 x 500K)
+[10-05 03:46:35] DsFlashN-TP2-1M-ep2 Track2 十二套件开始
+[10-05 05:44:10] DsFlashN-TP2-1M-ep2 Track3+BFCL 开始
+[10-05 05:59:42] DsFlashN-TP2-1M-ep2 DONE(全流程电池完成)

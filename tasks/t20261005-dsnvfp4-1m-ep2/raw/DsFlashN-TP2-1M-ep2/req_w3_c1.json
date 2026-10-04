@@ -1,0 +1,462 @@
+[
+  {
+    "ok": true,
+    "ttft_ms": 210.23159998003393,
+    "tpot_ms": 41.40434286091477,
+    "itl_ms": [
+      53.76600002637133,
+      61.436799995135516,
+      55.718099989462644,
+      58.51770000299439,
+      60.20599999465048
+    ],
+    "e2e_ms": 500.0620000064373,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 500.0620000064373,
+    "finish": "length",
+    "error": null,
+    "text": "Here is a structured breakdown of your terms"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 189.68780001159757,
+    "tpot_ms": 31.825228569297387,
+    "itl_ms": [
+      54.4069999596104,
+      53.53180004749447,
+      55.6800999911502,
+      58.9868999668397
+    ],
+    "e2e_ms": 412.4643999966793,
+    "completion_tokens": 8,
+    "prompt_tokens": 58,
+    "wall_ms": 412.4643999966793,
+    "finish": "length",
+    "error": null,
+    "text": "This looks like a stream of keywords related"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 178.26839996268973,
+    "tpot_ms": 49.702800003745196,
+    "itl_ms": [
+      58.709200005978346,
+      56.246799998916686,
+      55.688499996904284,
+      64.21020004199818,
+      54.02379995211959,
+      58.82550001842901
+    ],
+    "e2e_ms": 526.1879999889061,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 526.1879999889061,
+    "finish": "length",
+    "error": null,
+    "text": "I'm sorry, but it seems like"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 185.40740001481026,
+    "tpot_ms": 49.044471425336916,
+    "itl_ms": [
+      52.29009996401146,
+      59.13650000002235,
+      54.577300033997744,
+      56.68659997172654,
+      60.30090001877397,
+      60.03639998380095
+    ],
+    "e2e_ms": 528.7186999921687,
+    "completion_tokens": 8,
+    "prompt_tokens": 48,
+    "wall_ms": 528.7186999921687,
+    "finish": "length",
+    "error": null,
+    "text": "I need to parse this list of words"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 184.27840003278106,
+    "tpot_ms": 40.18055714134659,
+    "itl_ms": [
+      56.13389995414764,
+      57.877000013832,
+      52.83380002947524,
+      56.59699998795986,
+      57.658899982925504
+    ],
+    "e2e_ms": 465.5423000222072,
+    "completion_tokens": 8,
+    "prompt_tokens": 56,
+    "wall_ms": 465.5423000222072,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a string"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 224.03990000020713,
+    "tpot_ms": 42.7280999969558,
+    "itl_ms": [
+      63.025099982041866,
+      56.002299999818206,
+      54.67400001361966,
+      63.33519995678216,
+      61.813200009055436
+    ],
+    "e2e_ms": 523.1365999788977,
+    "completion_tokens": 8,
+    "prompt_tokens": 49,
+    "wall_ms": 523.1365999788977,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 233.19170001195744,
+    "tpot_ms": 49.08235714538023,
+    "itl_ms": [
+      54.48569997679442,
+      61.49150000419468,
+      52.22780001349747,
+      56.75300001166761,
+      60.377600020729005,
+      58.06939996546134
+    ],
+    "e2e_ms": 576.768200029619,
+    "completion_tokens": 8,
+    "prompt_tokens": 53,
+    "wall_ms": 576.768200029619,
+    "finish": "length",
+    "error": null,
+    "text": "I see you've provided a string of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 186.1572999623604,
+    "tpot_ms": 41.03354285637449,
+    "itl_ms": [
+      55.40499999187887,
+      58.245700027327985,
+      58.10879997443408,
+      58.09630005387589,
+      57.12069995934144
+    ],
+    "e2e_ms": 473.39209995698184,
+    "completion_tokens": 8,
+    "prompt_tokens": 48,
+    "wall_ms": 473.39209995698184,
+    "finish": "length",
+    "error": null,
+    "text": "Based on your input, it looks like"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 164.85279996413738,
+    "tpot_ms": 33.13221429042252,
+    "itl_ms": [
+      58.09210002189502,
+      55.400800018105656,
+      57.93629999971017,
+      60.330100008286536
+    ],
+    "e2e_ms": 396.778299997095,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 396.778299997095,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 223.6579000018537,
+    "tpot_ms": 40.816614287905395,
+    "itl_ms": [
+      60.87320001097396,
+      56.35319999419153,
+      55.79140002373606,
+      55.73179997736588,
+      56.75839999457821
+    ],
+    "e2e_ms": 509.37420001719147,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 509.37420001719147,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 227.28960000677034,
+    "tpot_ms": 40.12791428249329,
+    "itl_ms": [
+      58.28949995338917,
+      53.53309999918565,
+      57.93549999361858,
+      52.93040000833571,
+      58.0076000187546
+    ],
+    "e2e_ms": 508.1849999842234,
+    "completion_tokens": 8,
+    "prompt_tokens": 54,
+    "wall_ms": 508.1849999842234,
+    "finish": "length",
+    "error": null,
+    "text": "I think you're asking about **through"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 197.1457000472583,
+    "tpot_ms": 40.415014281669364,
+    "itl_ms": [
+      56.56439997255802,
+      57.15020000934601,
+      55.60020002303645,
+      55.233099963516,
+      58.20209998637438
+    ],
+    "e2e_ms": 480.05080001894385,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 480.05080001894385,
+    "finish": "length",
+    "error": null,
+    "text": "I think you're listing a mix of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 206.65990002453327,
+    "tpot_ms": 50.29338570810588,
+    "itl_ms": [
+      56.728499999735504,
+      62.632399960421026,
+      58.324200042989105,
+      57.21179995452985,
+      57.005700014997274,
+      59.99580002389848
+    ],
+    "e2e_ms": 558.7135999812745,
+    "completion_tokens": 8,
+    "prompt_tokens": 48,
+    "wall_ms": 558.7135999812745,
+    "finish": "length",
+    "error": null,
+    "text": "I notice you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 205.99659997969866,
+    "tpot_ms": 47.954200001965674,
+    "itl_ms": [
+      56.02790002012625,
+      55.61350000789389,
+      56.5987000009045,
+      54.5321999816224,
+      59.24610001966357,
+      53.47109999274835
+    ],
+    "e2e_ms": 541.6759999934584,
+    "completion_tokens": 8,
+    "prompt_tokens": 56,
+    "wall_ms": 541.6759999934584,
+    "finish": "length",
+    "error": null,
+    "text": "I think you're listing a mix of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 191.45809998735785,
+    "tpot_ms": 41.777357143083854,
+    "itl_ms": [
+      56.927099998574704,
+      60.834000003524125,
+      57.14300001272932,
+      56.9588000071235,
+      60.41949999053031
+    ],
+    "e2e_ms": 483.89959998894483,
+    "completion_tokens": 8,
+    "prompt_tokens": 47,
+    "wall_ms": 483.89959998894483,
+    "finish": "length",
+    "error": null,
+    "text": "Here's a structured summary of the terms"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 197.3399999551475,
+    "tpot_ms": 40.43432857309069,
+    "itl_ms": [
+      54.848100000526756,
+      56.69040000066161,
+      54.04290003934875,
+      60.3899999987334,
+      56.88139999983832
+    ],
+    "e2e_ms": 480.38029996678233,
+    "completion_tokens": 8,
+    "prompt_tokens": 52,
+    "wall_ms": 480.38029996678233,
+    "finish": "length",
+    "error": null,
+    "text": "I notice your message appears to be a"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 223.62379997503012,
+    "tpot_ms": 40.97380000166595,
+    "itl_ms": [
+      57.178999995812774,
+      56.839500030037016,
+      59.789499966427684,
+      55.28319999575615,
+      57.56779998773709
+    ],
+    "e2e_ms": 510.4403999866918,
+    "completion_tokens": 8,
+    "prompt_tokens": 52,
+    "wall_ms": 510.4403999866918,
+    "finish": "length",
+    "error": null,
+    "text": "This looks like a list of keywords or"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 190.1376000023447,
+    "tpot_ms": 40.35765714278178,
+    "itl_ms": [
+      51.35570000857115,
+      58.00909997196868,
+      55.98100001225248,
+      58.26570000499487,
+      58.74220002442598
+    ],
+    "e2e_ms": 472.6412000018172,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 472.6412000018172,
+    "finish": "length",
+    "error": null,
+    "text": "Looking at this string of terms, it"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 232.9306000028737,
+    "tpot_ms": 41.334200001853915,
+    "itl_ms": [
+      54.82520000077784,
+      66.65920000523329,
+      53.79149998771027,
+      58.02100000437349,
+      55.89110002620146
+    ],
+    "e2e_ms": 522.2700000158511,
+    "completion_tokens": 8,
+    "prompt_tokens": 57,
+    "wall_ms": 522.2700000158511,
+    "finish": "length",
+    "error": null,
+    "text": "This looks like a stream-of-consciousness"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 221.49460000218824,
+    "tpot_ms": 41.12575714576191,
+    "itl_ms": [
+      57.06419999478385,
+      54.888300015591085,
+      59.54590003238991,
+      57.959600002504885,
+      58.24349995236844
+    ],
+    "e2e_ms": 509.3749000225216,
+    "completion_tokens": 8,
+    "prompt_tokens": 49,
+    "wall_ms": 509.3749000225216,
+    "finish": "length",
+    "error": null,
+    "text": "Based on your input, it looks like"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 186.04150001192465,
+    "tpot_ms": 49.68348571232387,
+    "itl_ms": [
+      59.14560001110658,
+      57.910599978640676,
+      55.46549998689443,
+      55.336999997962266,
+      57.460299984086305,
+      62.24390002898872
+    ],
+    "e2e_ms": 533.8258999981917,
+    "completion_tokens": 8,
+    "prompt_tokens": 53,
+    "wall_ms": 533.8258999981917,
+    "finish": "length",
+    "error": null,
+    "text": "I see you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 172.08689998369664,
+    "tpot_ms": 42.22679999656975,
+    "itl_ms": [
+      63.19289997918531,
+      55.52310001803562,
+      56.199499987997115,
+      55.33619999187067,
+      65.13610004913062
+    ],
+    "e2e_ms": 467.6744999596849,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 467.6744999596849,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 227.15900000184774,
+    "tpot_ms": 41.3334000040777,
+    "itl_ms": [
+      62.17400002060458,
+      56.20900000212714,
+      56.383199989795685,
+      56.53319996781647,
+      57.87730001611635
+    ],
+    "e2e_ms": 516.4928000303917,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 516.4928000303917,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a dense"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 230.52519996417686,
+    "tpot_ms": 41.617257146364345,
+    "itl_ms": [
+      57.28619999717921,
+      62.681400042492896,
+      56.319499970413744,
+      56.165400019381195,
+      58.7082999991253
+    ],
+    "e2e_ms": 521.8459999887273,
+    "completion_tokens": 8,
+    "prompt_tokens": 56,
+    "wall_ms": 521.8459999887273,
+    "finish": "length",
+    "error": null,
+    "text": "Based on the keywords you've provided,"
+  }
+]
