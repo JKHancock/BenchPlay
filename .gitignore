@@ -1,6 +1,7 @@
 # Python 编译产物
 __pycache__/
 *.pyc
+.venv/
 
 # OS / 编辑器垃圾
 Thumbs.db

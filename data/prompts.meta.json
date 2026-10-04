@@ -1,0 +1,11 @@
+{
+  "source": "sharegpt",
+  "dataset": "/root/bench/ShareGPT_V3_unfiltered_cleaned_split.json",
+  "seed": 20260924,
+  "num_prompts": 100,
+  "output_len": 256,
+  "chat_template_applied": true,
+  "tokenizer": "/root/.cache/huggingface/Qwen3.5-122B-A10B-NVFP4",
+  "generated_at": "2026-09-29T21:12:20\u002B08:00",
+  "generator": "local-llm-bench extract"
+}
