@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# 全流程电池: DeepSeek-V4-Flash FP8 (deepseek_v4, 159.6GB, MLA单KV头, 原生1M, 单层MTP)
-# 场景: TP2+MTP(deepseek_mtp,k2)+原生1M+deepseek_v4工具parser+8路+batched8192, 关自调优
+# 全流程电池: DeepSeek-V4-Flash NVFP4 (deepseek_v4, DSpark草稿: mtp.0/1/2+main_norm/main_proj+markov/confidence头)
+# 场景: TP2+DSpark投机(dspark,k2)+原生1M+deepseek_v4工具parser+8路+batched8192, 关自调优
+# 注意: NVFP4版草稿是DSpark拓扑, 无enorm/hnorm/e_proj/h_proj, 必须用method=dspark(deepseek_mtp仅适用FP8版)
 # 电池: w1-w6+探针+Track2十二套件+soak(3x500K)+Track3+BFCL, 全程三时点metrics
 # 输出: tasks/t20261004-dsflash-nvfp4/raw/DsFlashN-TP2-1M
 set -u
@@ -35,7 +36,7 @@ export CUTE_DSL_ARCH=sm_121a HF_ENDPOINT=https://hf-mirror.com RAY_memory_monito
 export GLOO_SOCKET_IFNAME=enp1s0f1np1 NCCL_SOCKET_IFNAME=enp1s0f1np1
 nohup vllm serve /root/.cache/huggingface/DeepSeek-V4-Flash-NVFP4 \
   --tensor-parallel-size 2 --distributed-executor-backend ray \
-  --speculative-config '{"method":"deepseek_mtp","num_speculative_tokens":2}' \
+  --speculative-config '{"method":"dspark","num_speculative_tokens":2}' \
   --kernel-config '{"enable_flashinfer_autotune":false}' \
   --enable-auto-tool-choice --tool-call-parser deepseek_v4 \
   --served-model-name ds-nvfp4 --host 0.0.0.0 --port 8000 \

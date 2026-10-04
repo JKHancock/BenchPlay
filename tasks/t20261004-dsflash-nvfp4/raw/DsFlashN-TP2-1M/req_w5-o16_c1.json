@@ -1,0 +1,27 @@
+[
+  {
+    "ok": true,
+    "ttft_ms": 2648.466999991797,
+    "tpot_ms": 41.13570666716745,
+    "itl_ms": [
+      63.30439995508641,
+      56.07450002571568,
+      54.6191000030376,
+      56.31469999207184,
+      56.3265000237152,
+      57.95129999751225,
+      52.8133999905549,
+      53.20039996877313,
+      53.79970005014911,
+      55.11549999937415,
+      57.35259997891262
+    ],
+    "e2e_ms": 3265.5025999993086,
+    "completion_tokens": 16,
+    "prompt_tokens": 6339,
+    "wall_ms": 3265.5025999993086,
+    "finish": "length",
+    "error": null,
+    "text": "Based on the extensive token stream you provided, I have extracted the key configuration parameters"
+  }
+]

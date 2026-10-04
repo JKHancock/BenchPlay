@@ -2,15 +2,15 @@
 # 全流程电池(2026-09-30 复测): Qwen3.8-Flash-Next-NVFP4 (qwen4_exp, 132.64GB, MTP单层)
 # 场景: TP2+MTP(k2)+YaRN4x→1M+qwen3_xml工具+8路+batched8192, 关FlashInfer自调优(防死锁)
 # 电池: w1-w6+探针+Track2十二套件(新增 MATH-500/CMMLU/CEval/IFEval)+Track3+BFCL
-# 输出: tasks/t20261005-flashnext-40960-ep2/raw/FlashNext-TP2-40960-ep2 (同参数复测, 替换报告数据)
+# 输出: tasks/t20260930-flashnext-c12/raw/FlashNext-TP2-1M (同参数复测, 替换报告数据)
 set -u
 BP=/d/CSharpProject/BenchPlaybook
 CLI=/d/CSharpProject/Vllm_Benchmark
 PY=$CLI/python/.venv/Scripts/python.exe
-OUTBASE=$BP/tasks/t20261005-flashnext-40960-ep2/raw
+OUTBASE=$BP/tasks/t20260930-flashnext-c12/raw
 H=192.168.199.129; H2=192.168.199.134; U=syspetro; API=http://$H:8000/v1
 SSHOPT="-o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10"
-tag=FlashNext-TP2-40960-ep2
+tag=FlashNext-TP2-1M
 OUT=$OUTBASE/$tag
 mkdir -p "$OUT"
 log(){ echo "[$(date +%m-%d\ %H:%M:%S)] $tag $*" | tee -a "$OUTBASE/progress.log"; }
@@ -36,10 +36,11 @@ export GLOO_SOCKET_IFNAME=enp1s0f1np1 NCCL_SOCKET_IFNAME=enp1s0f1np1
 nohup vllm serve /root/.cache/huggingface/$MODEL \
   --tensor-parallel-size $TP --distributed-executor-backend ray --enable-expert-parallel \
   --speculative-config '{"method":"qwen4_exp_mtp","num_speculative_tokens":2}' \
+  --hf-overrides '{"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}}' \
   --kernel-config '{"enable_flashinfer_autotune":false}' \
   --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 \
   --served-model-name flash-next --host 0.0.0.0 --port 8000 \
-  --gpu-memory-utilization 0.85 --max-model-len 40960 \
+  --gpu-memory-utilization 0.85 --max-model-len 1048576 \
   --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching \
   > /root/vllm.log 2>&1 &
 echo LAUNCHED
@@ -81,6 +82,8 @@ snap "api" "metrics_probe_a.json"
 (cd $CLI && "$PY" -m bench.probes --api-base "$API" \
    --out "$OUT/probes.json" > "$OUT/probes.log" 2>&1) || log "probes FAIL"
 snap "api" "metrics_probe_b.json"
+log "soak 开始(3路 x 500K)"
+(cd $CLI && "$PY" -m bench.soak --api-base "$API" --model flash-next \n   --sessions 3 --chunk-tokens 20000 --target-context 524288 --max-tokens 512 \n   --request-timeout-s 1200 --out "$OUT/soak.json" --evidence-dir "$OUT" > "$OUT/soak.log" 2>&1) || log "soak FAIL"
 log "Track2 十二套件开始"
 snap "api" "metrics_cap_a.json"
 (cd $CLI && "$PY" -m bench.track2 --api-base "$API" --model flash-next \

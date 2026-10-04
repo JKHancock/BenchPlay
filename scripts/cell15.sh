@@ -3,15 +3,15 @@
 # 场景: TP2+DSpark投机(dspark,k2)+原生1M+deepseek_v4工具parser+8路+batched8192, 关自调优
 # 注意: NVFP4版草稿是DSpark拓扑, 无enorm/hnorm/e_proj/h_proj, 必须用method=dspark(deepseek_mtp仅适用FP8版)
 # 电池: w1-w6+探针+Track2十二套件+soak(3x500K)+Track3+BFCL, 全程三时点metrics
-# 输出: tasks/t20261005-dsnvfp4-40960-ep2/raw/DsFlashN-TP2-40960-ep2
+# 输出: tasks/t20261005-dsnvfp4-1m-ep2/raw/DsFlashN-TP2-1M-ep2
 set -u
 BP=/d/CSharpProject/BenchPlaybook
 CLI=/d/CSharpProject/BenchPlaybook
 PY=$CLI/.venv/Scripts/python.exe
-OUTBASE=$BP/tasks/t20261005-dsnvfp4-40960-ep2/raw
+OUTBASE=$BP/tasks/t20261005-dsnvfp4-1m-ep2/raw
 H=192.168.199.129; H2=192.168.199.134; U=syspetro; API=http://$H:8000/v1
 SSHOPT="-o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10"
-tag=DsFlashN-TP2-40960-ep2
+tag=DsFlashN-TP2-1M-ep2
 OUT=$OUTBASE/$tag
 mkdir -p "$OUT"
 log(){ echo "[$(date +%m-%d\ %H:%M:%S)] $tag $*" | tee -a "$OUTBASE/progress.log"; }
@@ -40,7 +40,7 @@ nohup vllm serve /root/.cache/huggingface/DeepSeek-V4-Flash-NVFP4 \
   --kernel-config '{"enable_flashinfer_autotune":false}' \
   --enable-auto-tool-choice --tool-call-parser deepseek_v4 \
   --served-model-name ds-nvfp4 --host 0.0.0.0 --port 8000 \
-  --gpu-memory-utilization 0.85 --max-model-len 40960 \
+  --gpu-memory-utilization 0.85 --max-model-len 1048576 \
   --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching \
   > /root/vllm.log 2>&1 &
 echo LAUNCHED
@@ -97,7 +97,7 @@ snap "api" "metrics_probe_a.json"
 snap "api" "metrics_probe_b.json"
 log "soak 开始(3路 x 500K)"
 (cd $CLI && "$PY" -m bench.soak --api-base "$API" --model ds-nvfp4 \
-   --sessions 3 --chunk-tokens 20000 --target-context 38400 --max-tokens 512 \
+   --sessions 3 --chunk-tokens 20000 --target-context 524288 --max-tokens 512 \
    --request-timeout-s 1200 --out "$OUT/soak.json" --evidence-dir "$OUT" > "$OUT/soak.log" 2>&1) || log "soak FAIL"
 log "Track2 十二套件开始"
 snap "api" "metrics_cap_a.json"

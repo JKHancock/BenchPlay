@@ -1,0 +1,462 @@
+[
+  {
+    "ok": true,
+    "ttft_ms": 217.64889999758452,
+    "tpot_ms": 30.425657144015922,
+    "itl_ms": [
+      53.289600007701665,
+      54.01970003731549,
+      51.36129999300465,
+      54.10419998224825
+    ],
+    "e2e_ms": 430.62850000569597,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 430.62850000569597,
+    "finish": "length",
+    "error": null,
+    "text": "Here is a structured breakdown of your terms"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 226.01799998665228,
+    "tpot_ms": 30.900900002702006,
+    "itl_ms": [
+      59.62409998755902,
+      47.48890001792461,
+      54.73229999188334,
+      54.29940001340583
+    ],
+    "e2e_ms": 442.32430000556633,
+    "completion_tokens": 8,
+    "prompt_tokens": 58,
+    "wall_ms": 442.32430000556633,
+    "finish": "length",
+    "error": null,
+    "text": "This looks like a stream of tokens from"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 173.63650002516806,
+    "tpot_ms": 39.26298571085291,
+    "itl_ms": [
+      53.30799997318536,
+      55.712100001983345,
+      57.68940004054457,
+      54.00709999958053,
+      53.93319996073842
+    ],
+    "e2e_ms": 448.47740000113845,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 448.47740000113845,
+    "finish": "length",
+    "error": null,
+    "text": "Based on your input, it looks like"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 171.15740000735968,
+    "tpot_ms": 39.04739999312109,
+    "itl_ms": [
+      52.948899974580854,
+      57.22870002500713,
+      52.49119998188689,
+      55.197799985762686,
+      55.267499992623925
+    ],
+    "e2e_ms": 444.4891999592073,
+    "completion_tokens": 8,
+    "prompt_tokens": 48,
+    "wall_ms": 444.4891999592073,
+    "finish": "length",
+    "error": null,
+    "text": "I notice your message contains a jumbled"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 180.06680003600195,
+    "tpot_ms": 38.79125713969448,
+    "itl_ms": [
+      57.32279998483136,
+      53.607999987434596,
+      53.68389998329803,
+      53.871900017838925,
+      52.88089998066425
+    ],
+    "e2e_ms": 451.6056000138633,
+    "completion_tokens": 8,
+    "prompt_tokens": 56,
+    "wall_ms": 451.6056000138633,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a string"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 210.35829995526,
+    "tpot_ms": 46.075428578270866,
+    "itl_ms": [
+      52.96140001155436,
+      54.77370001608506,
+      55.074999982025474,
+      55.57200004113838,
+      50.39799999212846,
+      53.52620000485331
+    ],
+    "e2e_ms": 532.8863000031561,
+    "completion_tokens": 8,
+    "prompt_tokens": 49,
+    "wall_ms": 532.8863000031561,
+    "finish": "length",
+    "error": null,
+    "text": "I see you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 219.4799999706447,
+    "tpot_ms": 38.505171433955965,
+    "itl_ms": [
+      53.689700027462095,
+      54.173899989109486,
+      53.75299998559058,
+      52.145700028631836,
+      55.51430000923574
+    ],
+    "e2e_ms": 489.01620000833645,
+    "completion_tokens": 8,
+    "prompt_tokens": 53,
+    "wall_ms": 489.01620000833645,
+    "finish": "length",
+    "error": null,
+    "text": "Based on your request, I've synthesized"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 178.2470000325702,
+    "tpot_ms": 47.04797142351578,
+    "itl_ms": [
+      58.52899997262284,
+      48.75399998854846,
+      56.270600005518645,
+      54.14780002320185,
+      55.15279999235645,
+      56.29550002049655
+    ],
+    "e2e_ms": 507.5827999971807,
+    "completion_tokens": 8,
+    "prompt_tokens": 48,
+    "wall_ms": 507.5827999971807,
+    "finish": "length",
+    "error": null,
+    "text": "Here is a detailed report structured around the"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 160.15440004412085,
+    "tpot_ms": 37.891285710169804,
+    "itl_ms": [
+      52.68309998791665,
+      53.47389995586127,
+      52.85520001780242,
+      56.147600000258535,
+      49.92820002371445
+    ],
+    "e2e_ms": 425.39340001530945,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 425.39340001530945,
+    "finish": "length",
+    "error": null,
+    "text": "Here is a structured summary of the key"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 163.84400002425537,
+    "tpot_ms": 39.08837142600013,
+    "itl_ms": [
+      53.080599987879395,
+      56.116499996278435,
+      57.2882000124082,
+      52.88319999817759,
+      54.08599996007979
+    ],
+    "e2e_ms": 437.46260000625625,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 437.46260000625625,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 221.34420002112165,
+    "tpot_ms": 46.191614287506255,
+    "itl_ms": [
+      54.85040001804009,
+      56.12449999898672,
+      51.83589999796823,
+      52.46799997985363,
+      56.22800003038719,
+      51.532299956306815
+    ],
+    "e2e_ms": 544.6855000336654,
+    "completion_tokens": 8,
+    "prompt_tokens": 54,
+    "wall_ms": 544.6855000336654,
+    "finish": "length",
+    "error": null,
+    "text": "I see you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 174.6665999526158,
+    "tpot_ms": 45.51688571726637,
+    "itl_ms": [
+      49.505800008773804,
+      53.499900037422776,
+      53.58949996298179,
+      54.74700004560873,
+      53.33149997750297,
+      53.7880000192672
+    ],
+    "e2e_ms": 493.2847999734804,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 493.2847999734804,
+    "finish": "length",
+    "error": null,
+    "text": "I think you're describing a **GPU"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 198.7002000096254,
+    "tpot_ms": 46.29472856842248,
+    "itl_ms": [
+      52.831499953754246,
+      55.42869999771938,
+      54.70630002673715,
+      54.72929996903986,
+      55.36180001217872,
+      50.77209998853505
+    ],
+    "e2e_ms": 522.7632999885827,
+    "completion_tokens": 8,
+    "prompt_tokens": 48,
+    "wall_ms": 522.7632999885827,
+    "finish": "length",
+    "error": null,
+    "text": "I notice your input appears to be a"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 202.72929995553568,
+    "tpot_ms": 38.33065714986463,
+    "itl_ms": [
+      54.79670001659542,
+      55.90510001638904,
+      51.66699999244884,
+      54.30070002330467,
+      51.46819999208674
+    ],
+    "e2e_ms": 471.04390000458807,
+    "completion_tokens": 8,
+    "prompt_tokens": 56,
+    "wall_ms": 471.04390000458807,
+    "finish": "length",
+    "error": null,
+    "text": "I notice your request contains a mix of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 206.95560000604019,
+    "tpot_ms": 30.435571430384048,
+    "itl_ms": [
+      48.67970000486821,
+      59.9307999946177,
+      52.37140000099316,
+      51.903100044000894
+    ],
+    "e2e_ms": 420.0046000187285,
+    "completion_tokens": 8,
+    "prompt_tokens": 47,
+    "wall_ms": 420.0046000187285,
+    "finish": "length",
+    "error": null,
+    "text": "Here's a structured summary of the technical"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 189.73459996050224,
+    "tpot_ms": 37.62000000071047,
+    "itl_ms": [
+      51.77890002960339,
+      51.51859996840358,
+      50.80000002635643,
+      53.98969998350367,
+      55.08150003151968
+    ],
+    "e2e_ms": 453.0745999654755,
+    "completion_tokens": 8,
+    "prompt_tokens": 52,
+    "wall_ms": 453.0745999654755,
+    "finish": "length",
+    "error": null,
+    "text": "I notice you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 174.44630002137274,
+    "tpot_ms": 31.21534285933844,
+    "itl_ms": [
+      53.46319999080151,
+      57.51469999086112,
+      51.403500023297966,
+      55.90520001715049
+    ],
+    "e2e_ms": 392.9537000367418,
+    "completion_tokens": 8,
+    "prompt_tokens": 52,
+    "wall_ms": 392.9537000367418,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 219.44359998451546,
+    "tpot_ms": 39.13121428506981,
+    "itl_ms": [
+      58.64930001553148,
+      52.634599967859685,
+      54.2041000444442,
+      50.39099999703467,
+      57.88949999259785
+    ],
+    "e2e_ms": 493.36209998000413,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 493.36209998000413,
+    "finish": "length",
+    "error": null,
+    "text": "Looking at this sequence, I can identify"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 181.57969997264445,
+    "tpot_ms": 38.83307142781892,
+    "itl_ms": [
+      53.92650002613664,
+      53.57910000020638,
+      55.32929999753833,
+      54.35240000952035,
+      54.43429999286309
+    ],
+    "e2e_ms": 453.4111999673769,
+    "completion_tokens": 8,
+    "prompt_tokens": 57,
+    "wall_ms": 453.4111999673769,
+    "finish": "length",
+    "error": null,
+    "text": "I'll decode this as a technical specification"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 166.87059996183962,
+    "tpot_ms": 47.500657150521874,
+    "itl_ms": [
+      58.06150002172217,
+      53.48110001068562,
+      52.93230002280325,
+      56.03289999999106,
+      58.92619997030124,
+      52.9122999869287
+    ],
+    "e2e_ms": 499.37520001549274,
+    "completion_tokens": 8,
+    "prompt_tokens": 49,
+    "wall_ms": 499.37520001549274,
+    "finish": "length",
+    "error": null,
+    "text": "Based on the keywords you've provided,"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 194.21019998844713,
+    "tpot_ms": 46.32862856877701,
+    "itl_ms": [
+      52.46059998171404,
+      56.75689998315647,
+      50.908700039144605,
+      54.901700001209974,
+      54.446699970867485,
+      54.652800026815385
+    ],
+    "e2e_ms": 518.5105999698862,
+    "completion_tokens": 8,
+    "prompt_tokens": 53,
+    "wall_ms": 518.5105999698862,
+    "finish": "length",
+    "error": null,
+    "text": "I see you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 171.72819998813793,
+    "tpot_ms": 38.64467143180913,
+    "itl_ms": [
+      53.76009998144582,
+      54.45890000555664,
+      65.03860000520945,
+      40.166900027543306,
+      56.84119998477399
+    ],
+    "e2e_ms": 442.24090001080185,
+    "completion_tokens": 8,
+    "prompt_tokens": 51,
+    "wall_ms": 442.24090001080185,
+    "finish": "length",
+    "error": null,
+    "text": "It looks like you've provided a list"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 221.1086999741383,
+    "tpot_ms": 45.41848571638444,
+    "itl_ms": [
+      50.01920001814142,
+      57.68629995873198,
+      49.97780005214736,
+      51.74209998222068,
+      52.80030000722036,
+      55.544800008647144
+    ],
+    "e2e_ms": 539.0380999888293,
+    "completion_tokens": 8,
+    "prompt_tokens": 50,
+    "wall_ms": 539.0380999888293,
+    "finish": "length",
+    "error": null,
+    "text": "I see you've provided a list of"
+  },
+  {
+    "ok": true,
+    "ttft_ms": 202.12490000994876,
+    "tpot_ms": 38.6187285683783,
+    "itl_ms": [
+      51.46679998142645,
+      54.53769996529445,
+      56.158100022003055,
+      54.95259998133406,
+      52.9264000360854
+    ],
+    "e2e_ms": 472.4559999885969,
+    "completion_tokens": 8,
+    "prompt_tokens": 56,
+    "wall_ms": 472.4559999885969,
+    "finish": "length",
+    "error": null,
+    "text": "This looks like a fragmented list of technical"
+  }
+]

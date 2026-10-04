@@ -1,0 +1,5 @@
+  w5-o1 c=1   n=1   TTFT 356.0/356.0 TPOT —/— ITLp99 — out 2.8 tok/s goodput 100.0% ok/f=1/0
+  w5-o16 c=1   n=1   TTFT 2648.5/2648.5 TPOT 41.1/41.1 ITLp99 62.8 out 4.9 tok/s goodput 0.0% ok/f=1/0
+  w5-o256 c=1   n=1   TTFT 2760.4/2760.4 TPOT 36.4/36.4 ITLp99 64.0 out 21.2 tok/s goodput 0.0% ok/f=1/0
+  w5-o1024 c=1   n=1   TTFT 2674.1/2674.1 TPOT 31.2/31.2 ITLp99 66.8 out 29.6 tok/s goodput 0.0% ok/f=1/0
+PASS w5 outladder 4档

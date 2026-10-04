@@ -1,0 +1,15 @@
+[10-04 20:03:21] DsFlashN-TP2-1M 清场+ray完成, serve发起(166.9GB加载预计10-20min)...
+[10-04 20:06:15] DsFlashN-TP2-1M serve进程退出,尾部:
+[10-04 20:23:24] DsFlashN-TP2-1M 清场+ray完成, serve发起(166.9GB加载预计10-20min)...
+[10-04 20:32:19] DsFlashN-TP2-1M serve就绪(约460s)
+[10-04 20:32:24] DsFlashN-TP2-1M 四关全过
+[10-04 20:32:30] DsFlashN-TP2-1M 电池开始
+[10-04 20:32:31] DsFlashN-TP2-1M w1 开始
+[10-04 20:38:50] DsFlashN-TP2-1M w2 开始
+[10-04 20:44:56] DsFlashN-TP2-1M w3 开始
+[10-04 20:45:33] DsFlashN-TP2-1M w4 开始
+[10-04 20:47:38] DsFlashN-TP2-1M w5 开始
+[10-04 20:48:36] DsFlashN-TP2-1M w6 开始
+[10-04 20:52:25] DsFlashN-TP2-1M probes 开始
+[10-04 20:55:56] DsFlashN-TP2-1M soak 开始(3路 x 500K)
+[10-04 21:26:26] DsFlashN-TP2-1M Track2 十二套件开始
