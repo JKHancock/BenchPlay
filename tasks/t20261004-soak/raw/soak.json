@@ -1,0 +1,25 @@
+{
+ "track": "soak",
+ "sessions": 3,
+ "chunk_tokens": 20000,
+ "target_context": 524288,
+ "rounds": 36,
+ "wall_s": 825.5,
+ "final_ctx_tokens": [
+  527460,
+  528399,
+  532870
+ ],
+ "ttft_first3_avg_ms": 10648.2,
+ "ttft_last3_avg_ms": 17100.1,
+ "ttft_growth_ratio": 1.61,
+ "kv_peak_perc": 0.848,
+ "prefix_hit_rate": 0.9376,
+ "preempted": false,
+ "failed_turns": 0,
+ "first_failure": null,
+ "note": "ttft_growth_ratio≈1 → 前缀缓存把全量重发救回(多轮聊天不劣化); kv_peak 对照池上限(如1.92M/1M ctx=1.83x)判容量口径",
+ "kv_peak_source": "engine_log(瞬时gauge只测活动块, 逐轮采到0; 引擎日志周期行含缓存块)",
+ "per_round_hit_rate_last": 0.968,
+ "prefill_bottleneck_note": "prefill吞吐~1.7-3K tok/s(GB10混合架构), TTFT绝对值由此决定; 增长比1.61来自残余未命中+调度"
+}
