@@ -306,6 +306,7 @@ def main():
             if bf.get("irrelevance") is not None or bf.get("simple") is not None:
                 L.append(f"| BFCL 无关克制 | {c(bf.get('irrelevance'), '{:.3f}')} | {vc_ag} |")
                 L.append(f"| BFCL 结构分（保守下界） | {c(bf.get('simple'), '{:.3f}')} | {vc_ag} |")
+            a4 = m.get("reasoning_ab")
             if a4:
                 ton, toff = a4.get("thinking_on", {}), a4.get("thinking_off", {})
                 L.append(f"| 思考链开 | {ton.get('wall_ms', '—')}ms/{ton.get('completion_tokens', '—')}tok | {vc_ag} |")
