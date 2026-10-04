@@ -83,6 +83,23 @@ def _vcell(sc, ph):
             f"排队p99 {c(h.get('queue_p99_server_s'), '{:.2f}')}s")
 
 
+def _vcols(sc, ph):
+    """该 phase(某场测试)期间的服务端指标, 拆成5列: [成功,失败,gen_tok,TTFTp99,TPOTp99]."""
+    cn = (sc.get("vllm_metrics") or {}).get("counters") or {}
+    hg = (sc.get("vllm_metrics") or {}).get("histograms") or {}
+    m = cn.get(ph)
+    if not m:
+        return ["—", "—", "—", "—", "—"]
+    h = hg.get(ph, {})
+    return [
+        c(m.get("requests_success"), "{:,.0f}"),
+        c(m.get("requests_failed"), "{:,.0f}"),
+        c(m.get("gen_tokens"), "{:,.0f}"),
+        c(h.get("ttft_p99_server_s"), "{:.2f}"),
+        c(h.get("tpot_p99_server_s"), "{:.3f}"),
+    ]
+
+
 def _emit_vllm(sc, prefixes, title):
     """渲染该 benchmark 段期间的 vLLM 服务端指标(随段走), 返回行列表."""
     cn = (sc.get("vllm_metrics") or {}).get("counters") or {}
@@ -234,14 +251,14 @@ def main():
         for w in sc["perf_metrics"]["workloads"]:
             spec = w.get("spec", {})
             phk = "phase:" + w['workload_id'].split('-')[0]
-            vc = _vcell(sc, phk)
-            L.append(f"- **{WL_NAMES.get(w['workload_id'], w['workload_id'])}**（数据: {spec.get('dataset', '—')}，"
-                     f"入{c(spec.get('input_len'), '{:.0f}')}→出{c(spec.get('output_len'), '{:.0f}')}；"
-                     f"本测试期间服务端：{vc}）")
+            _vc = _vcols(sc, phk)
+            L.append(f"**{WL_NAMES.get(w['workload_id'], w['workload_id'])}**（数据: {spec.get('dataset', '—')}，"
+                     f"入{c(spec.get('input_len'), '{:.0f}')}→出{c(spec.get('output_len'), '{:.0f}')}）")
             L.append("")
             L.extend(["| 并发 | n | TTFT p50/p90/p99 ms | TPOT p50/p90/p99 ms | ITL p99/max | "
-                      "E2E p99 | 单流出流 p50 | 出流 tok/s | QPS | goodput | 成/败 |",
-                      "|---|---|---|---|---|---|---|---|---|---|---|---|"])
+                      "E2E p99 | 单流出流 p50 | 出流 tok/s | QPS | goodput | 成/败 | "
+                      "成功 | 失败 | gen tok | 服务端TTFT p99 | 服务端TPOT p99 |",
+                      "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"])
             for lv in w.get("levels", []):
                 rel = lv.get("reliability", {})
                 L.append(
@@ -253,7 +270,8 @@ def main():
                     f"{c((lv.get('agg') or {}).get('output_tok_s'))} | "
                     f"{c((lv.get('agg') or {}).get('qps'), '{:.2f}')} | "
                     f"{c((lv.get('slo') or {}).get('goodput_pct'), '{:.0f}%')} | "
-                    f"{rel.get('completed', '—')}/{rel.get('failed', '—')} |")
+                    f"{rel.get('completed', '—')}/{rel.get('failed', '—')} | "
+                    f"{_vc[0]} | {_vc[1]} | {_vc[2]} | {_vc[3]} | {_vc[4]} |")
             rl = w.get("roofline")
             if rl:
                 L.append("")
@@ -276,41 +294,42 @@ def main():
                             "性能测试期间的服务端指标"))
         L.append("**Benchmark 二 · 模型能力**（专属指标 + 能力评测期间的服务端指标；统一口径 0-shot · 关思考链 · temp=0 · n=200 · 并发8）")
         L.append("")
-        vc_cap = _vcell(sc, "phase:cap")
-        L.extend(["| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 | 本段服务端指标（能力评测期间整体，逐行重复） |",
-                  "|---|---|---|---|---|---|---|---|"])
+        _cap = _vcols(sc, "phase:cap")
+        L.extend(["| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 | 成功 | 失败 | gen tok | 服务端TTFT p99 | 服务端TPOT p99 |",
+                  "|---|---|---|---|---|---|---|---|---|---|---|---|"])
         for cs in sc["capability_scores"]["suites"]:
             if cs.get("score"):
                 sx = cs["score"]
                 L.append(f"| {cs['suite_id']} | {cs['dimension']} | "
                          f"{c(sx.get('acc'), '{:.3f}')} | {sx.get('correct')}/{sx.get('n')} | "
                          f"{c((cs.get('tokens') or {}).get('avg_out'), '{:.0f}')} | "
-                         f"{(cs.get('reliability') or {}).get('requests_failed', '—')} | 实测 | {vc_cap} |")
+                         f"{(cs.get('reliability') or {}).get('requests_failed', '—')} | 实测 | "
+                         f"{_cap[0]} | {_cap[1]} | {_cap[2]} | {_cap[3]} | {_cap[4]} |")
             else:
                 L.append(f"| {cs['suite_id']} | {cs['dimension']} | — | — | — | — | "
-                         f"缺: {cs.get('missing_reason', '未测')} | {'—' if not cs.get('score') else vc_cap} |")
+                         f"缺: {cs.get('missing_reason', '未测')} | — | — | — | — | — |")
         L.append("")
         L.extend(_emit_vllm(sc, ["phase:cap"], "能力评测期间的服务端指标"))
         L.append("**Benchmark 三 · 智能体场景**（专属指标 + 智能体评测期间的服务端指标）")
         L.append("")
         ag = sc.get("agent_metrics") or {}
-        vc_ag = _vcell(sc, "phase:agent")
+        _ag = _vcols(sc, "phase:agent")
         if ag:
             m = ag.get("metrics") or {}
-            L.extend(["| 智能体指标 | 数值 | 本段服务端指标（智能体评测期间整体，逐行重复） |",
-                      "|---|---|---|"])
-            L.append(f"| 工具选择（含不调用克制） | {c(m.get('selection_acc'), '{:.3f}')} | {vc_ag} |")
-            L.append(f"| 参数抽取 | {c(m.get('args_acc'), '{:.3f}')} | {vc_ag} |")
-            L.append(f"| 多轮回环成功率 | {c(m.get('loop_success'), '{:.3f')} | {vc_ag} |")
+            L.extend(["| 智能体指标 | 数值 | 成功 | 失败 | gen tok | 服务端TTFT p99 | 服务端TPOT p99 |",
+                      "|---|---|---|---|---|---|---|"])
+            L.append(f"| 工具选择（含不调用克制） | {c(m.get('selection_acc'), '{:.3f}')} | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
+            L.append(f"| 参数抽取 | {c(m.get('args_acc'), '{:.3f}')} | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
+            L.append(f"| 多轮回环成功率 | {c(m.get('loop_success'), '{:.3f}')} | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
             bf = ag.get("bfcl") or {}
             if bf.get("irrelevance") is not None or bf.get("simple") is not None:
-                L.append(f"| BFCL 无关克制 | {c(bf.get('irrelevance'), '{:.3f}')} | {vc_ag} |")
-                L.append(f"| BFCL 结构分（保守下界） | {c(bf.get('simple'), '{:.3f}')} | {vc_ag} |")
+                L.append(f"| BFCL 无关克制 | {c(bf.get('irrelevance'), '{:.3f}')} | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
+                L.append(f"| BFCL 结构分（保守下界） | {c(bf.get('simple'), '{:.3f}')} | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
             a4 = m.get("reasoning_ab")
             if a4:
                 ton, toff = a4.get("thinking_on", {}), a4.get("thinking_off", {})
-                L.append(f"| 思考链开 | {ton.get('wall_ms', '—')}ms/{ton.get('completion_tokens', '—')}tok | {vc_ag} |")
-                L.append(f"| 思考链关 | {toff.get('wall_ms', '—')}ms/{toff.get('completion_tokens', '—')}tok | {vc_ag} |")
+                L.append(f"| 思考链开 | {ton.get('wall_ms', '—')}ms/{ton.get('completion_tokens', '—')}tok | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
+                L.append(f"| 思考链关 | {toff.get('wall_ms', '—')}ms/{toff.get('completion_tokens', '—')}tok | {_ag[0]} | {_ag[1]} | {_ag[2]} | {_ag[3]} | {_ag[4]} |")
         else:
             L.append("（本场景未采集智能体评测）")
         L.append("")

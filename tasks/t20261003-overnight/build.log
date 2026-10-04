@@ -1,2 +1,5 @@
 PASS 7场景: 8 ['080ea122', '6d083b0d', '3552466c', 'c82510df', '06802822', 'e64080d1', '37bb1c1e', '8e8992ea']
 PASS v4 报告: tasks\t20260930-matrix-full\report_v4.md (8 场景, 推荐理由数值回查全部通过)
+[Main/V1.0 9a2f4f6] overnight: Flash-Next 40960档+DeepSeek V4-Flash-0731全流程(M0→适配→serve→电池)原始证据与报告更新
+ 4 files changed, 672 insertions(+), 408 deletions(-)
+ create mode 100644 tasks/t20261003-overnight/build.log
