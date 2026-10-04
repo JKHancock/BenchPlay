@@ -1,0 +1,25 @@
+[
+  {
+    "ok": true,
+    "ttft_ms": 3022.086400014814,
+    "tpot_ms": 40.45652666439613,
+    "itl_ms": [
+      0.0219999928958714,
+      175.7093999767676,
+      0.017900019884109497,
+      17.583300010301173,
+      50.893799983896315,
+      183.75520000699908,
+      0.025499961338937283,
+      19.574600039049983,
+      159.14909995626658
+    ],
+    "e2e_ms": 3628.934299980756,
+    "completion_tokens": 16,
+    "prompt_tokens": 6339,
+    "wall_ms": 3628.934299980756,
+    "finish": "length",
+    "error": null,
+    "text": "This appears to be a stream of consciousness or a raw data dump of technical terms"
+  }
+]

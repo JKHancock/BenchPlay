@@ -1,0 +1,26 @@
+<string>:1: SyntaxWarning: 'int' object is not callable; perhaps you missed a comma?
+  gsm8k: 抽样 200 条(有效 200, 并发 8, max_tokens 1024)
+  gsm8k: acc=0.96 (192/200) 失败请求=0 平均输出=107.1 tokens 用时=257s
+  mmlu: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  mmlu: acc=0.8 (160/200) 失败请求=0 平均输出=4.7 tokens 用时=50s
+  arc: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  arc: acc=0.925 (185/200) 失败请求=0 平均输出=2.6 tokens 用时=36s
+  hellaswag: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  hellaswag: acc=0.885 (177/200) 失败请求=0 平均输出=2.0 tokens 用时=42s
+  winogrande: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  winogrande: acc=0.675 (135/200) 失败请求=0 平均输出=2.0 tokens 用时=25s
+  truthfulqa: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  truthfulqa: acc=0.62 (124/200) 失败请求=0 平均输出=2.0 tokens 用时=30s
+  openbookqa: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  openbookqa: acc=0.85 (170/200) 失败请求=0 平均输出=2.1 tokens 用时=33s
+  race: 抽样 200 条(有效 200, 并发 8, max_tokens 32)
+  race: acc=0.89 (178/200) 失败请求=0 平均输出=2.0 tokens 用时=57s
+  math500: 500 条(并发 8, max_tokens 8192, 0-shot,think,temp=0)
+  math500: acc=0.684 (342/500) 失败请求=0 平均输出=1799.0 tokens 用时=9812s
+  cmmlu: 200 条(并发 8, max_tokens 32, 0-shot,no-think,temp=0)
+  cmmlu: acc=0.745 (149/200) 失败请求=0 平均输出=2.4 tokens 用时=33s
+  ceval: 200 条(并发 8, max_tokens 32, 0-shot,no-think,temp=0)
+  ceval: acc=0.74 (148/200) 失败请求=0 平均输出=3.0 tokens 用时=36s
+  ifeval: 200 条(并发 8, max_tokens 1024, 0-shot,no-think,temp=0)
+  ifeval: acc=0.715 (143/200) 失败请求=0 平均输出=420.0 tokens 用时=1090s
+PASS Track2 完成: {'gsm8k': 0.96, 'mmlu': 0.8, 'arc': 0.925, 'hellaswag': 0.885, 'winogrande': 0.675, 'truthfulqa': 0.62, 'openbookqa': 0.85, 'race': 0.89, 'math500': 0.684, 'cmmlu': 0.745, 'ceval': 0.74, 'ifeval': 0.715}

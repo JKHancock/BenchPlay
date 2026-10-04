@@ -1,0 +1,15 @@
+[
+  {
+    "ok": true,
+    "ttft_ms": 492.83169995760545,
+    "tpot_ms": null,
+    "itl_ms": [],
+    "e2e_ms": 493.00389998825267,
+    "completion_tokens": 1,
+    "prompt_tokens": 6314,
+    "wall_ms": 493.00389998825267,
+    "finish": "length",
+    "error": null,
+    "text": "Based"
+  }
+]

@@ -1,0 +1,15 @@
+[10-04 14:40:55] DsFlash-TP2-1M 清场+ray完成, serve发起(159.6GB加载预计10-20min)...
+[10-04 14:47:47] DsFlash-TP2-1M serve就绪(约310s)
+[10-04 14:47:59] DsFlash-TP2-1M 四关全过
+[10-04 14:48:03] DsFlash-TP2-1M 电池开始
+[10-04 14:48:05] DsFlash-TP2-1M w1 开始
+[10-04 14:53:46] DsFlash-TP2-1M w2 开始
+[10-04 14:59:01] DsFlash-TP2-1M w3 开始
+[10-04 14:59:44] DsFlash-TP2-1M w4 开始
+[10-04 15:01:33] DsFlash-TP2-1M w5 开始
+[10-04 15:02:30] DsFlash-TP2-1M w6 开始
+[10-04 15:05:51] DsFlash-TP2-1M probes 开始
+[10-04 15:09:39] DsFlash-TP2-1M soak 开始(3路 x 500K)
+[10-04 15:41:50] DsFlash-TP2-1M Track2 十二套件开始
+[10-04 18:53:39] DsFlash-TP2-1M Track3+BFCL 开始
+[10-04 19:08:22] DsFlash-TP2-1M DONE(全流程电池完成)

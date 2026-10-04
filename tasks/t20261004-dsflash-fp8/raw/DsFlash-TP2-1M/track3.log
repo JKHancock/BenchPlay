@@ -1,0 +1,11 @@
+  w1  sel=True  args=True   2893ms
+  w2  sel=True  args=False  3570ms
+  w3  sel=True  args=True   3421ms
+  w4  sel=True  args=True   2545ms
+  w5  sel=True  args=True   4537ms
+  n1  sel=True  args=None  13869ms
+  n2  sel=True  args=None   9889ms
+  w6  sel=True  args=True   3660ms
+  l1  loop=True  e2e=5437ms 答:好的，我已经收到了天气数据。深圳现在多云，气温28摄氏度。我可以直接用中文回复用
+  l2  loop=True  e2e=7600ms 答:用户想要计算89乘以76。我已经用计算器工具得到了结果6764。现在我需要用中文
+Track3: selection=1.000 args=0.833 loop=1.0 → D:/CSharpProject/BenchPlaybook/tasks/t20261004-dsflash-fp8/raw/DsFlash-TP2-1M/agent.json [PASS]

@@ -42,3 +42,7 @@
 - [实测纠偏] 调大 max_num_batched_tokens 并未加速 GB10 长文冷预填 — 预填是算力瓶颈 → serve-vllm.md
 - hf-mirror 下载 nvidia 仓库必须禁 xet + Flash-Next 首测画像 → serve-vllm.md
 - testing-bench.md += 十二套件扩容实战(2026-10-04)
+- deepseek_v4 模板 enable_thinking=True 思考链直混 content(reasoning 字段不分离); 答案型套件必须关思考, think 套件判分须 content 内抽取 → testing-bench.md
+- probes 全灭(prefix 64/64×2轮+阶梯 c8 0/8)仍打印 PASS 且 speedup 拼成 "Nonex"; 12s 覆写超时远低于该机 TTFT 包络(c32 均 60s), 跨模型复发实锤探针侧问题 → testing-bench.md
+- vllm:kv_cache_usage_perc 整场 0.0%(实际占用≈池 70%): 容量口径改用 cache_config_info/池行算术, 新组合先做 gauge 对账 → testing-bench.md
+- 1M ctx 池行即并发上限(2.22M 池/2.12x 满长): soak 规模=sessions×target≤池, 大权重 FP8 实测 500K×3 成立 → serve-vllm.md

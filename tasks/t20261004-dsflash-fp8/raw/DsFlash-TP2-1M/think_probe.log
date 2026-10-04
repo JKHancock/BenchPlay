@@ -1,0 +1,2 @@
+enable_thinking=False -> reasoning=False content=1+1=2
+enable_thinking=True -> reasoning=False content=我们被问到："1+1=? 数字作答"。这是一个简单的问题。1+1=2。所以答案应

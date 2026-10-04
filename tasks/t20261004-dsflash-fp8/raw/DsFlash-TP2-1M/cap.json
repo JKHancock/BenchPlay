@@ -1,0 +1,136 @@
+{
+  "track": "track2",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "ds-flash",
+  "params": {
+    "n_per_suite": 200,
+    "concurrency": 8,
+    "seed": 20260930,
+    "mode": "0-shot,no-think,temp=0",
+    "gsm8k_max_tokens": 1024,
+    "mc_max_tokens": 32
+  },
+  "suites": {
+    "gsm8k": {
+      "suite": "gsm8k",
+      "n": 200,
+      "acc": 0.96,
+      "correct": 192,
+      "requests_failed": 0,
+      "avg_completion_tokens": 107.1,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 256.7
+    },
+    "mmlu": {
+      "suite": "mmlu",
+      "n": 200,
+      "acc": 0.8,
+      "correct": 160,
+      "requests_failed": 0,
+      "avg_completion_tokens": 4.7,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 50.1
+    },
+    "arc": {
+      "suite": "arc",
+      "n": 200,
+      "acc": 0.925,
+      "correct": 185,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.6,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 36.4
+    },
+    "hellaswag": {
+      "suite": "hellaswag",
+      "n": 200,
+      "acc": 0.885,
+      "correct": 177,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 41.6
+    },
+    "winogrande": {
+      "suite": "winogrande",
+      "n": 200,
+      "acc": 0.675,
+      "correct": 135,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 24.7
+    },
+    "truthfulqa": {
+      "suite": "truthfulqa",
+      "n": 200,
+      "acc": 0.62,
+      "correct": 124,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 30.1
+    },
+    "openbookqa": {
+      "suite": "openbookqa",
+      "n": 200,
+      "acc": 0.85,
+      "correct": 170,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.1,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 32.7
+    },
+    "race": {
+      "suite": "race",
+      "n": 200,
+      "acc": 0.89,
+      "correct": 178,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 57.2
+    },
+    "math500": {
+      "suite": "math500",
+      "n": 500,
+      "acc": 0.684,
+      "correct": 342,
+      "requests_failed": 0,
+      "avg_completion_tokens": 1799.0,
+      "mode": "0-shot,think,temp=0",
+      "duration_s": 9812.4
+    },
+    "cmmlu": {
+      "suite": "cmmlu",
+      "n": 200,
+      "acc": 0.745,
+      "correct": 149,
+      "requests_failed": 0,
+      "avg_completion_tokens": 2.4,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 33.3
+    },
+    "ceval": {
+      "suite": "ceval",
+      "n": 200,
+      "acc": 0.74,
+      "correct": 148,
+      "requests_failed": 0,
+      "avg_completion_tokens": 3.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 36.1
+    },
+    "ifeval": {
+      "suite": "ifeval",
+      "n": 200,
+      "acc": 0.715,
+      "correct": 143,
+      "requests_failed": 0,
+      "avg_completion_tokens": 420.0,
+      "mode": "0-shot,no-think,temp=0",
+      "duration_s": 1090.2,
+      "instr_acc": 0.805
+    }
+  }
+}

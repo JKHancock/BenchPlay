@@ -1,0 +1,23 @@
+{
+  "track": "bfcl",
+  "suites": {
+    "bfcl_irrelevance": {
+      "suite": "irrelevance",
+      "n": 100,
+      "answered": 100,
+      "requests_failed": 0,
+      "score": 0.58,
+      "note": "克制正确率(真值无关, 精确)",
+      "duration_s": 539.0
+    },
+    "bfcl_simple": {
+      "suite": "simple",
+      "n": 100,
+      "answered": 100,
+      "requests_failed": 0,
+      "score": 0.98,
+      "note": "结构分下界: 函数名对+required齐+类型合理(官方AST待真值源)",
+      "duration_s": 278.3
+    }
+  }
+}

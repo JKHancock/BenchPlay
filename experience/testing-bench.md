@@ -49,3 +49,30 @@
 - 结论: 智能体行为指标单次测量不可作为定论, 至少双次; 报告里写"行为特征"不写"缺陷"
 - 现象: probes.py 对 flash-next 1M 服务两批次(1003/1004)同样 64/64 失败(timeout_or_conn, 12s)
 - 真因: 待查(probe 侧超时/负载形态), 非服务侧(同期 w6 c64 全过); 前缀缓存热加速比因此缺测
+
+## deepseek_v4 首测: enable_thinking=True 思考链不进 reasoning 字段而是直混 content
+- 阶段: 测试(思考链探针+能力评测) | 现象: think_probe.log 两行实锤——enable_thinking=False → content="1+1=2" 干净无思考;
+  enable_thinking=True → reasoning=False 且 content="我们被问到：…这是一个简单的问题。1+1=2。所以答案应…"(思考链全文进了 content)
+- 真因: deepseek_v4 聊天模板(vLLM chat API)不产出 reasoning/reasoning_content 分离字段, 此前的"reasoning 字段兼容层"对该模板失效
+- 修复/口径: ① 答案型套件一律显式 enable_thinking=False(track2 实跑对新套件逐个标注 no-think: cmmlu/ceval/ifeval, 仅 math500 标 think);
+  ② think 套件(math500)判分器必须做 content 内答案抽取, 不能假设字段分离(本轮 acc=0.684 抽取成功);
+  ③ think 代价实测量级: math500 500 题 9812s≈2.7h(并发8, 平均输出 1799 tok) — 超出旧指引"预留 1-1.5h", FP8 大 MoE 排期按实测另估
+- 来源: t20261004-dsflash-fp8 | 命中: 1
+
+## probes 全灭仍打印 PASS + "speedup Nonex": 探针门禁缺口跨模型二次复发
+- 阶段: 测试(probes) | 现象: probes.json——prefix 缓存探针 fail_round1=64/64、fail_round2=64/64(TTFT 冷/热全 None);
+  容量阶梯 c=8 completed=0/failed=8, mode=timeout_or_conn(wall 12.5s); max_ok_conc=null; probes.log 却输出 "PASS probes → …(max_ok_conc=None, speedup=Nonex)"
+- 真因: ① 探针请求超时被覆写成 12s(probes.py 默认本为 420s, bench/probes.py:88 --request-timeout-s default=420), 远低于该机 TTFT 包络——
+  实测 c=8 短提示 TTFT p50 1.46s(w1.log)但 c=32 均值 60.3s、c=64 均值 84.6s/峰 174s(w1/w6.log), 15K ctx 单路也 14.2s(soak 第1轮) → 12s 必然全灭;
+  ② 判定只看"跑完"不看"有成": completed=0 仍 PASS; ③ f"{speedup}x" 把 None 拼成 "Nonex"
+- 修复: 探针超时按目标 TTFT 定标(≥单路冷预填实测, 建议 ≥120s 或不覆写 420 默认); completed=0 → FAIL/DEGRADED 而非 PASS;
+  None 禁止直接进 f-string; 本条为 t20260930-flashnext "真因待查"补证: qwen4_exp 与 deepseek_v4 双模型复发, 探针侧系统性问题实锤(同期 w6 c64 全过, 非服务侧)
+- 来源: t20261004-dsflash-fp8 | 命中: 2(flash-next 1003/1004 + ds-flash 1004)
+
+## vllm:kv_cache_usage_perc 整场 0.0%: 容量结论用 cache_config_info/池行算术, gauge 先对账
+- 阶段: 测试(soak) | 现象: soak 3 路×~520K ctx(final_ctx=[519071,521119,526265] 合计≈1.57M tok≈池 2.22M 的 70%),
+  33 轮 kv=0.0%(峰 0.0%), soak.json kv_peak_perc=0.0; metrics 快照里 vllm:kv_cache_usage_perc 存在但=0.0(相位末已回落), 连"峰"都全 0 → 采样点系统性错过负载窗口
+- 修复/口径: ① 新引擎×新模型组合首跑先做一次"手算占用 vs gauge"对账; ② 对不上即以恒值指标 vllm:cache_config_info 为准
+  (本轮 kv_cache_size_tokens=2220027, kv_cache_max_concurrency=2.117, num_gpu_blocks=22819)或 startup 池行换算, 报告注明容量口径(soak.json note 已自带此口径);
+  ③ 旁证: prefix 计数器(queries 26.85M/hits 25.03M≈0.93)与 soak 前缀命中 0.9398 吻合 — 计数器可信, gauge 存疑
+- 来源: t20261004-dsflash-fp8 | 命中: 1

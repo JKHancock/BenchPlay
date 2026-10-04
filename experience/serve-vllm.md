@@ -191,3 +191,12 @@
 - Flash-Next(qwen4_exp/132.64GB/TP2+MTP2+1M) 首测: 能力八套件全场最佳(gsm8k96.5/mmlu89.5/truthfulqa90.5), 单流41tok/s(与27B相当), 但KV池仅1.9M tok=1.81个满1M会话 — 132GB权重把内存吃干; "保守1M多路"在此模型上不成立, 500K×3-4路是上限
 - Track3行为特征: 计算类问题模型弃用工具直接心算(选择8/8但loop=0.5) — 智能体框架需在系统提示词中强制"计算必须走工具"
 - 来源: t20261003-flashnext | 命中: 2
+
+## 1M ctx 模型首测: KV 池行(kv_cache_max_concurrency)是 soak/容量档规模的唯一设计输入
+- 现象: ds-flash(deepseek_v4 FP8, TP2, gpu_memory_utilization=0.85) startup 一行同给两事实:
+  "GPU KV cache size: 2,220,027 tokens, Maximum concurrency for 1,048,576 tokens per request: 2.12x" — 满长 1M 请求全池只装 ~2 路;
+  本轮 soak 3路×524288(合计 1.57M<2.22M)成立, 零抢占(vllm:num_preemptions_total=0)
+- 规程: ① 起 soak/容量档前先从 startup 池行或 vllm:cache_config_info(kv_cache_max_concurrency=2.117)换算 sessions×target_ctx ≤ 池, 否则 preempt/排队失真;
+  ② 与 Flash-Next(池 1.9M=1.81 路满长)同规律: 大权重 FP8/MoE 的 1M 服务"保守 1M 多路"不成立, 500K×3 两模型实测成立;
+  ③ startup.log 常被裁剪(本轮只剩池行, serve.log 只剩 LAUNCHED), /metrics 的 cache_config_info 是等效可再生的池证据
+- 来源: t20261004-dsflash-fp8 | 命中: 2(ds-flash + flash-next 同规律)
