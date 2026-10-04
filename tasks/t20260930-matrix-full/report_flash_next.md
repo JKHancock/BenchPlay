@@ -1,6 +1,6 @@
 # GX10 双机 vLLM 条件组合完整报告（契约 v4 场景化）
 
-**生成**: 确定性渲染自 `report_doc.json` | 2 机 × 1 场景 | 缺格 = —(未采集)
+**生成**: 确定性渲染自 `report_doc.json` | 2 机 × 2 场景 | 缺格 = —(未采集)
 
 **适用指纹**: vLLM `0.30.0` · 镜像 `sha256:91d9b077589e` · 驱动 `580.178.04` · ray `2.44.0` （2026-09-30T22:45:35 复核）——环境漂移即整体失效
 
@@ -44,14 +44,14 @@
 
 ## Part B · 场景（按模型分组；组内场景 = 同模型的不同 vLLM 参数/集群组合）
 
-### 模型 1 · Qwen3.8-Flash-Next-NVFP4（1 个参数组合）
+### 模型 1 · Qwen3.8-Flash-Next-NVFP4（2 个参数组合）
 
-### 场景 S1 · `58df5374` — Qwen3.8-Flash-Next-NVFP4（moe，230B/激活4B，NVFP4） [完整]
+### 场景 S1 · `37bb1c1e` — Qwen3.8-Flash-Next-NVFP4（moe，230B/激活4B，NVFP4） [完整]
 
 **① vLLM 完整启动参数**（逐 flag 原文，场景唯一定义源）
 
 ```bash
-vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 --tensor-parallel-size 2 --distributed-executor-backend ray --speculative-config {"method":"qwen4_exp_mtp","num_speculative_tokens":2} --hf-overrides {"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --served-model-name flash-next --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.85 --max-model-len 1048576 --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching
+vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 --tensor-parallel-size 2 --distributed-executor-backend ray --speculative-config --hf-overrides {"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}} {"method":"qwen4_exp_mtp","num_speculative_tokens":2} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --served-model-name flash-next --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.85 --max-model-len 1048576 --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching
 ```
 launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com", "GLOO_SOCKET_IFNAME": "enp1s0f1np1", "NCCL_SOCKET_IFNAME": "enp1s0f1np1", "RAY_memory_monitor_refresh_ms": "0"}` · 备注: qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)
 
@@ -160,6 +160,47 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 ---
 
+### 场景 S2 · `8e8992ea` — Qwen3.8-Flash-Next-NVFP4（moe，230B/激活4B，NVFP4） [⚠partial:perf.w1/wsweep,perf.w2/w2s,cap.gsm8k]
+
+**① vLLM 完整启动参数**（逐 flag 原文，场景唯一定义源）
+
+```bash
+vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 --tensor-parallel-size 2 --distributed-executor-backend ray --speculative-config {"method":"qwen4_exp_mtp","num_speculative_tokens":2} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --served-model-name flash-next --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.85 --max-model-len 40960 --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching
+```
+launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com", "GLOO_SOCKET_IFNAME": "enp1s0f1np1", "NCCL_SOCKET_IFNAME": "enp1s0f1np1", "RAY_memory_monitor_refresh_ms": "0"}` · 备注: qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)
+
+**② 部署拓扑与每机 ray 设置**
+
+- 模式: **ray-tp2-2node** · 数据面: QSFP直连 192.168.100.0/24（iface enp1s0f1np1）
+
+| machine_id | 角色 | ray 设置 | GPU 占用 |
+|---|---|---|---|
+| gx10-9f5c | head | `ray start --head --port=6379 --node-ip-address=192.168.100.10` env=`{"RAY_memory_monitor_refresh_ms": "0"}` 资源={"GPU": 1} | TP0/2 shard |
+| gx10-9c05 | worker | `ray start --address=192.168.100.10:6379 --node-ip-address=192.168.100.11` env=`{"RAY_memory_monitor_refresh_ms": "0"}` 资源={"GPU": 1} | TP1/2 shard |
+
+**③ vLLM 服务端指标集合**
+
+| 组 | 指标 |
+|---|---|
+| 启动 | 就绪 —s · KV容量 — tok · 最大并发 —× · cudagraph PIECEWISE · autotune True · max_num_seqs 64 |
+
+| 相位 | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | TTFT p99 | TPOT p99 | ITL p99 | 排队 p99 |
+|---|---|---|---|---|---|---|---|---|---|
+
+**④ 性能指标集合**（SLO: TTFT≤500ms 且 TPOT≤100ms）
+
+**⑤ 能力分数集合**（统一口径 0-shot · 关思考链 · temp=0 · n=200 · 并发8）
+
+| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 |
+|---|---|---|---|---|---|---|
+| math500 | - | — | — | — | — | 缺: 数据集布局不兼容(hf-mirror 404) |
+| cmmlu/ceval | - | — | — | — | — | 缺: 同上, 中文套件下轮接 datasets 库 |
+| ifeval | - | — | — | — | — | 缺: 需可验证规则引擎(P2) |
+
+证据目录: `tasks/t20260930-matrix-full/raw4/FlashNext-TP2-40960`
+
+---
+
 ## Part C · 推荐（确定性规则推导，数值可回查）
 
 ### 综合推荐 → **Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)**（`e64080d1`）
@@ -179,7 +220,7 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 - 差距: +152.7 (+24.8%)
 - 次优: Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP)
 
-### 能力优先 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`58df5374`）
+### 能力优先 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
 
 - 三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.92(Qwen3.8-27B-NVFP4(TP2))
 - 差距: +0.02333 (+2.5%)
@@ -188,6 +229,8 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 ### 单机约束(无集群) → **Qwen3.6-35B-A3B-NVFP4-Fast(TP1)**（`c82510df`）
 
 - 单机场景中 c32 出流 431.1 tok/s 最高
+
+**未参评场景**: `8e8992ea`(partial: 缺 perf.w1/wsweep,perf.w2/w2s,cap.gsm8k,cap.mmlu)
 
 ---
 *本报告由契约 v4 渲染（schema 校验 + 推荐数值回查双门禁）；仅适用指纹匹配环境。*

@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-03T22:53:04",
+  "generated_at": "2026-10-04T08:45:23",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-flashnext/raw"
@@ -9299,7 +9299,7 @@
    "notes": "EP2(专家并行, --enable-expert-parallel) YaRN4x外拓至1M(原生262144, 质量衰减未做needle验证); MTP投机k=2实测接受率75.2%, 单流+37%; 128K输入TTFT实测57.7s(spec模式max_num_scheduled_tokens=2048限制), 1M满输入外推≈7-8分钟 FlashInfer自调优关闭口径(跨会话自调优确定性死亡, 实测代价<1%)"
   },
   {
-   "scenario_id": "58df5374",
+   "scenario_id": "37bb1c1e",
    "vllm_args": [
     "vllm",
     "serve",
@@ -9309,9 +9309,9 @@
     "--distributed-executor-backend",
     "ray",
     "--speculative-config",
-    "{\"method\":\"qwen4_exp_mtp\",\"num_speculative_tokens\":2}",
     "--hf-overrides",
     "{\"text_config\":{\"max_position_embeddings\":1048576,\"rope_scaling\":{\"rope_type\":\"yarn\",\"factor\":4.0,\"original_max_position_embeddings\":262144}}}",
+    "{\"method\":\"qwen4_exp_mtp\",\"num_speculative_tokens\":2}",
     "--enable-auto-tool-choice",
     "--tool-call-parser",
     "qwen3_xml",
@@ -10904,6 +10904,175 @@
     "recorded_at": "2026-09-30T22:45:35"
    },
    "notes": "qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)"
+  },
+  {
+   "scenario_id": "8e8992ea",
+   "vllm_args": [
+    "vllm",
+    "serve",
+    "/root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4",
+    "--tensor-parallel-size",
+    "2",
+    "--distributed-executor-backend",
+    "ray",
+    "--speculative-config",
+    "{\"method\":\"qwen4_exp_mtp\",\"num_speculative_tokens\":2}",
+    "--enable-auto-tool-choice",
+    "--tool-call-parser",
+    "qwen3_xml",
+    "--reasoning-parser",
+    "qwen3",
+    "--served-model-name",
+    "flash-next",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "8000",
+    "--gpu-memory-utilization",
+    "0.85",
+    "--max-model-len",
+    "40960",
+    "--max-num-seqs",
+    "8",
+    "--max-num-batched-tokens",
+    "8192",
+    "--enable-chunked-prefill",
+    "--enable-prefix-caching"
+   ],
+   "launch_env": {
+    "CUTE_DSL_ARCH": "sm_121a",
+    "HF_ENDPOINT": "https://hf-mirror.com",
+    "GLOO_SOCKET_IFNAME": "enp1s0f1np1",
+    "NCCL_SOCKET_IFNAME": "enp1s0f1np1",
+    "RAY_memory_monitor_refresh_ms": "0"
+   },
+   "model": {
+    "name": "Qwen3.8-Flash-Next-NVFP4",
+    "path": "/root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4",
+    "quant": "NVFP4",
+    "arch": {
+     "type": "moe",
+     "params_b": 230,
+     "active_b": 4
+    },
+    "weights_gb": 132.6,
+    "context_len": 40960,
+    "native_context": 40960,
+    "served_name": "bench"
+   },
+   "deployment": {
+    "mode": "ray-tp2-2node",
+    "machines": [
+     {
+      "machine_id": "gx10-9f5c",
+      "role": "head",
+      "ray": {
+       "role": "head",
+       "start_cmd": "ray start --head --port=6379 --node-ip-address=192.168.100.10",
+       "env": {
+        "RAY_memory_monitor_refresh_ms": "0"
+       },
+       "resources": {
+        "GPU": 1
+       }
+      },
+      "gpu_alloc": "TP0/2 shard"
+     },
+     {
+      "machine_id": "gx10-9c05",
+      "role": "worker",
+      "ray": {
+       "role": "worker",
+       "start_cmd": "ray start --address=192.168.100.10:6379 --node-ip-address=192.168.100.11",
+       "env": {
+        "RAY_memory_monitor_refresh_ms": "0"
+       },
+       "resources": {
+        "GPU": 1
+       }
+      },
+      "gpu_alloc": "TP1/2 shard"
+     }
+    ],
+    "data_plane": {
+     "topology": "QSFP直连 192.168.100.0/24",
+     "iface": "enp1s0f1np1",
+     "measured_bw_gbps": null
+    }
+   },
+   "vllm_metrics": {
+    "startup": {
+     "ready_s": null,
+     "load_s": null,
+     "kv_cache_tokens": null,
+     "max_concurrency_x": null,
+     "tensor_parallel": 2,
+     "pipeline_parallel": 1,
+     "cudagraph_mode": "PIECEWISE",
+     "flashinfer_autotune": true,
+     "compile_cache": "hit",
+     "weights_gb": 132.6,
+     "gpu_mem_reserved_gb": null,
+     "max_num_seqs": 64,
+     "max_model_len": 40960,
+     "gpu_mem_util": 0.85
+    },
+    "gauges_peak": {},
+    "counters": {},
+    "histograms": {},
+    "host_per_machine": {}
+   },
+   "perf_metrics": {
+    "workloads": [],
+    "probes": null
+   },
+   "capability_scores": {
+    "suites": [
+     {
+      "suite_id": "math500",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+     },
+     {
+      "suite_id": "cmmlu/ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+     },
+     {
+      "suite_id": "ifeval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "需可验证规则引擎(P2)"
+     }
+    ]
+   },
+   "status": "partial",
+   "missing": [
+    "perf.w1/wsweep",
+    "perf.w2/w2s",
+    "cap.gsm8k",
+    "cap.mmlu",
+    "cap.arc",
+    "vllm.gauges_peak",
+    "vllm.startup.kv"
+   ],
+   "evidence": {
+    "raw_dir": "tasks/t20260930-matrix-full/raw4/FlashNext-TP2-40960"
+   },
+   "fingerprint": {
+    "vllm": "0.30.0",
+    "image_digest": "sha256:91d9b077589e",
+    "driver": "580.178.04",
+    "gpu": "GB10",
+    "ray": "2.44.0",
+    "recorded_at": "2026-09-30T22:45:35"
+   },
+   "notes": "qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)"
   }
  ],
  "recommendation": {
@@ -10989,13 +11158,13 @@
    },
    {
     "profile": "能力优先",
-    "winner": "58df5374",
+    "winner": "37bb1c1e",
     "winner_label": "Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)",
     "reasons": [
      {
       "text": "三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.92(Qwen3.8-27B-NVFP4(TP2))",
       "check": {
-       "scenario": "58df5374",
+       "scenario": "37bb1c1e",
        "path": "cap_avg",
        "value": 0.9433333333333334
       }
@@ -11003,7 +11172,7 @@
      {
       "text": "差距: +0.02333 (+2.5%)",
       "check": {
-       "scenario": "58df5374",
+       "scenario": "37bb1c1e",
        "path": "cap_avg",
        "value": 0.9433333333333334
       }
@@ -11031,6 +11200,11 @@
     "runner_up": null
    }
   ],
-  "ineligible": []
+  "ineligible": [
+   {
+    "scenario_id": "8e8992ea",
+    "cause": "partial: 缺 perf.w1/wsweep,perf.w2/w2s,cap.gsm8k,cap.mmlu"
+   }
+  ]
  }
 }
