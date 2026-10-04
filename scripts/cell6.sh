@@ -80,11 +80,12 @@ snap "api" "metrics_probe_a.json"
 (cd $CLI && "$PY" -m bench.probes --api-base "$API" \
    --out "$OUT/probes.json" > "$OUT/probes.log" 2>&1) || log "probes FAIL"
 snap "api" "metrics_probe_b.json"
-log "Track2 八套件开始"
+log "Track2 十二套件开始"
 snap "api" "metrics_cap_a.json"
 (cd $CLI && "$PY" -m bench.track2 --api-base "$API" --model flash-next \
-   --suites gsm8k,mmlu,arc,hellaswag,winogrande,truthfulqa,openbookqa,race \
-   --n 200 --concurrency 8 --request-timeout-s 600 --gsm8k-max-tokens 1024 \
+   --suites gsm8k,mmlu,arc,hellaswag,winogrande,truthfulqa,openbookqa,race,math500,cmmlu,ceval,ifeval \
+   --n 200 --concurrency 8 --request-timeout-s 900 --gsm8k-max-tokens 1024 \
+   --math500-max-tokens 8192 --ifeval-max-tokens 1024 \
    --out "$OUT/cap.json" --evidence-dir "$OUT" > "$OUT/track2.log" 2>&1) || log "track2 FAIL"
 snap "api" "metrics_cap_b.json"
 log "Track3+BFCL 开始"

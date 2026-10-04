@@ -47,7 +47,8 @@
 | `verify.sh <host> [expect_tools=1]` | 四关验收 | 全过 |
 | `cell4.sh <tp> <model> <gb> <tag> [extra]` | 通用场景全电池 | 四关+档门禁+屋顶线 |
 | `cell5.sh` | 1M 上下文场景电池 | 同上 |
-| `cell6.sh` | Flash-Next(qwen4_exp)专用电池 | 同上 |
+| `cell6.sh` | Flash-Next(qwen4_exp)专用电池(八套件时期) | 同上 |
+| `cell7.sh` | Flash-Next 12套件复测电池(关自调优, math500开思考链) | 同上 |
 | `matrix4.sh` | 多场景矩阵编排（调 cell4/5/6） | 全场景完成 |
 
 ### 阶段 7-8 · 汇编渲染

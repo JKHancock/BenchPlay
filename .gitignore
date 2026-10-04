@@ -1,3 +1,23 @@
+# Python 编译产物
 __pycache__/
 *.pyc
+
+# OS / 编辑器垃圾
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.part
+nul
+
+# IDE 工作区（会话本地状态, 不属于项目资产）
+.zcode/
+.opencode/
+.claude/
+.idea/
+.vscode/
+
+# 历史草稿
 /tmp_readme_old
+
+# 注意: tasks/ 内的 *.log 是电池证据(serve/track/progress 日志), 有意纳入版本库, 勿加 *.log

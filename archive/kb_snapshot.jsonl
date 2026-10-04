@@ -1,0 +1,6 @@
+{"id": 1359489454, "payload": {"content": "vLLM 启动卡在连 huggingface.co, 内网无外网出口", "fix": "HF_ENDPOINT=https://hf-mirror.com", "tags": ["serving", "vllm", "failure"], "provenance": "GX10实测", "hits": 0}}
+{"id": 1540436156, "payload": {"content": "远端路径里的 ~ 在 SFTP/scp 与引号 shell 中不展开, 会写入字面量 ~/ 目录", "fix": "先 echo HOME 解析为绝对路径再用", "tags": ["distribute", "ssh", "failure"], "provenance": "t20261001-014115", "hits": 0}}
+{"id": 2179636762, "payload": {"content": "gloo exception: Connection refused 127.0.0.1, 分布式 worker 初始化选错网卡", "fix": "GLOO/NCCL_SOCKET_IFNAME 钉到 QSFP 网卡", "tags": ["cluster", "ray", "gb10", "failure"], "provenance": "GX10实测", "hits": 0}}
+{"id": 2297646698, "payload": {"content": "docker 报 Failed to infer device type, vLLM 容器检测不到 GPU", "fix": "docker run 加 --gpus all", "tags": ["substrate", "gb10", "docker", "failure"], "provenance": "GX10实测", "hits": 0}}
+{"id": 3105005938, "payload": {"content": "Ray ActorHandleNotFound, vLLM V1 启动 tensor parallel worker 失败", "fix": "pip install ray==2.44.0", "tags": ["cluster", "ray", "vllm", "failure"], "provenance": "GX10实测", "hits": 0}}
+{"id": 3866240292, "payload": {"content": "nvidia-smi 不报显存(显示 N/A)是 GB10 本机常态而非故障", "fix": "", "tags": ["inventory", "gb10", "quirk"], "provenance": "E2E实测", "hits": 0}}

@@ -30,6 +30,39 @@
 - 编排：Codex 的 plan/exec 循环；shell 工具执行 scripts/；
   注意为 Codex 显式列出不变式（它对"exit code 即门禁"遵守良好）。
 
+## OpenCode
+
+- `AGENTS.md` 同样是 OpenCode 的仓库级入口（读写同一份即可）。
+- 编排：OpenCode 的 subagent/agent 机制做脑任务（档案整理、报告章节、经验提炼），
+  Bash 工具串行跑 scripts/；后台任务用其 task/后台执行机制挂长电池。
+- 密钥与路径注意与通用绑定一致（bash + python 可用即达标）。
+
+## 并行加速：按宿主 IDE 选编排形态（强烈建议用满）
+
+单场景电池（serve→闸→三 benchmark）受物理约束**天然串行**：一个 vLLM 进程一次
+只能加载一组服务参数（TP/EP/MTP/parser 变了就得重启），GPU 也只有一个服务实例。
+所以"并行"要加在**没有资源冲突**的环节上，映射如下：
+
+| 可并行的环节 | 为什么安全 | ZCode 形态 | Claude Code | Codex | OpenCode |
+|---|---|---|---|---|---|
+| 多模型 M0 档案分析 | 纯读盘+CPU | workflow 里 `agent()` fan-out | 多个 Task subagent 并发 | 多个 cloud task | 多个 subagent |
+| 数据集准备/校验 | 纯本地 IO | fan-out 子任务 | 后台 Bash | 并行 exec | 后台 task |
+| 电池执行 | **GPU 互斥，禁并行**（多集群/多端口除外） | workflow 顺序 `world.run` | 顺序 Bash | 顺序 exec | 顺序 |
+| 电池后处理（build_doc/渲染/index/经验提炼） | 只读 raw、写不同文件 | fan-out 4 个子智能体 | 多 Task 并发 | 多 cloud task | 多 subagent |
+| 报告分章节写作（Part A/B/C） | 各章输入独立 | fan-out 后主控拼装 | 多 Task 并发 | 多 cloud task | 多 subagent |
+| 多场景电池（不同集群或错峰） | 不同 GPU | workflow 循环+并行分支 | 后台 Bash 各自跑 | 并行 exec | 后台 task |
+
+纪律（并行不改变门禁语义）：
+
+1. 子智能体的产出仍是**脚本 exit code + 证据文件路径**，主控只做汇总，
+   任何子智能体不得用自然语言"宣称成功"；
+2. 并行任务**不得写同一个 raw 目录**（tasks/<task>/raw/<tag>/ 归属唯一）；
+3. 失败归因（A4）在主控做——子智能体只带回证据，不自行重试越过 2 轮上限；
+4. 物理串行段的进度监控归主控（progress.log），子智能体不重复轮询。
+
+ZCode 参考实现：`scripts/overnight.sh` + 动态 workflow（阶段循环、归因重试 ≤2 轮、
+build/渲染/沉淀 fan-out）即按本表执行；其它 IDE 把同一拓扑翻译成自家原语即可。
+
 ## 通用绑定检查清单（任何新 agent 接入先过这四条）
 
 1. 能读 `SKILL.md` 并按阶段序执行，不跳门禁；
@@ -40,9 +73,9 @@
 
 ## 能力差异备忘
 
-| 能力 | ZCode | Claude Code | Codex |
-|---|---|---|---|
-| 实时直播 | workflow 看板+会话 | 会话 | 会话 |
-| 无人值守 | CronCreate | cron+headless | cron |
-| 重试护栏代码化 | workflow 控制流 | hooks | AGENTS.md 规则 |
-| 多机并行 | workflow fan-out | 顺序为主 | 顺序为主 |
+| 能力 | ZCode | Claude Code | Codex | OpenCode |
+|---|---|---|---|---|
+| 实时直播 | workflow 看板+会话 | 会话 | 会话 | 会话 |
+| 无人值守 | CronCreate | cron+headless | cron | cron |
+| 重试护栏代码化 | workflow 控制流 | hooks | AGENTS.md 规则 | AGENTS.md 规则 |
+| 子智能体并行 | workflow fan-out | Task 并发 | cloud task 并发 | subagent 并发 |

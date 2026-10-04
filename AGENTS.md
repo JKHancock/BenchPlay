@@ -20,9 +20,16 @@
    阶段循环与重试边界写在 workflow 脚本控制流里（代码级护栏），
    子智能体做档案整理/报告/提炼；也可把 `SKILL.md` 注册为技能用 `/benchpilot` 触发。
 2. 系统提示声明 Claude Code → **Claude 形态**：按 `docs/AGENT-BINDING.md` 的
-   Claude Code 节执行（顺序 Bash + hooks 校验退出码）。
-3. 系统提示声明 Codex → **Codex 形态**：同上对应节。
-4. 都不是 → 通用形态：顺序执行 `scripts/`，严守 SKILL.md 不变式。
+   Claude Code 节执行（Task 子智能体并行 + hooks 校验退出码）。
+3. 系统提示声明 Codex → **Codex 形态**：同上对应节（cloud task 并行）。
+4. 系统提示声明 OpenCode 或工作区有 `.opencode/` → **OpenCode 形态**：
+   同上对应节（subagent 并行）。
+5. 都不是 → 通用形态：顺序执行 `scripts/`，严守 SKILL.md 不变式。
+
+**并行纪律（所有形态通用）**：电池执行受 GPU 互斥天然串行，能并行的是
+M0 档案分析、数据集准备、电池后处理（build/渲染/index/提炼）、报告分章——
+映射表与红线见 `docs/AGENT-BINDING.md` §并行加速。子智能体产出仍必须是
+exit code + 证据文件，不得写同一 raw 目录。
 
 ## 三条铁律（未读 SKILL.md 前也必须遵守）
 
@@ -37,8 +44,12 @@
 ## 目录导览
 
 `SKILL.md` 流程法 ｜ `docs/`（PIPELINE/LIBRARIES/RUNBOOK/AGENT-BINDING/TWIN-MAPPING）
-`scripts/` 门禁脚本 ｜ `tasks/` 档案库 ｜ `experience/` 经验库 ｜ `machines/` 机器状态
-`viewer/app.py` 三库浏览器（`streamlit run viewer/app.py`）
+`scripts/` 门禁脚本（静态工具 + cell 运行档案） ｜ `viewer/app.py` 三库浏览器
+**动态层（你写入的地方，只追加不改写）**：`tasks/<id>/raw/` 原始证据 ·
+`machines/` 机器档案 · `models/` M0 模型档案 · `experience/` 经验库 ·
+`archive/scenario_index.jsonl` 全局索引 · `reports/` 定稿副本。
+静态 vs 动态的完整分类表（谁写/何时/是否进 git）见 README §9.1——
+**流程只读静态、只追加动态；raw/ 落档后不改写，复测=新任务目录。**
 
 ## 修订案同步（2026-10-03）— 新会话必读增量
 1. serve 任何模型前必须先跑 M0: `python scripts/model_profile.py <model_dir>`（无 profile 禁 serve，SKILL A1）
@@ -51,4 +62,4 @@
 ## 工具箱目录（阶段→脚本→门禁速查）
 详见 [docs/SCRIPTS.md](docs/SCRIPTS.md)——每个阶段该用哪个脚本、怎么调、门禁是什么。
 Agent 在进入任何阶段前先查此表，不要凭记忆调脚本名。
-核心规则: cell4/5/6 是编排脚本(内部调 serve/verify/bench 工具链); bench/ 工具在 ../Vllm_Benchmark/bench/。
+核心规则: cell4/5/6/7 是编排脚本(内部调 serve/verify/bench 工具链); bench/ 工具在 ../Vllm_Benchmark/bench/。

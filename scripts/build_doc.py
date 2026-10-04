@@ -222,19 +222,31 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
         cap_suites.append({"suite_id": s,
                            "dimension": {"gsm8k": "math", "mmlu": "knowledge",
                                          "arc": "science", "hellaswag": "commonsense",
-                                         "winogrande": "coref"}.get(s, "?"),
-                           "settings": {"n": v["n"], "shots": 0, "thinking": "off",
+                                         "winogrande": "coref",
+                                         "math500": "math-adv",
+                                         "cmmlu": "zh-knowledge",
+                                         "ceval": "zh-knowledge",
+                                         "ifeval": "instr-follow"}.get(s, "?"),
+                           "settings": {"n": v["n"], "shots": 0,
+                                        "thinking": ("on" if ",think," in v.get("mode", "")
+                                                     else "off"),
                                         "temperature": 0.0, "seed": 20260930,
                                         "concurrency": 8},
                            "score": {"acc": v["acc"], "correct": v["correct"],
                                      "n": v["n"], "unanswered": 0,
-                                     "truncated": None},
+                                     "truncated": None,
+                                     **({"instr_acc": v["instr_acc"]}
+                                        if v.get("instr_acc") is not None else {})},
                            "tokens": {"avg_out": v.get("avg_completion_tokens")},
                            "reliability": {"requests_failed": v["requests_failed"]},
                            "duration_s": v.get("duration_s")})
-    for missing, why in [("math500", "数据集布局不兼容(hf-mirror 404)"),
-                         ("cmmlu/ceval", "同上, 中文套件下轮接 datasets 库"),
-                         ("ifeval", "需可验证规则引擎(P2)")]:
+    # 未测套件才占位(cap.json 里已有的以实测为准)
+    for missing, why in [("math500", "未测(需 math500.jsonl)"),
+                         ("cmmlu", "未测(需 cmmlu CSV)"),
+                         ("ceval", "未测(需 ceval parquet)"),
+                         ("ifeval", "未测(需 ifeval.jsonl)")]:
+        if any(cs["suite_id"] == missing for cs in cap_suites):
+            continue
         cap_suites.append({"suite_id": missing, "dimension": "-",
                            "settings": {}, "score": None,
                            "missing_reason": why})

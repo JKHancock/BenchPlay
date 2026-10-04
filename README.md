@@ -102,10 +102,12 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 3. **四关验收** verify.sh：①身份（/v1/models）②功能（对话冒烟）③可观测（metrics≥10 条）④**智能体**（工具调用回环；用途=agent 时 FAIL 级——对话绿≠agent 可用，实测事故教训）
 4. **Track1 性能**（bench/track1.py）：w1 随机 512×c1/8/32 · w2 真实 ShareGPT · w3 短对话 · w4 长文 4096 · w5 输出阶梯 · w6 c64 · wsweep 舒适度扫描 · w7 128K 探针；指标族 TTFT/TPOT/ITL/E2E{mean,p50,p90,p99,max}+单流出流+goodput(SLO:TTFT≤500&TPOT≤100)+屋顶线(c1)+**负载中 gauge 峰值轮询**+档内失败自动补跑（WiFi 瞬断免疫，retried 计数）
 5. **探针**（bench/probes.py）：前缀缓存（冷/热加速比+命中计数；**复用率是长度函数** 1.5K→0%/4K→37%/16K→83%/64K→97%，探针必扫长度阶梯）+容量阶梯（最大可用并发/首败模式）
-6. **Track2 能力**（bench/track2.py）：八套件 n=200——gsm8k/mmlu/arc/hellaswag/winogrande/truthfulqa/openbookqa/race；统一口径 0-shot·关思考链·temp=0·固定种子分层抽样（**不关思考链会耗尽 max_tokens 出假分**：gsm8k 2%→94.5% 的教训）；截断率>10% 标⚠
+6. **Track2 能力**（bench/track2.py）：十二套件——gsm8k/mmlu/arc/hellaswag/winogrande/truthfulqa/openbookqa/race（各 n=200）+ **math500**（竞赛数学 500 题全集，开思考链=公开榜口径，LaTex 归一化容差比对）+ **cmmlu/ceval**（中文知识与中国特色考试，各 n=200）+ **ifeval**（指令遵循，22 种可编程校验器，全部指令通过才计对，另报指令级口径）；统一口径 0-shot·temp=0·固定种子分层抽样，除 math500 外关思考链（**不关思考链会耗尽 max_tokens 出假分**：gsm8k 2%→94.5% 的教训）；截断率>10% 标⚠
 7. **Track3 智能体**（bench/track3_agent.py + bench/bfcl.py）：工具选择（含不调用克制）/参数抽取/多轮回环/循环时延；BFCL v3（irrelevance 精确分、simple 结构分下界——HF 版真值脱敏如实标注）；思考链 on/off A/B
 8. **三时点 metrics**：每相位 idle→after 差值（vLLM 0.30 计数器名勘误在案：request_success_total{finished_reason}等）+ 每机 nvidia-smi 负载中采样
 9. **落档**：`tasks/<id>/raw/<场景>/`（serve/startup/w*.json/probes/cap/agent/bfcl/per-request 明细/host 采样）
+
+**执行加速（宿主 IDE 并行编排，强烈建议用满）**：电池本身受 GPU 互斥天然串行（一个 vLLM 实例一次只测一组服务参数），但 M0 模型画像分析、数据集准备、电池后处理（汇编/渲染/索引/经验提炼）、报告分章写作均无资源冲突，可并行。ZCode 用动态 workflow（CreateWorkflow，子智能体 fan-out + 控制流护栏）；Claude Code 用并行 Task 子智能体 + hooks 验退出码；Codex 用并行 cloud task；OpenCode 用 subagent 并发。红线：子智能体产出仍必须是 exit code + 证据文件，不得写同一 raw 目录。映射表详见 `docs/AGENT-BINDING.md` §并行加速。
 
 ### 阶段 7 · 汇编（build7.py）
 raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五要素：模型/机器与每机 ray/四指标集合）、推荐。**门禁**：JSON Schema 校验不过拒绝渲染。
@@ -126,9 +128,9 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 - 来源：SSE 流式逐请求计时（bench/track1、bench/probes）
 
 ### 6.2 Benchmark 二 · 模型能力（Track2）→ 能力指标集合
-- 套件：数学(gsm8k)·知识(mmlu)·科学(arc)·常识(hellaswag/openbookqa)·共指(winogrande)·诚实性(truthfulqa)·阅读理解(race)，统一口径 0-shot·关思考链·temp=0·固定种子分层抽样；发布卡级套件(MMLU-Pro/MATH-500/AIME/IFEval 等)按 docs/BATTERY.md 排期接入
-- 指标族：各套件 acc/截断率/失败数 → 维度分 → **C-Score 总分**（权重表随报告公示可复算）
-- 来源：bench/track2
+- 套件（12）：数学(gsm8k·**MATH-500**竞赛级,开思考链=公开榜口径)·知识(mmlu·**CMMLU**中文)·考试(**CEval**中国执业资格 16 科)·科学(arc)·常识(hellaswag/openbookqa)·共指(winogrande)·诚实性(truthfulqa)·阅读理解(race)·指令遵循(**IFEval**,22 种可编程校验器)，统一口径 0-shot·temp=0·固定种子分层抽样（除 math500 外关思考链）；发布卡级套件(MMLU-Pro/AIME 等)按 docs/BATTERY.md 排期接入
+- 指标族：各套件 acc/截断率/失败数（ifeval 另报指令级口径）→ 维度分 → **C-Score 总分**（权重表随报告公示可复算）
+- 来源：bench/track2（+ bench/track2_extra 四套加载器/校验器）
 
 ### 6.3 Benchmark 三 · 智能体场景（Track3 + BFCL）→ 智能体指标集合
 - 组分：工具选择（含不调用克制）/参数抽取/多轮回环(调用→回灌→作答)/BFCL 函数调用/思考链 on-off A/B
@@ -156,6 +158,8 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 
 **总检索协议（§5）**：新机/新模入场按 档案原始数据 → 经验叙事 → KB 结论 的顺序（原始>叙事>结论），三层全空才联网。
 
+**git 策略（三库全部进库，体积小）**：档案库（tasks/+machines/+models/）与经验库（experience/）本身就是文本文件，直接提交；知识库是 Qdrant 派生索引（源数据都在前两库），用 `python scripts/kb.py export` 导出 `archive/kb_snapshot.jsonl` 随库提交，新机用 `kb.py rebuild` 从快照重建（重嵌向量、幂等）。快照在每次知识库变动后导出一次。
+
 ## 9. 目录结构与脚本索引
 
 ```
@@ -179,14 +183,36 @@ scripts/                              全部执行脚本（30 个，按阶段分
 bench/（位于 ../Vllm_Benchmark/）
   track1.py(性能) track2.py(能力8套) track2_extra.py(新4套)
   track3_agent.py(智能体) bfcl.py(函数调用) probes.py(探针) common.py(客户端/指标)
-machines/                             机器档案（每台一个 JSON）
-models/                               模型 M0 profile
-experience/                           经验库（4 主题文件 + INDEX.md）
+machines/                             机器档案（每台一个 JSON）【动态】
+models/                               模型 M0 profile（首次 model_profile 后生成）【动态】
+experience/                           经验库（4 主题文件 + INDEX.md）【动态】
 archive/
-  scenario_index.jsonl                全局场景索引（跨任务可查）
-tasks/                                每任务目录（raw/ 全量证据 + 报告）
-viewer/                               Streamlit 浏览器
+  scenario_index.jsonl                全局场景索引（跨任务可查）【动态】
+tasks/                                每任务目录（raw/ 全量证据 + 报告）【动态】
+reports/                              定稿报告的交付副本【动态】
+viewer/                               Streamlit 浏览器【静态】
 ```
+
+### 9.1 静态资产 vs 运行时数据（谁写、何时写、写在哪）
+
+| 位置 | 性质 | 谁写入 | 何时 | git |
+|---|---|---|---|---|
+| `AGENTS.md`/`SKILL.md`/`README.md` | 静态·入口 | 维护者（Agent 经确认后可改） | 项目演进时 | ✓ |
+| `docs/*.md` | 静态·契约与绑定 | 维护者 | 同上 | ✓ |
+| `scripts/`（工具 + `excluded_scenarios.json` + `wash.ps1`） | 静态·工具 | 维护者 | 阶段/套件演进时 | ✓ |
+| `scripts/cell*.sh` | 静态·**运行档案** | 每次电池前创建一份，跑后只读不改 | 每个新场景/批次 | ✓ |
+| `../Vllm_Benchmark/bench/` | 静态·跑分工具 | 维护者 | 套件演进时 | 宿主仓库 |
+| `viewer/app.py` | 静态·浏览器 | 维护者 | — | ✓ |
+| `machines/<ip>.json` | 动态·机器档案 | Agent（阶段 1 清点，字段必绑证据） | 机器首次接入/复核 | ✓ |
+| `models/<name>.profile.json` | 动态·模型档案 | `model_profile.py`（M0 硬门禁） | 每模型首次 serve 前 | ✓ |
+| `tasks/<id>/raw/<场景>/` | 动态·原始证据 | cell 脚本及其工具链（Agent 不手改） | 电池执行时（一次写入不再改） | ✓ |
+| `tasks/<id>/report_doc.json`·`report_v4.md` | 动态·汇编产物 | `build*`/`report_gen4` | 电池完成后 | ✓ |
+| `reports/` | 动态·交付副本 | 渲染定稿后拷贝 | 每次定稿 | ✓ |
+| `experience/*.md` + `INDEX.md` | 动态·经验库 | Agent 提炼追加（阶段 9 沉淀） | 每次电池后 | ✓ |
+| `archive/scenario_index.jsonl` | 动态·全局索引 | `scenario_index.py` 追加（幂等去重） | 每场景入库 | ✓ |
+| `archive/kb_snapshot.jsonl` | 动态·知识库快照 | `kb.py export`（Qdrant→文件） | 知识库每次变动后 | ✓ |
+
+**规则**：静态文件定义"怎么做"，动态文件记录"做过了什么"。流程只读静态、只追加动态（`raw/` 落档后不改写，复测=新任务目录）。动态层（tasks/ + machines/ + models/ + experience/ + archive/ + reports/）是全部实验记忆；清空它们即回到"空库冷启动"，框架与工具无损。
 ## 10. 快速开始（人类操作员）
 
 1. **首次**：在目标集群就绪后，让任意 Agent 读 `AGENTS.md`，提供机器清单（`host|user|password|机型`）+ 模型清单 + 用途声明(chat/agent)

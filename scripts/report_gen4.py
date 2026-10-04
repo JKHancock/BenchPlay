@@ -572,7 +572,7 @@ def main():
         L.extend(_emit_vllm(sc, ["phase:w1", "phase:w2", "phase:w3", "phase:w4",
                                  "phase:w5", "phase:w6", "phase:probe"],
                             "性能测试期间的服务端指标"))
-        L.append("**Benchmark 二 · 模型能力**（专属指标 + 能力评测期间的服务端指标；统一口径 0-shot · 关思考链 · temp=0 · n=200 · 并发8）")
+        L.append("**Benchmark 二 · 模型能力**（专属指标 + 能力评测期间的服务端指标；统一口径 0-shot · temp=0 · n=200 · 并发8；除 MATH-500 开思考链（公开榜口径）外均关思考链）")
         L.append("")
         _cap = _vcols(sc, "phase:cap")
         L.extend(["| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 | "
@@ -581,10 +581,11 @@ def main():
         for cs in sc["capability_scores"]["suites"]:
             if cs.get("score"):
                 sx = cs["score"]
+                extra = ("，指令级 %.3f" % sx["instr_acc"]) if sx.get("instr_acc") is not None else ""
                 L.append(f"| {cs['suite_id']} | {cs['dimension']} | "
                          f"{c(sx.get('acc'), '{:.3f}')} | {sx.get('correct')}/{sx.get('n')} | "
                          f"{c((cs.get('tokens') or {}).get('avg_out'), '{:.0f}')} | "
-                         f"{(cs.get('reliability') or {}).get('requests_failed', '—')} | 实测 | "
+                         f"{(cs.get('reliability') or {}).get('requests_failed', '—')} | 实测{extra} | "
                          + " | ".join(_cap) + " |")
             else:
                 L.append(f"| {cs['suite_id']} | {cs['dimension']} | — | — | — | — | "

@@ -78,6 +78,42 @@ def cmd_upsert(args):
     print(f"PASS upsert (id={pid}, hits={hits})")
 
 
+def cmd_export(args):
+    """全量导出(不含向量, 向量可由 content 重嵌): archive/kb_snapshot.jsonl 进 git."""
+    import json
+    pts, offset = [], None
+    while True:
+        body = {"limit": 256, "with_payload": True}
+        if offset is not None:
+            body["offset"] = offset
+        r = http("POST", f"/collections/{COLLECTION}/points/scroll", body)["result"]
+        pts += [{"id": p["id"], "payload": p["payload"]} for p in r.get("points", [])]
+        offset = r.get("next_page_offset")
+        if offset is None:
+            break
+    out = args.out or "archive/kb_snapshot.jsonl"
+    with open(out, "w", encoding="utf-8") as f:
+        for p in pts:
+            f.write(json.dumps(p, ensure_ascii=False) + "\n")
+    print(f"PASS export {len(pts)} 条 -> {out}")
+
+
+def cmd_rebuild(args):
+    """从快照重建 Qdrant 集合(重嵌向量, 保留 hits; 幂等)."""
+    import json
+    from pathlib import Path
+    src = Path(getattr(args, "infile", None) or "archive/kb_snapshot.jsonl")
+    rows = [json.loads(l) for l in src.read_text(encoding="utf-8").splitlines() if l.strip()]
+    ensure_collection(len(embed(["dim"])[0]))
+    for i in range(0, len(rows), 64):
+        chunk = rows[i:i + 64]
+        vecs = embed([r["payload"]["content"] for r in chunk])
+        http("PUT", f"/collections/{COLLECTION}/points?wait=true", {"points": [
+            {"id": r["id"], "vector": v, "payload": r["payload"]}
+            for r, v in zip(chunk, vecs)]})
+    print(f"PASS rebuild {len(rows)} 条 (源 {src})")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -90,5 +126,10 @@ if __name__ == "__main__":
     u.add_argument("--fix")
     u.add_argument("--tags", default="")
     u.add_argument("--provenance")
+    e = sub.add_parser("export")
+    e.add_argument("--out", default=None)
+    rb = sub.add_parser("rebuild")
+    rb.add_argument("--infile", default=None)
     args = parser.parse_args()
-    {"query": cmd_query, "upsert": cmd_upsert}[args.cmd](args)
+    {"query": cmd_query, "upsert": cmd_upsert,
+     "export": cmd_export, "rebuild": cmd_rebuild}[args.cmd](args)

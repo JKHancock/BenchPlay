@@ -345,6 +345,7 @@
 - C-Score 权重: 数学.18 知识.22 常识.18 科学.12 诚实.18 共指.12（成员变动时权重表随报告重算公示）
 - A-Score 权重: BFCL克制.25 BFCL结构.25 循环.30 工具选择.20
 - 报告同时呈现三层（原始>维度>总分, 总分是派生视图不得替代原始）
-**套件扩容现状**: 能力 8 套件(gsm8k/mmlu/arc/hellaswag/winogrande/truthfulqa/openbookqa/race);
+**套件扩容现状**: 能力 12 套件(gsm8k/mmlu/arc/hellaswag/winogrande/truthfulqa/openbookqa/race
++ math500[开思考链,公开榜口径] + cmmlu + ceval + ifeval[22种可编程校验器,另报指令级口径]);
 BFCL 两类接入(irrelevance精确分, simple结构分下界 — HF版真值脱敏, 官方AST精判待真值源, 如实标注);
-待接: ceval/cmmlu(布局不兼容)/math500/IFEval/BFCL multiple·parallel(需真值)/τ².
+待接: BFCL multiple·parallel(需真值)/τ².
