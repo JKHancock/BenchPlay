@@ -42,6 +42,53 @@
 | 容器运行时 | Docker 29.6.2 |
 | vLLM 容器 | `vllm-node`（镜像 sha256:91d9b077589e，network=host，vllm 0.30.0 · ray 2.44.0 · py 3.12） |
 
+## 评测导读（每个数字是什么意思）
+
+### 性能指标
+
+| 指标 | 含义 | 如何测量 | 分数说明 |
+|---|---|---|---|
+| TTFT (首字延迟) | 用户发出请求到收到第一个字的等待时间 | 逐请求毫秒级计时 | p50=一半请求比这快; <500ms 体感秒回
+| TPOT (每token耗时) | 流式输出中相邻两个字的间隔 | 总生成时间÷token数 | p50 越低打字机越流畅; <100ms 阅读无卡顿
+| ITL (token间延迟) | 任意两个字之间的最坏间隔 | 逐 chunk 时间戳差 | p99 越小=没有突然卡顿
+| 出流 tok/s | 所有用户加起来每秒产出多少字 | 总输出token÷总耗时 | 越高能同时服务的人越多
+| goodput | 同时满足 TTFT≤500ms 且 TPOT≤100ms 的请求占比 | 逐请求判定 | 100%=全部秒回; <50%=一半人体感差
+| 理论上限校验 | 物理公式算出这台硬件最高能跑多快 | 显存带宽÷每token需读的权重 | 实测达到上限的百分比; <80%正常
+
+### 能力套件（八项，各测什么、分数什么意思）
+
+| 套件 | 测什么 | 怎么算分 | 95%意味着 | 70%意味着 |
+|---|---|---|---|---|
+| gsm8k | 小学数学应用题 | 200题答对÷200 | 小学数学基本满分 | 有明显计算错误 |
+| mmlu | 大学级多学科知识选择题 | 200题分层抽样 | 知识面广且准确 | 部分领域有盲区 |
+| arc | 中学科学推理 | 200题 | 科学推理可靠 | 概念性错误较多 |
+| hellaswag | 常识判断 | 200题四选一 | 常识接近人类 | 常识判断偏弱 |
+| winogrande | 指代消解 | 200题二选一 | 语义理解精准 | 存在指代混淆 |
+| truthfulqa | 事实性与抗幻觉 | 200题 | 回答可信度高 | 容易似是而非 |
+| openbookqa | 科普知识推理 | 200题四选一 | 基础科学扎实 | 推理链有断裂 |
+| race | 阅读理解 | 200题四选一 | 长文理解强 | 读到后面忘前面 |
+
+### 智能体指标
+
+| 指标 | 含义 | 怎么算 | 满分意味着 |
+|---|---|---|---|
+| 工具选择 | 给一堆工具和问题，选对该用的 | 8题选对÷8 | 不乱调也不漏调 |
+| 参数抽取 | 选对工具后参数填对 | 选对题参数匹配占比 | 准确提取参数值 |
+| 循环成功率 | 调用→回灌→正确回答全环走通 | 2个任务全通=1.0 | 智能体工作流可靠 |
+| BFCL 无关克制 | 问不需要工具的问题能不乱调 | 100题拒调÷100 | 不画蛇添足 |
+| BFCL 结构分 | 函数名对+必填参数齐+类型合理 | 100题结构校验 | 函数调用格式规范 |
+
+### vLLM 服务端指标（监考仪）
+
+| 指标 | 含义 |
+|---|---|
+| 成功/失败 | 该段测试期间正常完成/异常中断的请求数 |
+| prompt tok / gen tok | 该段读入的上下文总量 / 生成的回答总量 |
+| 前缀命中 q/h | 查了多少块缓存/命中多少（命中越多预填越快） |
+| TTFT/TPOT/ITL/排队 p99 | 服务端视角的延迟分位数 |
+| 投机接受率 | MTP 预测 token 验证通过率（越高解码越快） |
+| KV 峰值 | 测试时显存缓存了多少上下文 |
+
 ## Part B · 场景（按模型分组；组内场景 = 同模型的不同 vLLM 参数/集群组合）
 
 ### 模型 1 · Qwen3.8-Flash-Next-NVFP4（2 个已测参数组合）
@@ -59,7 +106,23 @@
 **① vLLM 完整启动参数**（逐 flag 原文，场景唯一定义源）
 
 ```bash
-vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 --tensor-parallel-size 2 --distributed-executor-backend ray --speculative-config --hf-overrides {"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}} {"method":"qwen4_exp_mtp","num_speculative_tokens":2} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --served-model-name flash-next --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.85 --max-model-len 1048576 --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching
+vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 \
+--tensor-parallel-size 2 \
+--distributed-executor-backend ray \
+--speculative-config \
+--hf-overrides {"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}} {"method":"qwen4_exp_mtp","num_speculative_tokens":2} \
+--enable-auto-tool-choice \
+--tool-call-parser qwen3_xml \
+--reasoning-parser qwen3 \
+--served-model-name flash-next \
+--host 0.0.0.0 \
+--port 8000 \
+--gpu-memory-utilization 0.85 \
+--max-model-len 1048576 \
+--max-num-seqs 8 \
+--max-num-batched-tokens 8192 \
+--enable-chunked-prefill \
+--enable-prefix-caching
 ```
 launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com", "GLOO_SOCKET_IFNAME": "enp1s0f1np1", "NCCL_SOCKET_IFNAME": "enp1s0f1np1", "RAY_memory_monitor_refresh_ms": "0"}` · 备注: qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)
 
@@ -78,6 +141,27 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 |---|---|
 | 启动 | 就绪 480s · KV容量 1,899,278 tok · 最大并发 1.8× · cudagraph PIECEWISE · autotune True · max_num_seqs 64 |
 | 负载中峰值 | KV缓存占用 9.2% · 同时在跑请求 8 路（出现在随机输入吞吐测试（512入/256出，并发1/8/32） 并发8 时） |
+
+**参数逐项说明**
+
+| 参数 | 含义与作用 | 我们的值 | 为何这样设置 |
+|---|---|---|---|
+| `--tensor-parallel-size` | **张量并行** 把模型切成几份分到几张 GPU 上同时算 | `2` | TP=2 用满双机；TP=1 单机跑 |
+| `--distributed-executor-backend` | **分布式后端** 跨机通信框架 | `ray` | ray 是双机集群标准选择 |
+| `--speculative-config` | **投机解码(MTP)** 用模型 MTP 头预测多个 token 一次验证 | `（开关）` | 模型自带 MTP 权重即可开；k=2 实测最优 |
+| `--hf-overrides` | **模型配置覆写** 运行时覆盖上下文长度（YaRN 外拓） | `{"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}}` | 原生 262K 不够用时外拓到 1M |
+| `--enable-auto-tool-choice` | **自动工具调用** 允许模型自动决定是否调工具 | `（开关）` | 智能体用途必须开 |
+| `--tool-call-parser` | **工具调用解析器** 识别模型输出的工具语法转 JSON | `qwen3_xml` | 须匹配模型格式；Qwen 用 qwen3_xml |
+| `--reasoning-parser` | **思考链解析器** 把推理过程分离到独立字段 | `qwen3` | 开启思考模式时用 |
+| `--served-model-name` | ****  | `flash-next` |  |
+| `--host` | ****  | `0.0.0.0` |  |
+| `--port` | ****  | `8000` |  |
+| `--gpu-memory-utilization` | **显存利用率** 最多占多少显存 | `0.85` | 0.85 留 15% 防 OOM |
+| `--max-model-len` | **最大上下文长度** 单请求输入+输出上限 | `1048576` | 40960 日常；1M 超长文 |
+| `--max-num-seqs` | **最大并发路数** 同时解码上限，超出排队 | `8` | 8 路保证每路满血 |
+| `--max-num-batched-tokens` | **单步批量 token** 每计算步处理多少 token | `8192` | 8192 平衡预填吞吐与解码延迟 |
+| `--enable-chunked-prefill` | **分片预填** 长输入切小片不阻塞他人 | `（开关）` | 多用户必开 |
+| `--enable-prefix-caching` | **前缀缓存** 相同前缀 KV 复用加速多轮 | `（开关）` | 多轮对话必开 |
 
 **Benchmark 一 · 模型性能**（专属指标 + 性能测试期间的服务端指标；SLO: TTFT≤500ms 且 TPOT≤100ms）
 
@@ -196,7 +280,22 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 **① vLLM 完整启动参数**（逐 flag 原文，场景唯一定义源）
 
 ```bash
-vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 --tensor-parallel-size 2 --distributed-executor-backend ray --speculative-config {"method":"qwen4_exp_mtp","num_speculative_tokens":2} --enable-auto-tool-choice --tool-call-parser qwen3_xml --reasoning-parser qwen3 --served-model-name flash-next --host 0.0.0.0 --port 8000 --gpu-memory-utilization 0.85 --max-model-len 40960 --max-num-seqs 8 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching
+vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 \
+--tensor-parallel-size 2 \
+--distributed-executor-backend ray \
+--speculative-config {"method":"qwen4_exp_mtp","num_speculative_tokens":2} \
+--enable-auto-tool-choice \
+--tool-call-parser qwen3_xml \
+--reasoning-parser qwen3 \
+--served-model-name flash-next \
+--host 0.0.0.0 \
+--port 8000 \
+--gpu-memory-utilization 0.85 \
+--max-model-len 40960 \
+--max-num-seqs 8 \
+--max-num-batched-tokens 8192 \
+--enable-chunked-prefill \
+--enable-prefix-caching
 ```
 launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com", "GLOO_SOCKET_IFNAME": "enp1s0f1np1", "NCCL_SOCKET_IFNAME": "enp1s0f1np1", "RAY_memory_monitor_refresh_ms": "0"}` · 备注: qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)
 
@@ -215,6 +314,26 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 |---|---|
 | 启动 | 就绪 —s · KV容量 — tok · 最大并发 —× · cudagraph PIECEWISE · autotune True · max_num_seqs 64 |
 | 负载中峰值 | KV缓存占用 9.0% · 同时在跑请求 8 路（出现在随机输入吞吐测试（512入/256出，并发1/8/32） 并发8 时） |
+
+**参数逐项说明**
+
+| 参数 | 含义与作用 | 我们的值 | 为何这样设置 |
+|---|---|---|---|
+| `--tensor-parallel-size` | **张量并行** 把模型切成几份分到几张 GPU 上同时算 | `2` | TP=2 用满双机；TP=1 单机跑 |
+| `--distributed-executor-backend` | **分布式后端** 跨机通信框架 | `ray` | ray 是双机集群标准选择 |
+| `--speculative-config` | **投机解码(MTP)** 用模型 MTP 头预测多个 token 一次验证 | `{"method":"qwen4_exp_mtp","num_speculative_tokens":2}` | 模型自带 MTP 权重即可开；k=2 实测最优 |
+| `--enable-auto-tool-choice` | **自动工具调用** 允许模型自动决定是否调工具 | `（开关）` | 智能体用途必须开 |
+| `--tool-call-parser` | **工具调用解析器** 识别模型输出的工具语法转 JSON | `qwen3_xml` | 须匹配模型格式；Qwen 用 qwen3_xml |
+| `--reasoning-parser` | **思考链解析器** 把推理过程分离到独立字段 | `qwen3` | 开启思考模式时用 |
+| `--served-model-name` | ****  | `flash-next` |  |
+| `--host` | ****  | `0.0.0.0` |  |
+| `--port` | ****  | `8000` |  |
+| `--gpu-memory-utilization` | **显存利用率** 最多占多少显存 | `0.85` | 0.85 留 15% 防 OOM |
+| `--max-model-len` | **最大上下文长度** 单请求输入+输出上限 | `40960` | 40960 日常；1M 超长文 |
+| `--max-num-seqs` | **最大并发路数** 同时解码上限，超出排队 | `8` | 8 路保证每路满血 |
+| `--max-num-batched-tokens` | **单步批量 token** 每计算步处理多少 token | `8192` | 8192 平衡预填吞吐与解码延迟 |
+| `--enable-chunked-prefill` | **分片预填** 长输入切小片不阻塞他人 | `（开关）` | 多用户必开 |
+| `--enable-prefix-caching` | **前缀缓存** 相同前缀 KV 复用加速多轮 | `（开关）` | 多轮对话必开 |
 
 **Benchmark 一 · 模型性能**（专属指标 + 性能测试期间的服务端指标；SLO: TTFT≤500ms 且 TPOT≤100ms）
 
@@ -330,25 +449,37 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 ## Part C · 推荐（确定性规则推导，数值可回查）
 
-### 综合推荐 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
+### 综合推荐
 
+**推荐场景** `37bb1c1e`（Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)）——详见 Part B 对应场景的完整数据。
+
+**推荐理由**：
 - 综合分 0.900(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)
 - c32 出流 155.6 tok/s, c1 出流 41.1 tok/s, 三套件均分 0.943
 
-### 延迟敏感 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
+### 延迟敏感
 
+**推荐场景** `37bb1c1e`（Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)）——详见 Part B 对应场景的完整数据。
+
+**推荐理由**：
 - c1 TPOT p50 ms (越低越好): 22 vs 次优 29.28(Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M))
 - 差距: -7.279 (-24.9%)
 - 次优: Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)
 
-### 吞吐优先 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
+### 吞吐优先
 
+**推荐场景** `37bb1c1e`（Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)）——详见 Part B 对应场景的完整数据。
+
+**推荐理由**：
 - c32 出流 tok/s: 155.6 vs 次优 144.2(Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M))
 - 差距: +11.41 (+7.9%)
 - 次优: Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)
 
-### 能力优先 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
+### 能力优先
 
+**推荐场景** `37bb1c1e`（Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)）——详见 Part B 对应场景的完整数据。
+
+**推荐理由**：
 - 三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.9417(Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M))
 - 差距: +0.001667 (+0.2%)
 - 次优: Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)
