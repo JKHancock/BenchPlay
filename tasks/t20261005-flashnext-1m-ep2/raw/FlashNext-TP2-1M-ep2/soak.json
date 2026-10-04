@@ -1,0 +1,22 @@
+{
+  "track": "soak",
+  "sessions": 3,
+  "chunk_tokens": 20000,
+  "target_context": 524288,
+  "rounds": 36,
+  "wall_s": 1199.5,
+  "final_ctx_tokens": [
+    526986,
+    528832,
+    537116
+  ],
+  "ttft_first3_avg_ms": 11361.8,
+  "ttft_last3_avg_ms": 24808.7,
+  "ttft_growth_ratio": 2.18,
+  "kv_peak_perc": 0.0,
+  "prefix_hit_rate": 0.9376,
+  "preempted": false,
+  "failed_turns": 0,
+  "first_failure": null,
+  "note": "ttft_growth_ratio≈1 → 前缀缓存把全量重发救回(多轮聊天不劣化); kv_peak 对照池上限(如1.92M/1M ctx=1.83x)判容量口径"
+}

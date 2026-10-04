@@ -1,6 +1,6 @@
 # GX10 双机 vLLM 条件组合完整报告（契约 v4 场景化）
 
-**生成**: 确定性渲染自 `report_doc.json` | 2 机 × 10 场景 | 缺格 = —(未采集)
+**生成**: 确定性渲染自 `report_doc.json` | 2 机 × 11 场景 | 缺格 = —(未采集)
 
 **适用指纹**: vLLM `0.30.0` · 镜像 `sha256:91d9b077589e` · 驱动 `580.178.04` · ray `2.44.0` （2026-09-30T22:45:35 复核）——环境漂移即整体失效
 
@@ -374,6 +374,7 @@ Qwen4ExpForConditionalGeneration(  # 顶层: 条件生成(支持文+图输入)
 |---|---|---|---|---|---|---|---|---|---|---|
 | S9 | ✅已测 | ray-tp2-2node | TP2·2node MTP✓ ctx=1048576 工具✓ 关自调优 | 1,048,576 | 37.5 | 167.8 | 1,919,532 | 0.945 | 0.885 | 1.00 |
 | S10 | ✅已测 | ray-tp2-2node | TP2·2node MTP✓ ctx=40960 工具✓ 关自调优 | 40,960 | 33.9 | 121.2 | — | 0.955 | 0.895 | 1.00 |
+| S11 | ⚠partial | ray-tp2-2node | TP2·2node EP✓ MTP✓ ctx=1048576 工具✓ 关自调优 | 1,048,576 | — | — | — | — | — | — |
 | — | 不可行 | TP1 单机 | TP1 单机 | — | — | — | — | — | — | — | <br>**原因**: 权重132.6GB > 单机可用内存(121GB×0.85≈103GB), 物理装不下 |
 | — | 待测 | TP2 | TP2 + EP2 | — | — | — | — | — | — | — | <br>**原因**: 512专家架构EP理论可行, 双机规模收益未知(3.6实测EP2仅+0.7%单流-7%) |
 | — | 待测 | MTP k=3 | MTP k=3 | — | — | — | — | — | — | — | <br>**原因**: 单MTP层递归起草理论上支持, 接受率衰减风险 |
@@ -1994,6 +1995,94 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 ---
 
+### 场景 S11 · `6d45e79f` — Qwen3.8-Flash-Next-NVFP4（moe，230B/激活4B，NVFP4） [⚠partial:perf.w1/wsweep,perf.w2/w2s,cap.gsm8k]
+
+**① vLLM 完整启动参数**（逐 flag 原文，场景唯一定义源）
+
+```bash
+vllm serve /root/.cache/huggingface/Qwen3.8-Flash-Next-NVFP4 \
+--tensor-parallel-size 2 \
+--distributed-executor-backend ray \
+--enable-expert-parallel \
+--speculative-config {"method":"qwen4_exp_mtp","num_speculative_tokens":2} \
+--hf-overrides {"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}} \
+--kernel-config {"enable_flashinfer_autotune":false} \
+--enable-auto-tool-choice \
+--tool-call-parser qwen3_xml \
+--reasoning-parser qwen3 \
+--served-model-name flash-next \
+--host 0.0.0.0 \
+--port 8000 \
+--gpu-memory-utilization 0.85 \
+--max-model-len 1048576 \
+--max-num-seqs 8 \
+--max-num-batched-tokens 8192 \
+--enable-chunked-prefill \
+--enable-prefix-caching
+```
+launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com", "GLOO_SOCKET_IFNAME": "enp1s0f1np1", "NCCL_SOCKET_IFNAME": "enp1s0f1np1", "RAY_memory_monitor_refresh_ms": "0"}` · 备注: 2026-10-05 EP2 场景(1M+MTP2+EP, 其余与 1M 复测全同): 与 19f00a4e 差分=专家并行纯收益; soak 500Kx3 产品口径
+
+**② 部署拓扑与每机 ray 设置**
+
+- 模式: **ray-tp2-2node** · 数据面: QSFP直连 192.168.100.0/24（iface enp1s0f1np1）
+
+| machine_id | 角色 | ray 设置 | GPU 占用 |
+|---|---|---|---|
+| gx10-9f5c | head | `ray start --head --port=6379 --node-ip-address=192.168.100.10` env=`{"RAY_memory_monitor_refresh_ms": "0"}` 资源={"GPU": 1} | TP0/2 shard |
+| gx10-9c05 | worker | `ray start --address=192.168.100.10:6379 --node-ip-address=192.168.100.11` env=`{"RAY_memory_monitor_refresh_ms": "0"}` 资源={"GPU": 1} | TP1/2 shard |
+
+**运行环境与服务端基础**（启动态与主机负载采样；各段服务端指标随对应 Benchmark 展示）
+
+| 项 | 值 |
+|---|---|
+| 启动 | 就绪 —s · KV容量 — tok · 最大并发 —× · cudagraph PIECEWISE · autotune False · max_num_seqs 8 |
+
+**参数逐项说明**
+
+| 参数 | 含义与作用 | 我们的值 | 为何这样设置 |
+|---|---|---|---|
+| `--tensor-parallel-size` | **张量并行** 把模型切成几份分到几张 GPU 上同时算 | `2` | TP=2 用满双机；TP=1 单机跑 |
+| `--distributed-executor-backend` | **分布式后端** 跨机通信框架 | `ray` | ray 是双机集群标准选择 |
+| `--enable-expert-parallel` | **专家并行** MoE 专家分组到不同节点 | `（开关）` | MoE 双机可选；实测收益 <1% |
+| `--speculative-config` | **投机解码(MTP)** 用模型 MTP 头预测多个 token 一次验证 | `{"method":"qwen4_exp_mtp","num_speculative_tokens":2}` | 模型自带 MTP 权重即可开；k 取值以 M0 档案建议为准(1 与 2 均应实测) |
+| `--hf-overrides` | **模型配置覆写** 运行时覆盖上下文长度（YaRN 外拓） | `{"text_config":{"max_position_embeddings":1048576,"rope_scaling":{"rope_type":"yarn","factor":4.0,"original_max_position_embeddings":262144}}}` | 原生 262K 不够用时外拓到 1M |
+| `--kernel-config` | **内核配置** 控制 FlashInfer 自调优等 | `{"enable_flashinfer_autotune":false}` | 关闭自调优避免死锁，代价<1% |
+| `--enable-auto-tool-choice` | **自动工具调用** 允许模型自动决定是否调工具 | `（开关）` | 智能体用途必须开 |
+| `--tool-call-parser` | **工具调用解析器** 识别模型输出的工具语法转 JSON | `qwen3_xml` | 须匹配模型格式；Qwen 用 qwen3_xml |
+| `--reasoning-parser` | **思考链解析器** 把推理过程分离到独立字段 | `qwen3` | 开启思考模式时用 |
+| `--served-model-name` | ****  | `flash-next` |  |
+| `--host` | ****  | `0.0.0.0` |  |
+| `--port` | ****  | `8000` |  |
+| `--gpu-memory-utilization` | **显存利用率** 最多占多少显存 | `0.85` | 0.85 留 15% 防 OOM |
+| `--max-model-len` | **最大上下文长度** 单请求输入+输出上限 | `1048576` | 40960 日常；1M 超长文 |
+| `--max-num-seqs` | **最大并发路数** 同时解码上限，超出排队 | `8` | 8 路保证每路满血 |
+| `--max-num-batched-tokens` | **单步批量 token** 每计算步处理多少 token | `8192` | 8192 平衡预填吞吐与解码延迟 |
+| `--enable-chunked-prefill` | **分片预填** 长输入切小片不阻塞他人 | `（开关）` | 多用户必开 |
+| `--enable-prefix-caching` | **前缀缓存** 相同前缀 KV 复用加速多轮 | `（开关）` | 多轮对话必开 |
+
+**Benchmark 一 · 模型性能**（专属指标 + 性能测试期间的服务端指标；SLO: TTFT≤500ms 且 TPOT≤100ms）
+
+**Benchmark 二 · 模型能力**（专属指标 + 能力评测期间的服务端指标；统一口径 0-shot · temp=0 · n=200 · 并发8；除 MATH-500 开思考链（公开榜口径）外均关思考链）
+
+| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | 服端TTFTp99(s) | 服端TPOTp99(s) | 服端ITLp99(s) | 服端排队p99(s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| math500 | - | — | — | — | — | 缺: 未测(需 math500.jsonl) | — | — | — | — | — |
+| cmmlu | - | — | — | — | — | 缺: 未测(需 cmmlu CSV) | — | — | — | — | — |
+| ceval | - | — | — | — | — | 缺: 未测(需 ceval parquet) | — | — | — | — | — |
+| ifeval | - | — | — | — | — | 缺: 未测(需 ifeval.jsonl) | — | — | — | — | — |
+
+**Benchmark 三 · 智能体场景**（专属指标 + 智能体评测期间的服务端指标）
+
+| 智能体指标 | 数值 | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | 服端TTFTp99(s) | 服端TPOTp99(s) | 服端ITLp99(s) | 服端排队p99(s) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 工具选择（含不调用克制） | — | — | — | — | — | — | — | — | — | — |
+| 参数抽取 | — | — | — | — | — | — | — | — | — | — |
+| 多轮回环成功率 | — | — | — | — | — | — | — | — | — | — |
+
+证据目录: `tasks/t20260930-matrix-full/raw4/FlashNext-TP2-1M-ep2`
+
+---
+
 ## Part C · 推荐（确定性规则推导，数值可回查）
 
 ### 综合推荐
@@ -2037,6 +2126,8 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 **推荐理由**：
 - 单机场景中 c32 出流 431.1 tok/s 最高
+
+**未参评场景**: `6d45e79f`(partial: 缺 perf.w1/wsweep,perf.w2/w2s,cap.gsm8k,cap.mmlu)
 
 ---
 *本报告由契约 v4 渲染（schema 校验 + 推荐数值回查双门禁）；仅适用指纹匹配环境。*

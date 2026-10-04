@@ -1,0 +1,15 @@
+[10-05 00:04:28] FlashNext-TP2-1M 清场+ray完成, serve发起(132GB加载预计10-15min)...
+[10-05 00:13:16] FlashNext-TP2-1M serve就绪(约440s)
+[10-05 00:13:20] FlashNext-TP2-1M 四关全过, 电池开始
+[10-05 00:13:21] FlashNext-TP2-1M w1 开始
+[10-05 00:16:38] FlashNext-TP2-1M w2 开始
+[10-05 00:19:48] FlashNext-TP2-1M w3 开始
+[10-05 00:20:17] FlashNext-TP2-1M w4 开始
+[10-05 00:21:40] FlashNext-TP2-1M w5 开始
+[10-05 00:22:24] FlashNext-TP2-1M w6 开始
+[10-05 00:24:12] FlashNext-TP2-1M probes 开始
+[10-05 00:27:43] FlashNext-TP2-1M soak 开始(3路 x 500K)
+[10-05 00:27:44] FlashNext-TP2-1M soak FAIL
+[10-05 00:27:44] FlashNext-TP2-1M Track2 十二套件开始
+[10-05 01:53:19] FlashNext-TP2-1M Track3+BFCL 开始
+[10-05 02:02:33] FlashNext-TP2-1M DONE(全流程电池完成)

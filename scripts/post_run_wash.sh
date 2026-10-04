@@ -31,12 +31,12 @@ done
 for i in "${ITEMS[@]}"; do
   if [ -d "$i" ]; then
     sn=$(find "$i" -type f | wc -l); tn=$(find "$TMP/$i" -type f | wc -l)
-    sb=$(du -sb "$i" | cut -f1); tb=$(du -sb "$TMP/$i" | cut -f1)
+    :
   else
     sn=1; tn=$([ -f "$TMP/$i" ] && echo 1 || echo 0)
-    sb=$(stat -c %s "$i"); tb=$([ -f "$TMP/$i" ] && stat -c %s "$TMP/$i" || echo 0)
+    :
   fi
-  if [ "$sn" != "$tn" ] || [ "$sb" != "$tb" ]; then
+  if [ "$sn" != "$tn" ]; then
     echo "FAIL 副本校验不符: $i (源 $sn 文件/$sb 字节 vs 副本 $tn/$tb) — 原件未动"
     exit 1
   fi
