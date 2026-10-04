@@ -20,4 +20,7 @@ nul
 # 历史草稿
 /tmp_readme_old
 
+# reset_data.sh 的回收站(本地反悔用, 不入库)
+.reset_backup/
+
 # 注意: tasks/ 内的 *.log 是电池证据(serve/track/progress 日志), 有意纳入版本库, 勿加 *.log

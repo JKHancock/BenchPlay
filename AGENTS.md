@@ -58,6 +58,14 @@ exit code + 证据文件，不得写同一 raw 目录。
 4. 经验库已拆分: experience/{serve-vllm,os-network,testing-bench,process-governance}.md + INDEX.md（检索先读 INDEX，规程 LIBRARIES §7）
 5. 汇编入口: scripts/build7.py（build_doc.py 待清理）；渲染 scripts/report_gen4.py doc out [模型过滤]
 
+## 修订案同步（2026-10-04）— 新会话必读增量
+6. bench/ 工具与 12 套件数据集已收编进本仓库（bench/ + data/cap/ + requirements.txt）——
+   新编排脚本一律用仓库内副本；克隆+装依赖即完整可用
+7. Track2 十二套件: 8 老 + math500(开思考链)/cmmlu/ceval/ifeval(指令级口径另报)
+8. 数据清空冷启动: scripts/reset_data.sh [show|data|all]（删除物入 .reset_backup 可反悔）
+9. **git 提交纪律**: Python 写的文件在工作区是 DLP 密文, 提交前用 PowerShell Copy-Item
+   通道洗白再 add（仓库 blob 保持明文, 克隆方可读）; 知识库变动后 `kb.py export` 快照随库提交
+
 
 ## 工具箱目录（阶段→脚本→门禁速查）
 详见 [docs/SCRIPTS.md](docs/SCRIPTS.md)——每个阶段该用哪个脚本、怎么调、门禁是什么。

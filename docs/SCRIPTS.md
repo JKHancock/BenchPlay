@@ -62,8 +62,9 @@
 |---|---|---|
 | `scenario_index.py <doc>` | 场景→全局索引 jsonl | 幂等追加 |
 | `scenario_index.py -q "tp=2"` | 跨任务查询 | — |
-| `kb.py upsert/query` | 知识库 Qdrant 客户端 | 提名制 |
+| `kb.py upsert/query/export/rebuild` | 知识库 Qdrant 客户端（export=快照进 git，rebuild=从快照重建） | 提名制 |
 | `envfingerprint.sh <host>` | 环境指纹 | — |
+| `reset_data.sh show|data|all` | 数据清空冷启动（data=清实验记忆留经验库；all=全清+删Qdrant集合） | 删除物入 .reset_backup 可反悔 |
 
 ### 运维与诊断
 | 脚本 | 用法 | 场景 |
@@ -84,6 +85,6 @@
 
 1. **按阶段查此表选脚本**——不要凭记忆调脚本名
 2. **先看门禁列**——门禁不过不进下一步
-3. **cell4/5/6 是编排脚本**——它们内部调 serve/verify/bench 工具链
-4. **bench/ 工具在 `../Vllm_Benchmark/bench/`**——track1(性能) track2(能力) track2_extra(新四套) track3(智能体) bfcl(函数调用) probes(探针)
-5. **DLP 注意**：Python 写文件可能触发 DLP 加密；如遇"文件不可读"用 `wash.ps1` 洗白
+3. **cell4/5/6/7 是编排脚本**——它们内部调 serve/verify/bench 工具链
+4. **bench/ 工具与数据集已收编进本仓库**（`bench/` + `data/cap/`）——track1(性能) track2(能力12套) track2_extra(新四套) track3(智能体) bfcl(函数调用) probes(探针)；依赖 `pip install -r requirements.txt`。旧位置 `../Vllm_Benchmark/bench/` 仅作历史运行档案(cell7 前)的路径参考
+5. **DLP 注意**：Python 写文件可能触发 DLP 加密；**git 提交前先洗白**（Python 新写的 JSON/log 用 PowerShell Copy-Item 通道过一遍再 add，git 仓库内保持明文），如遇"文件不可读"用 `wash.ps1`

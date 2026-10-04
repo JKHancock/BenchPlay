@@ -23,6 +23,8 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 - **推理引擎**：OpenAI 兼容 API 的服务（以 vLLM 为主靶，容器化部署；参数体系覆盖 TP/EP/投机解码/上下文扩展/工具调用 parser 等）
 - **模型**：任意本地权重目录（HuggingFace 布局）；M0 阶段自动做能力画像（MTP/上下文/多模态/parser），无需预先了解模型
 - **操作机**：Windows + Git Bash（测试工具链为 Python，venv 独立）
+- **依赖安装**：`python -m venv .venv && .venv/Scripts/pip install -r requirements.txt`（requests/pyarrow/jsonschema/fastembed/streamlit，全在仓库内声明）；知识库另需本机 Qdrant（默认 `127.0.0.1:6333`，缺省时可跳过语义检索）
+- **跑分工具随库自带**：`bench/`（六轨跑分器）与 `data/cap/`（12 套件数据集）已收编进本仓库，**克隆即完整可用**，无外部代码依赖
 - **环境特定值**（IP、机型、镜像 digest 等）只出现在 machines/ 档案与任务目录，流程与文档保持通用
 
 
@@ -180,9 +182,11 @@ scripts/                              全部执行脚本（30 个，按阶段分
   运维: serve_demo/serve_demo27b(演示) wash.ps1(DLP洗白)
   配置: excluded_scenarios.json(不可行组合清单)
   legacy/                             已废弃脚本（7 个，保留供考古）
-bench/（位于 ../Vllm_Benchmark/）
-  track1.py(性能) track2.py(能力8套) track2_extra.py(新4套)
+bench/                                跑分工具（六轨, 克隆即带）【静态】
+  track1.py(性能) track2.py(能力12套,含4新套) track2_extra.py(新4套加载器/校验器)
   track3_agent.py(智能体) bfcl.py(函数调用) probes.py(探针) common.py(客户端/指标)
+data/cap/                             12 套件数据集（parquet/jsonl/csv, 克隆即带）【静态】
+requirements.txt                      Python 依赖声明【静态】
 machines/                             机器档案（每台一个 JSON）【动态】
 models/                               模型 M0 profile（首次 model_profile 后生成）【动态】
 experience/                           经验库（4 主题文件 + INDEX.md）【动态】
@@ -201,7 +205,7 @@ viewer/                               Streamlit 浏览器【静态】
 | `docs/*.md` | 静态·契约与绑定 | 维护者 | 同上 | ✓ |
 | `scripts/`（工具 + `excluded_scenarios.json` + `wash.ps1`） | 静态·工具 | 维护者 | 阶段/套件演进时 | ✓ |
 | `scripts/cell*.sh` | 静态·**运行档案** | 每次电池前创建一份，跑后只读不改 | 每个新场景/批次 | ✓ |
-| `../Vllm_Benchmark/bench/` | 静态·跑分工具 | 维护者 | 套件演进时 | 宿主仓库 |
+| `bench/` + `data/cap/` | 静态·跑分工具与 12 套件数据集 | 维护者 | 套件演进时 | ✓ |
 | `viewer/app.py` | 静态·浏览器 | 维护者 | — | ✓ |
 | `machines/<ip>.json` | 动态·机器档案 | Agent（阶段 1 清点，字段必绑证据） | 机器首次接入/复核 | ✓ |
 | `models/<name>.profile.json` | 动态·模型档案 | `model_profile.py`（M0 硬门禁） | 每模型首次 serve 前 | ✓ |
@@ -215,10 +219,12 @@ viewer/                               Streamlit 浏览器【静态】
 **规则**：静态文件定义"怎么做"，动态文件记录"做过了什么"。流程只读静态、只追加动态（`raw/` 落档后不改写，复测=新任务目录）。动态层（tasks/ + machines/ + models/ + experience/ + archive/ + reports/）是全部实验记忆；清空它们即回到"空库冷启动"，框架与工具无损。
 ## 10. 快速开始（人类操作员）
 
-1. **首次**：在目标集群就绪后，让任意 Agent 读 `AGENTS.md`，提供机器清单（`host|user|password|机型`）+ 模型清单 + 用途声明(chat/agent)
-2. **产出**：`tasks/<id>/report_<模型>.md` —— 按模型分组、每参数组合四指标集合、C/A-Score、带数值理由的推荐
-3. **验真**：报告任何数字可回溯 `raw/` 原始请求记录；`git log` 看版本
-4. **复跑**：所有编排脚本幂等，断点续跑安全
+1. **克隆即完整可用**：`git clone` 后 `python -m venv .venv && .venv/Scripts/pip install -r requirements.txt`——流程文档、门禁脚本、bench 跑分器、12 套件数据集全在仓库内；（可选）装好 Qdrant 并 `python scripts/kb.py rebuild` 复原知识库语义检索
+2. **首次**：在目标集群就绪后，让任意 Agent 读 `AGENTS.md`，提供机器清单（`host|user|password|机型`）+ 模型清单 + 用途声明(chat/agent)
+3. **产出**：`tasks/<id>/report_<模型>.md` —— 按模型分组、每参数组合四指标集合、C/A-Score、带数值理由的推荐
+4. **验真**：报告任何数字可回溯 `raw/` 原始请求记录；`git log` 看版本
+5. **复跑**：所有编排脚本幂等，断点续跑安全
+6. **清空数据（冷启动）**：`bash scripts/reset_data.sh show`（预览）→ `data`（清实验记忆：tasks/archive/machines/models/reports，经验库保留）或 `all`（再加经验库与 Qdrant 集合，全新冷启动；删除物移入 `.reset_backup/<时间戳>/` 可反悔；`archive/kb_snapshot.jsonl` 仍在 git，可随时 rebuild 复原知识库）
 
 
 ## 11. 红线与安全

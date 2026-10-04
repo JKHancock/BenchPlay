@@ -1,4 +1,4 @@
-# DLP 洗白导入: PowerShell Copy-Item 是本环境唯一实测解密通道(.NET/cmd 读到的是密文).
+﻿# DLP 洗白导入: PowerShell Copy-Item 是本环境唯一实测解密通道(.NET/cmd 读到的是密文).
 # 门禁: 每文件目标非空; 收尾 config.json 必须可解析为 JSON, 否则 FAIL.
 # 用法: powershell -File wash.ps1 -Source <源目录> -Target <目标目录>
 param(

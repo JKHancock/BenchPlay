@@ -1,0 +1,7 @@
+# BenchPlaybook 运行依赖 (python -m venv .venv && pip install -r requirements.txt)
+# bench/ 跑分工具 + scripts/ 汇编校验 + kb.py 知识库 + viewer/ 浏览器
+requests>=2.31        # bench HTTP 客户端
+pyarrow>=15           # 能力套件 parquet 数据集读取
+jsonschema>=4         # report_doc.json 契约校验(build_doc)
+fastembed>=0.3        # kb.py 向量嵌入(离线模型, 首次自动经 hf-mirror 下载)
+streamlit>=1.35       # viewer/ 三库浏览器(仅浏览时需要)
