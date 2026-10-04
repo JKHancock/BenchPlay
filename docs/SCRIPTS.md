@@ -49,13 +49,16 @@
 | `cell5.sh` | 1M 上下文场景电池 | 同上 |
 | `cell6.sh` | Flash-Next(qwen4_exp)专用电池(八套件时期) | 同上 |
 | `cell7.sh` | Flash-Next 12套件复测电池(关自调优, math500开思考链) | 同上 |
+| `cell8.sh` | DeepSeek-V4-Flash FP8 电池(首个仓库内venv+bench, 含soak+思考链探针) | 同上 |
+| `post_run_wash.sh` | 电池后洗白+git提交(Python产物过PowerShell通道) | blob明文 |
 | `matrix4.sh` | 多场景矩阵编排（调 cell4/5/6） | 全场景完成 |
 
 ### 阶段 7-8 · 汇编渲染
 | 脚本 | 用法 | 门禁 |
 |---|---|---|
 | `build7.py` | raw→report_doc.json（7场景版, 运行档案） | JSON Schema 校验 |
-| `build8.py` | **当前汇编入口**（8场景: +Flash-Next 12套件复测, argv 含 kernel-config） | JSON Schema 校验 |
+| `build8.py` | 8场景版(运行档案) | JSON Schema 校验 |
+| `build9.py` | **当前汇编入口**（9场景: +DeepSeek-V4-Flash FP8 首测, M0档案驱动） | JSON Schema 校验 |
 | `report_gen4.py <doc> [out] [模型过滤]` | 渲染 markdown 报告 | 推荐数值回查 |
 
 ### 阶段 9 · 沉淀

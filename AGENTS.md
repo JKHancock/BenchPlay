@@ -65,6 +65,10 @@ exit code + 证据文件，不得写同一 raw 目录。
 8. 数据清空冷启动: scripts/reset_data.sh [show|data|all]（删除物入 .reset_backup 可反悔）
 9. **git 提交纪律**: Python 写的文件在工作区是 DLP 密文, 提交前用 PowerShell Copy-Item
    通道洗白再 add（仓库 blob 保持明文, 克隆方可读）; 知识库变动后 `kb.py export` 快照随库提交
+10. Benchmark 一新增 soak 工作负载家族(bench/soak.py): N路持久会话增长到目标ctx,
+    逐轮采 TTFT增长比/KV峰/前缀命中/抢占点; cell8 起为电池标准步骤
+11. DeepSeek-V4-Flash FP8 首测(2026-10-04): cell8.sh 电池 + build9.py 汇编(当前入口) +
+    post_run_wash.sh 洗白提交, 全程由动态 workflow 归因回跳控制(AGENT-BINDING §并行加速 第0条的代码形态)
 
 
 ## 工具箱目录（阶段→脚本→门禁速查）
