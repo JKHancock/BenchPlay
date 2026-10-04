@@ -234,21 +234,64 @@ def main():
                 key=lambda s: s["model"]["name"])]
     _seq = []
     for gi, (mname, gs) in enumerate(_groups, 1):
-        L += [f"### 模型 {gi} · {mname}（{len(gs)} 个已测参数组合）", ""]
+        L += [f"### 模型 {gi} · {mname}", ""]
+
+        # ---- 场景卡片总表（已测+未测合并一行一卡）----
+        def _diff_summary(sc):
+            """提取该场景与其他场景的关键差异参数."""
+            diffs = []
+            a = sc["vllm_args"]
+            if "--enable-expert-parallel" in a: diffs.append("EP✓")
+            if "--speculative-config" in a: diffs.append("MTP✓")
+            ml = sc["vllm_args"][sc["vllm_args"].index("--max-model-len") + 1] if "--max-model-len" in a else "?"
+            diffs.append(f"ctx={ml}")
+            if "--tool-call-parser" in a: diffs.append("工具✓")
+            if "--kernel-config" in a: diffs.append("关自调优")
+            tp = a[a.index("--tensor-parallel-size") + 1] if "--tensor-parallel-size" in a else "?"
+            mode = sc.get("deployment", {}).get("mode", "?")
+            diffs.insert(0, f"TP{tp}·{mode.split("-")[-1] if "-" in mode else mode}")
+            return " ".join(diffs)
+
+        L += ["**场景卡片总览（每行一个场景，含已测与未测；差异列标出该组合的独特之处）：**", "",
+              "| # | 状态 | 集群 | 关键参数差异 | 上下文 | 单流 tok/s | c8 出流 | KV 池 | gsm8k | mmlu | 智能体 |",
+              "|---|---|---|---|---|---|---|---|---|---|---|"]
         try:
             import json as _j
             ex = _j.load(open(Path(__file__).parent / "excluded_scenarios.json", encoding="utf-8"))
-            rows = next((v for k, v in ex.items() if k in mname), [])
-            if rows:
-                L += ["**未测 / 不可行 / 已知失败的场景（含原因，同样是数据）：**", "",
-                      "| 参数/集群组合 | 状态 | 原因 | 证据 |", "|---|---|---|---|"]
-                for r in rows:
-                    L.append(f"| {r['combo']} | {r['status']} | {r['reason']} | {r['evidence']} |")
-                L.append("")
+            ex_rows = next((v for k, v in ex.items() if k in mname), [])
         except Exception:
-            pass
-        for sc in gs:
+            ex_rows = []
+        for j, sc in enumerate(gs, 1):
             _seq.append(sc)
+            lv = (sc.get("perf", {}).get("levels", {})) or \
+                 {("c%d" % p["concurrency"]): p for p in
+                  (sc.get("perf_metrics", {}).get("workloads", [{}])[0].get("levels", [])
+                   if sc.get("perf_metrics", {}).get("workloads") else [])}
+            c1 = lv.get("c1", {})
+            c8 = lv.get("c8", {})
+            st = sc["vllm_metrics"]["startup"]
+            caps = {c["suite_id"]: c["score"]["acc"] for c in sc["capability_scores"]["suites"] if c.get("score")}
+            ag = (sc.get("agent_metrics") or {}).get("metrics", {})
+            L.append(
+                f"| S{len(_seq)} | {'✅已测' if sc['status']=='complete' else '⚠'+sc['status']} "
+                f"| {sc['deployment']['mode']} "
+                f"| {_diff_summary(sc)} "
+                f"| {c(st.get('max_model_len'), '{:,.0f}')} "
+                f"| {c(c1.get('agg', {}).get('output_tok_s'))} "
+                f"| {c(c8.get('agg', {}).get('output_tok_s'))} "
+                f"| {c(st.get('kv_cache_tokens'), '{:,.0f}')} "
+                f"| {c(caps.get('gsm8k'), '{:.3f}')} "
+                f"| {c(caps.get('mmlu'), '{:.3f}')} "
+                f"| {c(ag.get('selection_acc'), '{:.2f}')} |")
+        for r in ex_rows:
+            L.append(f"| — | {r['status']} | {r['combo'].split('+')[0].strip()} "
+                     f"| {r['combo']} | — | — | — | — | — | — | — | "
+                     f"<br>**原因**: {r['reason'][:80]} |")
+        L.append("")
+
+        # ---- 逐场景详情 ----
+        for sc in gs:
+            pass  # 详情在下方 _seq 循环中输出
     for i, sc in enumerate(_seq, 1):
         md = sc["model"]
         st = sc["vllm_metrics"]["startup"]
