@@ -1,0 +1,17 @@
+{
+  "Qwen3.6-35B-A3B": [
+    {"combo": "TP2 + FlashInfer自调选开启", "status": "已知失败", "reason": "自调优跨会话确定性死锁(~33分钟EngineCore init fail), 对策=--kernel-config关闭(实测代价<1%)", "evidence": "experience/gb10.md 已缓解条目"},
+    {"combo": "TP1 + 1M(YaRN)", "status": "待测", "reason": "KV池5.9M可容纳5个满1M会话, 物理可行未排期", "evidence": "—"},
+    {"combo": "MTP k=1", "status": "待测", "reason": "k=2接受率75-82%, k=1收益更低预期不明显", "evidence": "—"}
+  ],
+  "Qwen3.8-27B": [
+    {"combo": "TP2 + EP2", "status": "不适用", "reason": "27B为稠密模型, 无专家可并行(EP仅对MoE有意义)", "evidence": "M0画像: 无专家权重"},
+    {"combo": "TP1 交互用途", "status": "不推荐(已测劣)", "reason": "单流11 tok/s(TPOT 90ms)低于交互体感阈值", "evidence": "场景06802822实测"},
+    {"combo": "TP1 + 1M", "status": "待测", "reason": "KV池1.94M仅够1.8个满1M会话, 实用性存疑", "evidence": "—"}
+  ],
+  "Qwen3.8-Flash-Next": [
+    {"combo": "TP1 单机", "status": "不可行", "reason": "权重132.6GB > 单机可用内存(121GB×0.85≈103GB), 物理装不下", "evidence": "M0画像: total 132.64GB"},
+    {"combo": "TP2 + EP2", "status": "待测", "reason": "512专家架构EP理论可行, 双机规模收益未知(3.6实测EP2仅+0.7%单流-7%)", "evidence": "—"},
+    {"combo": "MTP k=3", "status": "待测", "reason": "单MTP层递归起草理论上支持, 接受率衰减风险", "evidence": "M0: k_note"}
+  ]
+}
