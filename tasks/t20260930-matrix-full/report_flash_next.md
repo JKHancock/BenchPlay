@@ -173,7 +173,8 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 **Benchmark 三 · 智能体场景**（专属指标 + 智能体评测期间的服务端指标）
 
-（智能体评测原始结果见证据目录 agent.json / bfcl.json；本场景汇编字段待接入）
+- 工具选择 1.000 · 参数抽取 0.750 · 循环成功率 0.500
+- BFCL 函数调用：无关克制（该拒调时拒调）0.750 · 结构分（保守下界口径）0.930 · 用例数 n=8
 
 证据目录: `tasks/t20260930-matrix-full/raw4/FlashNext-TP2-1M`
 
@@ -298,7 +299,8 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 **Benchmark 三 · 智能体场景**（专属指标 + 智能体评测期间的服务端指标）
 
-（智能体评测原始结果见证据目录 agent.json / bfcl.json；本场景汇编字段待接入）
+- 工具选择 1.000 · 参数抽取 0.750 · 循环成功率 0.500
+- BFCL 函数调用：无关克制（该拒调时拒调）0.700 · 结构分（保守下界口径）0.930 · 用例数 n=8
 
 证据目录: `tasks/t20260930-matrix-full/raw4/FlashNext-TP2-40960`
 

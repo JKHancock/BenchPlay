@@ -287,8 +287,13 @@ def main():
                          f"{ton.get('completion_tokens', '—')}tok · "
                          f"关 {toff.get('wall_ms', '—')}ms/"
                          f"{toff.get('completion_tokens', '—')}tok")
+            bf = ag.get("bfcl") or {}
+            if bf.get("irrelevance") is not None or bf.get("simple") is not None:
+                L.append(f"- BFCL 函数调用：无关克制（该拒调时拒调）{c(bf.get('irrelevance'), '{:.3f}')} · "
+                         f"结构分（保守下界口径）{c(bf.get('simple'), '{:.3f}')} · "
+                         f"用例数 n={c(m.get('n'), '{:.0f}')}")
         else:
-            L.append("（智能体评测原始结果见证据目录 agent.json / bfcl.json；本场景汇编字段待接入）")
+            L.append("（本场景未采集智能体评测）")
         L.append("")
         L.extend(_emit_vllm(sc, ["phase:agent"], "智能体评测期间的服务端指标"))
         L.append(f"证据目录: `{sc['evidence']['raw_dir']}`")

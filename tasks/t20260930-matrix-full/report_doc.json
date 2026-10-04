@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-04T08:51:36",
+  "generated_at": "2026-10-04T09:10:39",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-flashnext/raw"
@@ -1671,6 +1671,19 @@
      }
     ]
    },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": null,
+     "args_acc": null,
+     "loop_success": null,
+     "n": null,
+     "n_loops": null
+    },
+    "bfcl": {
+     "irrelevance": null,
+     "simple": null
+    }
+   },
    "status": "complete",
    "missing": [],
    "evidence": {
@@ -3234,6 +3247,19 @@
       "missing_reason": "需可验证规则引擎(P2)"
      }
     ]
+   },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": null,
+     "args_acc": null,
+     "loop_success": null,
+     "n": null,
+     "n_loops": null
+    },
+    "bfcl": {
+     "irrelevance": null,
+     "simple": null
+    }
    },
    "status": "complete",
    "missing": [],
@@ -4800,6 +4826,19 @@
      }
     ]
    },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": null,
+     "args_acc": null,
+     "loop_success": null,
+     "n": null,
+     "n_loops": null
+    },
+    "bfcl": {
+     "irrelevance": null,
+     "simple": null
+    }
+   },
    "status": "complete",
    "missing": [],
    "evidence": {
@@ -6342,6 +6381,19 @@
       "missing_reason": "需可验证规则引擎(P2)"
      }
     ]
+   },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": null,
+     "args_acc": null,
+     "loop_success": null,
+     "n": null,
+     "n_loops": null
+    },
+    "bfcl": {
+     "irrelevance": null,
+     "simple": null
+    }
    },
    "status": "complete",
    "missing": [],
@@ -7886,6 +7938,19 @@
      }
     ]
    },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": null,
+     "args_acc": null,
+     "loop_success": null,
+     "n": null,
+     "n_loops": null
+    },
+    "bfcl": {
+     "irrelevance": null,
+     "simple": null
+    }
+   },
    "status": "complete",
    "missing": [],
    "evidence": {
@@ -9282,6 +9347,19 @@
       "missing_reason": "需可验证规则引擎(P2)"
      }
     ]
+   },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": null,
+     "args_acc": null,
+     "loop_success": null,
+     "n": null,
+     "n_loops": null
+    },
+    "bfcl": {
+     "irrelevance": null,
+     "simple": null
+    }
    },
    "status": "complete",
    "missing": [],
@@ -10890,6 +10968,19 @@
      }
     ]
    },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": 1.0,
+     "args_acc": 0.75,
+     "loop_success": 0.5,
+     "n": 8,
+     "n_loops": 2
+    },
+    "bfcl": {
+     "irrelevance": 0.75,
+     "simple": 0.93
+    }
+   },
    "status": "complete",
    "missing": [],
    "evidence": {
@@ -12494,6 +12585,19 @@
       "missing_reason": "需可验证规则引擎(P2)"
      }
     ]
+   },
+   "agent_metrics": {
+    "metrics": {
+     "selection_acc": 1.0,
+     "args_acc": 0.75,
+     "loop_success": 0.5,
+     "n": 8,
+     "n_loops": 2
+    },
+    "bfcl": {
+     "irrelevance": 0.7,
+     "simple": 0.93
+    }
    },
    "status": "complete",
    "missing": [

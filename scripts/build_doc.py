@@ -207,6 +207,16 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
 
     # capability
     cap = load(d / "cap.json") if (d / "cap.json").exists() else {"suites": {}}
+    agd = load(d / "agent.json") if (d / "agent.json").exists() else {}
+    am = agd.get("metrics", {}) if agd else {}
+    bfd = load(d / "bfcl.json") if (d / "bfcl.json").exists() else {}
+    bs = bfd.get("suites", {}) if bfd else {}
+    agent_metrics = {
+        "metrics": {k: am.get(k) for k in
+                    ("selection_acc", "args_acc", "loop_success", "n", "n_loops")},
+        "bfcl": {"irrelevance": (bs.get("bfcl_irrelevance") or {}).get("score"),
+                 "simple": (bs.get("bfcl_simple") or {}).get("score")},
+    }
     cap_suites = []
     for s, v in cap.get("suites", {}).items():
         cap_suites.append({"suite_id": s,
@@ -300,6 +310,7 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
                          "probes": probes and {"prefix_cache": probes["prefix_cache"],
                                                "capacity": probes["capacity"]}},
         "capability_scores": {"suites": cap_suites},
+        "agent_metrics": agent_metrics,
         "status": "complete" if p0_ok else "partial",
         "missing": missing,
         "evidence": {"raw_dir": f"tasks/t20260930-matrix-full/raw4/{tag}"},
