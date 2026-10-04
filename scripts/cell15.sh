@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 全流程电池: DeepSeek-V4-Flash NVFP4 (deepseek_v4, DSpark草稿: mtp.0/1/2+main_norm/main_proj+markov/confidence头)
+# 全流程电池: DS-V4-Flash NVFP4 EP2 场景(1M+MTP+专家并行, soak 500Kx3)
 # 场景: TP2+DSpark投机(dspark,k2)+原生1M+deepseek_v4工具parser+8路+batched8192, 关自调优
 # 注意: NVFP4版草稿是DSpark拓扑, 无enorm/hnorm/e_proj/h_proj, 必须用method=dspark(deepseek_mtp仅适用FP8版)
 # 电池: w1-w6+探针+Track2十二套件+soak(3x500K)+Track3+BFCL, 全程三时点metrics
@@ -116,3 +116,6 @@ snap "api" "metrics_agent_a.json"
 snap "api" "metrics_agent_b.json"
 ssh -n $SSHOPT $U@$H "docker exec vllm-node bash -c \"pkill -f 'nvidia-smi --query-gpu=utilization.gpu,memory.used' 2>/dev/null; true\"; docker exec vllm-node cat /tmp/hostsample.log 2>/dev/null | tail -3000; docker exec vllm-node bash -c 'rm -f /tmp/hostsample.log'" 2>/dev/null > "$OUT/host_head.log"
 log "DONE(全流程电池完成)"
+
+# 失败传播: 任何步骤 FAIL 必须让电池退出非零(2026-10-05 事故: soak FAIL 被吞, 电池假绿)
+if grep -q " FAIL" "$OUTBASE/progress.log"; then log "电池含FAIL标记, 判失败"; exit 1; fi

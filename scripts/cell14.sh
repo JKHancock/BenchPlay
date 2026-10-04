@@ -5,12 +5,12 @@
 # 输出: tasks/t20260930-flashnext-c12/raw/FlashNext-TP2-1M (同参数复测, 替换报告数据)
 set -u
 BP=/d/CSharpProject/BenchPlaybook
-CLI=/d/CSharpProject/Vllm_Benchmark
-PY=$CLI/python/.venv/Scripts/python.exe
-OUTBASE=$BP/tasks/t20260930-flashnext-c12/raw
+CLI=/d/CSharpProject/BenchPlaybook
+PY=$CLI/.venv/Scripts/python.exe
+OUTBASE=$BP/tasks/t20261005-flashnext-1m-ep2/raw
 H=192.168.199.129; H2=192.168.199.134; U=syspetro; API=http://$H:8000/v1
 SSHOPT="-o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10"
-tag=FlashNext-TP2-1M
+tag=FlashNext-TP2-1M-ep2
 OUT=$OUTBASE/$tag
 mkdir -p "$OUT"
 log(){ echo "[$(date +%m-%d\ %H:%M:%S)] $tag $*" | tee -a "$OUTBASE/progress.log"; }
@@ -63,7 +63,7 @@ done
 bash $BP/scripts/verify.sh $H 1 > "$OUT/verify.log" 2>&1 || { log "VERIFY-FAIL"; cat "$OUT/verify.log"; exit 1; }
 log "四关全过, 电池开始"
 snap(){ "$PY" - "$API" "$OUT/$2" <<'EOF'
-import sys; sys.path.insert(0, 'D:/CSharpProject/Vllm_Benchmark')
+import sys; sys.path.insert(0, 'D:/CSharpProject/BenchPlaybook')
 from bench.common import snapshot
 snapshot(sys.argv[1], sys.argv[2])
 EOF
@@ -101,3 +101,6 @@ snap "api" "metrics_agent_a.json"
 snap "api" "metrics_agent_b.json"
 ssh -n $SSHOPT $U@$H "docker exec vllm-node bash -c \"pkill -f 'nvidia-smi --query-gpu=utilization.gpu,memory.used' 2>/dev/null; true\"; docker exec vllm-node cat /tmp/hostsample.log 2>/dev/null | tail -3000; docker exec vllm-node bash -c 'rm -f /tmp/hostsample.log'" 2>/dev/null > "$OUT/host_head.log"
 log "DONE(全流程电池完成)"
+
+# 失败传播: 任何步骤 FAIL 必须让电池退出非零(2026-10-05 事故: soak FAIL 被吞, 电池假绿)
+if grep -q " FAIL" "$OUTBASE/progress.log"; then log "电池含FAIL标记, 判失败"; exit 1; fi
