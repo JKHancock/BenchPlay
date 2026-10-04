@@ -222,8 +222,8 @@ def main():
         _vocab = 248320 if "Flash" in mn else 152064
         _arch = "Qwen4ExpForConditionalGeneration" if "Flash" in mn else "Qwen3_5MoeForConditionalGeneration" if _e else "Qwen3_5ForCausalLM"
         L.append("")
-        if not ("Flash" in mn or "Qwen" in mn):
-            # 结构树生成器仅覆盖 Qwen 系——其他模型如实标注并指向 M0 档案, 不渲染假树
+        if "qwen" not in mn.lower():
+            # 结构树生成器仅覆盖 Qwen 系(deepseek 名字含 Flash 字样, 必须按品牌判断)
             L.append(f"**模型结构树**：本渲染器当前仅覆盖 Qwen 系结构推导；`{mn}`（{md.get('quant','')}）"
                      f"的逐层结构、MTP/专家/KV 形态以 M0 权重档案为准：`models/{mn}.profile.json`"
                      f"（MLA 单 KV 头、{arch.get('params_b','?')}B 总参/激活 {arch.get('active_b','?')}B 等关键事实见上表）。")

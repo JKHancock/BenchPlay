@@ -237,58 +237,8 @@ Qwen4ExpForConditionalGeneration(  # 顶层: 条件生成(支持文+图输入)
 | 上下文 | 原生 1,048,576 | 原生即部署上限
 | 权重量 | 159.6 GB | 双机 TP2 各持 79.8 GB，剩余给 KV 缓存
 
-**模型结构树（print(model) 等效，由 M0 权重文件逐名推导）：**
-```python
-# ── 模型结构: 每行注释说明该组件做什么、对推理性能/能力的影响 ──
-Qwen4ExpForConditionalGeneration(  # 顶层: 条件生成(支持文+图输入)
-  (model): Qwen4ExpModel(
-    (embed_tokens): Embedding(248320, 2560)  # 词嵌入: 248320个token→2560维向量; 词表越大中文/代码覆盖越好
-    (layers): ModuleList(
-      (0-47): 48 x DecoderLayer(  # 48层堆叠; 每层=注意力+FFN+归一化
-        (linear_attn): GatedDeltaNet(  # 线性注意力(Mamba/GDN系)
-          (in_proj_qkv): Linear  # 输入投影: 把token映射到QKV空间
-          (conv1d): Conv1d  # 1D卷积做局部上下文感知
-          (A_log): Parameter  # 状态衰减系数(决定'记忆'多长)
-          (dt_bias): Parameter  # 时间步偏置
-          (out_proj): Linear  # 输出投影回隐藏维
-        )  # ← 复杂度O(n)不看全历史, 但状态是滚动的→前缀缓存粒度由检查点间隔决定
-        (self_attn): Attention(  # 标准自注意力: 每个token'看'所有前文
-          (q_proj): Linear(2560, 2560)  # Query: 24个头, 每个106维; 决定'我在找什么'
-          (k_proj): Linear(2560, 213)  # Key: 仅2个KV头(GQA)→KV缓存缩小12倍
-          (v_proj): Linear(2560, 213)  # Value: 同KV头数; 存'我找到了什么'
-          (o_proj): Linear(2560, 2560)  # 输出: 拼接所有头的结果投影回去
-          (rotary_emb): RotaryEmbedding()  # 位置编码: 让模型知道token的先后顺序
-        )  # ← 复杂度O(n²); KV头越少, 推理时能缓存的上下文越多
-        (mlp): MoE(  # 混合专家FFN: 并非所有参数都参与计算
-          (gate): Linear(2560, 512)  # 路由器: 给每个token打分, 选最相关的10个专家
-          (experts): ModuleList(512 x Expert(  # 512个独立FFN
-            (gate_proj): Linear(2560, 640)  # 升维: 2560→640 (SwiGLU的gate分支)
-            (up_proj): Linear(2560, 640)  # 升维: 2560→640 (SwiGLU的up分支)
-            (down_proj): Linear(640, 2560)  # 降维: 640→2560 (输出)
-          ))  # ← 每 token 仅激活 10/512 (1%): 省算力但全量权重都驻显存
-        )
-        (input_layernorm): RMSNorm()  # 注意力前归一化: 稳定数值分布
-        (post_attention_layernorm): RMSNorm()  # FFN前归一化
-      )
-    )
-    (norm): RMSNorm()  # 最终层归一化
-  )
-  (lm_head): Linear(2560, 248320, bias=False)  # 输出层: 隐藏向量→248320个token的概率分布
-  (mtp): MTPHead(  # 投机解码头(MTP): 一次预测多个token再由主模型验证
-    (fc): Linear(2560, 5120)  # 投影: 把当前隐状态映射到MTP空间
-    (layers): ModuleList(1 x DecoderLayer(...))  # 单层递归起草: 同一层反复调用k次
-  )  # ← 加速幅度以服务端·投机接受率·指标为准(经验库参考: 同集群 Flash-Next 接受率 60-83%)
-  (visual): VisionTower(  # 视觉编码器(ViT): 把图片转为token序列
-    (patch_embed): Conv2d  # 图片切块→初始特征(如14×14像素块)
-    (blocks): ModuleList(N x VisionBlock())  # 视觉Transformer层: 提取图像特征
-  )  # ← 使模型能看图回答; 图片折算~146 token/张, 预填开销极小
-)
-#
-# 总参数: ~160B | 权重: 159.6GB (NVFP4=4bit浮点+两级缩放)
-# 层数: 48 | 隐藏维: 2560 | 注意力: 24头(查询)/2头(KV缓存) | 词表: 248320
-# 专家: 512个(每token激活10个) → 单token计算量≈6B参数的稠密模型
-# KV缓存: 每token每层约占424字节(仅2个KV头) → 双机可缓存数百万token
-```
+**模型结构树**：本渲染器当前仅覆盖 Qwen 系结构推导；`DeepSeek-V4-Flash-fp8`（FP8）的逐层结构、MTP/专家/KV 形态以 M0 权重档案为准：`models/DeepSeek-V4-Flash-fp8.profile.json`（MLA 单 KV 头、160B 总参/激活 6B 等关键事实见上表）。
+
 
 | 项 | 值 | 解读 |
 |---|---|---|
