@@ -69,6 +69,8 @@ exit code + 证据文件，不得写同一 raw 目录。
     逐轮采 TTFT增长比/KV峰/前缀命中/抢占点; cell8 起为电池标准步骤
 11. DeepSeek-V4-Flash FP8 首测(2026-10-04): cell8.sh 电池 + build9.py 汇编(当前入口) +
     post_run_wash.sh 洗白提交, 全程由动态 workflow 归因回跳控制(AGENT-BINDING §并行加速 第0条的代码形态)
+12. **电池监工**(2026-10-04): 长电池运行期间跑独立监工 workflow(子智能体 15min 周期 foreman.sh,
+    分级 0/3/4; 只诊断不动手, 见 DONE 撤岗); 必须用 IDE 无关原语实现, 禁止宿主私有定时器
 
 
 ## 工具箱目录（阶段→脚本→门禁速查）

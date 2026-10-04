@@ -109,6 +109,7 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 7. **Track3 智能体**（bench/track3_agent.py + bench/bfcl.py）：工具选择（含不调用克制）/参数抽取/多轮回环/循环时延；BFCL v3（irrelevance 精确分、simple 结构分下界——HF 版真值脱敏如实标注）；思考链 on/off A/B
 8. **三时点 metrics**：每相位 idle→after 差值（vLLM 0.30 计数器名勘误在案：request_success_total{finished_reason}等）+ 每机 nvidia-smi 负载中采样
 9. **落档**：`tasks/<id>/raw/<场景>/`（serve/startup/w*.json/probes/cap/agent/bfcl/per-request 明细/host 采样）
+10. **电池监工**（长电池标配）：电池运行期间由**独立监工工作流**并发驻扎——"监工"子智能体每 15 分钟跑 `scripts/foreman.sh`（失败标记→服务存活→60s 双采样活性，分级退出码 0/3/4），异常只诊断上报不动手（归因回跳归电池自身的控制器，双控制器不打架），见 DONE 自动撤岗。实现必须是 workflow+子智能体等 IDE 无关原语，禁止宿主私有定时器
 
 **执行加速（宿主 IDE 并行编排，强烈建议用满）**：电池本身受 GPU 互斥天然串行（一个 vLLM 实例一次只测一组服务参数），但 M0 模型画像分析、数据集准备、电池后处理（汇编/渲染/索引/经验提炼）、报告分章写作均无资源冲突，可并行。ZCode 用动态 workflow（CreateWorkflow，子智能体 fan-out + 控制流护栏）；Claude Code 用并行 Task 子智能体 + hooks 验退出码；Codex 用并行 cloud task；OpenCode 用 subagent 并发。红线：子智能体产出仍必须是 exit code + 证据文件，不得写同一 raw 目录。映射表详见 `docs/AGENT-BINDING.md` §并行加速。
 
