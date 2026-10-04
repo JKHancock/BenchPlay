@@ -203,32 +203,22 @@ launch_env: `{"CUTE_DSL_ARCH": "sm_121a", "HF_ENDPOINT": "https://hf-mirror.com"
 
 ## Part C · 推荐（确定性规则推导，数值可回查）
 
-### 综合推荐 → **Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)**（`e64080d1`）
+### 综合推荐 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
 
-- 综合分 0.591(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)
-- c32 出流 768.1 tok/s, c1 出流 121.4 tok/s, 三套件均分 0.915
+- 综合分 0.000(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)
+- c32 出流 155.6 tok/s, c1 出流 41.1 tok/s, 三套件均分 0.943
 
-### 延迟敏感 → **Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)**（`e64080d1`）
+### 延迟敏感 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
 
-- c1 TPOT p50 ms (越低越好): 7.774 vs 次优 10.82(Qwen3.6-35B-A3B-NVFP4-Fast(TP2))
-- 差距: -3.05 (-28.2%)
-- 次优: Qwen3.6-35B-A3B-NVFP4-Fast(TP2)
+- c1 TPOT p50 ms (越低越好): 22
 
-### 吞吐优先 → **Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)**（`e64080d1`）
+### 吞吐优先 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
 
-- c32 出流 tok/s: 768.1 vs 次优 615.4(Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP))
-- 差距: +152.7 (+24.8%)
-- 次优: Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP)
+- c32 出流 tok/s: 155.6
 
 ### 能力优先 → **Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)**（`37bb1c1e`）
 
-- 三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.92(Qwen3.8-27B-NVFP4(TP2))
-- 差距: +0.02333 (+2.5%)
-- 次优: Qwen3.8-27B-NVFP4(TP2)
-
-### 单机约束(无集群) → **Qwen3.6-35B-A3B-NVFP4-Fast(TP1)**（`c82510df`）
-
-- 单机场景中 c32 出流 431.1 tok/s 最高
+- 三套件(gsm8k/mmlu/arc)均分: 0.9433
 
 **未参评场景**: `8e8992ea`(partial: 缺 perf.w1/wsweep,perf.w2/w2s,cap.gsm8k,cap.mmlu)
 
