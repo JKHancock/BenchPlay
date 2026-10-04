@@ -422,7 +422,10 @@ def recommend(scs):
     def label_of(s):
         tp = s['vllm_args'][s['vllm_args'].index('--tensor-parallel-size') + 1]
         ep = "+EP" if '--enable-expert-parallel' in s['vllm_args'] else ''
-        mtp = "+MTP2+1M" if '--speculative-config' in s['vllm_args'] else ''
+        _av = s["vllm_args"]
+        _ml = _av[_av.index("--max-model-len") + 1] if "--max-model-len" in _av else "?"
+        _ctx = ("1M" if int(_ml) >= 1048576 else ("40960" if _ml == "40960" else _ml))
+        mtp = ("+MTP2+" + _ctx) if "--speculative-config" in _av else ("+" + _ctx)
         return f"{s['model']['name']}(TP{tp}{ep}{mtp})"
 
     # 综合分(显式权重, 逐场景计算)
