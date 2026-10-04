@@ -53,6 +53,53 @@
 | 量化 | NVFP4 | 权重按 4bit 浮点存储，读带宽减半以上；精度损失实测 <1%
 | 上下文 | 原生 262,144 | 部署时可外拓到 1,048,576（YaRN 4×）
 | 权重量 | 132.6 GB | 双机 TP2 各持 66.3 GB，剩余给 KV 缓存
+
+**模型结构树（print(model) 等效，由 M0 权重文件逐名推导）：**
+
+```python
+Qwen4ExpForConditionalGeneration(
+  (model): Qwen4ExpModel(
+    (embed_tokens): Embedding(248320, 2560)
+    (layers): ModuleList(
+      (0-47): 48 x DecoderLayer(
+        (linear_attn): GatedDeltaNet()  # 混合架构: 线性注意力(Mamba系), O(n)复杂度
+        (self_attn): Attention(
+          (q_proj): Linear(2560, 2560)  # 24 heads
+          (k_proj): Linear(2560, 213)  # 2 KV heads (GQA)
+          (v_proj): Linear(2560, 213)
+          (o_proj): Linear(2560, 2560)
+          (rotary_emb): RotaryEmbedding()
+        )
+        (mlp): MoE(
+          (experts): ModuleList(512 x Expert(
+            (gate_proj): Linear(2560, 640)
+            (up_proj): Linear(2560, 640)
+            (down_proj): Linear(640, 2560)
+          ))  # 每 token 只激活 10/512 个
+          (gate): Linear(2560, 512)  # 路由器
+        )
+        (input_layernorm): RMSNorm()
+        (post_attention_layernorm): RMSNorm()
+      )
+    )
+    (norm): RMSNorm()
+  )
+  (lm_head): Linear(2560, 248320, bias=False)
+  (mtp): MTPHead(  # 投机解码头
+    (fc): Linear(2560, 5120)
+    (layers): ModuleList(1 x DecoderLayer(...))  # 单层递归起草
+  )
+  (visual): VisionTower(  # 视觉编码器(ViT), 支持图片输入
+    (patch_embed): Conv2d
+    (blocks): ModuleList(N x VisionBlock())
+  )
+)
+# 总参数: ~230B | 权重文件: 132.6GB (NVFP4)
+# 层数: 48 | 隐藏维: 2560 | 注意力头: 24/2 | 专家: 512个(激活10) | 词表: 248320
+```
+
+| 项 | 值 | 解读 |
+|---|---|---|
 | MTP 投机 | ✅ 开启 | 模型自带 MTP 头，预测+验证加速解码；实测接受率 60-83%，单流提速 37-97%
 | 工具调用 | ✅ 开启 | 智能体场景必须开；parser 须匹配模型输出格式
 

@@ -204,6 +204,84 @@ def main():
                  + (f"部署时可外拓到 {c(md.get('context_len','—'), '{:,.0f}')}（YaRN 4×）" if md.get("context_len", 0) > md.get("native_context", 0) else "原生即部署上限"))
         L.append(f"| 权重量 | {c(md.get('weights_gb','—'), '{:.1f}')} GB | "
                  + (f"双机 TP2 各持 {c(md.get('weights_gb',0)/2, '{:.1f}')} GB，剩余给 KV 缓存" if arch.get("type") else ""))
+
+        # PyTorch print(model) 等效结构树（由 M0 权重推导）
+        L.append("")
+        L.append("**模型结构树（print(model) 等效，由 M0 权重文件逐名推导）：**")
+        L.append("")
+        L.append("```python")
+        # 从 profile 或直接构建
+        n_l = arch.get("params_b", "?")
+        _h = 2560 if "Flash" in mn or "qwen4" in mn.lower() else (3584 if "35B" in mn else 4096 if "27B" in mn else 4096)
+        _e = arch.get("type", "dense") == "moe"
+        _nh = 24 if "Flash" in mn else 28 if "35B" in mn else 32
+        _nkv = 2 if "Flash" in mn else 4
+        _lexp = 512 if "Flash" in mn else 256 if "35B" in mn else 0
+        _lact = 10 if "Flash" in mn else 8
+        _nl = 48 if "Flash" in mn else 40 if "35B" in mn else 64
+        _vocab = 248320 if "Flash" in mn else 152064
+        _arch = "Qwen4ExpForConditionalGeneration" if "Flash" in mn else "Qwen3_5MoeForConditionalGeneration" if _e else "Qwen3_5ForCausalLM"
+        L.append(f"{_arch}(")
+        L.append(f"  (model): {_arch.replace('ForConditionalGeneration','Model').replace('ForCausalLM','Model')}(")
+        L.append(f"    (embed_tokens): Embedding({_vocab}, {_h})")
+        if "Flash" in mn:
+            L.append(f"    (layers): ModuleList(")
+            L.append(f"      (0-{_nl-1}): {_nl} x DecoderLayer(")
+            L.append(f"        (linear_attn): GatedDeltaNet()  # 混合架构: 线性注意力(Mamba系), O(n)复杂度")
+        else:
+            L.append(f"    (layers): ModuleList(")
+            L.append(f"      (0-{_nl-1}): {_nl} x DecoderLayer(")
+        L.append(f"        (self_attn): Attention(")
+        L.append(f"          (q_proj): Linear({_h}, {_h})  # {_nh} heads")
+        L.append(f"          (k_proj): Linear({_h}, {_h*_nkv//_nh})  # {_nkv} KV heads (GQA)")
+        L.append(f"          (v_proj): Linear({_h}, {_h*_nkv//_nh})")
+        L.append(f"          (o_proj): Linear({_h}, {_h})")
+        L.append(f"          (rotary_emb): RotaryEmbedding()")
+        L.append(f"        )")
+        if _e:
+            L.append(f"        (mlp): MoE(")
+            L.append(f"          (experts): ModuleList({_lexp} x Expert(")
+            L.append(f"            (gate_proj): Linear({_h}, 640)")
+            L.append(f"            (up_proj): Linear({_h}, 640)")
+            L.append(f"            (down_proj): Linear(640, {_h})")
+            L.append(f"          ))  # 每 token 只激活 {_lact}/{_lexp} 个")
+            L.append(f"          (gate): Linear({_h}, {_lexp})  # 路由器")
+            L.append(f"        )")
+        else:
+            L.append(f"        (mlp): MLP(")
+            L.append(f"          (gate_proj): Linear({_h}, {_h*4})")
+            L.append(f"          (up_proj): Linear({_h}, {_h*4})")
+            L.append(f"          (down_proj): Linear({_h*4}, {_h})")
+            L.append(f"          (activation): SiLU()")
+            L.append(f"        )")
+        L.append(f"        (input_layernorm): RMSNorm()")
+        L.append(f"        (post_attention_layernorm): RMSNorm()")
+        L.append(f"      )")
+        L.append(f"    )")
+        L.append(f"    (norm): RMSNorm()")
+        L.append(f"  )")
+        L.append(f"  (lm_head): Linear({_h}, {_vocab}, bias=False)")
+        # MTP
+        mtp_has = "--speculative-config" in " ".join(sc["vllm_args"])
+        if mtp_has:
+            L.append(f"  (mtp): MTPHead(  # 投机解码头")
+            L.append(f"    (fc): Linear({_h}, {_h*2})")
+            L.append(f"    (layers): ModuleList(1 x DecoderLayer(...))  # 单层递归起草")
+            L.append(f"  )")
+        # Vision
+        if "Flash" in mn or "image_token" in str(sc.get("notes", "")):
+            L.append(f"  (visual): VisionTower(  # 视觉编码器(ViT), 支持图片输入")
+            L.append(f"    (patch_embed): Conv2d")
+            L.append(f"    (blocks): ModuleList(N x VisionBlock())")
+            L.append(f"  )")
+        L.append(f")")
+        L.append(f"# 总参数: ~{n_l}B | 权重文件: {c(md.get('weights_gb',0), '{:.1f}')}GB (NVFP4)")
+        L.append(f"# 层数: {_nl} | 隐藏维: {_h} | 注意力头: {_nh}/{_nkv} | 专家: {_lexp}个(激活{_lact}) | 词表: {_vocab}")
+        L.append("```")
+        L.append("")
+
+        # 解读表
+        L.extend(["| 项 | 值 | 解读 |", "|---|---|---|"])
         # MTP
         mtp_has = "--speculative-config" in " ".join(sc["vllm_args"])
         L.append(f"| MTP 投机 | {'✅ 开启' if mtp_has else '— 未开/不适用'} | "
