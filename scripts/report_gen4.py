@@ -160,8 +160,8 @@ def main():
          f"驱动 `{doc['meta']['fingerprint']['driver']}` · ray `{doc['meta']['fingerprint']['ray']}` "
          f"（{doc['meta']['fingerprint']['recorded_at']} 复核）——环境漂移即整体失效", ""]
 
-    # ---------- Part A ----------
-    L += ["## Part A · 机器环境清单（先于一切数据）", ""]
+    # ---------- Part A: 环境与导读 ----------
+    L += ["## Part A · 集群环境与模型档案（先于一切测试数据）", ""]
     for m in doc["machines"]:
         h, s = m["hardware"], m["software"]
         L.append(f"### {m['alias']}（machine_id: `{m['machine_id']}`）")
@@ -182,8 +182,54 @@ def main():
               f"ray {s['container']['ray_ver']} · py {s['container']['python_ver']}） |"]
         L.append("")
 
-    # ---------- 评测导读 ----------
-    L += ["## 评测导读（每个数字是什么意思）", ""]
+    # ---- 模型结构解读（M0 产物的 human-readable 版）----
+    L += ["### 模型档案（M0 调研产物：结构解读 + 专用参数 + 避坑）", ""]
+    _seen_models = set()
+    for sc in doc["scenarios"]:
+        mn = sc["model"]["name"]
+        if mn in _seen_models:
+            continue
+        _seen_models.add(mn)
+        md = sc["model"]
+        L.append(f"#### {mn}")
+        L.append("")
+        L.extend(["| 项 | 值 | 解读 |", "|---|---|---|"])
+        arch = md.get("arch", {})
+        L.append(f"| 架构 | {arch.get('type','—')} | "
+                 + ("混合架构：部分层用线性注意力（Mamba/GDN），部分用标准注意力——前缀缓存粒度由 Mamba 检查点决定" if arch.get("type") == "moe" else "标准 Transformer"))
+        L.append(f"| 参数量 | {arch.get('params_b','—')}B（激活 {arch.get('active_b','—')}B） | "
+                 + (f"每 token 只激活 {arch.get('active_b','—')}B（{arch.get('active_b',0)*100//max(arch.get('params_b',1),1)}%），其余休眠——MoE 省算力但费显存" if arch.get("type") == "moe" else "全参数激活——每 token 都要读完整模型"))
+        L.append(f"| 量化 | {md.get('quant','—')} | 权重按 4bit 浮点存储，读带宽减半以上；精度损失实测 <1%")
+        L.append(f"| 上下文 | 原生 {c(md.get('native_context','—'), '{:,.0f}')} | "
+                 + (f"部署时可外拓到 {c(md.get('context_len','—'), '{:,.0f}')}（YaRN 4×）" if md.get("context_len", 0) > md.get("native_context", 0) else "原生即部署上限"))
+        L.append(f"| 权重量 | {c(md.get('weights_gb','—'), '{:.1f}')} GB | "
+                 + (f"双机 TP2 各持 {c(md.get('weights_gb',0)/2, '{:.1f}')} GB，剩余给 KV 缓存" if arch.get("type") else ""))
+        # MTP
+        mtp_has = "--speculative-config" in " ".join(sc["vllm_args"])
+        L.append(f"| MTP 投机 | {'✅ 开启' if mtp_has else '— 未开/不适用'} | "
+                 + ("模型自带 MTP 头，预测+验证加速解码；实测接受率 60-83%，单流提速 37-97%" if mtp_has else "模型无 MTP 权重或未开启"))
+        # 工具调用
+        tool_has = "--tool-call-parser" in " ".join(sc["vllm_args"])
+        L.append(f"| 工具调用 | {'✅ 开启' if tool_has else '— 未开'} | "
+                 + ("智能体场景必须开；parser 须匹配模型输出格式" if tool_has else "纯对话场景可不开"))
+        L.append("")
+
+        # 已知坑（从经验库/调研提取，关联此模型）
+        L.append("**专用参数与避坑**：")
+        L.append("")
+        notes = sc.get("notes", "")
+        if notes:
+            for n in notes.split(" | "):
+                n = n.strip()
+                if n:
+                    L.append(f"- {n}")
+        if mtp_has and "qwen4" in str(sc["vllm_args"]):
+            L.append("- **YaRN 外拓配方**：vLLM 0.30 对 yarn 故意不乘 factor——必须直接写目标 `max_position_embeddings` 到 `hf-overrides` 的 `text_config` 里，且须保留原 mrope/partial 字段")
+            L.append("- **FlashInfer 自调优**：跨会话 serve 时确定性死锁 ~33min——用 `--kernel-config {\"enable_flashinfer_autotune\":false}` 关闭，实测代价 <1%，就绪从 33min → 150s")
+        L.append("")
+
+    # ---------- 评测导读（归入 Part A 尾部）----------
+    L += ["本报告使用以下评测体系，每个数字的含义如下：", ""]
     L += ["### 性能指标", "",
           "| 指标 | 含义 | 如何测量 | 分数说明 |",
           "|---|---|---|---|",
