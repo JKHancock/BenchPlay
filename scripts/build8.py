@@ -12,6 +12,10 @@ B.MODELS["Qwen3.8-Flash-Next-NVFP4"] = {"quant": "NVFP4", "type": "moe", "params
 
 RAW_1M = "D:/CSharpProject/BenchPlaybook/tasks/t20260930-flashnext-c12/raw"
 RAW_40K = "D:/CSharpProject/BenchPlaybook/tasks/t20261003-overnight"
+# build_doc.scenario() 内部对 FlashNext 标签硬编码走 RAW2(1M)/overnight(40960) —
+# 直接改写 RAW2 指向本次复测目录(设 B.RAW 无效, 该函数不看它)
+from pathlib import Path as _P
+B.RAW2 = _P(RAW_1M)
 
 
 def fn_argv(max_len):
