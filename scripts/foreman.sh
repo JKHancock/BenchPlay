@@ -34,7 +34,8 @@ if echo "$tail5" | grep -qE "FAIL|未归零|超时"; then
   echo "[FAIL] progress.log 含失败标记:"; echo "$tail5" | tail -3; exit 4
 fi
 # 2) 服务存活(电池未完但 8000 无监听)
-p=$(ssh -n $SSHOPT syspetro@$H "ss -ltn 2>/dev/null | grep -c ':8000 '" 2>/dev/null || echo 0)
+p=$(ssh -n $SSHOPT syspetro@$H "ss -ltn 2>/dev/null | grep -c ':8000 ' || true" 2>/dev/null)
+p=$(echo "${p:-0}" | tail -1)
 if [ "${p:-0}" -lt 1 ]; then
   echo "[FAIL] 电池未完成但 8000 端口无监听(服务死了)"; exit 4
 fi
