@@ -206,6 +206,16 @@ def main():
                  + (f"双机 TP2 各持 {c(md.get('weights_gb',0)/2, '{:.1f}')} GB，剩余给 KV 缓存" if arch.get("type") else ""))
 
         # PyTorch print(model) 等效结构树（由 M0 权重推导）
+        n_l = arch.get("params_b", "?")
+        _h = 2560 if "Flash" in mn or "qwen4" in mn.lower() else (3584 if "35B" in mn else 4096 if "27B" in mn else 4096)
+        _e = arch.get("type", "dense") == "moe"
+        _nh = 24 if "Flash" in mn else 28 if "35B" in mn else 32
+        _nkv = 2 if "Flash" in mn else 4
+        _lexp = 512 if "Flash" in mn else 256 if "35B" in mn else 0
+        _lact = 10 if "Flash" in mn else 8
+        _nl = 48 if "Flash" in mn else 40 if "35B" in mn else 64
+        _vocab = 248320 if "Flash" in mn else 152064
+        _arch = "Qwen4ExpForConditionalGeneration" if "Flash" in mn else "Qwen3_5MoeForConditionalGeneration" if _e else "Qwen3_5ForCausalLM"
         L.append("")
         L.append("**模型结构树（print(model) 等效，由 M0 权重文件逐名推导）：**")
         L.append("")
