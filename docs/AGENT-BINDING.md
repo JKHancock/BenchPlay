@@ -64,7 +64,7 @@
      内含一个"监工"子智能体按 15min 周期跑 `scripts/foreman.sh`（分级退出码 0/3/4：
      健康双采样/观察容忍窗/异常），异常时子智能体只诊断上报、严禁动手——电池的归因回跳
      归电池工作流，双控制器不打架；监工见 DONE 自动撤岗。禁止用宿主 IDE 私有定时器
-     （ZCode Cron/Claude hooks 等）实现该职责——流程资产必须 agent 无关。监工工作流模板已随库: `scripts/workflows/电池监工.dwf.ts`（ZCode 以 path 直跑, 他 IDE 翻译等价拓扑）。
+     （ZCode Cron/Claude hooks 等）实现该职责——流程资产必须 agent 无关。**v3 起监工内嵌于电池工作流模板 `scripts/workflows/全流程电池.dwf.ts`（自动必带, 代码强制）**; 独立模板 `电池监工.dwf.ts` 仅用于给非模板启动的电池补岗。
 1. 子智能体的产出仍是**脚本 exit code + 证据文件路径**，主控只做汇总，
    任何子智能体不得用自然语言"宣称成功"；
 2. 并行任务**不得写同一个 raw 目录**（tasks/<task>/raw/<tag>/ 归属唯一）；
