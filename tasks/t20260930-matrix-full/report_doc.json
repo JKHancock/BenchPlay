@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-04T08:45:23",
+  "generated_at": "2026-10-04T08:51:36",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-flashnext/raw"
@@ -11017,17 +11017,1461 @@
      "max_model_len": 40960,
      "gpu_mem_util": 0.85
     },
-    "gauges_peak": {},
-    "counters": {},
-    "histograms": {},
+    "gauges_peak": {
+     "w1:c1": {
+      "kv_peak": 0.0113,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 1.0,
+      "samples": 30
+     },
+     "w1:c8": {
+      "kv_peak": 0.09,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 8.0,
+      "samples": 33
+     },
+     "w1:c32": {
+      "kv_peak": 0.09,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 8.0,
+      "samples": 42
+     },
+     "w2:c1": {
+      "kv_peak": 0.0113,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 1.0,
+      "samples": 54
+     },
+     "w2:c8": {
+      "kv_peak": 0.09,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 8.0,
+      "samples": 42
+     },
+     "w3:c1": {
+      "kv_peak": 0.0113,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 1.0,
+      "samples": 4
+     },
+     "w3:c8": {
+      "kv_peak": 0.0225,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 2.0,
+      "samples": 3
+     },
+     "w4:c1": {
+      "kv_peak": 0.0169,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 1.0,
+      "samples": 15
+     },
+     "w4:c4": {
+      "kv_peak": 0.0675,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 4.0,
+      "samples": 17
+     },
+     "w5:c1": {
+      "kv_peak": 0.0169,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 1.0,
+      "samples": 13
+     },
+     "w6:c64": {
+      "kv_peak": 0.09,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 8.0,
+      "samples": 49
+     }
+    },
+    "counters": {
+     "phase:w1": {
+      "prompt_tokens": 66485.0,
+      "gen_tokens": 22544.0,
+      "prefix_queries": 66485.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:w2": {
+      "prompt_tokens": 6089.0,
+      "gen_tokens": 16400.0,
+      "prefix_queries": 6089.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:w3": {
+      "prompt_tokens": 4883.0,
+      "gen_tokens": 592.0,
+      "prefix_queries": 4883.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:w4": {
+      "prompt_tokens": 71584.0,
+      "gen_tokens": 3088.0,
+      "prefix_queries": 71584.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:w5": {
+      "prompt_tokens": 29618.0,
+      "gen_tokens": 1313.0,
+      "prefix_queries": 29618.0,
+      "prefix_hits": 3200.0,
+      "prompt_tokens_cached": 3200.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:w6": {
+      "prompt_tokens": 48581.0,
+      "gen_tokens": 16400.0,
+      "prefix_queries": 48581.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:probe": {
+      "prompt_tokens": 0.0,
+      "gen_tokens": 0.0,
+      "prefix_queries": 0.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 0.0,
+      "requests_failed": 0.0
+     },
+     "phase:cap": {
+      "prompt_tokens": 247877.0,
+      "gen_tokens": 49936.0,
+      "prefix_queries": 247877.0,
+      "prefix_hits": 0.0,
+      "prompt_tokens_cached": 0.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 3200.0,
+      "requests_failed": 3200.0
+     }
+    },
+    "histograms": {
+     "phase:w1": {
+      "ttft_p99_server_s": 77.9778,
+      "ttft_p50_server_s": 4.0179,
+      "tpot_p99_server_s": 0.0924,
+      "itl_p99_server_s": 0.4853,
+      "queue_p99_server_s": 49.35,
+      "req_latency_p99_server_s": 25.45
+     },
+     "phase:w2": {
+      "ttft_p99_server_s": 76.5333,
+      "ttft_p50_server_s": 0.6818,
+      "tpot_p99_server_s": 0.0953,
+      "itl_p99_server_s": 0.4257,
+      "queue_p99_server_s": 48.8857,
+      "req_latency_p99_server_s": 27.2
+     },
+     "phase:w3": {
+      "ttft_p99_server_s": 74.9111,
+      "ttft_p50_server_s": 0.4273,
+      "tpot_p99_server_s": 0.0919,
+      "itl_p99_server_s": 0.4237,
+      "queue_p99_server_s": 48.3643,
+      "req_latency_p99_server_s": 23.55
+     },
+     "phase:w4": {
+      "ttft_p99_server_s": 74.6222,
+      "ttft_p50_server_s": 0.4419,
+      "tpot_p99_server_s": 0.0911,
+      "itl_p99_server_s": 0.4307,
+      "queue_p99_server_s": 48.2714,
+      "req_latency_p99_server_s": 27.16
+     },
+     "phase:w5": {
+      "ttft_p99_server_s": 74.5111,
+      "ttft_p50_server_s": 0.4482,
+      "tpot_p99_server_s": 0.0908,
+      "itl_p99_server_s": 0.4263,
+      "queue_p99_server_s": 48.2357,
+      "req_latency_p99_server_s": 27.55
+     },
+     "phase:w6": {
+      "ttft_p99_server_s": 128.8,
+      "ttft_p50_server_s": 0.7273,
+      "tpot_p99_server_s": 0.0867,
+      "itl_p99_server_s": 0.4477,
+      "queue_p99_server_s": 112.2,
+      "req_latency_p99_server_s": 26.4667
+     },
+     "phase:probe": {
+      "ttft_p99_server_s": 128.8,
+      "ttft_p50_server_s": 0.7273,
+      "tpot_p99_server_s": 0.0867,
+      "itl_p99_server_s": 0.4477,
+      "queue_p99_server_s": 112.2,
+      "req_latency_p99_server_s": 26.4667
+     },
+     "phase:cap": {
+      "ttft_p99_server_s": 69.6558,
+      "ttft_p50_server_s": 0.4791,
+      "tpot_p99_server_s": 0.2859,
+      "itl_p99_server_s": 0.3314,
+      "queue_p99_server_s": 72.2,
+      "req_latency_p99_server_s": 22.425
+     }
+    },
     "host_per_machine": {}
    },
    "perf_metrics": {
-    "workloads": [],
-    "probes": null
+    "workloads": [
+     {
+      "workload_id": "w1",
+      "spec": {
+       "input_len": 512,
+       "output_len": 256,
+       "dataset": "random-512",
+       "levels": [
+        1,
+        8,
+        32
+       ],
+       "np": [
+        8,
+        32,
+        48
+       ],
+       "seed": 20260930,
+       "temperature": 0.0,
+       "ignore_eos": true,
+       "no_think": true,
+       "warmup": 1,
+       "cooldown_s": 10
+      },
+      "levels": [
+       {
+        "concurrency": 1,
+        "num_prompts": 8,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 499.814,
+         "p90": 524.373,
+         "p99": 527.239,
+         "mean": 445.655,
+         "max": 527.557
+        },
+        "tpot_ms": {
+         "p50": 29.281,
+         "p90": 31.892,
+         "p99": 32.294,
+         "mean": 27.9,
+         "max": 32.338
+        },
+        "itl_ms": {
+         "p50": 74.85,
+         "p99": 87.501,
+         "max": 104.655
+        },
+        "e2e_ms": {
+         "p50": 7870.579,
+         "p90": 8635.87,
+         "p99": 8760.026
+        },
+        "per_stream_out_tok_s": {
+         "p50": 32.562,
+         "p99": 46.895
+        },
+        "agg": {
+         "output_tok_s": 33.86,
+         "total_tok_s": 132.75,
+         "qps": 0.1323
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 50.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 8,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 60.5,
+        "gauge_peaks": {
+         "kv_peak": 0.0113,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 1.0,
+         "samples": 30
+        }
+       },
+       {
+        "concurrency": 8,
+        "num_prompts": 32,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 1444.974,
+         "p90": 3186.617,
+         "p99": 3189.257,
+         "mean": 1610.535,
+         "max": 3189.445
+        },
+        "tpot_ms": {
+         "p50": 58.683,
+         "p90": 67.601,
+         "p99": 78.193,
+         "mean": 57.119,
+         "max": 79.043
+        },
+        "itl_ms": {
+         "p50": 140.579,
+         "p99": 492.366,
+         "max": 2832.948
+        },
+        "e2e_ms": {
+         "p50": 15840.778,
+         "p90": 19702.761,
+         "p99": 22355.64
+        },
+        "per_stream_out_tok_s": {
+         "p50": 16.161,
+         "p99": 20.191
+        },
+        "agg": {
+         "output_tok_s": 121.22,
+         "total_tok_s": 475.14,
+         "qps": 0.4735
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 12.5,
+         "met": false
+        },
+        "reliability": {
+         "completed": 32,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 67.6,
+        "gauge_peaks": {
+         "kv_peak": 0.09,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 8.0,
+         "samples": 33
+        }
+       },
+       {
+        "concurrency": 32,
+        "num_prompts": 48,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 33340.848,
+         "p90": 46569.205,
+         "p99": 48015.263,
+         "mean": 28333.792,
+         "max": 48142.897
+        },
+        "tpot_ms": {
+         "p50": 50.169,
+         "p90": 66.032,
+         "p99": 73.886,
+         "mean": 51.165,
+         "max": 75.158
+        },
+        "itl_ms": {
+         "p50": 95.77,
+         "p99": 511.818,
+         "max": 2319.124
+        },
+        "e2e_ms": {
+         "p50": 45826.605,
+         "p90": 59628.412,
+         "p99": 60629.751
+        },
+        "per_stream_out_tok_s": {
+         "p50": 5.653,
+         "p99": 21.463
+        },
+        "agg": {
+         "output_tok_s": 144.18,
+         "total_tok_s": 564.68,
+         "qps": 0.5632
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 48,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 85.2,
+        "gauge_peaks": {
+         "kv_peak": 0.09,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 8.0,
+         "samples": 42
+        }
+       }
+      ],
+      "duration_s": 233.3,
+      "roofline": {
+       "ceiling_tok_s": 136.5,
+       "c1_output_tok_s": 33.86,
+       "utilization": 0.248,
+       "warning": null
+      },
+      "gate_pass": true
+     },
+     {
+      "workload_id": "w2",
+      "spec": {
+       "input_len": null,
+       "output_len": null,
+       "dataset": "sharegpt-real(100条,输入p50=35tok)",
+       "levels": [
+        1,
+        8
+       ],
+       "np": [
+        16,
+        48
+       ],
+       "seed": 20260930,
+       "temperature": 0.0,
+       "ignore_eos": true,
+       "no_think": true,
+       "warmup": 1,
+       "cooldown_s": 10
+      },
+      "levels": [
+       {
+        "concurrency": 1,
+        "num_prompts": 16,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 196.559,
+         "p90": 340.142,
+         "p99": 524.568,
+         "mean": 230.143,
+         "max": 553.556
+        },
+        "tpot_ms": {
+         "p50": 26.633,
+         "p90": 31.21,
+         "p99": 32.791,
+         "mean": 26.402,
+         "max": 32.997
+        },
+        "itl_ms": {
+         "p50": 55.04,
+         "p99": 97.276,
+         "max": 197.353
+        },
+        "e2e_ms": {
+         "p50": 6940.893,
+         "p90": 8323.939,
+         "p99": 8719.653
+        },
+        "per_stream_out_tok_s": {
+         "p50": 36.909,
+         "p99": 47.466
+        },
+        "agg": {
+         "output_tok_s": 36.77,
+         "total_tok_s": 51.73,
+         "qps": 0.1436
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 93.8,
+         "met": false
+        },
+        "reliability": {
+         "completed": 16,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 111.4,
+        "gauge_peaks": {
+         "kv_peak": 0.0113,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 1.0,
+         "samples": 54
+        }
+       },
+       {
+        "concurrency": 8,
+        "num_prompts": 48,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 386.395,
+         "p90": 989.069,
+         "p99": 992.032,
+         "mean": 490.61,
+         "max": 992.294
+        },
+        "tpot_ms": {
+         "p50": 50.17,
+         "p90": 58.562,
+         "p99": 93.194,
+         "mean": 50.995,
+         "max": 115.688
+        },
+        "itl_ms": {
+         "p50": 106.23,
+         "p99": 222.207,
+         "max": 1926.811
+        },
+        "e2e_ms": {
+         "p50": 13347.748,
+         "p90": 15605.841,
+         "p99": 24459.807
+        },
+        "per_stream_out_tok_s": {
+         "p50": 19.179,
+         "p99": 31.798
+        },
+        "agg": {
+         "output_tok_s": 144.29,
+         "total_tok_s": 187.44,
+         "qps": 0.5636
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 70.8,
+         "met": false
+        },
+        "reliability": {
+         "completed": 48,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 85.2,
+        "gauge_peaks": {
+         "kv_peak": 0.09,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 8.0,
+         "samples": 42
+        }
+       }
+      ],
+      "duration_s": 206.6,
+      "roofline": {
+       "ceiling_tok_s": 136.5,
+       "c1_output_tok_s": 36.77,
+       "utilization": 0.269,
+       "warning": null
+      },
+      "gate_pass": true
+     },
+     {
+      "workload_id": "w3",
+      "spec": {
+       "input_len": 32,
+       "output_len": 8,
+       "dataset": "random-32",
+       "levels": [
+        1,
+        8
+       ],
+       "np": [
+        24,
+        48
+       ],
+       "seed": 20260930,
+       "temperature": 0.0,
+       "ignore_eos": true,
+       "no_think": true,
+       "warmup": 1,
+       "cooldown_s": 10
+      },
+      "levels": [
+       {
+        "concurrency": 1,
+        "num_prompts": 24,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 140.733,
+         "p90": 158.526,
+         "p99": 208.144,
+         "mean": 143.568,
+         "max": 222.803
+        },
+        "tpot_ms": {
+         "p50": 22.722,
+         "p90": 27.58,
+         "p99": 32.496,
+         "mean": 23.633,
+         "max": 33.07
+        },
+        "itl_ms": {
+         "p50": 52.382,
+         "p99": 77.171,
+         "max": 79.42
+        },
+        "e2e_ms": {
+         "p50": 301.954,
+         "p90": 333.963,
+         "p99": 435.615
+        },
+        "per_stream_out_tok_s": {
+         "p50": 26.495,
+         "p99": 29.341
+        },
+        "agg": {
+         "output_tok_s": 25.87,
+         "total_tok_s": 211.38,
+         "qps": 3.2334
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 100.0,
+         "met": true
+        },
+        "reliability": {
+         "completed": 24,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 7.4,
+        "gauge_peaks": {
+         "kv_peak": 0.0113,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 1.0,
+         "samples": 4
+        }
+       },
+       {
+        "concurrency": 8,
+        "num_prompts": 48,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 374.149,
+         "p90": 441.993,
+         "p99": 516.36,
+         "mean": 368.283,
+         "max": 516.455
+        },
+        "tpot_ms": {
+         "p50": 42.212,
+         "p90": 52.896,
+         "p99": 73.248,
+         "mean": 43.82,
+         "max": 78.937
+        },
+        "itl_ms": {
+         "p50": 80.929,
+         "p99": 210.715,
+         "max": 221.241
+        },
+        "e2e_ms": {
+         "p50": 659.518,
+         "p90": 728.818,
+         "p99": 820.788
+        },
+        "per_stream_out_tok_s": {
+         "p50": 12.13,
+         "p99": 15.071
+        },
+        "agg": {
+         "output_tok_s": 92.96,
+         "total_tok_s": 760.59,
+         "qps": 11.6194
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 95.8,
+         "met": false
+        },
+        "reliability": {
+         "completed": 48,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 4.1,
+        "gauge_peaks": {
+         "kv_peak": 0.0225,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 2.0,
+         "samples": 3
+        }
+       }
+      ],
+      "duration_s": 21.6,
+      "roofline": {
+       "ceiling_tok_s": 136.5,
+       "c1_output_tok_s": 25.87,
+       "utilization": 0.19,
+       "warning": null
+      },
+      "gate_pass": true
+     },
+     {
+      "workload_id": "w4",
+      "spec": {
+       "input_len": 4096,
+       "output_len": 256,
+       "dataset": "random-4096",
+       "levels": [
+        1,
+        4
+       ],
+       "np": [
+        4,
+        8
+       ],
+       "seed": 20260930,
+       "temperature": 0.0,
+       "ignore_eos": true,
+       "no_think": true,
+       "warmup": 1,
+       "cooldown_s": 10
+      },
+      "levels": [
+       {
+        "concurrency": 1,
+        "num_prompts": 4,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 1706.956,
+         "p90": 1823.309,
+         "p99": 1860.561,
+         "mean": 1737.39,
+         "max": 1864.7
+        },
+        "tpot_ms": {
+         "p50": 21.123,
+         "p90": 22.644,
+         "p99": 23.221,
+         "mean": 21.509,
+         "max": 23.285
+        },
+        "itl_ms": {
+         "p50": 51.919,
+         "p99": 80.124,
+         "max": 90.812
+        },
+        "e2e_ms": {
+         "p50": 7093.278,
+         "p90": 7597.565,
+         "p99": 7781.871
+        },
+        "per_stream_out_tok_s": {
+         "p50": 36.091,
+         "p99": 37.078
+        },
+        "agg": {
+         "output_tok_s": 35.44,
+         "total_tok_s": 855.43,
+         "qps": 0.1385
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 4,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 28.9,
+        "gauge_peaks": {
+         "kv_peak": 0.0169,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 1.0,
+         "samples": 15
+        }
+       },
+       {
+        "concurrency": 4,
+        "num_prompts": 8,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 4128.698,
+         "p90": 8778.977,
+         "p99": 9894.19,
+         "mean": 5008.157,
+         "max": 10018.102
+        },
+        "tpot_ms": {
+         "p50": 46.34,
+         "p90": 60.309,
+         "p99": 67.901,
+         "mean": 46.593,
+         "max": 68.745
+        },
+        "itl_ms": {
+         "p50": 73.705,
+         "p99": 872.762,
+         "max": 3331.062
+        },
+        "e2e_ms": {
+         "p50": 16424.407,
+         "p90": 22059.575,
+         "p99": 22640.198
+        },
+        "per_stream_out_tok_s": {
+         "p50": 16.04,
+         "p99": 22.037
+        },
+        "agg": {
+         "output_tok_s": 59.73,
+         "total_tok_s": 1434.63,
+         "qps": 0.2333
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 8,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 34.3,
+        "gauge_peaks": {
+         "kv_peak": 0.0675,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 4.0,
+         "samples": 17
+        }
+       }
+      ],
+      "duration_s": 73.2,
+      "roofline": {
+       "ceiling_tok_s": 136.5,
+       "c1_output_tok_s": 35.44,
+       "utilization": 0.26,
+       "warning": null
+      },
+      "gate_pass": true
+     },
+     {
+      "workload_id": "w5",
+      "kind": "outladder",
+      "spec": {
+       "input_len": 4096,
+       "out_ladder": [
+        1,
+        16,
+        256,
+        1024
+       ],
+       "seed": 20260930,
+       "temperature": 0.0,
+       "ignore_eos": true,
+       "no_think": true,
+       "warmup": 1
+      },
+      "levels": [
+       {
+        "out_len": 1,
+        "concurrency": 1,
+        "num_prompts": 1,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 793.145,
+         "p90": 793.145,
+         "p99": 793.145,
+         "mean": 793.145,
+         "max": 793.145
+        },
+        "tpot_ms": {
+         "mean": null,
+         "p50": null,
+         "p90": null,
+         "p99": null,
+         "max": null
+        },
+        "itl_ms": {
+         "p50": null,
+         "p99": null,
+         "max": null
+        },
+        "e2e_ms": {
+         "p50": 793.29,
+         "p90": 793.29,
+         "p99": 793.29
+        },
+        "per_stream_out_tok_s": {
+         "p50": 1.261,
+         "p99": 1.261
+        },
+        "agg": {
+         "output_tok_s": 1.26,
+         "total_tok_s": 7423.27,
+         "qps": 1.2573
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 1,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 0.8,
+        "gauge_peaks": {
+         "kv_peak": 0.0,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 0.0,
+         "samples": 1
+        }
+       },
+       {
+        "out_len": 16,
+        "concurrency": 1,
+        "num_prompts": 1,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 1699.677,
+         "p90": 1699.677,
+         "p99": 1699.677,
+         "mean": 1699.677,
+         "max": 1699.677
+        },
+        "tpot_ms": {
+         "p50": 29.811,
+         "p90": 29.811,
+         "p99": 29.811,
+         "mean": 29.811,
+         "max": 29.811
+        },
+        "itl_ms": {
+         "p50": 52.948,
+         "p99": 79.027,
+         "max": 80.565
+        },
+        "e2e_ms": {
+         "p50": 2146.844,
+         "p90": 2146.844,
+         "p99": 2146.844
+        },
+        "per_stream_out_tok_s": {
+         "p50": 7.453,
+         "p99": 7.453
+        },
+        "agg": {
+         "output_tok_s": 7.45,
+         "total_tok_s": 2770.09,
+         "qps": 0.4656
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 1,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 2.1,
+        "gauge_peaks": {
+         "kv_peak": 0.0,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 0.0,
+         "samples": 2
+        }
+       },
+       {
+        "out_len": 256,
+        "concurrency": 1,
+        "num_prompts": 1,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 1655.526,
+         "p90": 1655.526,
+         "p99": 1655.526,
+         "mean": 1655.526,
+         "max": 1655.526
+        },
+        "tpot_ms": {
+         "p50": 26.02,
+         "p90": 26.02,
+         "p99": 26.02,
+         "mean": 26.02,
+         "max": 26.02
+        },
+        "itl_ms": {
+         "p50": 52.566,
+         "p99": 224.449,
+         "max": 522.536
+        },
+        "e2e_ms": {
+         "p50": 8290.706,
+         "p90": 8290.706,
+         "p99": 8290.706
+        },
+        "per_stream_out_tok_s": {
+         "p50": 30.878,
+         "p99": 30.878
+        },
+        "agg": {
+         "output_tok_s": 30.87,
+         "total_tok_s": 746.17,
+         "qps": 0.1206
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 1,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 8.3,
+        "gauge_peaks": {
+         "kv_peak": 0.0137,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 1.0,
+         "samples": 4
+        }
+       },
+       {
+        "out_len": 1024,
+        "concurrency": 1,
+        "num_prompts": 1,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 3352.008,
+         "p90": 3352.008,
+         "p99": 3352.008,
+         "mean": 3352.008,
+         "max": 3352.008
+        },
+        "tpot_ms": {
+         "p50": 22.558,
+         "p90": 22.558,
+         "p99": 22.558,
+         "mean": 22.558,
+         "max": 22.558
+        },
+        "itl_ms": {
+         "p50": 53.855,
+         "p99": 97.786,
+         "max": 175.265
+        },
+        "e2e_ms": {
+         "p50": 26428.678,
+         "p90": 26428.678,
+         "p99": 26428.678
+        },
+        "per_stream_out_tok_s": {
+         "p50": 38.746,
+         "p99": 38.746
+        },
+        "agg": {
+         "output_tok_s": 38.74,
+         "total_tok_s": 261.87,
+         "qps": 0.0378
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 0.0,
+         "met": false
+        },
+        "reliability": {
+         "completed": 1,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 26.4,
+        "gauge_peaks": {
+         "kv_peak": 0.0169,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 1.0,
+         "samples": 13
+        }
+       }
+      ],
+      "duration_s": 0,
+      "gate_pass": true
+     },
+     {
+      "workload_id": "w6",
+      "spec": {
+       "input_len": 512,
+       "output_len": 256,
+       "dataset": "random-512",
+       "levels": [
+        64
+       ],
+       "np": [
+        64
+       ],
+       "seed": 20260930,
+       "temperature": 0.0,
+       "ignore_eos": true,
+       "no_think": true,
+       "warmup": 1,
+       "cooldown_s": 10
+      },
+      "levels": [
+       {
+        "concurrency": 64,
+        "num_prompts": 64,
+        "retried": 0,
+        "ttft_ms": {
+         "p50": 44658.502,
+         "p90": 87529.364,
+         "p99": 91748.911,
+         "mean": 45690.444,
+         "max": 92353.29
+        },
+        "tpot_ms": {
+         "p50": 44.035,
+         "p90": 57.37,
+         "p99": 61.862,
+         "mean": 46.216,
+         "max": 62.236
+        },
+        "itl_ms": {
+         "p50": 93.138,
+         "p99": 507.989,
+         "max": 1318.183
+        },
+        "e2e_ms": {
+         "p50": 55869.178,
+         "p90": 98861.571,
+         "p99": 100864.025
+        },
+        "per_stream_out_tok_s": {
+         "p50": 4.612,
+         "p99": 23.159
+        },
+        "agg": {
+         "output_tok_s": 162.11,
+         "total_tok_s": 635.37,
+         "qps": 0.6332
+        },
+        "slo": {
+         "ttft_le_ms": 500.0,
+         "tpot_le_ms": 100.0,
+         "goodput_pct": 1.6,
+         "met": false
+        },
+        "reliability": {
+         "completed": 64,
+         "failed": 0,
+         "rejected": 0,
+         "timeout": 0
+        },
+        "wall_s": 101.1,
+        "gauge_peaks": {
+         "kv_peak": 0.09,
+         "gpu_cache_peak": 0.0,
+         "running_peak": 8.0,
+         "samples": 49
+        }
+       }
+      ],
+      "duration_s": 101.1,
+      "roofline": {
+       "ceiling_tok_s": 136.5,
+       "c1_output_tok_s": null,
+       "utilization": null,
+       "warning": null
+      },
+      "gate_pass": true
+     }
+    ],
+    "probes": {
+     "prefix_cache": {
+      "n": 64,
+      "fail_round1": 64,
+      "fail_round2": 64,
+      "ttft_cold_p50_ms": null,
+      "ttft_warm_p50_ms": null,
+      "speedup_x": null,
+      "note": "加速比>1 且服务端 prefix_hits 增加 → 前缀缓存生效"
+     },
+     "capacity": {
+      "ladder": [
+       {
+        "concurrency": 8,
+        "n": 8,
+        "completed": 0,
+        "failed": 8,
+        "wall_s": 12.1,
+        "out_tok_s": null,
+        "mode": "timeout_or_conn"
+       }
+      ],
+      "max_ok_conc": null,
+      "first_failure": {
+       "concurrency": 8,
+       "mode": "timeout_or_conn",
+       "failed": 8
+      },
+      "note": "上限=max_num_seqs(64)约束下的实测可用并发"
+     }
+    }
    },
    "capability_scores": {
     "suites": [
+     {
+      "suite_id": "gsm8k",
+      "dimension": "math",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.955,
+       "correct": 191,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 235.7
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 292.7
+     },
+     {
+      "suite_id": "mmlu",
+      "dimension": "knowledge",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.895,
+       "correct": 179,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 17.4
+     },
+     {
+      "suite_id": "arc",
+      "dimension": "science",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.975,
+       "correct": 195,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 12.4
+     },
+     {
+      "suite_id": "hellaswag",
+      "dimension": "commonsense",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.955,
+       "correct": 191,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 32.0
+     },
+     {
+      "suite_id": "winogrande",
+      "dimension": "coref",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.87,
+       "correct": 174,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 10.2
+     },
+     {
+      "suite_id": "truthfulqa",
+      "dimension": "?",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.9,
+       "correct": 180,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 11.7
+     },
+     {
+      "suite_id": "openbookqa",
+      "dimension": "?",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.965,
+       "correct": 193,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 11.9
+     },
+     {
+      "suite_id": "race",
+      "dimension": "?",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.93,
+       "correct": 186,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 46.4
+     },
      {
       "suite_id": "math500",
       "dimension": "-",
@@ -11051,14 +12495,8 @@
      }
     ]
    },
-   "status": "partial",
+   "status": "complete",
    "missing": [
-    "perf.w1/wsweep",
-    "perf.w2/w2s",
-    "cap.gsm8k",
-    "cap.mmlu",
-    "cap.arc",
-    "vllm.gauges_peak",
     "vllm.startup.kv"
    ],
    "evidence": {
@@ -11084,11 +12522,11 @@
     "winner_label": "Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)",
     "reasons": [
      {
-      "text": "综合分 0.591(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)",
+      "text": "综合分 0.592(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)",
       "check": {
        "scenario": "e64080d1",
        "path": "score",
-       "value": 0.591
+       "value": 0.592
       }
      },
      {
@@ -11096,7 +12534,7 @@
       "check": {
        "scenario": "e64080d1",
        "path": "score",
-       "value": 0.591
+       "value": 0.592
       }
      }
     ],
@@ -11162,7 +12600,7 @@
     "winner_label": "Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)",
     "reasons": [
      {
-      "text": "三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.92(Qwen3.8-27B-NVFP4(TP2))",
+      "text": "三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.9417(Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M))",
       "check": {
        "scenario": "37bb1c1e",
        "path": "cap_avg",
@@ -11170,7 +12608,7 @@
       }
      },
      {
-      "text": "差距: +0.02333 (+2.5%)",
+      "text": "差距: +0.001667 (+0.2%)",
       "check": {
        "scenario": "37bb1c1e",
        "path": "cap_avg",
@@ -11179,8 +12617,8 @@
      }
     ],
     "runner_up": {
-     "scenario_id": "080ea122",
-     "label": "Qwen3.8-27B-NVFP4(TP2)"
+     "scenario_id": "8e8992ea",
+     "label": "Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)"
     }
    },
    {
@@ -11200,11 +12638,6 @@
     "runner_up": null
    }
   ],
-  "ineligible": [
-   {
-    "scenario_id": "8e8992ea",
-    "cause": "partial: 缺 perf.w1/wsweep,perf.w2/w2s,cap.gsm8k,cap.mmlu"
-   }
-  ]
+  "ineligible": []
  }
 }
