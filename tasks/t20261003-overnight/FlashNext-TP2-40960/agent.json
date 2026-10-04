@@ -1,0 +1,83 @@
+{
+  "track": "track3",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "flashnext-40k",
+  "metrics": {
+    "selection_acc": 1.0,
+    "args_acc": 0.75,
+    "restraint_included": true,
+    "n": 8,
+    "loop_success": 0.5,
+    "n_loops": 2
+  },
+  "details": [
+    {
+      "id": "w1",
+      "sel": true,
+      "args": true,
+      "ms": 1792.0,
+      "got": "get_weather"
+    },
+    {
+      "id": "w2",
+      "sel": true,
+      "args": true,
+      "ms": 1964.0,
+      "got": "search_docs"
+    },
+    {
+      "id": "w3",
+      "sel": true,
+      "args": true,
+      "ms": 1395.0,
+      "got": "calc"
+    },
+    {
+      "id": "w4",
+      "sel": true,
+      "args": true,
+      "ms": 1349.0,
+      "got": "get_weather"
+    },
+    {
+      "id": "w5",
+      "sel": true,
+      "args": true,
+      "ms": 2329.0,
+      "got": "send_email"
+    },
+    {
+      "id": "n1",
+      "sel": true,
+      "args": null,
+      "ms": 7629.0,
+      "got": null
+    },
+    {
+      "id": "n2",
+      "sel": true,
+      "args": null,
+      "ms": 2307.0,
+      "got": null
+    },
+    {
+      "id": "w6",
+      "sel": true,
+      "args": true,
+      "ms": 4078.0,
+      "got": "search_docs"
+    }
+  ],
+  "loops": [
+    {
+      "id": "l1",
+      "loop_ok": true,
+      "e2e_ms": 2696.0
+    },
+    {
+      "id": "l2",
+      "stage": "no_call"
+    }
+  ],
+  "gate_pass": false
+}

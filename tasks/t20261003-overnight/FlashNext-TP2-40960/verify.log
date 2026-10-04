@@ -1,0 +1,5 @@
+  关1 身份: ✓ /v1/models 含 flashnext-40k
+  关2 功能: ✓ 对话冒烟通过
+  关3 可观测: ✓ /metrics 含 409 个 vllm: 指标
+  关4 智能体: ✓ 工具调用回环通(model=flashnext-40k)
+PASS URL 四关全过: http://192.168.199.129:8000

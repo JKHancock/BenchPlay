@@ -1,0 +1,1 @@
+(EngineCore pid=69187) INFO 10-03 16:40:31 [kv_cache_utils.py:2395] GPU KV cache size: 1,185,934 tokens, Maximum concurrency for 40,960 tokens per request: 28.95x
