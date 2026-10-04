@@ -67,6 +67,33 @@ def check_value(sc, path, value):
     return abs(got - value) <= max(abs(value) * 0.011, 1e-9)
 
 
+
+def _emit_vllm(sc, prefixes, title):
+    """渲染该 benchmark 段期间的 vLLM 服务端指标(随段走), 返回行列表."""
+    cn = (sc.get("vllm_metrics") or {}).get("counters") or {}
+    hg = (sc.get("vllm_metrics") or {}).get("histograms") or {}
+    rows = [k for k in prefixes if k in cn]
+    if not rows:
+        return []
+    out = [f"*{title}（该段测试前后的服务端指标差值）：*", "",
+           "| 指标采集段 | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | TTFT p99 | TPOT p99 | ITL p99 | 排队 p99 |",
+           "|---|---|---|---|---|---|---|---|---|---|"]
+    for k in rows:
+        m = cn[k]
+        h = hg.get(k, {})
+        q, h_ = m.get("prefix_queries"), m.get("prefix_hits")
+        out.append(f"| {PH_NAMES.get(k, k)} | {c(m.get('requests_success'), '{:,.0f')} | "
+                   f"{c(m.get('requests_failed'), '{:,.0f')} | "
+                   f"{c(m.get('prompt_tokens'), '{:,.0f')} | {c(m.get('gen_tokens'), '{:,.0f')} | "
+                   f"{c(q, '{:,.0f}')}/{c(h_, '{:,.0f}') if q is not None else '—'} | "
+                   f"{c(h.get('ttft_p99_server_s'), '{:.3f')} | "
+                   f"{c(h.get('tpot_p99_server_s'), '{:.3f')} | "
+                   f"{c(h.get('itl_p99_server_s'), '{:.3f')} | "
+                   f"{c(h.get('queue_p99_server_s'), '{:.3f')} |")
+    out.append("")
+    return out
+
+
 def main():
     doc = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     out = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(sys.argv[1]).with_name("report_v4.md")
@@ -162,59 +189,41 @@ def main():
             L.append(f"| {dm['machine_id']} | {dm['role']} | {rs} | {dm['gpu_alloc']} |")
         L.append("")
         # ③ vllm metrics
-        L.append("**③ vLLM 服务端指标集合**")
+        L.append("**运行环境与服务端基础**（启动态与主机负载采样；各段服务端指标随对应 Benchmark 展示）")
         L.append("")
-        L.extend(["| 组 | 指标 |", "|---|---|"])
-        L += [f"| 启动 | 就绪 {c(st['ready_s'], '{:.0f}')}s · KV容量 "
-              f"{c(st['kv_cache_tokens'], '{:,.0f}')} tok · 最大并发 "
-              f"{c(st['max_concurrency_x'], '{:.1f}')}× · cudagraph {st['cudagraph_mode']} · "
-              f"autotune {st['flashinfer_autotune']} · max_num_seqs {st['max_num_seqs']} |"]
+        L.extend(["| 项 | 值 |", "|---|---|"])
+        L.append(f"| 启动 | 就绪 {c(st['ready_s'], '{:.0f}')}s · KV容量 "
+                 f"{c(st['kv_cache_tokens'], '{:,.0f}')} tok · 最大并发 "
+                 f"{c(st['max_concurrency_x'], '{:.1f}')}× · cudagraph {st['cudagraph_mode']} · "
+                 f"autotune {st['flashinfer_autotune']} · max_num_seqs {st['max_num_seqs']} |")
         g = sc["vllm_metrics"]["gauges_peak"]
         if g:
             kmax = max(g, key=lambda k: (g[k].get("running_peak") or
                                          g[k].get("num_requests_running") or 0))
             pk = g[kmax]
-            kname = kmax.split(":")[0]
-            kname = WL_NAMES.get(kname, kname)
+            kname = WL_NAMES.get(kmax.split(":")[0], kmax)
             conc = kmax.split(":c")[-1] if ":c" in kmax else ""
-            L.append(f"| 负载中峰值 | KV缓存占用 {c(pk.get('kv_peak') if pk.get('kv_peak') is not None else pk.get('kv_cache_usage_perc'), '{:.1%}')} · "
-                     f"同时在跑请求 {c(pk.get('running_peak') if pk.get('running_peak') is not None else pk.get('num_requests_running'), '{:.0f}')} 路"
-                     f"（出现在{kname}{(' 并发' + conc + ' 时') if conc else ''}，采样{pk.get('samples', '—')}次） |")
+            kvv = pk.get('kv_peak') if pk.get('kv_peak') is not None else pk.get('kv_cache_usage_perc')
+            rpv = pk.get('running_peak') if pk.get('running_peak') is not None else pk.get('num_requests_running')
+            L.append(f"| 负载中峰值 | KV缓存占用 {c(kvv, '{:.1%}')} · "
+                     f"同时在跑请求 {c(rpv, '{:.0f}')} 路"
+                     f"（出现在{kname}{(' 并发' + conc + ' 时') if conc else ''}） |")
         ph = sc["vllm_metrics"]["host_per_machine"]
         if ph:
             L.append("| 主机(负载中) | " + " · ".join(
                 f"{k}: util {c(v['gpu_util_perc_peak'], '{:.0f}%')}/"
                 f"mem {c(v['gpu_mem_used_gb_peak'], '{:.0f}')}GB" for k, v in ph.items()) + " |")
         L.append("")
-        cn = sc["vllm_metrics"]["counters"]
-        L.extend(["| 指标采集段（哪场测试期间） | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | TTFT p99 | TPOT p99 | ITL p99 | 排队 p99 |",
-                 "|---|---|---|---|---|---|---|---|---|---|"])
-        for k, m in cn.items():
-            hg = sc["vllm_metrics"]["histograms"].get(k, {})
-            q, h_ = m.get("prefix_queries"), m.get("prefix_hits")
-            kname = PH_NAMES.get(k, k)
-            L.append(f"| {kname} | {c(m.get('requests_success'), '{:,.0f}')} | "
-                     f"{c(m.get('requests_failed'), '{:,.0f}')} | "
-                     f"{c(m.get('prompt_tokens'), '{:,.0f}')} | "
-                     f"{c(m.get('gen_tokens'), '{:,.0f}')} | "
-                     f"{c(q, '{:,.0f}')}/{c(h_, '{:,.0f}') if q is not None else '—'} | "
-                     f"{c(hg.get('ttft_p99_server_s'), '{:.3f}')} | "
-                     f"{c(hg.get('tpot_p99_server_s'), '{:.3f}')} | "
-                     f"{c(hg.get('itl_p99_server_s'), '{:.3f}')} | "
-                     f"{c(hg.get('queue_p99_server_s'), '{:.3f}')} |")
-        L.append("")
-        # ④ perf
-        L.append("**④ 性能指标集合**（SLO: TTFT≤500ms 且 TPOT≤100ms）")
+        L.append("**Benchmark 一 · 模型性能**（专属指标 + 性能测试期间的服务端指标；SLO: TTFT≤500ms 且 TPOT≤100ms）")
         L.append("")
         for w in sc["perf_metrics"]["workloads"]:
             spec = w.get("spec", {})
-            L.append(f"- **{WL_NAMES.get(w['workload_id'], w['workload_id'])}**（{spec.get('dataset', '—')}，"
-                     f"入{c(spec.get('input_len'), '{:.0f}')}→出"
-                     f"{c(spec.get('output_len'), '{:.0f}')}）")
+            L.append(f"- **{WL_NAMES.get(w['workload_id'], w['workload_id'])}**（数据: {spec.get('dataset', '—')}，"
+                     f"入{c(spec.get('input_len'), '{:.0f}')}→出{c(spec.get('output_len'), '{:.0f}')}）")
             L.append("")
-            L.extend(["| 档 | n | TTFT p50/p90/p99 ms | TPOT p50/p90/p99 ms | ITL p99/max | "
-                     "E2E p99 | 单流出流 p50 | 出流 tok/s | QPS | goodput | 成/败 | retried |",
-                     "|---|---|---|---|---|---|---|---|---|---|---|---|"])
+            L.extend(["| 并发 | n | TTFT p50/p90/p99 ms | TPOT p50/p90/p99 ms | ITL p99/max | "
+                      "E2E p99 | 单流出流 p50 | 出流 tok/s | QPS | goodput | 成/败 |",
+                      "|---|---|---|---|---|---|---|---|---|---|---|---|"])
             for lv in w.get("levels", []):
                 rel = lv.get("reliability", {})
                 L.append(
@@ -226,40 +235,62 @@ def main():
                     f"{c((lv.get('agg') or {}).get('output_tok_s'))} | "
                     f"{c((lv.get('agg') or {}).get('qps'), '{:.2f}')} | "
                     f"{c((lv.get('slo') or {}).get('goodput_pct'), '{:.0f}%')} | "
-                    f"{rel.get('completed', '—')}/{rel.get('failed', '—')} | {lv.get('retried', 0)} |")
+                    f"{rel.get('completed', '—')}/{rel.get('failed', '—')} |")
             rl = w.get("roofline")
             if rl:
                 L.append("")
                 L.append(f"  理论上限校验：单路解码的理论速度上限≈显存带宽÷每token需读取的权重量"
                          f"=约 {c(rl.get('ceiling_tok_s'), '{:.0f}')} tok/s；实测达到理论上限的 "
-                         f"{c(rl.get('utilization'), '{:.0%}')}（<80% 为正常；若超80%说明测量可能有误需人工复核）"
-                         + (f" ⚠{rl['warning']}" if rl.get('warning') else ""))
+                         f"{c(rl.get('utilization'), '{:.0%}')}（<80% 为正常；超80%需人工复核测量）"
+                         + (f" ⚠{rl['warning']}" if rl.get("warning") else ""))
             L.append("")
         pr = sc["perf_metrics"].get("probes")
         if pr:
             pc, cp = pr.get("prefix_cache", {}), pr.get("capacity", {})
-            L.append(f"- **探针**: 前缀缓存 冷/热 TTFT p50 "
+            L.append(f"- **专项探针**：前缀缓存 冷/热 TTFT p50 "
                      f"{c(pc.get('ttft_cold_p50_ms'), '{:.0f}')}/{c(pc.get('ttft_warm_p50_ms'), '{:.0f}')} ms "
-                     f"→ 加速 {c(pc.get('speedup_x'), '{:.2f}')}× · "
-                     f"容量阶梯 最大可用并发 **{c(cp.get('max_ok_conc'), '{:.0f}')}**"
-                     + (f"（首败 {cp['first_failure']['concurrency']}@{cp['first_failure']['mode']}）"
-                        if cp.get("first_failure") else "（阶梯全过, 上限=max_num_seqs）"))
+                     f"→ 加速 {c(pc.get('speedup_x'), '{:.2f}')}× · 容量阶梯 最大可用并发 **{c(cp.get('max_ok_conc'), '{:.0f}')}**"
+                     + (f"（首败 {cp['first_failure']['concurrency']}路@{cp['first_failure']['mode']}）"
+                        if cp.get("first_failure") else "（阶梯全过）"))
             L.append("")
-        # ⑤ capability
-        L.append("**⑤ 能力分数集合**（统一口径 0-shot · 关思考链 · temp=0 · n=200 · 并发8）")
+        L.extend(_emit_vllm(sc, ["phase:w1", "phase:w2", "phase:w3", "phase:w4",
+                                 "phase:w5", "phase:w6", "phase:probe"],
+                            "性能测试期间的服务端指标"))
+        L.append("**Benchmark 二 · 模型能力**（专属指标 + 能力评测期间的服务端指标；统一口径 0-shot · 关思考链 · temp=0 · n=200 · 并发8）")
         L.append("")
-        L.extend(["| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 |", "|---|---|---|---|---|---|---|"])
+        L.extend(["| 套件 | 维度 | acc | 对/n | 平均输出tok | 失败 | 状态 |",
+                  "|---|---|---|---|---|---|---|"])
         for cs in sc["capability_scores"]["suites"]:
             if cs.get("score"):
-                s = cs["score"]
+                sx = cs["score"]
                 L.append(f"| {cs['suite_id']} | {cs['dimension']} | "
-                         f"{c(s.get('acc'), '{:.3f}')} | {s.get('correct')}/{s.get('n')} | "
+                         f"{c(sx.get('acc'), '{:.3f}')} | {sx.get('correct')}/{sx.get('n')} | "
                          f"{c((cs.get('tokens') or {}).get('avg_out'), '{:.0f}')} | "
                          f"{(cs.get('reliability') or {}).get('requests_failed', '—')} | 实测 |")
             else:
                 L.append(f"| {cs['suite_id']} | {cs['dimension']} | — | — | — | — | "
                          f"缺: {cs.get('missing_reason', '未测')} |")
         L.append("")
+        L.extend(_emit_vllm(sc, ["phase:cap"], "能力评测期间的服务端指标"))
+        L.append("**Benchmark 三 · 智能体场景**（专属指标 + 智能体评测期间的服务端指标）")
+        L.append("")
+        ag = sc.get("agent_metrics") or {}
+        if ag:
+            m = ag.get("metrics") or {}
+            L.append(f"- 工具选择 {c(m.get('selection_acc'), '{:.3f}')} · "
+                     f"参数抽取 {c(m.get('args_acc'), '{:.3f}')} · "
+                     f"循环成功率 {c(m.get('loop_success'), '{:.3f}')}")
+            a4 = m.get("reasoning_ab")
+            if a4:
+                ton, toff = a4.get("thinking_on", {}), a4.get("thinking_off", {})
+                L.append(f"- 思考链开/关对比：开 {ton.get('wall_ms', '—')}ms/"
+                         f"{ton.get('completion_tokens', '—')}tok · "
+                         f"关 {toff.get('wall_ms', '—')}ms/"
+                         f"{toff.get('completion_tokens', '—')}tok")
+        else:
+            L.append("（智能体评测原始结果见证据目录 agent.json / bfcl.json；本场景汇编字段待接入）")
+        L.append("")
+        L.extend(_emit_vllm(sc, ["phase:agent"], "智能体评测期间的服务端指标"))
         L.append(f"证据目录: `{sc['evidence']['raw_dir']}`")
         L.append("")
         L.append("---")
