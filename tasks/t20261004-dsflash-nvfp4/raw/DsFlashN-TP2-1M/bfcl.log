@@ -1,0 +1,3 @@
+  bfcl_irrelevance  n=100 score=0.430 (克制正确率(真值无关, 精确))
+  bfcl_simple       n=100 score=0.990 (结构分下界: 函数名对+required齐+类型合理(官方AST待真值源))
+PASS bfcl → D:/CSharpProject/BenchPlaybook/tasks/t20261004-dsflash-nvfp4/raw/DsFlashN-TP2-1M/bfcl.json

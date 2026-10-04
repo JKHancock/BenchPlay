@@ -83,3 +83,22 @@
 - 修复: scripts/st_check.py 头解析级校验(header 长度+张量覆盖区间==文件字节数), 每片秒级; 坏片从对侧节点容器管道 LAN 中转(cat|docker exec -i, 两跳SSH ~5min, 免外网)
 - 规程: 大模型下载门禁必须 st_check 内容级过一遍, 尺寸校验只是初筛; 节点间有好片优先 LAN 中转
 - 监工体系首战: foreman 3 级检查抓到服务死亡 → 监工子智能体只诊断不动手(纪律生效) → 电池工作流归因回跳并行诊断 → 双控制器无打架
+
+## NVFP4 池比 FP8 小 43%, 且 soak 活 ctx 合计超池 22% 仍零抢占 — 池行并发上限是保守下界, 不是硬闸
+- 阶段: 测试(soak)+容量口径 | 现象: 同日同模型(deepseek_v4/DsFlash)双量化、同 TP2+1M ctx、同 gpu_memory_utilization=0.85——
+  NVFP4 池 1,275,550 tok/kv_cache_max_concurrency=1.216/num_gpu_blocks=13111 vs FP8 2,220,027 tok/2.117/22819
+  (DsFlashN-TP2-1M/startup.log:1 + metrics_soak_b.json cache_config_info, fp8 侧同源); 权重更小的 NVFP4 池反而小 43%
+- 超池实测: NVFP4 soak 三路 final_ctx=[525823,514969,512185] 合计 1.553M = 池的 121.8%, 33 轮零失败零抢占(preempted=false), 前缀命中 0.9398(soak.json/soak.log:35)
+- 真因(部分定位): ① 池规模逐配方实测, 禁止"量化更小→池更大"推断; ② 超池可过: cache_config_info 证实 sliding_window=128 混合滑窗注意力、
+  无 CPU offload(num_cpu_blocks/kv_offloading_size 均 None), 且 num_gpu_blocks×block_size=13111×4=52,444 ≪ 池 token 数 → 混合多池结构,
+  池行"满长并发 x"按保守口径换算, 滑窗层驻留远小于 ctx 全长(此为架构推断, 未逐层验证); soak.py:12-13 三路内容 seed 隔离, 跨会话前缀共享已排除
+- 修复/口径: ① fp8 条目的"sessions×target≤池"降级为**规划安全下界**, 不得作事后否决(本跑超 22% PASS); ② 容量证据链=cache_config_info 全字段+实测 ctx, kv gauge 两跑整场 0.0% 仍不可用; ③ 双量化对照时池差异(43%)必须写入画像, 直接影响产品并发承诺
+- 来源: t20261004-dsflash-nvfp4(对照 t20261004-dsflash-fp8) | 命中: 1
+
+## deepseek_v4 500K 级 soak TTFT 增长 ×2.2-2.4 是健康基线 — "ratio≈1=不劣化"的判读期望对该模型不成立
+- 阶段: 测试(soak 判读) | 现象: NVFP4 TP2 首3轮 13.9s→末3轮 32.9s(×2.36)@ctx≈513-526K; FP8 同日 15.7s→34.3s(×2.19);
+  两跑均 33 轮零失败、前缀命中同为 0.9398(soak 固定 seed, 数字自洽)
+- 真因: 94% 前缀命中只救回"历史全量重发", 每轮新增 ~20K/路 的纯预填+超长 ctx 注意力开销随长度增长是物理下限;
+  soak.py:143 note 的 "ttft_growth_ratio≈1 → 多轮聊天不劣化" 期望对 512K 级深上下文不现实
+- 修复/口径: 判读阈值校准——该模型 500K 级 soak ×≤2.5 且零失败即健康; >3 或出现抢占才报劣化; 首测新模型先建立自身基线再定阈值, 不沿用 note 的 ≈1 期望
+- 来源: t20261004-dsflash-nvfp4(对照 fp8 同日) | 命中: 2

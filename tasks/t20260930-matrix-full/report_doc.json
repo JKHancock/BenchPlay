@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-04T23:31:01",
+  "generated_at": "2026-10-04T23:49:51",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-overnight",
@@ -14845,6 +14845,28 @@
       "requests_success": 0.0,
       "requests_failed": 0.0
      },
+     "phase:cap": {
+      "prompt_tokens": 354346.0,
+      "gen_tokens": 637050.0,
+      "prefix_queries": 354346.0,
+      "prefix_hits": 512.0,
+      "prompt_tokens_cached": 512.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 2700.0,
+      "requests_failed": 0.0
+     },
+     "phase:agent": {
+      "prompt_tokens": 79935.0,
+      "gen_tokens": 26038.0,
+      "prefix_queries": 79935.0,
+      "prefix_hits": 1280.0,
+      "prompt_tokens_cached": 1280.0,
+      "kv_cache_usage": 0.0,
+      "running_peak": 0.0,
+      "requests_success": 212.0,
+      "requests_failed": 0.0
+     },
      "phase:soak": {
       "prompt_tokens": 26394576.0,
       "gen_tokens": 24658.0,
@@ -14913,6 +14935,22 @@
       "itl_p99_server_s": 0.454,
       "queue_p99_server_s": 224.3,
       "req_latency_p99_server_s": 39.7286
+     },
+     "phase:cap": {
+      "ttft_p99_server_s": 128.1302,
+      "ttft_p50_server_s": 0.6788,
+      "tpot_p99_server_s": 0.7138,
+      "itl_p99_server_s": 0.3254,
+      "queue_p99_server_s": 109.5659,
+      "req_latency_p99_server_s": 344.352
+     },
+     "phase:agent": {
+      "ttft_p99_server_s": 124.186,
+      "ttft_p50_server_s": 0.6621,
+      "tpot_p99_server_s": 0.7063,
+      "itl_p99_server_s": 0.3217,
+      "queue_p99_server_s": 106.4634,
+      "req_latency_p99_server_s": 324.0
      },
      "phase:soak": {
       "ttft_p99_server_s": 498.4,
@@ -15969,54 +16007,335 @@
    "capability_scores": {
     "suites": [
      {
+      "suite_id": "gsm8k",
+      "dimension": "math",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.965,
+       "correct": 193,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 105.2
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 247.2
+     },
+     {
+      "suite_id": "mmlu",
+      "dimension": "knowledge",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.84,
+       "correct": 168,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 30.4
+     },
+     {
+      "suite_id": "arc",
+      "dimension": "science",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.945,
+       "correct": 189,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 20.5
+     },
+     {
+      "suite_id": "hellaswag",
+      "dimension": "commonsense",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.875,
+       "correct": 175,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.1
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 38.8
+     },
+     {
+      "suite_id": "winogrande",
+      "dimension": "coref",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.675,
+       "correct": 135,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 14.6
+     },
+     {
+      "suite_id": "truthfulqa",
+      "dimension": "?",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.63,
+       "correct": 126,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.2
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 24.9
+     },
+     {
+      "suite_id": "openbookqa",
+      "dimension": "?",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.89,
+       "correct": 178,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 15.5
+     },
+     {
+      "suite_id": "race",
+      "dimension": "?",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.895,
+       "correct": 179,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.4
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 52.0
+     },
+     {
       "suite_id": "math500",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "未测(需 math500.jsonl)"
+      "dimension": "math-adv",
+      "settings": {
+       "n": 500,
+       "shots": 0,
+       "thinking": "on",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.722,
+       "correct": 361,
+       "n": 500,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 1011.1
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 5507.3
      },
      {
       "suite_id": "cmmlu",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "未测(需 cmmlu CSV)"
+      "dimension": "zh-knowledge",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.77,
+       "correct": 154,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 22.3
      },
      {
       "suite_id": "ceval",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "未测(需 ceval parquet)"
+      "dimension": "zh-knowledge",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.79,
+       "correct": 158,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.0
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 17.6
      },
      {
       "suite_id": "ifeval",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "未测(需 ifeval.jsonl)"
+      "dimension": "instr-follow",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.73,
+       "correct": 146,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null,
+       "instr_acc": 0.8082
+      },
+      "tokens": {
+       "avg_out": 533.5
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 1590.4
      }
     ]
    },
    "agent_metrics": {
     "metrics": {
-     "selection_acc": null,
-     "args_acc": null,
-     "loop_success": null,
-     "n": null,
-     "n_loops": null
+     "selection_acc": 1.0,
+     "args_acc": 1.0,
+     "loop_success": 1.0,
+     "n": 8,
+     "n_loops": 2
     },
     "bfcl": {
-     "irrelevance": null,
-     "simple": null
+     "irrelevance": 0.43,
+     "simple": 0.99
     }
    },
-   "status": "partial",
-   "missing": [
-    "cap.gsm8k",
-    "cap.mmlu",
-    "cap.arc"
-   ],
+   "status": "complete",
+   "missing": [],
    "evidence": {
     "raw_dir": "tasks/t20260930-matrix-full/raw4/DsFlashN-TP2-1M"
    },
@@ -16156,11 +16475,6 @@
     "runner_up": null
    }
   ],
-  "ineligible": [
-   {
-    "scenario_id": "d0cd763a",
-    "cause": "partial: 缺 cap.gsm8k,cap.mmlu,cap.arc"
-   }
-  ]
+  "ineligible": []
  }
 }

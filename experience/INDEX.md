@@ -46,3 +46,6 @@
 - probes 全灭(prefix 64/64×2轮+阶梯 c8 0/8)仍打印 PASS 且 speedup 拼成 "Nonex"; 12s 覆写超时远低于该机 TTFT 包络(c32 均 60s), 跨模型复发实锤探针侧问题 → testing-bench.md
 - vllm:kv_cache_usage_perc 整场 0.0%(实际占用≈池 70%): 容量口径改用 cache_config_info/池行算术, 新组合先做 gauge 对账 → testing-bench.md
 - 1M ctx 池行即并发上限(2.22M 池/2.12x 满长): soak 规模=sessions×target≤池, 大权重 FP8 实测 500K×3 成立 → serve-vllm.md
+- NVFP4 池比 FP8 小 43%(1.28M vs 2.22M, 同 0.85 util)且 soak 活 ctx 合计超池 22% 仍零抢占: sliding_window=128 混合池, 池行只是保守下界不作事后否决, 容量以 cache_config_info+实测为准 → testing-bench.md
+- deepseek_v4 500K 级 soak TTFT 增长 ×2.2-2.4(NVFP4 2.36/FP8 2.19)是健康基线, "ratio≈1=不劣化"期望不成立, 劣化阈值按基线定 → testing-bench.md
+- serve 三投两败取证缺口: "See root cause above" 尾部截取必丢根因(首败尾部甚至为空) + serve 命令行未落盘; 修复重投前须核查 EngineCore/shm 残留 → serve-vllm.md

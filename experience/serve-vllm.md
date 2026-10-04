@@ -200,3 +200,15 @@
   ② 与 Flash-Next(池 1.9M=1.81 路满长)同规律: 大权重 FP8/MoE 的 1M 服务"保守 1M 多路"不成立, 500K×3 两模型实测成立;
   ③ startup.log 常被裁剪(本轮只剩池行, serve.log 只剩 LAUNCHED), /metrics 的 cache_config_info 是等效可再生的池证据
 - 来源: t20261004-dsflash-fp8 | 命中: 2(ds-flash + flash-next 同规律)
+
+## NVFP4 首测 serve 三投两败: "See root cause above" 尾部截取必丢根因, 修复重投后仍会再败一次
+- 现象(t20261004-dsflash-nvfp4, DsFlashN-TP2-1M): 20:03 首投 3min 即退(raw/progress.log:1-2, 捕获的"退出尾部"为**空**);
+  20:12 修复 shard-00040 后重投 4min 再退(fix_shard40_relaunch.log:2-4); 20:23 第三投 ~460s 就绪(progress.log:3-4)
+- 真因(取证缺陷): ① 二败尾部只有 APIServer 侧堆栈, 终于 "RuntimeError: Engine core initialization failed. See root cause above.
+  Failed core proc(s): {}"(fix_shard40_relaunch.log:26-27) — 它指向的根因在 EngineCore 进程输出里, 位于截取窗口上方, tail 必然丢;
+  且 Failed core proc(s) 为空集, APIServer 视角连进程号都没有; ② 两次失败(尤其二败)至今无根因证据行; ③ 二败唯一残留线索:
+  resource_tracker "1 leaked shared_memory objects"(fix_shard40_relaunch.log:28)提示首败 EngineCore 残留未清净
+- 修复: ① serve 崩溃取证禁用纯 tail — 全量日志先 grep -nE "ERROR|Traceback|CUDA|NCCL|RuntimeError" 定位后带上下文截取, 必含
+  (EngineCore pid=...) 行; ② serve 发起时把完整命令行+解析后参数 echo 进 serve.log(本跑仅 "LAUNCHED" 1 行, 池/调度差异事后无法排查);
+  ③ 修复重投前核查上一轮 EngineCore 进程/shm 已净, 不能只信"清场完成"日志行; 关联: 分片损坏本体见 testing-bench.md NVFP4 分片条目
+- 来源: t20261004-dsflash-nvfp4 | 命中: 1
