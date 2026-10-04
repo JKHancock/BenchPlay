@@ -76,3 +76,10 @@
   (本轮 kv_cache_size_tokens=2220027, kv_cache_max_concurrency=2.117, num_gpu_blocks=22819)或 startup 池行换算, 报告注明容量口径(soak.json note 已自带此口径);
   ③ 旁证: prefix 计数器(queries 26.85M/hits 25.03M≈0.93)与 soak 前缀命中 0.9398 吻合 — 计数器可信, gauge 存疑
 - 来源: t20261004-dsflash-fp8 | 命中: 1
+
+## 2026-10-04 NVFP4 分片内容损坏逃过尺寸校验(NVFP4 场景, 监工首雷)
+- 现象: serve 加载 safetensors 报 "incomplete metadata, file not fully covered"(134/TP1), EngineCore 退出
+- 真因: model-00040 尾部多 176KB 垃圾(curl -C 续传污染的变体)——尺寸偏差 <1MB, 逐字节**尺寸**校验(±1MB 容差)放过; 尺寸≠内容
+- 修复: scripts/st_check.py 头解析级校验(header 长度+张量覆盖区间==文件字节数), 每片秒级; 坏片从对侧节点容器管道 LAN 中转(cat|docker exec -i, 两跳SSH ~5min, 免外网)
+- 规程: 大模型下载门禁必须 st_check 内容级过一遍, 尺寸校验只是初筛; 节点间有好片优先 LAN 中转
+- 监工体系首战: foreman 3 级检查抓到服务死亡 → 监工子智能体只诊断不动手(纪律生效) → 电池工作流归因回跳并行诊断 → 双控制器无打架
