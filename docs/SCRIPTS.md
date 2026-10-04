@@ -51,6 +51,7 @@
 | `cell7.sh` | Flash-Next 12套件复测电池(关自调优, math500开思考链) | 同上 |
 | `cell8.sh` | DeepSeek-V4-Flash FP8 电池(首个仓库内venv+bench, 含soak+思考链探针) | 同上 |
 | `post_run_wash.sh` | 电池后洗白+git提交(Python产物过PowerShell通道) | blob明文 |
+| `foreman.sh` | **电池监工**: 定期巡检运行中电池(失败标记/服务存活/60s双采样活性, 分级退出码 0/3/4) | 退出码 |
 | `matrix4.sh` | 多场景矩阵编排（调 cell4/5/6） | 全场景完成 |
 
 ### 阶段 7-8 · 汇编渲染
