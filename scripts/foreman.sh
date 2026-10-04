@@ -14,6 +14,15 @@ if [ -z "$DIR" ]; then
   for d in $(ls -dt $BP/tasks/t*/raw 2>/dev/null); do
     if [ -f "$d/progress.log" ] && ! tail -1 "$d/progress.log" 2>/dev/null | grep -q "DONE"; then DIR="$d"; break; fi
   done
+  # 竞态防护: 目录已建但 progress.log 未写(电池清场期~4min)→视为刚启动, 不判"无电池"
+  if [ -z "$DIR" ]; then
+    for d in $(ls -dt $BP/tasks/t*/raw 2>/dev/null | head -2); do
+      age_min=$(( ( $(date +%s) - $(stat -c %Y "$d") ) / 60 ))
+      if [ ! -f "$d/progress.log" ] && [ "$age_min" -lt 30 ]; then
+        echo "[观察] $d 刚创建尚无进度日志(电池清场期), 视为进行中"; exit 3
+      fi
+    done
+  fi
 fi
 [ -z "$DIR" ] && { echo "[监工] 无进行中的电池"; exit 0; }
 echo "[监工] 目标: $DIR"
