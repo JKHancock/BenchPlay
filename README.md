@@ -156,21 +156,37 @@ raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五�
 
 **总检索协议（§5）**：新机/新模入场按 档案原始数据 → 经验叙事 → KB 结论 的顺序（原始>叙事>结论），三层全空才联网。
 
-## 9. 目录结构
+## 9. 目录结构与脚本索引
 
 ```
-AGENTS.md/SKILL.md/README.md   入口三件（Agent 入口/法条/人类说明）
-docs/    PIPELINE(全景图) REPORT-SPEC-v4(契约) LIBRARIES(三库治理) BATTERY(套件排期) AGENT-BENCH(智能体基准调研)
-scripts/ bootstrap_key/probe/substrate/distribute/preflight/clean/cluster/serve/verify(四关)
-         cell4-cell6(场景电池编排) matrix/matrix4 serve_demo*(演示服务) model_profile(M0)
-         build7(汇编) report_gen4(渲染) kb(知识库) sniff8000(网络嗅探) envfingerprint
-bench/（位于 ../Vllm_Benchmark） track1性能 track2能力 track3智能体 bfcl probes common(客户端/metrics/分位)
-machines/ models/   机器档案 / 模型 profile
-experience/         四主题文件 + INDEX.md（41 条真机经验）
-tasks/              每任务 raw 全量证据 + 报告（按模型分组）
-viewer/             Streamlit 浏览器
+AGENTS.md / SKILL.md / README.md     入口三件（Agent 入口 / 流程法条 / 人类说明）
+docs/
+  SCRIPTS.md                          Agent 工具箱目录（阶段→脚本→门禁速查表）
+  PIPELINE.md                         流程全景图 + 阶段详解 + 十条不变量
+  REPORT-SPEC-v4.md                   报告契约（schema/渲染规则/采集义务）
+  LIBRARIES.md                        三库治理（分层/写入/检索/§5协议）
+  BATTERY.md                          套件排期（12套件覆盖计划）
+  AGENT-BENCH.md                      智能体基准调研与规格
+scripts/                              全部执行脚本（30 个，按阶段分类见 SCRIPTS.md）
+  核心管线: bootstrap_key→probe→substrate→model_profile→distribute→preflight→clean→
+           cluster→serve→verify→cell*→build7→report_gen4→scenario_index→kb
+  场景编排: cell4/cell5/cell6(单场景电池) matrix4(矩阵) overnight(无人值守)
+  增量: gen_scenarios(三层生成) add_scenario(报告后追加)
+  诊断: sniff8000(抓包) capture_kv(KV补采) fourcoll(四集合快采)
+  运维: serve_demo/serve_demo27b(演示) wash.ps1(DLP洗白)
+  配置: excluded_scenarios.json(不可行组合清单)
+  legacy/                             已废弃脚本（7 个，保留供考古）
+bench/（位于 ../Vllm_Benchmark/）
+  track1.py(性能) track2.py(能力8套) track2_extra.py(新4套)
+  track3_agent.py(智能体) bfcl.py(函数调用) probes.py(探针) common.py(客户端/指标)
+machines/                             机器档案（每台一个 JSON）
+models/                               模型 M0 profile
+experience/                           经验库（4 主题文件 + INDEX.md）
+archive/
+  scenario_index.jsonl                全局场景索引（跨任务可查）
+tasks/                                每任务目录（raw/ 全量证据 + 报告）
+viewer/                               Streamlit 浏览器
 ```
-
 ## 10. 快速开始（人类操作员）
 
 1. **首次**：在目标集群就绪后，让任意 Agent 读 `AGENTS.md`，提供机器清单（`host|user|password|机型`）+ 模型清单 + 用途声明(chat/agent)

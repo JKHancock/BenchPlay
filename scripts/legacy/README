@@ -1,0 +1,8 @@
+# 已废弃脚本（被新版本替代，保留供考古）
+bench.sh      → 被 bench/track1.py 替代（C# CLI 包装器）
+collect.sh    → 被 cell4.sh 替代（v3 采集流程）
+merge_rows.py → 被 build7.py 替代（v3 行合并）
+report_gen.py → 被 report_gen4.py 替代（v3 渲染器）
+matrix.sh     → 被 matrix4.sh 替代（v3 矩阵）
+cell.sh       → 被 cell4.sh 替代（v3 单组合电池）
+round5.sh     → 一次性绕行脚本（自调优问题已由 kernel-config 根治）

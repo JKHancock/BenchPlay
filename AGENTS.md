@@ -46,3 +46,9 @@
 3. 场景生成三维化: 模型(M0)×服务flags(TP/EP/MTP/YaRN/parser)×用途；报告按模型分组、组合=argv
 4. 经验库已拆分: experience/{serve-vllm,os-network,testing-bench,process-governance}.md + INDEX.md（检索先读 INDEX，规程 LIBRARIES §7）
 5. 汇编入口: scripts/build7.py（build_doc.py 待清理）；渲染 scripts/report_gen4.py doc out [模型过滤]
+
+
+## 工具箱目录（阶段→脚本→门禁速查）
+详见 [docs/SCRIPTS.md](docs/SCRIPTS.md)——每个阶段该用哪个脚本、怎么调、门禁是什么。
+Agent 在进入任何阶段前先查此表，不要凭记忆调脚本名。
+核心规则: cell4/5/6 是编排脚本(内部调 serve/verify/bench 工具链); bench/ 工具在 ../Vllm_Benchmark/bench/。
