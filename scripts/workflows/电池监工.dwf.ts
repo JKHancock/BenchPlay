@@ -27,6 +27,7 @@ const foreman = agent("电池监工", {
     "判不了就明说判不了, 不要猜.",
 });
 
+let lastSig = "";
 let cycles = 0;
 let healthyCycles = 0;
 const findings: WatchReport["findings"] = [];
@@ -41,17 +42,23 @@ for (let cycle = 1; cycle <= 40; cycle++) {
     break;
   }
   if (chk.exitCode === 4) {
-    const diag = await foreman.ask<Diagnosis>(
-      "巡检异常(FOREMAN exit 4):\n" + chk.stdout + "\n按证据归因(只诊断不动手), 返回 stage/root_cause/needs_user。",
-    );
-    findings.push({
-      where: "tasks/t20261004-dsflash-fp8/raw",
-      what: "第" + cycle + "轮巡检异常: " + diag.stage + " — " + diag.root_cause,
-      evidence: chk.stdout.split("\n").slice(0, 4).join(" | "),
-      severity: diag.needs_user ? "high" : "medium",
-    });
-    report({ cycle: cycle, 状态: "异常", 结论: diag.root_cause, 需人工: diag.needs_user });
-    if (diag.needs_user) { concluded = "发现需人工决策的异常, 监工提前撤岗上报"; break; }
+    const sig = chk.stdout.split("\n").slice(0, 2).join("|").slice(0, 140);
+    if (sig === lastSig) {
+      // 同签名异常不重复派诊断(已在处置中), 只记观察
+      report({ cycle: cycle, 状态: "重复异常(已处置中)", 签名: sig.slice(0, 60) });
+    } else {
+      lastSig = sig;
+      const diag = await foreman.ask<Diagnosis>(
+        "巡检异常(FOREMAN exit 4):\n" + chk.stdout + "\n按证据归因(只诊断不动手), 返回 stage/root_cause/needs_user。",
+      );
+      findings.push({
+        where: "电池任务目录",
+        what: "第" + cycle + "轮巡检异常: " + diag.stage + " — " + diag.root_cause,
+        evidence: chk.stdout.split("\n").slice(0, 4).join(" | "),
+        severity: diag.needs_user ? "high" : "medium",
+      });
+      report({ cycle: cycle, 状态: "异常", 结论: diag.root_cause, 需人工: diag.needs_user });
+    }
   } else if (chk.exitCode === 3) {
     report({ cycle: cycle, 状态: "观察", 详情: (chk.stdout.split("\n")[1] ?? "").slice(0, 80) });
   } else {
