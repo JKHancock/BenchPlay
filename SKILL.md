@@ -186,3 +186,16 @@ verify.sh 增 关4(工具调用回环), 分级: 用途=agent → FAIL级; 用途
 **Subsumption规则**: autotune=on 被 off 包含(差<1%且死锁); MTP k=1 被 k=2 包含(k=1接受率是子集); 同参组合的低配被高配包含(如 max_num_seqs=8 被 64 包含)。
 
 **效果**: 64组合笛卡尔积 → 裁决后 8-12个serve配置 → 每个内含完整请求轴矩阵(5种输入长度×5种并发×3种输出长度)。
+
+### 修订案 A6（2026-10-04）· 场景索引层 + add_scenario 增量追加
+**场景索引层**: scripts/scenario_index.py
+- 每个 report_doc.json 完成后自动追加到 archive/scenario_index.jsonl（幂等，同 scenario_id 覆盖）
+- 每条记录 = 一个场景的扁平关键字段（模型/集群/TP/EP/MTP_k/parser/KV池/性能/能力/智能体/指纹/原始目录指针）
+- 查询接口: --query "tp=2" / "capability.gsm8k>0.94" / "Flash" / "mtp_k>0"
+- 用途: ①新机/新模 §5 检索近似场景 ②跨任务趋势查询 ③知识库 Qdrant 喂入来源
+
+**add_scenario**: scripts/add_scenario.py
+- 人类看完报告说"想试新参数组合" → 解析 → Layer2裁决 → 查重(是否已测) → 可行则输出cell命令
+- 支持自然语言("TP2+EP+MTP3+parser")和精确参数(--tp 2 --ep --mtp-k 3)
+
+**冷启动**: gen_scenarios 三层架构不依赖经验库/知识库（M0现场画像+机器档案+模型无关的vLLM经验=足够裁决）
