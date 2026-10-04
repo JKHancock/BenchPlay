@@ -131,3 +131,11 @@ kb.py upsert --content "GB10×1 单机 Qwen3.6-35B-A3B(NVFP4): 单流 67.7 tok/s
 库结构: experience/{serve-vllm, os-network, testing-bench, process-governance}.md + INDEX.md(条目→文件映射)
 检索三级: ①读INDEX按标题定位→读对应文件条目 ②按阶段/关键词grep条目标题(每条含 阶段/现象/修复/来源/命中数) ③条目>100或语义模糊查询时走KB(kb.py query)
 写入规则: 新教训append到对应主题文件(找不到主题进misc.md), 同步更新INDEX; 命中计数在下次命中时+1
+
+## §8 三库 git 持久化（2026-10-04 生效）
+- 档案库/经验库是文本文件, 直接随仓库提交;
+- 知识库(Qdrant kb_playbook)是派生索引: 变动后 `kb.py export` → archive/kb_snapshot.jsonl 随仓库提交,
+  新机 `kb.py rebuild` 从快照重建(重嵌向量, 保留命中数, 幂等);
+- **提交纪律**: Python 新写的文件在工作区是 DLP 密文, git add 前用 PowerShell Copy-Item 通道洗白
+  (wash.ps1), 保证仓库 blob 是明文、克隆方可读;
+- 全量清空走 scripts/reset_data.sh（见 README §10）, 删除物入 .reset_backup 可反悔。

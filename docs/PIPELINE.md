@@ -47,7 +47,7 @@
 │ serve→verify四关→Track1-4→三时点metrics→落档 │
 └──────────────────────────────────────────────┘
    ▼
-[7 汇编 build_doc] report_doc.json ──◆ jsonschema校验不过拒绝渲染
+[7 汇编 build8(当前), build_doc为内核] report_doc.json ──◆ jsonschema校验不过拒绝渲染
    ▼
 [8 渲染 report_gen4] ──◆ 推荐理由数值回查(单元格查不到即失败)
    ▼
@@ -104,7 +104,7 @@ raw/<tag>/{serve,startup,w*.json, probes.json, cap.json,
                                             │
             ┌──── 档案库 raw/ 全量证据 ←──────┘
 envfingerprint(每任务复核, 漂移即灰标)
-                    │ build_doc.py
+                    │ build8.py→build_doc.py(内核)
                     ▼
             report_doc.json ◆jsonschema
                     │ report_gen4.py ◆推荐数值回查
@@ -127,7 +127,7 @@ envfingerprint(每任务复核, 漂移即灰标)
 | M0.5调研 | Agent检索 | external_research | 实测后才verified | 档案+KB提名 | web |
 | 5组网 | cluster.sh | ray双机 | 2节点2GPU | 档案 | 经验(ray僵尸/QSFP) |
 | 6场景 | cell*.sh+bench/* | raw/<tag>/全量 | 四关+档门禁+屋顶线+截断率 | 档案 | profile/经验/KB |
-| 7汇编 | build_doc.py | report_doc.json | schema校验 | 档案 | — |
+| 7汇编 | build8.py(内核build_doc) | report_doc.json | schema校验 | 档案 | — |
 | 8渲染 | report_gen4.py | report_v4.md | 推荐数值回查 | 档案 | — |
 | 9沉淀 | Agent | 经验条目/KB提名 | 复现门槛(N≥2) | 经验+KB | 全库 |
 

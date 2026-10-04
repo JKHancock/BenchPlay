@@ -54,7 +54,8 @@
 ### 阶段 7-8 · 汇编渲染
 | 脚本 | 用法 | 门禁 |
 |---|---|---|
-| `build7.py` | raw→report_doc.json（含 agent_metrics） | JSON Schema 校验 |
+| `build7.py` | raw→report_doc.json（7场景版, 运行档案） | JSON Schema 校验 |
+| `build8.py` | **当前汇编入口**（8场景: +Flash-Next 12套件复测, argv 含 kernel-config） | JSON Schema 校验 |
 | `report_gen4.py <doc> [out] [模型过滤]` | 渲染 markdown 报告 | 推荐数值回查 |
 
 ### 阶段 9 · 沉淀

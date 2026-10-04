@@ -111,7 +111,7 @@ BenchPlaybook 的回答：把"部署 → 多参数组合测试 → 报告 → �
 
 **执行加速（宿主 IDE 并行编排，强烈建议用满）**：电池本身受 GPU 互斥天然串行（一个 vLLM 实例一次只测一组服务参数），但 M0 模型画像分析、数据集准备、电池后处理（汇编/渲染/索引/经验提炼）、报告分章写作均无资源冲突，可并行。ZCode 用动态 workflow（CreateWorkflow，子智能体 fan-out + 控制流护栏）；Claude Code 用并行 Task 子智能体 + hooks 验退出码；Codex 用并行 cloud task；OpenCode 用 subagent 并发。红线：子智能体产出仍必须是 exit code + 证据文件，不得写同一 raw 目录。映射表详见 `docs/AGENT-BINDING.md` §并行加速。
 
-### 阶段 7 · 汇编（build7.py）
+### 阶段 7 · 汇编（build8.py，当前入口）
 raw → `report_doc.json`：机器 Part A、模型 Profile、场景列表（五要素：模型/机器与每机 ray/四指标集合）、推荐。**门禁**：JSON Schema 校验不过拒绝渲染。
 
 ### 阶段 8 · 渲染（report_gen4.py）
@@ -175,8 +175,8 @@ docs/
   AGENT-BENCH.md                      智能体基准调研与规格
 scripts/                              全部执行脚本（30 个，按阶段分类见 SCRIPTS.md）
   核心管线: bootstrap_key→probe→substrate→model_profile→distribute→preflight→clean→
-           cluster→serve→verify→cell*→build7→report_gen4→scenario_index→kb
-  场景编排: cell4/cell5/cell6(单场景电池) matrix4(矩阵) overnight(无人值守)
+           cluster→serve→verify→cell*→build8→report_gen4→scenario_index→kb
+  场景编排: cell4/cell5/cell6/cell7(单场景电池) matrix4(矩阵) overnight(无人值守)
   增量: gen_scenarios(三层生成) add_scenario(报告后追加)
   诊断: sniff8000(抓包) capture_kv(KV补采) fourcoll(四集合快采)
   运维: serve_demo/serve_demo27b(演示) wash.ps1(DLP洗白)
