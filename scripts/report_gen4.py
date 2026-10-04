@@ -171,11 +171,15 @@ def main():
               f"autotune {st['flashinfer_autotune']} · max_num_seqs {st['max_num_seqs']} |"]
         g = sc["vllm_metrics"]["gauges_peak"]
         if g:
-            kmax = max(g, key=lambda k: (g[k].get("num_requests_running") or 0))
+            kmax = max(g, key=lambda k: (g[k].get("running_peak") or
+                                         g[k].get("num_requests_running") or 0))
             pk = g[kmax]
-            L.append(f"| 负载中峰值 | KV占用 {c(pk.get('kv_cache_usage_perc'), '{:.1%}')} · "
-                     f"running {c(pk.get('num_requests_running'), '{:.0f}')} · "
-                     f"waiting {c(pk.get('num_requests_waiting'), '{:.0f}')}（最重相 {kmax}） |")
+            kname = kmax.split(":")[0]
+            kname = WL_NAMES.get(kname, kname)
+            conc = kmax.split(":c")[-1] if ":c" in kmax else ""
+            L.append(f"| 负载中峰值 | KV缓存占用 {c(pk.get('kv_peak') if pk.get('kv_peak') is not None else pk.get('kv_cache_usage_perc'), '{:.1%}')} · "
+                     f"同时在跑请求 {c(pk.get('running_peak') if pk.get('running_peak') is not None else pk.get('num_requests_running'), '{:.0f}')} 路"
+                     f"（出现在{kname}{(' 并发' + conc + ' 时') if conc else ''}，采样{pk.get('samples', '—')}次） |")
         ph = sc["vllm_metrics"]["host_per_machine"]
         if ph:
             L.append("| 主机(负载中) | " + " · ".join(
@@ -183,12 +187,13 @@ def main():
                 f"mem {c(v['gpu_mem_used_gb_peak'], '{:.0f}')}GB" for k, v in ph.items()) + " |")
         L.append("")
         cn = sc["vllm_metrics"]["counters"]
-        L.extend(["| 相位 | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | TTFT p99 | TPOT p99 | ITL p99 | 排队 p99 |",
+        L.extend(["| 指标采集段（哪场测试期间） | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | TTFT p99 | TPOT p99 | ITL p99 | 排队 p99 |",
                  "|---|---|---|---|---|---|---|---|---|---|"])
         for k, m in cn.items():
             hg = sc["vllm_metrics"]["histograms"].get(k, {})
             q, h_ = m.get("prefix_queries"), m.get("prefix_hits")
-            L.append(f"| {k} | {c(m.get('requests_success'), '{:,.0f}')} | "
+            kname = PH_NAMES.get(k, k)
+            L.append(f"| {kname} | {c(m.get('requests_success'), '{:,.0f}')} | "
                      f"{c(m.get('requests_failed'), '{:,.0f}')} | "
                      f"{c(m.get('prompt_tokens'), '{:,.0f}')} | "
                      f"{c(m.get('gen_tokens'), '{:,.0f}')} | "
