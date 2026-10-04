@@ -150,9 +150,10 @@ def main():
             loops.append({"id": cid, "error": str(e)[:150]})
 
     n = len(CASES)
+    n_call = sum(1 for c in CASES if not c[3].get("no_call"))  # 克制题不计入参数分母
     out = {"track": "track3", "api_base": api, "model": args.model,
            "metrics": {"selection_acc": round(sel_ok / n, 4),
-                       "args_acc": round(args_ok / n, 4),
+                       "args_acc": round(args_ok / n_call, 4) if n_call else None,
                        "restraint_included": True, "n": n,
                        "loop_success": round(loop_ok / len(LOOP_CASES), 4),
                        "n_loops": len(LOOP_CASES)},

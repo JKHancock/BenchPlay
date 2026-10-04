@@ -1,0 +1,3 @@
+  w3 c=1   n=24  TTFT 148.3/170.8 TPOT 22.7/30.2 ITLp99 89.5 out 26.1 tok/s goodput 100.0% ok/f=24/0
+  w3 c=8   n=48  TTFT 387.1/471.1 TPOT 48.9/76.7 ITLp99 205.0 out 85.7 tok/s goodput 100.0% ok/f=48/0
+PASS w3 2档 → D:/CSharpProject/BenchPlaybook/tasks/t20260930-flashnext-c12/raw/FlashNext-TP2-1M/w3.json

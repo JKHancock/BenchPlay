@@ -41,3 +41,4 @@
 - [开放→已定位] tool_choice=auto 全灭: hermes parser 与 Qwen3.5系XML语法不匹配 → serve-vllm.md
 - [实测纠偏] 调大 max_num_batched_tokens 并未加速 GB10 长文冷预填 — 预填是算力瓶颈 → serve-vllm.md
 - hf-mirror 下载 nvidia 仓库必须禁 xet + Flash-Next 首测画像 → serve-vllm.md
+- testing-bench.md += 十二套件扩容实战(2026-10-04)

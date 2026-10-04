@@ -1,10 +1,11 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-04T09:33:05",
+  "generated_at": "2026-10-04T12:39:47",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
-   "tasks/t20261003-flashnext/raw"
+   "tasks/t20261003-overnight",
+   "tasks/t20260930-flashnext-c12/raw"
   ],
   "fingerprint": {
    "vllm": "0.30.0",
@@ -1653,21 +1654,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -3230,21 +3238,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -4808,21 +4823,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -6364,21 +6386,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -7920,21 +7949,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -9330,21 +9366,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -9377,7 +9420,7 @@
    "notes": "EP2(专家并行, --enable-expert-parallel) YaRN4x外拓至1M(原生262144, 质量衰减未做needle验证); MTP投机k=2实测接受率75.2%, 单流+37%; 128K输入TTFT实测57.7s(spec模式max_num_scheduled_tokens=2048限制), 1M满输入外推≈7-8分钟 FlashInfer自调优关闭口径(跨会话自调优确定性死亡, 实测代价<1%)"
   },
   {
-   "scenario_id": "37bb1c1e",
+   "scenario_id": "19f00a4e",
    "vllm_args": [
     "vllm",
     "serve",
@@ -9387,9 +9430,11 @@
     "--distributed-executor-backend",
     "ray",
     "--speculative-config",
+    "{\"method\":\"qwen4_exp_mtp\",\"num_speculative_tokens\":2}",
     "--hf-overrides",
     "{\"text_config\":{\"max_position_embeddings\":1048576,\"rope_scaling\":{\"rope_type\":\"yarn\",\"factor\":4.0,\"original_max_position_embeddings\":262144}}}",
-    "{\"method\":\"qwen4_exp_mtp\",\"num_speculative_tokens\":2}",
+    "--kernel-config",
+    "{\"enable_flashinfer_autotune\":false}",
     "--enable-auto-tool-choice",
     "--tool-call-parser",
     "qwen3_xml",
@@ -9475,10 +9520,10 @@
    },
    "vllm_metrics": {
     "startup": {
-     "ready_s": 480,
+     "ready_s": 380,
      "load_s": null,
-     "kv_cache_tokens": 1899278,
-     "max_concurrency_x": 1.81,
+     "kv_cache_tokens": 1919532,
+     "max_concurrency_x": 1.83,
      "tensor_parallel": 2,
      "pipeline_parallel": 1,
      "cudagraph_mode": "PIECEWISE",
@@ -9492,70 +9537,70 @@
     },
     "gauges_peak": {
      "w1:c1": {
-      "kv_peak": 0.0115,
+      "kv_peak": 0.0114,
       "gpu_cache_peak": 0.0,
       "running_peak": 1.0,
-      "samples": 25
+      "samples": 23
      },
      "w1:c8": {
-      "kv_peak": 0.092,
+      "kv_peak": 0.091,
       "gpu_cache_peak": 0.0,
       "running_peak": 8.0,
-      "samples": 26
+      "samples": 24
      },
      "w1:c32": {
-      "kv_peak": 0.092,
+      "kv_peak": 0.091,
       "gpu_cache_peak": 0.0,
       "running_peak": 8.0,
-      "samples": 39
+      "samples": 33
      },
      "w2:c1": {
-      "kv_peak": 0.0115,
+      "kv_peak": 0.0114,
       "gpu_cache_peak": 0.0,
       "running_peak": 1.0,
-      "samples": 52
+      "samples": 45
      },
      "w2:c8": {
-      "kv_peak": 0.092,
+      "kv_peak": 0.091,
       "gpu_cache_peak": 0.0,
       "running_peak": 8.0,
-      "samples": 40
+      "samples": 36
      },
      "w3:c1": {
-      "kv_peak": 0.0115,
+      "kv_peak": 0.0114,
       "gpu_cache_peak": 0.0,
       "running_peak": 1.0,
       "samples": 4
      },
      "w3:c8": {
-      "kv_peak": 0.0575,
+      "kv_peak": 0.091,
       "gpu_cache_peak": 0.0,
-      "running_peak": 5.0,
+      "running_peak": 8.0,
       "samples": 3
      },
      "w4:c1": {
-      "kv_peak": 0.0172,
-      "gpu_cache_peak": 0.0,
-      "running_peak": 1.0,
-      "samples": 18
-     },
-     "w4:c4": {
-      "kv_peak": 0.069,
-      "gpu_cache_peak": 0.0,
-      "running_peak": 4.0,
-      "samples": 19
-     },
-     "w5:c1": {
-      "kv_peak": 0.0172,
+      "kv_peak": 0.0171,
       "gpu_cache_peak": 0.0,
       "running_peak": 1.0,
       "samples": 14
      },
+     "w4:c4": {
+      "kv_peak": 0.0642,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 4.0,
+      "samples": 14
+     },
+     "w5:c1": {
+      "kv_peak": 0.0146,
+      "gpu_cache_peak": 0.0,
+      "running_peak": 1.0,
+      "samples": 15
+     },
      "w6:c64": {
-      "kv_peak": 0.092,
+      "kv_peak": 0.091,
       "gpu_cache_peak": 0.0,
       "running_peak": 8.0,
-      "samples": 55
+      "samples": 44
      }
     },
     "counters": {
@@ -9637,100 +9682,100 @@
       "requests_failed": 0.0
      },
      "phase:cap": {
-      "prompt_tokens": 247877.0,
-      "gen_tokens": 49337.0,
-      "prefix_queries": 247877.0,
+      "prompt_tokens": 368387.0,
+      "gen_tokens": 878577.0,
+      "prefix_queries": 368387.0,
       "prefix_hits": 0.0,
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 3198.0,
-      "requests_failed": 3198.0
+      "requests_success": 5298.0,
+      "requests_failed": 5298.0
      },
      "phase:agent": {
-      "prompt_tokens": 78482.0,
-      "gen_tokens": 24391.0,
-      "prefix_queries": 78482.0,
+      "prompt_tokens": 78628.0,
+      "gen_tokens": 25044.0,
+      "prefix_queries": 78628.0,
       "prefix_hits": 0.0,
       "prompt_tokens_cached": 0.0,
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
-      "requests_success": 420.0,
-      "requests_failed": 420.0
+      "requests_success": 418.0,
+      "requests_failed": 418.0
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 67.8667,
-      "ttft_p50_server_s": 4.0179,
-      "tpot_p99_server_s": 0.0742,
-      "itl_p99_server_s": 0.4254,
-      "queue_p99_server_s": 40.9,
-      "req_latency_p99_server_s": 19.7725
+      "ttft_p99_server_s": 39.4313,
+      "ttft_p50_server_s": 3.0357,
+      "tpot_p99_server_s": 0.0636,
+      "itl_p99_server_s": 0.2897,
+      "queue_p99_server_s": 39.6208,
+      "req_latency_p99_server_s": 15.45
      },
      "phase:w2": {
-      "ttft_p99_server_s": 59.2,
-      "ttft_p50_server_s": 0.4816,
-      "tpot_p99_server_s": 0.0742,
-      "itl_p99_server_s": 0.3241,
-      "queue_p99_server_s": 39.7565,
-      "req_latency_p99_server_s": 19.731
+      "ttft_p99_server_s": 39.025,
+      "ttft_p50_server_s": 0.4776,
+      "tpot_p99_server_s": 0.0685,
+      "itl_p99_server_s": 0.2719,
+      "queue_p99_server_s": 39.35,
+      "req_latency_p99_server_s": 14.9765
      },
      "phase:w3": {
-      "ttft_p99_server_s": 49.4667,
-      "ttft_p50_server_s": 0.4039,
-      "tpot_p99_server_s": 0.0741,
-      "itl_p99_server_s": 0.32,
-      "queue_p99_server_s": 39.4391,
-      "req_latency_p99_server_s": 19.6052
+      "ttft_p99_server_s": 38.5688,
+      "ttft_p50_server_s": 0.4025,
+      "tpot_p99_server_s": 0.073,
+      "itl_p99_server_s": 0.2713,
+      "queue_p99_server_s": 39.0458,
+      "req_latency_p99_server_s": 14.9458
      },
      "phase:w4": {
-      "ttft_p99_server_s": 47.7333,
-      "ttft_p50_server_s": 0.4174,
-      "tpot_p99_server_s": 0.0745,
-      "itl_p99_server_s": 0.3344,
-      "queue_p99_server_s": 39.3826,
-      "req_latency_p99_server_s": 21.9333
+      "ttft_p99_server_s": 38.4875,
+      "ttft_p50_server_s": 0.4159,
+      "tpot_p99_server_s": 0.0729,
+      "itl_p99_server_s": 0.2714,
+      "queue_p99_server_s": 38.9917,
+      "req_latency_p99_server_s": 14.9833
      },
      "phase:w5": {
-      "ttft_p99_server_s": 47.0667,
-      "ttft_p50_server_s": 0.4232,
-      "tpot_p99_server_s": 0.0745,
-      "itl_p99_server_s": 0.326,
-      "queue_p99_server_s": 39.3609,
-      "req_latency_p99_server_s": 23.825
+      "ttft_p99_server_s": 38.4562,
+      "ttft_p50_server_s": 0.4216,
+      "tpot_p99_server_s": 0.0728,
+      "itl_p99_server_s": 0.2694,
+      "queue_p99_server_s": 38.9708,
+      "req_latency_p99_server_s": 16.325
      },
      "phase:w6": {
-      "ttft_p99_server_s": 142.1714,
-      "ttft_p50_server_s": 0.4932,
-      "tpot_p99_server_s": 0.0745,
-      "itl_p99_server_s": 0.4092,
-      "queue_p99_server_s": 112.512,
-      "req_latency_p99_server_s": 22.2
+      "ttft_p99_server_s": 78.5067,
+      "ttft_p50_server_s": 0.4911,
+      "tpot_p99_server_s": 0.0719,
+      "itl_p99_server_s": 0.2816,
+      "queue_p99_server_s": 108.3,
+      "req_latency_p99_server_s": 14.9968
      },
      "phase:probe": {
-      "ttft_p99_server_s": 142.1714,
-      "ttft_p50_server_s": 0.4932,
-      "tpot_p99_server_s": 0.0745,
-      "itl_p99_server_s": 0.4092,
-      "queue_p99_server_s": 112.512,
-      "req_latency_p99_server_s": 22.2
+      "ttft_p99_server_s": 78.5067,
+      "ttft_p50_server_s": 0.4911,
+      "tpot_p99_server_s": 0.0719,
+      "itl_p99_server_s": 0.2816,
+      "queue_p99_server_s": 108.3,
+      "req_latency_p99_server_s": 14.9968
      },
      "phase:cap": {
-      "ttft_p99_server_s": 72.9379,
-      "ttft_p50_server_s": 0.482,
-      "tpot_p99_server_s": 0.2522,
-      "itl_p99_server_s": 0.3083,
-      "queue_p99_server_s": 74.112,
-      "req_latency_p99_server_s": 21.0444
+      "ttft_p99_server_s": 42.5067,
+      "ttft_p50_server_s": 0.4276,
+      "tpot_p99_server_s": 0.148,
+      "itl_p99_server_s": 0.1919,
+      "queue_p99_server_s": 42.35,
+      "req_latency_p99_server_s": 294.6462
      },
      "phase:agent": {
-      "ttft_p99_server_s": 70.0276,
-      "ttft_p50_server_s": 0.4621,
-      "tpot_p99_server_s": 0.2469,
-      "itl_p99_server_s": 0.2925,
-      "queue_p99_server_s": 69.048,
-      "req_latency_p99_server_s": 21.7952
+      "ttft_p99_server_s": 39.9,
+      "ttft_p50_server_s": 0.4206,
+      "tpot_p99_server_s": 0.1475,
+      "itl_p99_server_s": 0.1912,
+      "queue_p99_server_s": 39.925,
+      "req_latency_p99_server_s": 281.6
      }
     },
     "host_per_machine": {}
@@ -9766,43 +9811,43 @@
         "num_prompts": 8,
         "retried": 0,
         "ttft_ms": {
-         "p50": 301.291,
-         "p90": 411.66,
-         "p99": 421.115,
-         "mean": 328.96,
-         "max": 422.165
+         "p50": 312.816,
+         "p90": 500.516,
+         "p99": 507.203,
+         "mean": 358.309,
+         "max": 507.946
         },
         "tpot_ms": {
-         "p50": 22.002,
-         "p90": 26.925,
-         "p99": 27.882,
-         "mean": 23.16,
-         "max": 27.988
+         "p50": 20.266,
+         "p90": 33.321,
+         "p99": 53.996,
+         "mean": 25.36,
+         "max": 56.293
         },
         "itl_ms": {
-         "p50": 52.244,
-         "p99": 73.294,
-         "max": 123.785
+         "p50": 52.192,
+         "p99": 86.865,
+         "max": 8852.198
         },
         "e2e_ms": {
-         "p50": 5911.712,
-         "p90": 7277.636,
-         "p99": 7530.987
+         "p50": 5546.643,
+         "p90": 8890.556,
+         "p99": 14265.4
         },
         "per_stream_out_tok_s": {
-         "p50": 43.313,
-         "p99": 48.63
+         "p50": 46.157,
+         "p99": 47.935
         },
         "agg": {
-         "output_tok_s": 41.06,
-         "total_tok_s": 160.97,
-         "qps": 0.1604
+         "output_tok_s": 37.51,
+         "total_tok_s": 147.04,
+         "qps": 0.1465
         },
         "slo": {
          "ttft_le_ms": 500.0,
          "tpot_le_ms": 100.0,
-         "goodput_pct": 100.0,
-         "met": true
+         "goodput_pct": 87.5,
+         "met": false
         },
         "reliability": {
          "completed": 8,
@@ -9810,12 +9855,12 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 49.9,
+        "wall_s": 54.6,
         "gauge_peaks": {
-         "kv_peak": 0.0115,
+         "kv_peak": 0.0114,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
-         "samples": 25
+         "samples": 23
         }
        },
        {
@@ -9823,42 +9868,42 @@
         "num_prompts": 32,
         "retried": 0,
         "ttft_ms": {
-         "p50": 678.275,
-         "p90": 3770.191,
-         "p99": 3771.928,
-         "mean": 1421.527,
-         "max": 3772.088
+         "p50": 811.585,
+         "p90": 3548.646,
+         "p99": 3550.748,
+         "mean": 1479.113,
+         "max": 3551.213
         },
         "tpot_ms": {
-         "p50": 47.522,
-         "p90": 58.602,
-         "p99": 64.33,
-         "mean": 48.605,
-         "max": 64.848
+         "p50": 41.165,
+         "p90": 47.458,
+         "p99": 50.527,
+         "mean": 41.602,
+         "max": 51.801
         },
         "itl_ms": {
-         "p50": 102.222,
-         "p99": 442.744,
-         "max": 3291.711
+         "p50": 91.226,
+         "p99": 310.795,
+         "max": 3182.728
         },
         "e2e_ms": {
-         "p50": 13111.219,
-         "p90": 18047.697,
-         "p99": 19687.104
+         "p50": 11798.916,
+         "p90": 13953.263,
+         "p99": 15415.395
         },
         "per_stream_out_tok_s": {
-         "p50": 19.586,
-         "p99": 25.185
+         "p50": 21.697,
+         "p99": 24.838
         },
         "agg": {
-         "output_tok_s": 145.35,
-         "total_tok_s": 569.73,
-         "qps": 0.5678
+         "output_tok_s": 167.76,
+         "total_tok_s": 657.58,
+         "qps": 0.6553
         },
         "slo": {
          "ttft_le_ms": 500.0,
          "tpot_le_ms": 100.0,
-         "goodput_pct": 25.0,
+         "goodput_pct": 21.9,
          "met": false
         },
         "reliability": {
@@ -9867,12 +9912,12 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 56.4,
+        "wall_s": 48.8,
         "gauge_peaks": {
-         "kv_peak": 0.092,
+         "kv_peak": 0.091,
          "gpu_cache_peak": 0.0,
          "running_peak": 8.0,
-         "samples": 26
+         "samples": 24
         }
        },
        {
@@ -9880,37 +9925,37 @@
         "num_prompts": 48,
         "retried": 0,
         "ttft_ms": {
-         "p50": 31140.298,
-         "p90": 39729.395,
-         "p99": 40572.723,
-         "mean": 26787.26,
-         "max": 40782.933
+         "p50": 28776.487,
+         "p90": 34531.905,
+         "p99": 35675.372,
+         "mean": 23224.793,
+         "max": 36118.009
         },
         "tpot_ms": {
-         "p50": 46.961,
-         "p90": 57.391,
-         "p99": 65.034,
-         "mean": 47.392,
-         "max": 68.089
+         "p50": 41.255,
+         "p90": 45.037,
+         "p99": 46.27,
+         "mean": 40.977,
+         "max": 46.318
         },
         "itl_ms": {
-         "p50": 110.81,
-         "p99": 423.448,
-         "max": 2517.136
+         "p50": 90.508,
+         "p99": 302.097,
+         "max": 1325.891
         },
         "e2e_ms": {
-         "p50": 43403.068,
-         "p90": 51836.653,
-         "p99": 52527.002
+         "p50": 39447.647,
+         "p90": 45745.498,
+         "p99": 46503.226
         },
         "per_stream_out_tok_s": {
-         "p50": 5.939,
-         "p99": 17.036
+         "p50": 6.548,
+         "p99": 25.282
         },
         "agg": {
-         "output_tok_s": 155.59,
-         "total_tok_s": 609.37,
-         "qps": 0.6078
+         "output_tok_s": 182.67,
+         "total_tok_s": 715.42,
+         "qps": 0.7135
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -9924,20 +9969,20 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 79.0,
+        "wall_s": 67.3,
         "gauge_peaks": {
-         "kv_peak": 0.092,
+         "kv_peak": 0.091,
          "gpu_cache_peak": 0.0,
          "running_peak": 8.0,
-         "samples": 39
+         "samples": 33
         }
        }
       ],
-      "duration_s": 205.2,
+      "duration_s": 190.7,
       "roofline": {
        "ceiling_tok_s": 136.5,
-       "c1_output_tok_s": 41.06,
-       "utilization": 0.301,
+       "c1_output_tok_s": 37.51,
+       "utilization": 0.275,
        "warning": null
       },
       "gate_pass": true
@@ -9969,37 +10014,37 @@
         "num_prompts": 16,
         "retried": 0,
         "ttft_ms": {
-         "p50": 173.924,
-         "p90": 365.54,
-         "p99": 442.644,
-         "mean": 215.663,
-         "max": 447.492
+         "p50": 150.59,
+         "p90": 272.667,
+         "p99": 350.778,
+         "mean": 174.738,
+         "max": 361.455
         },
         "tpot_ms": {
-         "p50": 24.082,
-         "p90": 30.529,
-         "p99": 34.228,
-         "mean": 24.975,
-         "max": 34.863
+         "p50": 22.364,
+         "p90": 23.74,
+         "p99": 25.226,
+         "mean": 22.055,
+         "max": 25.487
         },
         "itl_ms": {
-         "p50": 53.667,
-         "p99": 75.7,
-         "max": 128.405
+         "p50": 50.946,
+         "p99": 83.091,
+         "max": 136.844
         },
         "e2e_ms": {
-         "p50": 6281.74,
-         "p90": 7994.292,
-         "p99": 9028.01
+         "p50": 5927.709,
+         "p90": 6223.451,
+         "p99": 6676.658
         },
         "per_stream_out_tok_s": {
-         "p50": 40.753,
-         "p99": 51.564
+         "p50": 43.193,
+         "p99": 52.876
         },
         "agg": {
-         "output_tok_s": 38.88,
-         "total_tok_s": 54.7,
-         "qps": 0.1519
+         "output_tok_s": 44.14,
+         "total_tok_s": 62.11,
+         "qps": 0.1724
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10013,12 +10058,12 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 105.4,
+        "wall_s": 92.8,
         "gauge_peaks": {
-         "kv_peak": 0.0115,
+         "kv_peak": 0.0114,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
-         "samples": 52
+         "samples": 45
         }
        },
        {
@@ -10026,42 +10071,42 @@
         "num_prompts": 48,
         "retried": 0,
         "ttft_ms": {
-         "p50": 377.824,
-         "p90": 476.723,
-         "p99": 614.471,
-         "mean": 398.535,
-         "max": 724.138
+         "p50": 353.047,
+         "p90": 445.341,
+         "p99": 517.469,
+         "mean": 375.652,
+         "max": 526.488
         },
         "tpot_ms": {
-         "p50": 46.007,
-         "p90": 59.569,
-         "p99": 67.913,
-         "mean": 48.868,
-         "max": 69.017
+         "p50": 45.331,
+         "p90": 48.683,
+         "p99": 55.278,
+         "mean": 44.367,
+         "max": 57.084
         },
         "itl_ms": {
-         "p50": 103.515,
-         "p99": 202.078,
-         "max": 2610.932
+         "p50": 103.724,
+         "p99": 203.139,
+         "max": 1830.191
         },
         "e2e_ms": {
-         "p50": 12076.35,
-         "p90": 15669.735,
-         "p99": 17800.136
+         "p50": 11919.351,
+         "p90": 12817.517,
+         "p99": 14481.335
         },
         "per_stream_out_tok_s": {
-         "p50": 21.199,
-         "p99": 26.284
+         "p50": 21.478,
+         "p99": 27.207
         },
         "agg": {
-         "output_tok_s": 150.56,
-         "total_tok_s": 195.58,
-         "qps": 0.5881
+         "output_tok_s": 168.95,
+         "total_tok_s": 219.46,
+         "qps": 0.66
         },
         "slo": {
          "ttft_le_ms": 500.0,
          "tpot_le_ms": 100.0,
-         "goodput_pct": 97.9,
+         "goodput_pct": 95.8,
          "met": false
         },
         "reliability": {
@@ -10070,20 +10115,20 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 81.6,
+        "wall_s": 72.7,
         "gauge_peaks": {
-         "kv_peak": 0.092,
+         "kv_peak": 0.091,
          "gpu_cache_peak": 0.0,
          "running_peak": 8.0,
-         "samples": 40
+         "samples": 36
         }
        }
       ],
-      "duration_s": 197.0,
+      "duration_s": 175.5,
       "roofline": {
        "ceiling_tok_s": 136.5,
-       "c1_output_tok_s": 38.88,
-       "utilization": 0.285,
+       "c1_output_tok_s": 44.14,
+       "utilization": 0.323,
        "warning": null
       },
       "gate_pass": true
@@ -10115,37 +10160,37 @@
         "num_prompts": 24,
         "retried": 0,
         "ttft_ms": {
-         "p50": 133.77,
-         "p90": 207.708,
-         "p99": 244.351,
-         "mean": 147.6,
-         "max": 250.889
+         "p50": 148.274,
+         "p90": 163.568,
+         "p99": 170.847,
+         "mean": 144.472,
+         "max": 172.382
         },
         "tpot_ms": {
-         "p50": 22.412,
-         "p90": 29.918,
-         "p99": 31.923,
-         "mean": 20.816,
-         "max": 32.13
+         "p50": 22.675,
+         "p90": 26.439,
+         "p99": 30.194,
+         "mean": 23.183,
+         "max": 30.853
         },
         "itl_ms": {
-         "p50": 51.687,
-         "p99": 146.041,
-         "max": 170.405
+         "p50": 52.409,
+         "p99": 89.534,
+         "max": 101.604
         },
         "e2e_ms": {
-         "p50": 287.457,
-         "p90": 326.073,
-         "p99": 373.673
+         "p50": 304.137,
+         "p90": 340.686,
+         "p99": 360.004
         },
         "per_stream_out_tok_s": {
-         "p50": 27.83,
-         "p99": 30.156
+         "p50": 26.305,
+         "p99": 29.335
         },
         "agg": {
-         "output_tok_s": 27.26,
-         "total_tok_s": 222.74,
-         "qps": 3.407
+         "output_tok_s": 26.06,
+         "total_tok_s": 212.98,
+         "qps": 3.2579
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10159,9 +10204,9 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 7.0,
+        "wall_s": 7.4,
         "gauge_peaks": {
-         "kv_peak": 0.0115,
+         "kv_peak": 0.0114,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
          "samples": 4
@@ -10172,37 +10217,37 @@
         "num_prompts": 48,
         "retried": 0,
         "ttft_ms": {
-         "p50": 372.494,
-         "p90": 445.917,
-         "p99": 458.249,
-         "mean": 345.312,
-         "max": 458.593
+         "p50": 387.053,
+         "p90": 468.955,
+         "p99": 471.139,
+         "mean": 389.986,
+         "max": 471.153
         },
         "tpot_ms": {
-         "p50": 42.11,
-         "p90": 58.801,
-         "p99": 65.519,
-         "mean": 45.443,
-         "max": 70.822
+         "p50": 48.881,
+         "p90": 65.477,
+         "p99": 76.695,
+         "mean": 48.757,
+         "max": 77.563
         },
         "itl_ms": {
-         "p50": 82.53,
-         "p99": 194.156,
-         "max": 216.719
+         "p50": 105.366,
+         "p99": 205.01,
+         "max": 206.581
         },
         "e2e_ms": {
-         "p50": 665.6,
-         "p90": 715.294,
-         "p99": 802.779
+         "p50": 723.076,
+         "p90": 778.551,
+         "p99": 885.978
         },
         "per_stream_out_tok_s": {
-         "p50": 12.019,
-         "p99": 14.658
+         "p50": 11.064,
+         "p99": 13.449
         },
         "agg": {
-         "output_tok_s": 93.61,
-         "total_tok_s": 765.95,
-         "qps": 11.7013
+         "output_tok_s": 85.71,
+         "total_tok_s": 701.31,
+         "qps": 10.7138
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10216,20 +10261,20 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 4.1,
+        "wall_s": 4.5,
         "gauge_peaks": {
-         "kv_peak": 0.0575,
+         "kv_peak": 0.091,
          "gpu_cache_peak": 0.0,
-         "running_peak": 5.0,
+         "running_peak": 8.0,
          "samples": 3
         }
        }
       ],
-      "duration_s": 21.2,
+      "duration_s": 21.9,
       "roofline": {
        "ceiling_tok_s": 136.5,
-       "c1_output_tok_s": 27.26,
-       "utilization": 0.2,
+       "c1_output_tok_s": 26.06,
+       "utilization": 0.191,
        "warning": null
       },
       "gate_pass": true
@@ -10261,37 +10306,37 @@
         "num_prompts": 4,
         "retried": 0,
         "ttft_ms": {
-         "p50": 2883.507,
-         "p90": 3118.91,
-         "p99": 3172.159,
-         "mean": 2640.493,
-         "max": 3178.076
+         "p50": 1682.659,
+         "p90": 1701.696,
+         "p99": 1708.746,
+         "mean": 1683.668,
+         "max": 1709.529
         },
         "tpot_ms": {
-         "p50": 26.117,
-         "p90": 29.233,
-         "p99": 29.724,
-         "mean": 25.711,
-         "max": 29.779
+         "p50": 22.087,
+         "p90": 22.536,
+         "p99": 22.666,
+         "mean": 21.786,
+         "max": 22.681
         },
         "itl_ms": {
-         "p50": 67.048,
-         "p99": 81.19,
-         "max": 140.238
+         "p50": 51.45,
+         "p99": 86.367,
+         "max": 99.182
         },
         "e2e_ms": {
-         "p50": 9543.22,
-         "p90": 10515.034,
-         "p99": 10745.97
+         "p50": 7303.145,
+         "p90": 7441.381,
+         "p99": 7487.947
         },
         "per_stream_out_tok_s": {
-         "p50": 26.866,
-         "p99": 36.675
+         "p50": 35.054,
+         "p99": 37.271
         },
         "agg": {
-         "output_tok_s": 27.83,
-         "total_tok_s": 671.76,
-         "qps": 0.1087
+         "output_tok_s": 35.36,
+         "total_tok_s": 853.42,
+         "qps": 0.1381
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10305,12 +10350,12 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 36.8,
+        "wall_s": 29.0,
         "gauge_peaks": {
-         "kv_peak": 0.0172,
+         "kv_peak": 0.0171,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
-         "samples": 18
+         "samples": 14
         }
        },
        {
@@ -10318,37 +10363,37 @@
         "num_prompts": 8,
         "retried": 0,
         "ttft_ms": {
-         "p50": 5387.715,
-         "p90": 9313.213,
-         "p99": 10475.176,
-         "mean": 5675.399,
-         "max": 10604.283
+         "p50": 5333.76,
+         "p90": 7147.772,
+         "p99": 7678.858,
+         "mean": 5105.28,
+         "max": 7737.868
         },
         "tpot_ms": {
-         "p50": 50.341,
-         "p90": 77.76,
-         "p99": 86.754,
-         "mean": 51.743,
-         "max": 87.754
+         "p50": 31.232,
+         "p90": 47.115,
+         "p99": 58.041,
+         "mean": 36.228,
+         "max": 59.255
         },
         "itl_ms": {
-         "p50": 88.337,
-         "p99": 1719.785,
-         "max": 3922.881
+         "p50": 69.261,
+         "p99": 843.829,
+         "max": 3117.354
         },
         "e2e_ms": {
-         "p50": 18789.588,
-         "p90": 25571.497,
-         "p99": 28963.863
+         "p50": 14479.598,
+         "p90": 15486.673,
+         "p99": 16677.683
         },
         "per_stream_out_tok_s": {
-         "p50": 13.747,
-         "p99": 28.911
+         "p50": 17.689,
+         "p99": 21.509
         },
         "agg": {
-         "output_tok_s": 53.94,
-         "total_tok_s": 1295.69,
-         "qps": 0.2107
+         "output_tok_s": 70.71,
+         "total_tok_s": 1698.59,
+         "qps": 0.2762
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10362,20 +10407,20 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 38.0,
+        "wall_s": 29.0,
         "gauge_peaks": {
-         "kv_peak": 0.069,
+         "kv_peak": 0.0642,
          "gpu_cache_peak": 0.0,
          "running_peak": 4.0,
-         "samples": 19
+         "samples": 14
         }
        }
       ],
-      "duration_s": 84.8,
+      "duration_s": 67.9,
       "roofline": {
        "ceiling_tok_s": 136.5,
-       "c1_output_tok_s": 27.83,
-       "utilization": 0.204,
+       "c1_output_tok_s": 35.36,
+       "utilization": 0.259,
        "warning": null
       },
       "gate_pass": true
@@ -10404,11 +10449,11 @@
         "num_prompts": 1,
         "retried": 0,
         "ttft_ms": {
-         "p50": 755.782,
-         "p90": 755.782,
-         "p99": 755.782,
-         "mean": 755.782,
-         "max": 755.782
+         "p50": 815.639,
+         "p90": 815.639,
+         "p99": 815.639,
+         "mean": 815.639,
+         "max": 815.639
         },
         "tpot_ms": {
          "mean": null,
@@ -10423,18 +10468,18 @@
          "max": null
         },
         "e2e_ms": {
-         "p50": 755.989,
-         "p90": 755.989,
-         "p99": 755.989
+         "p50": 815.813,
+         "p90": 815.813,
+         "p99": 815.813
         },
         "per_stream_out_tok_s": {
-         "p50": 1.323,
-         "p99": 1.323
+         "p50": 1.226,
+         "p99": 1.226
         },
         "agg": {
-         "output_tok_s": 1.32,
-         "total_tok_s": 7787.05,
-         "qps": 1.3189
+         "output_tok_s": 1.22,
+         "total_tok_s": 7217.04,
+         "qps": 1.2224
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10462,37 +10507,37 @@
         "num_prompts": 1,
         "retried": 0,
         "ttft_ms": {
-         "p50": 1609.801,
-         "p90": 1609.801,
-         "p99": 1609.801,
-         "mean": 1609.801,
-         "max": 1609.801
+         "p50": 1678.974,
+         "p90": 1678.974,
+         "p99": 1678.974,
+         "mean": 1678.974,
+         "max": 1678.974
         },
         "tpot_ms": {
-         "p50": 32.869,
-         "p90": 32.869,
-         "p99": 32.869,
-         "mean": 32.869,
-         "max": 32.869
+         "p50": 30.228,
+         "p90": 30.228,
+         "p99": 30.228,
+         "mean": 30.228,
+         "max": 30.228
         },
         "itl_ms": {
-         "p50": 52.259,
-         "p99": 77.57,
-         "max": 79.545
+         "p50": 50.883,
+         "p99": 93.362,
+         "max": 94.556
         },
         "e2e_ms": {
-         "p50": 2102.834,
-         "p90": 2102.834,
-         "p99": 2102.834
+         "p50": 2132.395,
+         "p90": 2132.395,
+         "p99": 2132.395
         },
         "per_stream_out_tok_s": {
-         "p50": 7.609,
-         "p99": 7.609
+         "p50": 7.503,
+         "p99": 7.503
         },
         "agg": {
-         "output_tok_s": 7.61,
-         "total_tok_s": 2828.45,
-         "qps": 0.4754
+         "output_tok_s": 7.5,
+         "total_tok_s": 2788.91,
+         "qps": 0.4688
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10508,7 +10553,7 @@
         },
         "wall_s": 2.1,
         "gauge_peaks": {
-         "kv_peak": 0.014,
+         "kv_peak": 0.0138,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
          "samples": 2
@@ -10520,37 +10565,37 @@
         "num_prompts": 1,
         "retried": 0,
         "ttft_ms": {
-         "p50": 2690.381,
-         "p90": 2690.381,
-         "p99": 2690.381,
-         "mean": 2690.381,
-         "max": 2690.381
+         "p50": 1712.551,
+         "p90": 1712.551,
+         "p99": 1712.551,
+         "mean": 1712.551,
+         "max": 1712.551
         },
         "tpot_ms": {
-         "p50": 27.008,
-         "p90": 27.008,
-         "p99": 27.008,
-         "mean": 27.008,
-         "max": 27.008
+         "p50": 23.363,
+         "p90": 23.363,
+         "p99": 23.363,
+         "mean": 23.363,
+         "max": 23.363
         },
         "itl_ms": {
-         "p50": 68.567,
-         "p99": 77.313,
-         "max": 111.278
+         "p50": 52.368,
+         "p99": 90.965,
+         "max": 104.922
         },
         "e2e_ms": {
-         "p50": 9577.502,
-         "p90": 9577.502,
-         "p99": 9577.502
+         "p50": 7670.056,
+         "p90": 7670.056,
+         "p99": 7670.056
         },
         "per_stream_out_tok_s": {
-         "p50": 26.729,
-         "p99": 26.729
+         "p50": 33.377,
+         "p99": 33.377
         },
         "agg": {
-         "output_tok_s": 26.73,
-         "total_tok_s": 645.94,
-         "qps": 0.1044
+         "output_tok_s": 33.37,
+         "total_tok_s": 806.58,
+         "qps": 0.1304
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10564,12 +10609,12 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 9.6,
+        "wall_s": 7.7,
         "gauge_peaks": {
-         "kv_peak": 0.0172,
+         "kv_peak": 0.0138,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
-         "samples": 5
+         "samples": 4
         }
        },
        {
@@ -10578,37 +10623,37 @@
         "num_prompts": 1,
         "retried": 0,
         "ttft_ms": {
-         "p50": 2325.248,
-         "p90": 2325.248,
-         "p99": 2325.248,
-         "mean": 2325.248,
-         "max": 2325.248
+         "p50": 1691.677,
+         "p90": 1691.677,
+         "p99": 1691.677,
+         "mean": 1691.677,
+         "max": 1691.677
         },
         "tpot_ms": {
-         "p50": 25.098,
-         "p90": 25.098,
-         "p99": 25.098,
-         "mean": 25.098,
-         "max": 25.098
+         "p50": 27.41,
+         "p90": 27.41,
+         "p99": 27.41,
+         "mean": 27.41,
+         "max": 27.41
         },
         "itl_ms": {
-         "p50": 69.417,
-         "p99": 75.539,
-         "max": 125.481
+         "p50": 51.562,
+         "p99": 88.704,
+         "max": 126.321
         },
         "e2e_ms": {
-         "p50": 28000.653,
-         "p90": 28000.653,
-         "p99": 28000.653
+         "p50": 29731.816,
+         "p90": 29731.816,
+         "p99": 29731.816
         },
         "per_stream_out_tok_s": {
-         "p50": 36.571,
-         "p99": 36.571
+         "p50": 34.441,
+         "p99": 34.441
         },
         "agg": {
-         "output_tok_s": 36.57,
-         "total_tok_s": 247.17,
-         "qps": 0.0357
+         "output_tok_s": 34.44,
+         "total_tok_s": 232.78,
+         "qps": 0.0336
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10622,12 +10667,12 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 28.0,
+        "wall_s": 29.7,
         "gauge_peaks": {
-         "kv_peak": 0.0172,
+         "kv_peak": 0.0146,
          "gpu_cache_peak": 0.0,
          "running_peak": 1.0,
-         "samples": 14
+         "samples": 15
         }
        }
       ],
@@ -10659,37 +10704,37 @@
         "num_prompts": 64,
         "retried": 0,
         "ttft_ms": {
-         "p50": 50682.916,
-         "p90": 92231.024,
-         "p99": 99598.059,
-         "mean": 49410.322,
-         "max": 100046.456
+         "p50": 39234.374,
+         "p90": 77436.163,
+         "p99": 80920.817,
+         "mean": 40011.529,
+         "max": 81867.242
         },
         "tpot_ms": {
-         "p50": 51.848,
-         "p90": 59.739,
-         "p99": 65.526,
-         "mean": 51.454,
-         "max": 65.873
+         "p50": 41.869,
+         "p90": 44.612,
+         "p99": 49.435,
+         "mean": 41.471,
+         "max": 49.598
         },
         "itl_ms": {
-         "p50": 122.146,
-         "p99": 422.668,
-         "max": 1311.438
+         "p50": 91.38,
+         "p99": 311.234,
+         "max": 1336.242
         },
         "e2e_ms": {
-         "p50": 64536.689,
-         "p90": 108273.889,
-         "p99": 112350.957
+         "p50": 49939.177,
+         "p90": 88443.728,
+         "p99": 90314.969
         },
         "per_stream_out_tok_s": {
-         "p50": 3.981,
-         "p99": 19.512
+         "p50": 5.153,
+         "p99": 24.3
         },
         "agg": {
-         "output_tok_s": 145.66,
-         "total_tok_s": 570.93,
-         "qps": 0.569
+         "output_tok_s": 180.77,
+         "total_tok_s": 708.53,
+         "qps": 0.7061
         },
         "slo": {
          "ttft_le_ms": 500.0,
@@ -10703,16 +10748,16 @@
          "rejected": 0,
          "timeout": 0
         },
-        "wall_s": 112.5,
+        "wall_s": 90.6,
         "gauge_peaks": {
-         "kv_peak": 0.092,
+         "kv_peak": 0.091,
          "gpu_cache_peak": 0.0,
          "running_peak": 8.0,
-         "samples": 55
+         "samples": 44
         }
        }
       ],
-      "duration_s": 112.5,
+      "duration_s": 90.7,
       "roofline": {
        "ceiling_tok_s": 136.5,
        "c1_output_tok_s": null,
@@ -10739,7 +10784,7 @@
         "n": 8,
         "completed": 0,
         "failed": 8,
-        "wall_s": 12.3,
+        "wall_s": 12.2,
         "out_tok_s": null,
         "mode": "timeout_or_conn"
        }
@@ -10768,19 +10813,19 @@
        "concurrency": 8
       },
       "score": {
-       "acc": 0.965,
-       "correct": 193,
+       "acc": 0.945,
+       "correct": 189,
        "n": 200,
        "unanswered": 0,
        "truncated": null
       },
       "tokens": {
-       "avg_out": 232.7
+       "avg_out": 231.8
       },
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 288.1
+      "duration_s": 239.5
      },
      {
       "suite_id": "mmlu",
@@ -10794,8 +10839,8 @@
        "concurrency": 8
       },
       "score": {
-       "acc": 0.895,
-       "correct": 179,
+       "acc": 0.885,
+       "correct": 177,
        "n": 200,
        "unanswered": 0,
        "truncated": null
@@ -10806,7 +10851,7 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 16.5
+      "duration_s": 17.3
      },
      {
       "suite_id": "arc",
@@ -10832,7 +10877,7 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 15.5
+      "duration_s": 11.9
      },
      {
       "suite_id": "hellaswag",
@@ -10858,7 +10903,7 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 25.2
+      "duration_s": 22.5
      },
      {
       "suite_id": "winogrande",
@@ -10872,8 +10917,8 @@
        "concurrency": 8
       },
       "score": {
-       "acc": 0.865,
-       "correct": 173,
+       "acc": 0.84,
+       "correct": 168,
        "n": 200,
        "unanswered": 0,
        "truncated": null
@@ -10884,7 +10929,7 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 9.9
+      "duration_s": 11.9
      },
      {
       "suite_id": "truthfulqa",
@@ -10898,8 +10943,8 @@
        "concurrency": 8
       },
       "score": {
-       "acc": 0.905,
-       "correct": 181,
+       "acc": 0.895,
+       "correct": 179,
        "n": 200,
        "unanswered": 0,
        "truncated": null
@@ -10910,7 +10955,7 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 12.5
+      "duration_s": 11.8
      },
      {
       "suite_id": "openbookqa",
@@ -10936,7 +10981,7 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 14.6
+      "duration_s": 10.8
      },
      {
       "suite_id": "race",
@@ -10950,8 +10995,8 @@
        "concurrency": 8
       },
       "score": {
-       "acc": 0.93,
-       "correct": 186,
+       "acc": 0.935,
+       "correct": 187,
        "n": 200,
        "unanswered": 0,
        "truncated": null
@@ -10962,28 +11007,112 @@
       "reliability": {
        "requests_failed": 0
       },
-      "duration_s": 38.9
+      "duration_s": 30.7
      },
      {
       "suite_id": "math500",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "dimension": "math-adv",
+      "settings": {
+       "n": 500,
+       "shots": 0,
+       "thinking": "on",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.846,
+       "correct": 423,
+       "n": 500,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 1520.5
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 3985.0
      },
      {
-      "suite_id": "cmmlu/ceval",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "suite_id": "cmmlu",
+      "dimension": "zh-knowledge",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.875,
+       "correct": 175,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.1
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 15.9
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "zh-knowledge",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.835,
+       "correct": 167,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null
+      },
+      "tokens": {
+       "avg_out": 2.5
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 16.1
      },
      {
       "suite_id": "ifeval",
-      "dimension": "-",
-      "settings": {},
-      "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "dimension": "instr-follow",
+      "settings": {
+       "n": 200,
+       "shots": 0,
+       "thinking": "off",
+       "temperature": 0.0,
+       "seed": 20260930,
+       "concurrency": 8
+      },
+      "score": {
+       "acc": 0.68,
+       "correct": 136,
+       "n": 200,
+       "unanswered": 0,
+       "truncated": null,
+       "instr_acc": 0.7862
+      },
+      "tokens": {
+       "avg_out": 341.3
+      },
+      "reliability": {
+       "requests_failed": 0
+      },
+      "duration_s": 438.2
      }
     ]
    },
@@ -10991,12 +11120,12 @@
     "metrics": {
      "selection_acc": 1.0,
      "args_acc": 0.75,
-     "loop_success": 0.5,
+     "loop_success": 1.0,
      "n": 8,
      "n_loops": 2
     },
     "bfcl": {
-     "irrelevance": 0.75,
+     "irrelevance": 0.74,
      "simple": 0.93
     }
    },
@@ -11013,10 +11142,10 @@
     "ray": "2.44.0",
     "recorded_at": "2026-09-30T22:45:35"
    },
-   "notes": "qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)"
+   "notes": "2026-10-04 复测(1M 参数不变, 关 FlashInfer 自调优防死锁): 能力电池扩至 12 套件(MATH-500 开思考链/CMMLU/CEval/IFEval); qwen4_exp 新架构, 132.64GB 权重, MTP k=2"
   },
   {
-   "scenario_id": "8e8992ea",
+   "scenario_id": "85429e59",
    "vllm_args": [
     "vllm",
     "serve",
@@ -11027,6 +11156,8 @@
     "ray",
     "--speculative-config",
     "{\"method\":\"qwen4_exp_mtp\",\"num_speculative_tokens\":2}",
+    "--kernel-config",
+    "{\"enable_flashinfer_autotune\":false}",
     "--enable-auto-tool-choice",
     "--tool-call-parser",
     "qwen3_xml",
@@ -12606,21 +12737,28 @@
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "数据集布局不兼容(hf-mirror 404)"
+      "missing_reason": "未测(需 math500.jsonl)"
      },
      {
-      "suite_id": "cmmlu/ceval",
+      "suite_id": "cmmlu",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "同上, 中文套件下轮接 datasets 库"
+      "missing_reason": "未测(需 cmmlu CSV)"
+     },
+     {
+      "suite_id": "ceval",
+      "dimension": "-",
+      "settings": {},
+      "score": null,
+      "missing_reason": "未测(需 ceval parquet)"
      },
      {
       "suite_id": "ifeval",
       "dimension": "-",
       "settings": {},
       "score": null,
-      "missing_reason": "需可验证规则引擎(P2)"
+      "missing_reason": "未测(需 ifeval.jsonl)"
      }
     ]
    },
@@ -12652,7 +12790,7 @@
     "ray": "2.44.0",
     "recorded_at": "2026-09-30T22:45:35"
    },
-   "notes": "qwen4_exp新架构首次在本集群实测; 132.64GB权重; Track3工具选择8/8满分但l2计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)"
+   "notes": "40960 上下文对照场景(过夜批次, 八套件时期数据); Track3 工具选择 8/8 但 l2 计算题模型弃用工具直接心算(loop=0.5, 行为特征如实记录)"
   }
  ],
  "recommendation": {
@@ -12664,11 +12802,11 @@
     "winner_label": "Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)",
     "reasons": [
      {
-      "text": "综合分 0.592(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)",
+      "text": "综合分 0.594(权重 c32吞吐0.35/c1吞吐0.2/能力0.25/KV容量0.1/省一机0.1)",
       "check": {
        "scenario": "e64080d1",
        "path": "score",
-       "value": 0.592
+       "value": 0.594
       }
      },
      {
@@ -12676,7 +12814,7 @@
       "check": {
        "scenario": "e64080d1",
        "path": "score",
-       "value": 0.592
+       "value": 0.594
       }
      }
     ],
@@ -12738,28 +12876,28 @@
    },
    {
     "profile": "能力优先",
-    "winner": "37bb1c1e",
+    "winner": "85429e59",
     "winner_label": "Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)",
     "reasons": [
      {
-      "text": "三套件(gsm8k/mmlu/arc)均分: 0.9433 vs 次优 0.9417(Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M))",
+      "text": "三套件(gsm8k/mmlu/arc)均分: 0.9417 vs 次优 0.9333(Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M))",
       "check": {
-       "scenario": "37bb1c1e",
+       "scenario": "85429e59",
        "path": "cap_avg",
-       "value": 0.9433333333333334
+       "value": 0.9416666666666668
       }
      },
      {
-      "text": "差距: +0.001667 (+0.2%)",
+      "text": "差距: +0.008333 (+0.9%)",
       "check": {
-       "scenario": "37bb1c1e",
+       "scenario": "85429e59",
        "path": "cap_avg",
-       "value": 0.9433333333333334
+       "value": 0.9416666666666668
       }
      }
     ],
     "runner_up": {
-     "scenario_id": "8e8992ea",
+     "scenario_id": "19f00a4e",
      "label": "Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+1M)"
     }
    },
