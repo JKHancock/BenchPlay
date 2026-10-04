@@ -1,0 +1,49 @@
+{
+ "model_dir": "/root/.cache/huggingface/DeepSeek-V4-Flash-NVFP4",
+ "model_type": "deepseek_v4",
+ "architectures": [
+  "DeepseekV4ForCausalLM"
+ ],
+ "quant": "fp8",
+ "params": {
+  "layers": 43,
+  "experts": null,
+  "attention_heads": 64,
+  "kv_heads": 1,
+  "expert_weights_present": 136980
+ },
+ "weights": {
+  "total_gb": 166.88,
+  "vision_tower": false
+ },
+ "context": {
+  "native_max_position": 1048576,
+  "rope": {
+   "beta_fast": 32,
+   "beta_slow": 1,
+   "factor": 16,
+   "original_max_position_embeddings": 65536,
+   "type": "yarn"
+  },
+  "is_mrope_hybrid": false,
+  "extend_recipe_hint": "hf-overrides嵌套text_config, 直接写目标max_position_embeddings(vLLM 0.30 yarn设计上不乘factor), rope_scaling需带原mrope/partial字段"
+ },
+ "mtp": {
+  "has_mtp_weights": true,
+  "mtp_weight_count": 4705,
+  "mtp_layer_indices": [],
+  "config_declared_layers": 1,
+  "suggested_method": "deepseek_mtp",
+  "k_suggestion": 1,
+  "k_note": "单层=递归起草,k=2实测可用; k越大接受率越低, 1与2都应实测对比"
+ },
+ "tool_calling": {
+  "template_markers": [],
+  "parser_hint": null,
+  "parser_must_probe": false
+ },
+ "multimodal": {
+  "image_token": false
+ },
+ "recorded_at": "2026-10-04T12:01:39"
+}
