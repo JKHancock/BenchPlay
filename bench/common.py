@@ -228,8 +228,16 @@ def metrics_delta(after, before, keys):
         if kind.startswith("hist_q"):
             bk = _lookup(after, key + "{_buckets}")
             ak = _lookup(before, key + "{_buckets}")
-            q = hist_diff_pct(bk, ak, int(kind.split("_q")[1])) if bk is not None else None
-            out[label] = round(q, 4) if q is not None else None
+            if bk is not None:
+                q = hist_diff_pct(bk, ak, int(kind.split("_q")[1]))
+                out[label] = round(q, 4) if q is not None else None
+            else:
+                # 旧快照未存桶数组: 回退为累计口径并打标记(渲染端注明†, 不冒充段内值;
+                # 新电池的快照自带桶, 自动为段内真值)
+                v = _lookup(after, key + "{q=0.99}")
+                if v is not None:
+                    out[label] = round(v, 4)
+                    out["_cum_fallback"] = True
             continue
         v = _lookup(after, key)
         if v is None:

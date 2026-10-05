@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-05T08:27:15",
+  "generated_at": "2026-10-05T09:14:20",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-overnight",
@@ -301,7 +301,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -312,7 +313,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -323,7 +325,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -334,7 +337,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -345,7 +349,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -356,7 +361,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 302859.0,
@@ -367,7 +373,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 272.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 124257.0,
@@ -378,73 +385,74 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1000.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 7.125,
+      "ttft_p50_server_s": 7.125,
+      "tpot_p99_server_s": 0.1483,
+      "itl_p99_server_s": 0.3577,
+      "queue_p99_server_s": 7.75,
+      "req_latency_p99_server_s": 29.75
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 6.8542,
+      "ttft_p50_server_s": 6.8542,
+      "tpot_p99_server_s": 0.147,
+      "itl_p99_server_s": 0.3181,
+      "queue_p99_server_s": 6.125,
+      "req_latency_p99_server_s": 29.5694
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 6.55,
+      "ttft_p50_server_s": 6.55,
+      "tpot_p99_server_s": 0.1456,
+      "itl_p99_server_s": 0.3169,
+      "queue_p99_server_s": 4.9417,
+      "req_latency_p99_server_s": 29.3667
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 6.6393,
+      "ttft_p50_server_s": 6.6393,
+      "tpot_p99_server_s": 0.1454,
+      "itl_p99_server_s": 0.3237,
+      "queue_p99_server_s": 4.9212,
+      "req_latency_p99_server_s": 29.3658
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 6.6214,
+      "ttft_p50_server_s": 6.6214,
+      "tpot_p99_server_s": 0.1453,
+      "itl_p99_server_s": 0.3207,
+      "queue_p99_server_s": 4.9115,
+      "req_latency_p99_server_s": 29.6158
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 17.9267,
+      "ttft_p50_server_s": 17.9267,
+      "tpot_p99_server_s": 0.1953,
+      "itl_p99_server_s": 0.4281,
+      "queue_p99_server_s": 13.2722,
+      "req_latency_p99_server_s": 49.156
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 16.1133,
+      "ttft_p50_server_s": 16.1133,
+      "tpot_p99_server_s": 0.2636,
+      "itl_p99_server_s": 0.4208,
+      "queue_p99_server_s": 11.7611,
+      "req_latency_p99_server_s": 48.068
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 9.8271,
+      "ttft_p50_server_s": 9.8271,
+      "tpot_p99_server_s": 0.2011,
+      "itl_p99_server_s": 0.3802,
+      "queue_p99_server_s": 8.7804,
+      "req_latency_p99_server_s": 45.6185
      }
     },
     "host_per_machine": {}
@@ -1886,7 +1894,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -1897,7 +1906,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -1908,7 +1918,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -1919,7 +1930,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -1930,7 +1942,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -1941,7 +1954,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 302859.0,
@@ -1952,7 +1966,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 272.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 124257.0,
@@ -1963,73 +1978,74 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1000.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.4357,
+      "ttft_p50_server_s": 2.4357,
+      "tpot_p99_server_s": 0.0495,
+      "itl_p99_server_s": 0.2151,
+      "queue_p99_server_s": 2.05,
+      "req_latency_p99_server_s": 14.8594
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.3893,
+      "ttft_p50_server_s": 2.3893,
+      "tpot_p99_server_s": 0.0492,
+      "itl_p99_server_s": 0.1131,
+      "queue_p99_server_s": 1.945,
+      "req_latency_p99_server_s": 14.7578
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.3371,
+      "ttft_p50_server_s": 2.3371,
+      "tpot_p99_server_s": 0.0489,
+      "itl_p99_server_s": 0.1125,
+      "queue_p99_server_s": 1.872,
+      "req_latency_p99_server_s": 14.6438
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.4187,
+      "ttft_p50_server_s": 2.4187,
+      "tpot_p99_server_s": 0.0489,
+      "itl_p99_server_s": 0.1154,
+      "queue_p99_server_s": 1.859,
+      "req_latency_p99_server_s": 14.6234
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.4158,
+      "ttft_p50_server_s": 2.4158,
+      "tpot_p99_server_s": 0.0489,
+      "itl_p99_server_s": 0.1102,
+      "queue_p99_server_s": 1.854,
+      "req_latency_p99_server_s": 14.6273
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.8449,
+      "ttft_p50_server_s": 4.8449,
+      "tpot_p99_server_s": 0.0738,
+      "itl_p99_server_s": 0.2386,
+      "queue_p99_server_s": 4.676,
+      "req_latency_p99_server_s": 19.7223
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.6449,
+      "ttft_p50_server_s": 4.6449,
+      "tpot_p99_server_s": 0.0919,
+      "itl_p99_server_s": 0.2549,
+      "queue_p99_server_s": 4.3927,
+      "req_latency_p99_server_s": 19.4795
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 3.9096,
+      "ttft_p50_server_s": 3.9096,
+      "tpot_p99_server_s": 0.1123,
+      "itl_p99_server_s": 0.2188,
+      "queue_p99_server_s": 3.351,
+      "req_latency_p99_server_s": 18.804
      }
     },
     "host_per_machine": {}
@@ -3472,7 +3488,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -3483,7 +3500,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -3494,7 +3512,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -3505,7 +3524,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -3516,7 +3536,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -3527,7 +3548,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 302859.0,
@@ -3538,7 +3560,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 272.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 124257.0,
@@ -3549,73 +3572,74 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1000.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.4357,
+      "ttft_p50_server_s": 2.4357,
+      "tpot_p99_server_s": 0.0495,
+      "itl_p99_server_s": 0.169,
+      "queue_p99_server_s": 1.925,
+      "req_latency_p99_server_s": 14.8594
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.3893,
+      "ttft_p50_server_s": 2.3893,
+      "tpot_p99_server_s": 0.0492,
+      "itl_p99_server_s": 0.1047,
+      "queue_p99_server_s": 1.8708,
+      "req_latency_p99_server_s": 14.7578
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.3371,
+      "ttft_p50_server_s": 2.3371,
+      "tpot_p99_server_s": 0.0489,
+      "itl_p99_server_s": 0.1022,
+      "queue_p99_server_s": 1.81,
+      "req_latency_p99_server_s": 14.6438
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.3661,
+      "ttft_p50_server_s": 2.3661,
+      "tpot_p99_server_s": 0.0489,
+      "itl_p99_server_s": 0.1049,
+      "queue_p99_server_s": 1.7992,
+      "req_latency_p99_server_s": 14.6234
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.3633,
+      "ttft_p50_server_s": 2.3633,
+      "tpot_p99_server_s": 0.0489,
+      "itl_p99_server_s": 0.098,
+      "queue_p99_server_s": 1.795,
+      "req_latency_p99_server_s": 14.6273
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.7492,
+      "ttft_p50_server_s": 4.7492,
+      "tpot_p99_server_s": 0.0738,
+      "itl_p99_server_s": 0.188,
+      "queue_p99_server_s": 4.6466,
+      "req_latency_p99_server_s": 19.7066
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.5298,
+      "ttft_p50_server_s": 4.5298,
+      "tpot_p99_server_s": 0.0919,
+      "itl_p99_server_s": 0.1914,
+      "queue_p99_server_s": 4.3375,
+      "req_latency_p99_server_s": 19.45
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 3.7234,
+      "ttft_p50_server_s": 3.7234,
+      "tpot_p99_server_s": 0.0934,
+      "itl_p99_server_s": 0.1711,
+      "queue_p99_server_s": 3.2011,
+      "req_latency_p99_server_s": 18.7652
      }
     },
     "host_per_machine": {}
@@ -5036,7 +5060,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -5047,7 +5072,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -5058,7 +5084,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -5069,7 +5096,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -5080,7 +5108,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -5091,7 +5120,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 302859.0,
@@ -5102,7 +5132,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 272.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 124257.0,
@@ -5113,73 +5144,74 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1000.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.6786,
+      "ttft_p50_server_s": 4.6786,
+      "tpot_p99_server_s": 0.0743,
+      "itl_p99_server_s": 0.2199,
+      "queue_p99_server_s": 2.75,
+      "req_latency_p99_server_s": 19.8594
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.4464,
+      "ttft_p50_server_s": 4.4464,
+      "tpot_p99_server_s": 0.0738,
+      "itl_p99_server_s": 0.0915,
+      "queue_p99_server_s": 2.445,
+      "req_latency_p99_server_s": 19.7578
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.1857,
+      "ttft_p50_server_s": 4.1857,
+      "tpot_p99_server_s": 0.0732,
+      "itl_p99_server_s": 0.0895,
+      "queue_p99_server_s": 2.372,
+      "req_latency_p99_server_s": 19.6438
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.2469,
+      "ttft_p50_server_s": 4.2469,
+      "tpot_p99_server_s": 0.0731,
+      "itl_p99_server_s": 0.0967,
+      "queue_p99_server_s": 2.359,
+      "req_latency_p99_server_s": 19.6234
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.2312,
+      "ttft_p50_server_s": 4.2312,
+      "tpot_p99_server_s": 0.0731,
+      "itl_p99_server_s": 0.0895,
+      "queue_p99_server_s": 2.354,
+      "req_latency_p99_server_s": 19.6273
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 6.9817,
+      "ttft_p50_server_s": 6.9817,
+      "tpot_p99_server_s": 0.1327,
+      "itl_p99_server_s": 0.2401,
+      "queue_p99_server_s": 7.4083,
+      "req_latency_p99_server_s": 29.5141
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 6.5283,
+      "ttft_p50_server_s": 6.5283,
+      "tpot_p99_server_s": 0.1176,
+      "itl_p99_server_s": 0.2582,
+      "queue_p99_server_s": 5.1417,
+      "req_latency_p99_server_s": 29.0891
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 4.9352,
+      "ttft_p50_server_s": 4.9352,
+      "tpot_p99_server_s": 0.1403,
+      "itl_p99_server_s": 0.2241,
+      "queue_p99_server_s": 4.1223,
+      "req_latency_p99_server_s": 28.4529
      }
     },
     "host_per_machine": {}
@@ -6600,7 +6632,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -6611,7 +6644,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -6622,7 +6656,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -6633,7 +6668,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -6644,7 +6680,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -6655,7 +6692,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 302859.0,
@@ -6666,7 +6704,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 272.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 124257.0,
@@ -6677,73 +6716,74 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1000.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 9.6786,
+      "ttft_p50_server_s": 9.6786,
+      "tpot_p99_server_s": 0.1986,
+      "itl_p99_server_s": 0.5981,
+      "queue_p99_server_s": 9.5909,
+      "req_latency_p99_server_s": 49.6897
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 9.4464,
+      "ttft_p50_server_s": 9.4464,
+      "tpot_p99_server_s": 0.1976,
+      "itl_p99_server_s": 0.4822,
+      "queue_p99_server_s": 9.2955,
+      "req_latency_p99_server_s": 49.4655
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 9.1857,
+      "ttft_p50_server_s": 9.1857,
+      "tpot_p99_server_s": 0.1964,
+      "itl_p99_server_s": 0.4771,
+      "queue_p99_server_s": 8.9636,
+      "req_latency_p99_server_s": 49.2138
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 9.2469,
+      "ttft_p50_server_s": 9.2469,
+      "tpot_p99_server_s": 0.1962,
+      "itl_p99_server_s": 0.5034,
+      "queue_p99_server_s": 8.9958,
+      "req_latency_p99_server_s": 49.169
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 9.2312,
+      "ttft_p50_server_s": 9.2312,
+      "tpot_p99_server_s": 0.1962,
+      "itl_p99_server_s": 0.493,
+      "queue_p99_server_s": 8.975,
+      "req_latency_p99_server_s": 49.4966
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 18.9276,
+      "ttft_p50_server_s": 18.9276,
+      "tpot_p99_server_s": 0.2939,
+      "itl_p99_server_s": 0.6421,
+      "queue_p99_server_s": 17.7786,
+      "req_latency_p99_server_s": 106.6714
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 17.9897,
+      "ttft_p50_server_s": 17.9897,
+      "tpot_p99_server_s": 0.2966,
+      "itl_p99_server_s": 0.6789,
+      "queue_p99_server_s": 15.8357,
+      "req_latency_p99_server_s": 95.0143
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 14.5414,
+      "ttft_p50_server_s": 14.5414,
+      "tpot_p99_server_s": 0.2915,
+      "itl_p99_server_s": 0.6229,
+      "queue_p99_server_s": 12.5472,
+      "req_latency_p99_server_s": 76.8273
      }
     },
     "host_per_machine": {}
@@ -8208,7 +8248,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 129.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w7-long128k": {
       "prompt_tokens": 189388.0,
@@ -8219,7 +8260,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 2.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:wsweep": {
       "prompt_tokens": 96463.0,
@@ -8230,7 +8272,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 129.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 302859.0,
@@ -8241,7 +8284,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 272.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 124257.0,
@@ -8252,49 +8296,50 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1000.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w2s": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.4631,
+      "ttft_p50_server_s": 2.4631,
+      "tpot_p99_server_s": 0.0493,
+      "itl_p99_server_s": 0.1959,
+      "queue_p99_server_s": 1.841,
+      "req_latency_p99_server_s": 14.1367
      },
      "phase:w7-long128k": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.9875,
+      "ttft_p50_server_s": 2.9875,
+      "tpot_p99_server_s": 0.0493,
+      "itl_p99_server_s": 0.1958,
+      "queue_p99_server_s": 1.839,
+      "req_latency_p99_server_s": 14.4633
      },
      "phase:wsweep": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 3.375,
+      "ttft_p50_server_s": 3.375,
+      "tpot_p99_server_s": 0.0491,
+      "itl_p99_server_s": 0.2459,
+      "queue_p99_server_s": 1.97,
+      "req_latency_p99_server_s": 13.9167
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.465,
+      "ttft_p50_server_s": 2.465,
+      "tpot_p99_server_s": 0.0926,
+      "itl_p99_server_s": 0.2633,
+      "queue_p99_server_s": 1.7294,
+      "req_latency_p99_server_s": 13.5567
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 2.2851,
+      "ttft_p50_server_s": 2.2851,
+      "tpot_p99_server_s": 0.1381,
+      "itl_p99_server_s": 0.2141,
+      "queue_p99_server_s": 1.3775,
+      "req_latency_p99_server_s": 13.3339
      }
     },
     "host_per_machine": {}
@@ -9620,7 +9665,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -9631,7 +9677,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -9642,7 +9689,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -9653,7 +9701,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -9664,7 +9713,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -9675,7 +9725,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 0.0,
@@ -9686,7 +9737,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 0.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 368387.0,
@@ -9697,7 +9749,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 2700.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:agent": {
       "prompt_tokens": 78628.0,
@@ -9708,81 +9761,82 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 212.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 39.4313,
+      "ttft_p50_server_s": 39.4313,
+      "tpot_p99_server_s": 0.0636,
+      "itl_p99_server_s": 0.2897,
+      "queue_p99_server_s": 39.6208,
+      "req_latency_p99_server_s": 15.45
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 39.025,
+      "ttft_p50_server_s": 39.025,
+      "tpot_p99_server_s": 0.0685,
+      "itl_p99_server_s": 0.2719,
+      "queue_p99_server_s": 39.35,
+      "req_latency_p99_server_s": 14.9765
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 38.5688,
+      "ttft_p50_server_s": 38.5688,
+      "tpot_p99_server_s": 0.073,
+      "itl_p99_server_s": 0.2713,
+      "queue_p99_server_s": 39.0458,
+      "req_latency_p99_server_s": 14.9458
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 38.4875,
+      "ttft_p50_server_s": 38.4875,
+      "tpot_p99_server_s": 0.0729,
+      "itl_p99_server_s": 0.2714,
+      "queue_p99_server_s": 38.9917,
+      "req_latency_p99_server_s": 14.9833
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 38.4562,
+      "ttft_p50_server_s": 38.4562,
+      "tpot_p99_server_s": 0.0728,
+      "itl_p99_server_s": 0.2694,
+      "queue_p99_server_s": 38.9708,
+      "req_latency_p99_server_s": 16.325
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 78.5067,
+      "ttft_p50_server_s": 78.5067,
+      "tpot_p99_server_s": 0.0719,
+      "itl_p99_server_s": 0.2816,
+      "queue_p99_server_s": 108.3,
+      "req_latency_p99_server_s": 14.9968
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 78.5067,
+      "ttft_p50_server_s": 78.5067,
+      "tpot_p99_server_s": 0.0719,
+      "itl_p99_server_s": 0.2816,
+      "queue_p99_server_s": 108.3,
+      "req_latency_p99_server_s": 14.9968
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 42.5067,
+      "ttft_p50_server_s": 42.5067,
+      "tpot_p99_server_s": 0.148,
+      "itl_p99_server_s": 0.1919,
+      "queue_p99_server_s": 42.35,
+      "req_latency_p99_server_s": 294.6462
      },
      "phase:agent": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 39.9,
+      "ttft_p50_server_s": 39.9,
+      "tpot_p99_server_s": 0.1475,
+      "itl_p99_server_s": 0.1912,
+      "queue_p99_server_s": 39.925,
+      "req_latency_p99_server_s": 281.6
      }
     },
     "host_per_machine": {}
@@ -11368,7 +11422,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -11379,7 +11434,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -11390,7 +11446,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -11401,7 +11458,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -11412,7 +11470,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -11423,7 +11482,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 0.0,
@@ -11434,7 +11494,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 0.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 247877.0,
@@ -11445,7 +11506,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 1600.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:agent": {
       "prompt_tokens": 78480.0,
@@ -11456,81 +11518,82 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 211.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 77.9778,
+      "ttft_p50_server_s": 77.9778,
+      "tpot_p99_server_s": 0.0924,
+      "itl_p99_server_s": 0.4853,
+      "queue_p99_server_s": 49.35,
+      "req_latency_p99_server_s": 25.45
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 76.5333,
+      "ttft_p50_server_s": 76.5333,
+      "tpot_p99_server_s": 0.0953,
+      "itl_p99_server_s": 0.4257,
+      "queue_p99_server_s": 48.8857,
+      "req_latency_p99_server_s": 27.2
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 74.9111,
+      "ttft_p50_server_s": 74.9111,
+      "tpot_p99_server_s": 0.0919,
+      "itl_p99_server_s": 0.4237,
+      "queue_p99_server_s": 48.3643,
+      "req_latency_p99_server_s": 23.55
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 74.6222,
+      "ttft_p50_server_s": 74.6222,
+      "tpot_p99_server_s": 0.0911,
+      "itl_p99_server_s": 0.4307,
+      "queue_p99_server_s": 48.2714,
+      "req_latency_p99_server_s": 27.16
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 74.5111,
+      "ttft_p50_server_s": 74.5111,
+      "tpot_p99_server_s": 0.0908,
+      "itl_p99_server_s": 0.4263,
+      "queue_p99_server_s": 48.2357,
+      "req_latency_p99_server_s": 27.55
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 128.8,
+      "ttft_p50_server_s": 128.8,
+      "tpot_p99_server_s": 0.0867,
+      "itl_p99_server_s": 0.4477,
+      "queue_p99_server_s": 112.2,
+      "req_latency_p99_server_s": 26.4667
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 128.8,
+      "ttft_p50_server_s": 128.8,
+      "tpot_p99_server_s": 0.0867,
+      "itl_p99_server_s": 0.4477,
+      "queue_p99_server_s": 112.2,
+      "req_latency_p99_server_s": 26.4667
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 69.6558,
+      "ttft_p50_server_s": 69.6558,
+      "tpot_p99_server_s": 0.2859,
+      "itl_p99_server_s": 0.3314,
+      "queue_p99_server_s": 72.2,
+      "req_latency_p99_server_s": 22.425
      },
      "phase:agent": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 67.693,
+      "ttft_p50_server_s": 67.693,
+      "tpot_p99_server_s": 0.2844,
+      "itl_p99_server_s": 0.2953,
+      "queue_p99_server_s": 66.925,
+      "req_latency_p99_server_s": 22.0944
      }
     },
     "host_per_machine": {}
@@ -13015,7 +13078,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 5482.0,
@@ -13026,7 +13090,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4542.0,
@@ -13037,7 +13102,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 76225.0,
@@ -13048,7 +13114,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 31632.0,
@@ -13059,7 +13126,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 51297.0,
@@ -13070,7 +13138,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 0.0,
@@ -13081,7 +13150,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 0.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 354346.0,
@@ -13092,7 +13162,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 2700.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:agent": {
       "prompt_tokens": 79984.0,
@@ -13103,7 +13174,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 212.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:soak": {
       "prompt_tokens": 26613101.0,
@@ -13114,89 +13186,90 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 99.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 78.8375,
+      "ttft_p50_server_s": 78.8375,
+      "tpot_p99_server_s": 0.1422,
+      "itl_p99_server_s": 0.7038,
+      "queue_p99_server_s": 117.675,
+      "req_latency_p99_server_s": 29.8823
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 78.025,
+      "ttft_p50_server_s": 78.025,
+      "tpot_p99_server_s": 0.1477,
+      "itl_p99_server_s": 0.661,
+      "queue_p99_server_s": 116.05,
+      "req_latency_p99_server_s": 37.3667
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 77.1125,
+      "ttft_p50_server_s": 77.1125,
+      "tpot_p99_server_s": 0.423,
+      "itl_p99_server_s": 0.6614,
+      "queue_p99_server_s": 114.225,
+      "req_latency_p99_server_s": 36.15
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 76.95,
+      "ttft_p50_server_s": 76.95,
+      "tpot_p99_server_s": 0.4187,
+      "itl_p99_server_s": 0.6627,
+      "queue_p99_server_s": 113.9,
+      "req_latency_p99_server_s": 36.5143
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 76.8875,
+      "ttft_p50_server_s": 76.8875,
+      "tpot_p99_server_s": 0.417,
+      "itl_p99_server_s": 0.6587,
+      "queue_p99_server_s": 113.775,
+      "req_latency_p99_server_s": 36.8875
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 451.6,
+      "ttft_p50_server_s": 451.6,
+      "tpot_p99_server_s": 0.193,
+      "itl_p99_server_s": 0.6867,
+      "queue_p99_server_s": 220.1684,
+      "req_latency_p99_server_s": 36.075
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 451.6,
+      "ttft_p50_server_s": 451.6,
+      "tpot_p99_server_s": 0.193,
+      "itl_p99_server_s": 0.6867,
+      "queue_p99_server_s": 220.1684,
+      "req_latency_p99_server_s": 36.075
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 82.9,
+      "ttft_p50_server_s": 82.9,
+      "tpot_p99_server_s": 0.5849,
+      "itl_p99_server_s": 0.4332,
+      "queue_p99_server_s": 103.8267,
+      "req_latency_p99_server_s": 648.7
      },
      "phase:agent": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 79.1525,
+      "ttft_p50_server_s": 79.1525,
+      "tpot_p99_server_s": 0.5684,
+      "itl_p99_server_s": 0.4303,
+      "queue_p99_server_s": 101.0,
+      "req_latency_p99_server_s": 627.5
      },
      "phase:soak": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 392.2,
+      "ttft_p50_server_s": 392.2,
+      "tpot_p99_server_s": 0.1859,
+      "itl_p99_server_s": 0.7093,
+      "queue_p99_server_s": 213.9158,
+      "req_latency_p99_server_s": 102.3
      }
     },
     "host_per_machine": {}
@@ -14777,7 +14850,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 5482.0,
@@ -14788,7 +14862,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4542.0,
@@ -14799,7 +14874,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 76225.0,
@@ -14810,7 +14886,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 31632.0,
@@ -14821,7 +14898,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 51297.0,
@@ -14832,7 +14910,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 0.0,
@@ -14843,7 +14922,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 0.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 354346.0,
@@ -14854,7 +14934,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 2700.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:agent": {
       "prompt_tokens": 79935.0,
@@ -14865,7 +14946,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 212.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:soak": {
       "prompt_tokens": 26394576.0,
@@ -14876,89 +14958,90 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 99.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 156.28,
+      "ttft_p50_server_s": 156.28,
+      "tpot_p99_server_s": 0.1487,
+      "itl_p99_server_s": 0.4691,
+      "queue_p99_server_s": 117.675,
+      "req_latency_p99_server_s": 38.9667
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 153.68,
+      "ttft_p50_server_s": 153.68,
+      "tpot_p99_server_s": 0.1737,
+      "itl_p99_server_s": 0.4425,
+      "queue_p99_server_s": 116.05,
+      "req_latency_p99_server_s": 42.1
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 150.76,
+      "ttft_p50_server_s": 150.76,
+      "tpot_p99_server_s": 0.1918,
+      "itl_p99_server_s": 0.4416,
+      "queue_p99_server_s": 114.225,
+      "req_latency_p99_server_s": 39.8931
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 150.24,
+      "ttft_p50_server_s": 150.24,
+      "tpot_p99_server_s": 0.1913,
+      "itl_p99_server_s": 0.4402,
+      "queue_p99_server_s": 113.9,
+      "req_latency_p99_server_s": 39.8581
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 150.04,
+      "ttft_p50_server_s": 150.04,
+      "tpot_p99_server_s": 0.1911,
+      "itl_p99_server_s": 0.4385,
+      "queue_p99_server_s": 113.775,
+      "req_latency_p99_server_s": 39.8469
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 532.3429,
+      "ttft_p50_server_s": 532.3429,
+      "tpot_p99_server_s": 0.1888,
+      "itl_p99_server_s": 0.454,
+      "queue_p99_server_s": 224.3,
+      "req_latency_p99_server_s": 39.7286
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 532.3429,
+      "ttft_p50_server_s": 532.3429,
+      "tpot_p99_server_s": 0.1888,
+      "itl_p99_server_s": 0.454,
+      "queue_p99_server_s": 224.3,
+      "req_latency_p99_server_s": 39.7286
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 128.1302,
+      "ttft_p50_server_s": 128.1302,
+      "tpot_p99_server_s": 0.7138,
+      "itl_p99_server_s": 0.3254,
+      "queue_p99_server_s": 109.5659,
+      "req_latency_p99_server_s": 344.352
      },
      "phase:agent": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 124.186,
+      "ttft_p50_server_s": 124.186,
+      "tpot_p99_server_s": 0.7063,
+      "itl_p99_server_s": 0.3217,
+      "queue_p99_server_s": 106.4634,
+      "req_latency_p99_server_s": 324.0
      },
      "phase:soak": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 498.4,
+      "ttft_p50_server_s": 498.4,
+      "tpot_p99_server_s": 0.3957,
+      "itl_p99_server_s": 0.4606,
+      "queue_p99_server_s": 219.35,
+      "req_latency_p99_server_s": 89.025
      }
     },
     "host_per_machine": {}
@@ -16544,7 +16627,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 6089.0,
@@ -16555,7 +16639,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4883.0,
@@ -16566,7 +16651,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 71584.0,
@@ -16577,7 +16663,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 29618.0,
@@ -16588,7 +16675,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 48581.0,
@@ -16599,7 +16687,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 0.0,
@@ -16610,7 +16699,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 0.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 368387.0,
@@ -16621,7 +16711,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 2700.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:agent": {
       "prompt_tokens": 78668.0,
@@ -16632,7 +16723,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 212.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:soak": {
       "prompt_tokens": 29561889.0,
@@ -16643,89 +16735,90 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 108.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 39.4313,
+      "ttft_p50_server_s": 39.4313,
+      "tpot_p99_server_s": 0.0737,
+      "itl_p99_server_s": 0.2895,
+      "queue_p99_server_s": 39.6208,
+      "req_latency_p99_server_s": 19.35
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 39.025,
+      "ttft_p50_server_s": 39.025,
+      "tpot_p99_server_s": 0.0736,
+      "itl_p99_server_s": 0.2727,
+      "queue_p99_server_s": 39.35,
+      "req_latency_p99_server_s": 19.2909
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 38.5688,
+      "ttft_p50_server_s": 38.5688,
+      "tpot_p99_server_s": 0.0734,
+      "itl_p99_server_s": 0.2722,
+      "queue_p99_server_s": 39.0458,
+      "req_latency_p99_server_s": 18.9591
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 38.4875,
+      "ttft_p50_server_s": 38.4875,
+      "tpot_p99_server_s": 0.074,
+      "itl_p99_server_s": 0.276,
+      "queue_p99_server_s": 38.9917,
+      "req_latency_p99_server_s": 21.9333
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 38.4562,
+      "ttft_p50_server_s": 38.4562,
+      "tpot_p99_server_s": 0.074,
+      "itl_p99_server_s": 0.2746,
+      "queue_p99_server_s": 38.9708,
+      "req_latency_p99_server_s": 23.825
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 128.8,
+      "ttft_p50_server_s": 128.8,
+      "tpot_p99_server_s": 0.0741,
+      "itl_p99_server_s": 0.2896,
+      "queue_p99_server_s": 112.2,
+      "req_latency_p99_server_s": 22.2
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 128.8,
+      "ttft_p50_server_s": 128.8,
+      "tpot_p99_server_s": 0.0741,
+      "itl_p99_server_s": 0.2896,
+      "queue_p99_server_s": 112.2,
+      "req_latency_p99_server_s": 22.2
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 43.1333,
+      "ttft_p50_server_s": 43.1333,
+      "tpot_p99_server_s": 0.1494,
+      "itl_p99_server_s": 0.199,
+      "queue_p99_server_s": 49.4,
+      "req_latency_p99_server_s": 315.7091
      },
      "phase:agent": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 39.9,
+      "ttft_p50_server_s": 39.9,
+      "tpot_p99_server_s": 0.1491,
+      "itl_p99_server_s": 0.1989,
+      "queue_p99_server_s": 39.925,
+      "req_latency_p99_server_s": 304.1455
      },
      "phase:soak": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 42.4889,
+      "ttft_p50_server_s": 42.4889,
+      "tpot_p99_server_s": 0.1977,
+      "itl_p99_server_s": 0.1991,
+      "queue_p99_server_s": 39.5875,
+      "req_latency_p99_server_s": 298.2545
      }
     },
     "host_per_machine": {}
@@ -18307,7 +18400,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 89.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w2": {
       "prompt_tokens": 5482.0,
@@ -18318,7 +18412,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w3": {
       "prompt_tokens": 4542.0,
@@ -18329,7 +18424,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 73.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w4": {
       "prompt_tokens": 76225.0,
@@ -18340,7 +18436,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 13.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w5": {
       "prompt_tokens": 31632.0,
@@ -18351,7 +18448,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 5.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:w6": {
       "prompt_tokens": 51297.0,
@@ -18362,7 +18460,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 65.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:probe": {
       "prompt_tokens": 0.0,
@@ -18373,7 +18472,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 0.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:cap": {
       "prompt_tokens": 354346.0,
@@ -18384,7 +18484,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 2700.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:agent": {
       "prompt_tokens": 79930.0,
@@ -18395,7 +18496,8 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 212.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      },
      "phase:soak": {
       "prompt_tokens": 26633595.0,
@@ -18406,89 +18508,90 @@
       "kv_cache_usage": 0.0,
       "running_peak": 0.0,
       "requests_success": 99.0,
-      "requests_failed": 0.0
+      "requests_failed": 0.0,
+      "latency_cum_fallback": true
      }
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 149.3714,
+      "ttft_p50_server_s": 149.3714,
+      "tpot_p99_server_s": 0.1473,
+      "itl_p99_server_s": 0.4675,
+      "queue_p99_server_s": 117.675,
+      "req_latency_p99_server_s": 30.7
      },
      "phase:w2": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 141.9429,
+      "ttft_p50_server_s": 141.9429,
+      "tpot_p99_server_s": 0.1737,
+      "itl_p99_server_s": 0.4421,
+      "queue_p99_server_s": 116.05,
+      "req_latency_p99_server_s": 38.2444
      },
      "phase:w3": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 133.6,
+      "ttft_p50_server_s": 133.6,
+      "tpot_p99_server_s": 0.1807,
+      "itl_p99_server_s": 0.4412,
+      "queue_p99_server_s": 114.225,
+      "req_latency_p99_server_s": 37.4333
      },
      "phase:w4": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 132.1143,
+      "ttft_p50_server_s": 132.1143,
+      "tpot_p99_server_s": 0.1797,
+      "itl_p99_server_s": 0.4407,
+      "queue_p99_server_s": 113.9,
+      "req_latency_p99_server_s": 37.7818
      },
      "phase:w5": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 131.5429,
+      "ttft_p50_server_s": 131.5429,
+      "tpot_p99_server_s": 0.1792,
+      "itl_p99_server_s": 0.4388,
+      "queue_p99_server_s": 113.775,
+      "req_latency_p99_server_s": 37.925
      },
      "phase:w6": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 451.6,
+      "ttft_p50_server_s": 451.6,
+      "tpot_p99_server_s": 0.1738,
+      "itl_p99_server_s": 0.4566,
+      "queue_p99_server_s": 223.6174,
+      "req_latency_p99_server_s": 37.7571
      },
      "phase:probe": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 451.6,
+      "ttft_p50_server_s": 451.6,
+      "tpot_p99_server_s": 0.1738,
+      "itl_p99_server_s": 0.4566,
+      "queue_p99_server_s": 223.6174,
+      "req_latency_p99_server_s": 37.7571
      },
      "phase:cap": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 102.175,
+      "ttft_p50_server_s": 102.175,
+      "tpot_p99_server_s": 0.4472,
+      "itl_p99_server_s": 0.3195,
+      "queue_p99_server_s": 108.1024,
+      "req_latency_p99_server_s": 358.96
      },
      "phase:agent": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 96.875,
+      "ttft_p50_server_s": 96.875,
+      "tpot_p99_server_s": 0.4436,
+      "itl_p99_server_s": 0.3158,
+      "queue_p99_server_s": 105.0,
+      "req_latency_p99_server_s": 342.0
      },
      "phase:soak": {
-      "ttft_p99_server_s": null,
-      "ttft_p50_server_s": null,
-      "tpot_p99_server_s": null,
-      "itl_p99_server_s": null,
-      "queue_p99_server_s": null,
-      "req_latency_p99_server_s": null
+      "ttft_p99_server_s": 392.2,
+      "ttft_p50_server_s": 392.2,
+      "tpot_p99_server_s": 0.187,
+      "itl_p99_server_s": 0.4598,
+      "queue_p99_server_s": 218.4522,
+      "req_latency_p99_server_s": 103.48
      }
     },
     "host_per_machine": {}

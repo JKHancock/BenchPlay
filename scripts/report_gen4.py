@@ -96,16 +96,17 @@ def _vcols(sc, ph):
     h = hg.get(ph, {})
     q, hits = m.get("prefix_queries"), m.get("prefix_hits")
     prefix = (f"{q:,.0f}/{hits:,.0f}" if q is not None else "—")
+    cum = "†" if m.get("latency_cum_fallback") else ""
     return [
         c(m.get("requests_success"), "{:,.0f}"),
         c(m.get("requests_failed"), "{:,.0f}"),
         c(m.get("prompt_tokens"), "{:,.0f}"),
         c(m.get("gen_tokens"), "{:,.0f}"),
         prefix,
-        c(h.get("ttft_p99_server_s"), "{:.2f}"),
-        c(h.get("tpot_p99_server_s"), "{:.3f}"),
-        c(h.get("itl_p99_server_s"), "{:.3f}"),
-        c(h.get("queue_p99_server_s"), "{:.2f}"),
+        c(h.get("ttft_p99_server_s"), "{:.2f}") + cum,
+        c(h.get("tpot_p99_server_s"), "{:.3f}") + cum,
+        c(h.get("itl_p99_server_s"), "{:.3f}") + cum,
+        c(h.get("queue_p99_server_s"), "{:.2f}") + cum,
     ]
 
 
@@ -125,7 +126,9 @@ def _emit_vllm(sc, prefixes, title):
     rows = [k for k in prefixes if k in cn]
     if not rows:
         return []
-    out = [f"*{title}（这段测试运行期间服务端实际发生的量）：*", "",
+    _cumf = any(cn.get(k, {}).get("latency_cum_fallback") for k in rows)
+    _note = "（†延迟列为服务启动以来累计口径，非本段真值——旧快照未存直方图桶；新电池起自动为段内真值）" if _cumf else ""
+    out = [f"*{title}（这段测试运行期间服务端实际发生的量）{_note}：*", "",
            "| 指标采集段 | 成功 | 失败 | prompt tok | gen tok | 前缀q/h | TTFT p99 | TPOT p99 | ITL p99 | 排队 p99 |",
            "|---|---|---|---|---|---|---|---|---|---|"]
     for k in rows:

@@ -184,12 +184,15 @@ def scenario(tag, model, tp, noauto, extra_flags=(), max_len=40960):
         fa, fb = d / f"metrics_{w}_a.json", d / f"metrics_{w}_b.json"
         if fa.exists() and fb.exists():
             delta = metrics_delta(load(fb), load(fa), METRIC_KEYS)
+            _cumf = delta.pop("_cum_fallback", False)
             delta["requests_success"] = round(
                 delta.pop("requests_stop", 0) + delta.pop("requests_length", 0), 3)
             delta["requests_failed"] = round(
                 delta.pop("requests_abort", 0) + delta.pop("requests_error", 0), 3)
             counters[f"phase:{w}"] = {k: v for k, v in delta.items()
                                       if not k.endswith(("_s",))}
+            if _cumf:
+                counters[f"phase:{w}"]["latency_cum_fallback"] = True
             histograms[f"phase:{w}"] = {k: v for k, v in delta.items()
                                         if k.endswith("_s")}
     for wd in workloads:
