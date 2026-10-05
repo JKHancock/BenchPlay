@@ -227,3 +227,10 @@
   显式 enable_thinking:true 仍可深推理; 长度粗控用 max_tokens
 - 坑: nvidia NVFP4 仓库根本没有 chat_template.jinja(hf-mirror 返回 Entry not found
   被下载脚本当正文存了 15 字节垃圾)——模板完全来自 vLLM 内置 parser
+
+## 2026-10-05 vLLM 0.30 SSE 客户端断连观测盲区(老板"全部超时"根因)
+- 现象: 客户端(SysMind)报 "operation was aborted due to timeout"; vLLM 日志全 200 OK、无 disconnect、abort 计数器=0
+- 真因: vLLM 0.30 不检测 SSE 流中途的客户端断连——uvicorn 在响应头发出时记 200, 之后流断开既不记日志也不更新 abort 指标; 引擎继续算完(隐性算力浪费)
+- 场景: 模型生成长回复(~9000 token÷30 tok/s≈5min), 撞上客户端 HTTP 超时线, SSE 被 abort
+- 修复: ①客户端设 max_tokens≤4096(4096÷30≈136s, 远低于常见5min超时) ②反向代理层检测断连 ③报告标注"服务端指标无法反映客户端断连"
+- 教训: 服务端"全部 200"≠客户端全部收到完整响应; 排障时必须结合客户端日志才能定位 SSE 断连
