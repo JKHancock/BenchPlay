@@ -212,3 +212,9 @@
   (EngineCore pid=...) 行; ② serve 发起时把完整命令行+解析后参数 echo 进 serve.log(本跑仅 "LAUNCHED" 1 行, 池/调度差异事后无法排查);
   ③ 修复重投前核查上一轮 EngineCore 进程/shm 已净, 不能只信"清场完成"日志行; 关联: 分片损坏本体见 testing-bench.md NVFP4 分片条目
 - 来源: t20261004-dsflash-nvfp4 | 命中: 1
+
+## 2026-10-05 DS NVFP4 降 max-model-len 反而砍 KV 池(500K×3 产品口径的正确实现)
+- 现象: max-model-len 1048576→524288(其余全同), KV 池 1,389,961→909,846 token(-35%), 500K 满载并发 2.65×→1.74×
+- 真因: vLLM 0.30 对 deepseek_v4(MLA/混合+dspark 草稿)的 KV 池分配与 max_len 正相关(池 tokens 估计含随 max_len 缩放的预留)
+- 修复: "500K×N"产品口径不靠降 max-len 实现——保持原生 1M(池最大)+ --max-num-seqs N 准入控制; seqs 3/8 对池无影响(隔离实验双向验证)
+- 教训: 容量调优先做单变量隔离(本次 500K×{3,8} 两发即定位), 不凭直觉假设"上下文越小池越大"

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# DeepSeek-V4-Flash NVFP4 演示服务(产品口径: 500K x 3 路 SLA)
+# DeepSeek-V4-Flash NVFP4 演示服务(产品口径: 500K x 3 路 SLA; 保持原生 1M len 不降——降 500K 反使 KV 池缩水 35%[1.39M→0.91M],
 # 依据 t20261005-dsnvfp4-1m-ep2 实测: EP2 聚合+6~9%, soak 3x52万零抢占;
 #   MTP 必须用 dspark(NVFP4 打包为 DSpark 草稿拓扑, deepseek_mtp 会 KeyError 崩溃);
-#   500K×3=1.57M 满载(池账面1.39M, MLA 记账与实测有差, soak 实测零抢占为准).
+#   3 路准入由 --max-num-seqs 3 控制; 容量依据 soak 实测 3×52万零抢占)
 set -u
 H=192.168.199.129; H2=192.168.199.134; U=syspetro
 SSHOPT="-o BatchMode=yes -o StrictHostKeyChecking=no -o ConnectTimeout=10"
@@ -21,7 +21,7 @@ nohup vllm serve /root/.cache/huggingface/DeepSeek-V4-Flash-NVFP4 \
   --kernel-config '{"enable_flashinfer_autotune":false}' \
   --enable-auto-tool-choice --tool-call-parser deepseek_v4 \
   --served-model-name ds-nvfp4 --host 0.0.0.0 --port 8000 \
-  --gpu-memory-utilization 0.85 --max-model-len 524288 \
+  --gpu-memory-utilization 0.85 --max-model-len 1048576 \
   --max-num-seqs 3 --max-num-batched-tokens 8192 --enable-chunked-prefill --enable-prefix-caching \
   > /root/vllm.log 2>&1 &
 echo LAUNCHED
