@@ -218,3 +218,12 @@
 - 真因: vLLM 0.30 对 deepseek_v4(MLA/混合+dspark 草稿)的 KV 池分配与 max_len 正相关(池 tokens 估计含随 max_len 缩放的预留)
 - 修复: "500K×N"产品口径不靠降 max-len 实现——保持原生 1M(池最大)+ --max-num-seqs N 准入控制; seqs 3/8 对池无影响(隔离实验双向验证)
 - 教训: 容量调优先做单变量隔离(本次 500K×{3,8} 两发即定位), 不凭直觉假设"上下文越小池越大"
+
+## 2026-10-05 DS V4 默认全深度思考(老板反馈"思考太深")与产品默认关闭
+- 现象: 客户端不带 chat_template_kwargs 的裸请求, 推理链极长——老板体感"思考太深"
+- 真因: vllm/parser/deepseek_v4.py:251 默认 thinking=True(不传参=全开);
+  且 reasoning_effort 仅支持 "none"(无分级), 无法"降等级"只能开关
+- 修复: 容器内 patch 该行默认 False(双机, .bak 备份; 容器重建会丢, 重建后需重打);
+  显式 enable_thinking:true 仍可深推理; 长度粗控用 max_tokens
+- 坑: nvidia NVFP4 仓库根本没有 chat_template.jinja(hf-mirror 返回 Entry not found
+  被下载脚本当正文存了 15 字节垃圾)——模板完全来自 vLLM 内置 parser

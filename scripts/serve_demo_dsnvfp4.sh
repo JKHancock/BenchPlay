@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # DeepSeek-V4-Flash NVFP4 演示服务(产品口径: 500K x 3 路 SLA; 保持原生 1M len 不降——降 500K 反使 KV 池缩水 35%[1.39M→0.91M],
+# 注: 容器内 vllm/parser/deepseek_v4.py 已patch默认关思考(2026-10-05); 容器重建后需重打(.bak在原目录)
 # 依据 t20261005-dsnvfp4-1m-ep2 实测: EP2 聚合+6~9%, soak 3x52万零抢占;
 #   MTP 必须用 dspark(NVFP4 打包为 DSpark 草稿拓扑, deepseek_mtp 会 KeyError 崩溃);
 #   3 路准入由 --max-num-seqs 3 控制; 容量依据 soak 实测 3×52万零抢占)
