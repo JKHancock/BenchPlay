@@ -174,6 +174,10 @@ def fetch_metrics(api_base, timeout_s=15):
         out[name + labels] = val
     for k, h in hist.items():
         if h["inf"] > 0:
+            # 保留桶数组供"段差分分位数"使用: 累计直方图的 b桶-a桶=本段直方图.
+            # (2026-10-05 教训: 直接引用累计 q 值会把跨阶段历史当本段值,
+            #  三场景同负载下插值结果比特级相同, 复核员正确地判为不可信)
+            out[k + "{_buckets}"] = [[le, c] for le, c in sorted(h["buckets"])]
             out[k + "{q=0.99}"] = hist_pct(h, 99)
             out[k + "{q=0.50}"] = hist_pct(h, 50)
     return out
@@ -194,14 +198,39 @@ def hist_pct(h, p):
     return h["buckets"][-1][0] if h["buckets"] else None
 
 
+def hist_diff_pct(b_buckets, a_buckets, p):
+    """段内分位数: b桶(累计)-a桶(累计)=本段直方图, 再桶内插值分位."""
+    am = {le: c for le, c in (a_buckets or [])}
+    pts = [(le, c - am.get(le, 0.0)) for le, c in (b_buckets or [])]
+    total = pts[-1][1] if pts else 0
+    if total <= 0:
+        return None
+    target = total * p / 100.0
+    prev_c, prev_le = 0.0, 0.0
+    for le, c in pts:
+        if c >= target:
+            if c - prev_c <= 0:
+                return le
+            frac = (target - prev_c) / (c - prev_c)
+            return prev_le + (le - prev_le) * frac
+        prev_c, prev_le = c, le
+    return pts[-1][0]
+
+
 def metrics_delta(after, before, keys):
-    """关心的计数器取差值(累计型), gauge/直方图取 after 值.
+    """关心的计数器取差值(累计型), gauge取 after 值, 直方图取段差分分位数.
 
     键查找两级回退: 精确(名+标签) → 按名(不同标签变体/无标签).
     (实测坑: vLLM 0.30 的 request_success_total 带 finished_reason 标签,
      直方图分位数键是我们自造的 {q=...}, 必须精确匹配.)"""
     out = {}
     for label, kind, key in keys:
+        if kind.startswith("hist_q"):
+            bk = _lookup(after, key + "{_buckets}")
+            ak = _lookup(before, key + "{_buckets}")
+            q = hist_diff_pct(bk, ak, int(kind.split("_q")[1])) if bk is not None else None
+            out[label] = round(q, 4) if q is not None else None
+            continue
         v = _lookup(after, key)
         if v is None:
             continue
@@ -246,12 +275,12 @@ METRIC_KEYS = [
     ("kv_cache_usage", "gauge_last", 'vllm:kv_cache_usage_perc{engine="0",model_name="bench"}'),
     ("gpu_cache_usage", "gauge_last", 'vllm:gpu_cache_usage_perc{engine="0",model_name="bench"}'),
     ("running_peak", "gauge_last", 'vllm:num_requests_running{engine="0",model_name="bench"}'),
-    ("ttft_p99_server_s", "gauge_last", "vllm:time_to_first_token_seconds{q=0.99}"),
-    ("ttft_p50_server_s", "gauge_last", "vllm:time_to_first_token_seconds{q=0.50}"),
-    ("tpot_p99_server_s", "gauge_last", "vllm:request_time_per_output_token_seconds{q=0.99}"),
-    ("itl_p99_server_s", "gauge_last", "vllm:inter_token_latency_seconds{q=0.99}"),
-    ("queue_p99_server_s", "gauge_last", "vllm:request_queue_time_seconds{q=0.99}"),
-    ("req_latency_p99_server_s", "gauge_last", "vllm:request_inference_time_seconds{q=0.99}"),
+    ("ttft_p99_server_s", "hist_q99", "vllm:time_to_first_token_seconds"),
+    ("ttft_p50_server_s", "hist_q50", "vllm:time_to_first_token_seconds"),
+    ("tpot_p99_server_s", "hist_q99", "vllm:request_time_per_output_token_seconds"),
+    ("itl_p99_server_s", "hist_q99", "vllm:inter_token_latency_seconds"),
+    ("queue_p99_server_s", "hist_q99", "vllm:request_queue_time_seconds"),
+    ("req_latency_p99_server_s", "hist_q99", "vllm:request_inference_time_seconds"),
 ]
 
 

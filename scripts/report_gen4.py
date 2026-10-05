@@ -14,7 +14,7 @@ WL_NAMES = {
   "w2": "真实对话分布测试（ShareGPT 提取）",
   "w3": "短对话延迟测试（32入/8出）",
   "w4": "长文预填测试（4096入/256出）",
-  "w5": "输出长度阶梯测试（出1/16/256/1024）",
+  "w5": "输出长度阶梯测试（出1/16/256/1024；每档 n=1，p50/p90/p99 为单样本非统计量，goodput 仅反映 TTFT 半条件）",
   "w6": "高并发满批测试（64路）",
   "wsweep": "并发舒适度扫描（1→32路逐档）",
   "w7-long128k": "超长上下文单发测试（128K输入）",
@@ -55,8 +55,10 @@ def check_value(sc, path, value):
     """推荐理由数值回查: path 为简写键 → 场景内取值比对(容差1%)."""
     c1 = wl_level(sc, "w1", 1)
     c32 = wl_level(sc, "w1", 32)
+    w2c1 = wl_level(sc, "w2", 1)
     got = {"tpot_c1": c1 and c1["tpot_ms"]["p50"],
            "c32_out": c32 and c32["agg"]["output_tok_s"],
+           "goodput_c1_real": w2c1 and (w2c1.get("slo") or {}).get("goodput_pct"),
            "score": value, "cap_avg": None}.get(path)
     if got is None and path == "cap_avg":
         vals = [cs["score"]["acc"] for cs in sc["capability_scores"]["suites"]
@@ -337,7 +339,7 @@ def main():
           "| ITL (token间延迟) | 任意两个字之间的最坏间隔 | 逐 chunk 时间戳差 | p99 越小=没有突然卡顿",
           "| 出流 tok/s | 所有用户加起来每秒产出多少字 | 总输出token÷总耗时 | 越高能同时服务的人越多",
           "| goodput | 同时满足 TTFT≤500ms 且 TPOT≤100ms 的请求占比 | 逐请求判定 | 100%=全部秒回; <50%=一半人体感差",
-          "| 理论上限校验 | 物理公式算出这台硬件最高能跑多快 | 显存带宽÷每token需读的权重 | 实测达到上限的百分比; <80%正常",
+          "| 理论上限校验 | 物理公式算出这台硬件最高能跑多快(输入: 显存带宽÷每token激活权重量, 激活权重量为估算值并随场景传入) | 显存带宽÷每token需读的权重 | 实测达到上限的百分比; <80%正常",
           ""]
     L += ["### 能力套件（十二项，各测什么、分数什么意思）", "",
           "| 套件 | 维度 | 测什么 | 怎么算分 | 95%意味着 | 70%意味着 |",
@@ -402,7 +404,7 @@ def main():
             return " ".join(diffs)
 
         L += ["**场景卡片总览（每行一个场景，含已测与未测；差异列标出该组合的独特之处）：**", "",
-              "| # | 状态 | 集群 | 关键参数差异 | 上下文 | 单流 tok/s | c8 出流 | KV 池 | gsm8k | mmlu | 智能体 |",
+              "| # | 状态 | 集群 | 关键参数差异 | 上下文 | 单流 tok/s | c8 出流 | KV 池 | gsm8k | mmlu | 智能体(选择/克制) |",
               "|---|---|---|---|---|---|---|---|---|---|---|"]
         try:
             import json as _j
@@ -420,7 +422,11 @@ def main():
             c8 = lv.get("c8", {})
             st = sc["vllm_metrics"]["startup"]
             caps = {c["suite_id"]: c["score"]["acc"] for c in sc["capability_scores"]["suites"] if c.get("score")}
-            ag = (sc.get("agent_metrics") or {}).get("metrics", {})
+            ag = (sc.get("agent_metrics") or {})
+            agm = ag.get("metrics", {}) or {}
+            bf = ag.get("bfcl") or {}
+            _agcell = '%s/%s' % (
+                c(agm.get('selection_acc'), '{:.2f}'), c(bf.get('irrelevance'), '{:.2f}'))
             L.append(
                 f"| S{len(_seq)} | {'✅已测' if sc['status']=='complete' else '⚠'+sc['status']} "
                 f"| {sc['deployment']['mode']} "
@@ -431,7 +437,7 @@ def main():
                 f"| {c(st.get('kv_cache_tokens'), '{:,.0f}')} "
                 f"| {c(caps.get('gsm8k'), '{:.3f}')} "
                 f"| {c(caps.get('mmlu'), '{:.3f}')} "
-                f"| {c(ag.get('selection_acc'), '{:.2f}')} |")
+                f"| {_agcell} |")
         for r in ex_rows:
             L.append(f"| — | {r['status']} | {r['combo'].split('+')[0].strip()} "
                      f"| {r['combo']} | — | — | — | — | — | — | — | "
@@ -513,7 +519,7 @@ def main():
         _PD = {
             "--tensor-parallel-size": ("张量并行", "把模型切成几份分到几张 GPU 上同时算", "TP=2 用满双机；TP=1 单机跑"),
             "--distributed-executor-backend": ("分布式后端", "跨机通信框架", "ray 是双机集群标准选择"),
-            "--enable-expert-parallel": ("专家并行", "MoE 专家分组到不同节点", "MoE 双机可选；实测收益 <1%"),
+            "--enable-expert-parallel": ("专家并行", "MoE 专家分组到不同节点", "MoE 双机可选; 收益看本库同模型 EP 差分场景(实测: Flash-Next 单流+19%/DS 聚合+6~9%)"),
             "--speculative-config": ("投机解码(MTP)", "用模型 MTP 头预测多个 token 一次验证", "模型自带 MTP 权重即可开；k 取值以 M0 档案建议为准(1 与 2 均应实测)"),
             "--hf-overrides": ("模型配置覆写", "运行时覆盖上下文长度（YaRN 外拓）", "原生 262K 不够用时外拓到 1M"),
             "--enable-auto-tool-choice": ("自动工具调用", "允许模型自动决定是否调工具", "智能体用途必须开"),
@@ -668,10 +674,14 @@ def main():
         L.append("")
         L.append("**推荐理由**：")
         for r in p["reasons"]:
-            # 数值回查门禁
+            # 数值回查门禁(纯文字理由无 check 键, 直接呈现)
+            ck = r.get("check")
+            if not ck:
+                L.append(f"- {r['text']}")
+                continue
             sc = next((s for s in doc["scenarios"]
-                       if s["scenario_id"] == r["check"]["scenario"]), None)
-            if sc and not check_value(sc, r["check"]["path"], r["check"]["value"]):
+                       if s["scenario_id"] == ck["scenario"]), None)
+            if sc and not check_value(sc, ck["path"], ck["value"]):
                 raise SystemExit(f"FAIL 推荐数值回查不符: {r['text']}")
             L.append(f"- {r['text']}")
         if p.get("runner_up"):

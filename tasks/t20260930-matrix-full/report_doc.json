@@ -1,7 +1,7 @@
 {
  "meta": {
   "contract_version": "4",
-  "generated_at": "2026-10-05T06:21:02",
+  "generated_at": "2026-10-05T08:27:15",
   "source_artifacts": [
    "tasks/t20260930-matrix-full/raw4",
    "tasks/t20261003-overnight",
@@ -383,68 +383,68 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 7.125,
-      "ttft_p50_server_s": 1.1111,
-      "tpot_p99_server_s": 0.1483,
-      "itl_p99_server_s": 0.3577,
-      "queue_p99_server_s": 7.75,
-      "req_latency_p99_server_s": 29.75
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 6.8542,
-      "ttft_p50_server_s": 0.477,
-      "tpot_p99_server_s": 0.147,
-      "itl_p99_server_s": 0.3181,
-      "queue_p99_server_s": 6.125,
-      "req_latency_p99_server_s": 29.5694
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 6.55,
-      "ttft_p50_server_s": 0.3874,
-      "tpot_p99_server_s": 0.1456,
-      "itl_p99_server_s": 0.3169,
-      "queue_p99_server_s": 4.9417,
-      "req_latency_p99_server_s": 29.3667
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 6.6393,
-      "ttft_p50_server_s": 0.4025,
-      "tpot_p99_server_s": 0.1454,
-      "itl_p99_server_s": 0.3237,
-      "queue_p99_server_s": 4.9212,
-      "req_latency_p99_server_s": 29.3658
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 6.6214,
-      "ttft_p50_server_s": 0.4076,
-      "tpot_p99_server_s": 0.1453,
-      "itl_p99_server_s": 0.3207,
-      "queue_p99_server_s": 4.9115,
-      "req_latency_p99_server_s": 29.6158
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 17.9267,
-      "ttft_p50_server_s": 0.4905,
-      "tpot_p99_server_s": 0.1953,
-      "itl_p99_server_s": 0.4281,
-      "queue_p99_server_s": 13.2722,
-      "req_latency_p99_server_s": 49.156
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 16.1133,
-      "ttft_p50_server_s": 1.294,
-      "tpot_p99_server_s": 0.2636,
-      "itl_p99_server_s": 0.4208,
-      "queue_p99_server_s": 11.7611,
-      "req_latency_p99_server_s": 48.068
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 9.8271,
-      "ttft_p50_server_s": 0.4197,
-      "tpot_p99_server_s": 0.2011,
-      "itl_p99_server_s": 0.3802,
-      "queue_p99_server_s": 8.7804,
-      "req_latency_p99_server_s": 45.6185
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -1968,68 +1968,68 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 2.4357,
-      "ttft_p50_server_s": 0.5741,
-      "tpot_p99_server_s": 0.0495,
-      "itl_p99_server_s": 0.2151,
-      "queue_p99_server_s": 2.05,
-      "req_latency_p99_server_s": 14.8594
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 2.3893,
-      "ttft_p50_server_s": 0.2338,
-      "tpot_p99_server_s": 0.0492,
-      "itl_p99_server_s": 0.1131,
-      "queue_p99_server_s": 1.945,
-      "req_latency_p99_server_s": 14.7578
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 2.3371,
-      "ttft_p50_server_s": 0.1874,
-      "tpot_p99_server_s": 0.0489,
-      "itl_p99_server_s": 0.1125,
-      "queue_p99_server_s": 1.872,
-      "req_latency_p99_server_s": 14.6438
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 2.4187,
-      "ttft_p50_server_s": 0.1959,
-      "tpot_p99_server_s": 0.0489,
-      "itl_p99_server_s": 0.1154,
-      "queue_p99_server_s": 1.859,
-      "req_latency_p99_server_s": 14.6234
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 2.4158,
-      "ttft_p50_server_s": 0.1986,
-      "tpot_p99_server_s": 0.0489,
-      "itl_p99_server_s": 0.1102,
-      "queue_p99_server_s": 1.854,
-      "req_latency_p99_server_s": 14.6273
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 4.8449,
-      "ttft_p50_server_s": 0.2423,
-      "tpot_p99_server_s": 0.0738,
-      "itl_p99_server_s": 0.2386,
-      "queue_p99_server_s": 4.676,
-      "req_latency_p99_server_s": 19.7223
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 4.6449,
-      "ttft_p50_server_s": 0.5855,
-      "tpot_p99_server_s": 0.0919,
-      "itl_p99_server_s": 0.2549,
-      "queue_p99_server_s": 4.3927,
-      "req_latency_p99_server_s": 19.4795
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 3.9096,
-      "ttft_p50_server_s": 0.2175,
-      "tpot_p99_server_s": 0.1123,
-      "itl_p99_server_s": 0.2188,
-      "queue_p99_server_s": 3.351,
-      "req_latency_p99_server_s": 18.804
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -3554,68 +3554,68 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 2.4357,
-      "ttft_p50_server_s": 0.5714,
-      "tpot_p99_server_s": 0.0495,
-      "itl_p99_server_s": 0.169,
-      "queue_p99_server_s": 1.925,
-      "req_latency_p99_server_s": 14.8594
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 2.3893,
-      "ttft_p50_server_s": 0.2369,
-      "tpot_p99_server_s": 0.0492,
-      "itl_p99_server_s": 0.1047,
-      "queue_p99_server_s": 1.8708,
-      "req_latency_p99_server_s": 14.7578
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 2.3371,
-      "ttft_p50_server_s": 0.1906,
-      "tpot_p99_server_s": 0.0489,
-      "itl_p99_server_s": 0.1022,
-      "queue_p99_server_s": 1.81,
-      "req_latency_p99_server_s": 14.6438
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 2.3661,
-      "ttft_p50_server_s": 0.1988,
-      "tpot_p99_server_s": 0.0489,
-      "itl_p99_server_s": 0.1049,
-      "queue_p99_server_s": 1.7992,
-      "req_latency_p99_server_s": 14.6234
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 2.3633,
-      "ttft_p50_server_s": 0.2014,
-      "tpot_p99_server_s": 0.0489,
-      "itl_p99_server_s": 0.098,
-      "queue_p99_server_s": 1.795,
-      "req_latency_p99_server_s": 14.6273
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 4.7492,
-      "ttft_p50_server_s": 0.2439,
-      "tpot_p99_server_s": 0.0738,
-      "itl_p99_server_s": 0.188,
-      "queue_p99_server_s": 4.6466,
-      "req_latency_p99_server_s": 19.7066
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 4.5298,
-      "ttft_p50_server_s": 0.5129,
-      "tpot_p99_server_s": 0.0919,
-      "itl_p99_server_s": 0.1914,
-      "queue_p99_server_s": 4.3375,
-      "req_latency_p99_server_s": 19.45
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 3.7234,
-      "ttft_p50_server_s": 0.2098,
-      "tpot_p99_server_s": 0.0934,
-      "itl_p99_server_s": 0.1711,
-      "queue_p99_server_s": 3.2011,
-      "req_latency_p99_server_s": 18.7652
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -5118,68 +5118,68 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 4.6786,
-      "ttft_p50_server_s": 0.6471,
-      "tpot_p99_server_s": 0.0743,
-      "itl_p99_server_s": 0.2199,
-      "queue_p99_server_s": 2.75,
-      "req_latency_p99_server_s": 19.8594
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 4.4464,
-      "ttft_p50_server_s": 0.2768,
-      "tpot_p99_server_s": 0.0738,
-      "itl_p99_server_s": 0.0915,
-      "queue_p99_server_s": 2.445,
-      "req_latency_p99_server_s": 19.7578
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 4.1857,
-      "ttft_p50_server_s": 0.2,
-      "tpot_p99_server_s": 0.0732,
-      "itl_p99_server_s": 0.0895,
-      "queue_p99_server_s": 2.372,
-      "req_latency_p99_server_s": 19.6438
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 4.2469,
-      "ttft_p50_server_s": 0.2083,
-      "tpot_p99_server_s": 0.0731,
-      "itl_p99_server_s": 0.0967,
-      "queue_p99_server_s": 2.359,
-      "req_latency_p99_server_s": 19.6234
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 4.2312,
-      "ttft_p50_server_s": 0.2107,
-      "tpot_p99_server_s": 0.0731,
-      "itl_p99_server_s": 0.0895,
-      "queue_p99_server_s": 2.354,
-      "req_latency_p99_server_s": 19.6273
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 6.9817,
-      "ttft_p50_server_s": 0.2891,
-      "tpot_p99_server_s": 0.1327,
-      "itl_p99_server_s": 0.2401,
-      "queue_p99_server_s": 7.4083,
-      "req_latency_p99_server_s": 29.5141
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 6.5283,
-      "ttft_p50_server_s": 0.7296,
-      "tpot_p99_server_s": 0.1176,
-      "itl_p99_server_s": 0.2582,
-      "queue_p99_server_s": 5.1417,
-      "req_latency_p99_server_s": 29.0891
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 4.9352,
-      "ttft_p50_server_s": 0.2333,
-      "tpot_p99_server_s": 0.1403,
-      "itl_p99_server_s": 0.2241,
-      "queue_p99_server_s": 4.1223,
-      "req_latency_p99_server_s": 28.4529
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -6682,68 +6682,68 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 9.6786,
-      "ttft_p50_server_s": 1.8878,
-      "tpot_p99_server_s": 0.1986,
-      "itl_p99_server_s": 0.5981,
-      "queue_p99_server_s": 9.5909,
-      "req_latency_p99_server_s": 49.6897
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 9.4464,
-      "ttft_p50_server_s": 0.6964,
-      "tpot_p99_server_s": 0.1976,
-      "itl_p99_server_s": 0.4822,
-      "queue_p99_server_s": 9.2955,
-      "req_latency_p99_server_s": 49.4655
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 9.1857,
-      "ttft_p50_server_s": 0.424,
-      "tpot_p99_server_s": 0.1964,
-      "itl_p99_server_s": 0.4771,
-      "queue_p99_server_s": 8.9636,
-      "req_latency_p99_server_s": 49.2138
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 9.2469,
-      "ttft_p50_server_s": 0.4381,
-      "tpot_p99_server_s": 0.1962,
-      "itl_p99_server_s": 0.5034,
-      "queue_p99_server_s": 8.9958,
-      "req_latency_p99_server_s": 49.169
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 9.2312,
-      "ttft_p50_server_s": 0.4423,
-      "tpot_p99_server_s": 0.1962,
-      "itl_p99_server_s": 0.493,
-      "queue_p99_server_s": 8.975,
-      "req_latency_p99_server_s": 49.4966
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 18.9276,
-      "ttft_p50_server_s": 0.7321,
-      "tpot_p99_server_s": 0.2939,
-      "itl_p99_server_s": 0.6421,
-      "queue_p99_server_s": 17.7786,
-      "req_latency_p99_server_s": 106.6714
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 17.9897,
-      "ttft_p50_server_s": 1.7713,
-      "tpot_p99_server_s": 0.2966,
-      "itl_p99_server_s": 0.6789,
-      "queue_p99_server_s": 15.8357,
-      "req_latency_p99_server_s": 95.0143
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 14.5414,
-      "ttft_p50_server_s": 0.486,
-      "tpot_p99_server_s": 0.2915,
-      "itl_p99_server_s": 0.6229,
-      "queue_p99_server_s": 12.5472,
-      "req_latency_p99_server_s": 76.8273
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -8257,44 +8257,44 @@
     },
     "histograms": {
      "phase:w2s": {
-      "ttft_p99_server_s": 2.4631,
-      "ttft_p50_server_s": 0.32,
-      "tpot_p99_server_s": 0.0493,
-      "itl_p99_server_s": 0.1959,
-      "queue_p99_server_s": 1.841,
-      "req_latency_p99_server_s": 14.1367
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w7-long128k": {
-      "ttft_p99_server_s": 2.9875,
-      "ttft_p50_server_s": 0.32,
-      "tpot_p99_server_s": 0.0493,
-      "itl_p99_server_s": 0.1958,
-      "queue_p99_server_s": 1.839,
-      "req_latency_p99_server_s": 14.4633
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:wsweep": {
-      "ttft_p99_server_s": 3.375,
-      "ttft_p50_server_s": 0.4054,
-      "tpot_p99_server_s": 0.0491,
-      "itl_p99_server_s": 0.2459,
-      "queue_p99_server_s": 1.97,
-      "req_latency_p99_server_s": 13.9167
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 2.465,
-      "ttft_p50_server_s": 0.4652,
-      "tpot_p99_server_s": 0.0926,
-      "itl_p99_server_s": 0.2633,
-      "queue_p99_server_s": 1.7294,
-      "req_latency_p99_server_s": 13.5567
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 2.2851,
-      "ttft_p50_server_s": 0.2564,
-      "tpot_p99_server_s": 0.1381,
-      "itl_p99_server_s": 0.2141,
-      "queue_p99_server_s": 1.3775,
-      "req_latency_p99_server_s": 13.3339
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -9713,76 +9713,76 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 39.4313,
-      "ttft_p50_server_s": 3.0357,
-      "tpot_p99_server_s": 0.0636,
-      "itl_p99_server_s": 0.2897,
-      "queue_p99_server_s": 39.6208,
-      "req_latency_p99_server_s": 15.45
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 39.025,
-      "ttft_p50_server_s": 0.4776,
-      "tpot_p99_server_s": 0.0685,
-      "itl_p99_server_s": 0.2719,
-      "queue_p99_server_s": 39.35,
-      "req_latency_p99_server_s": 14.9765
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 38.5688,
-      "ttft_p50_server_s": 0.4025,
-      "tpot_p99_server_s": 0.073,
-      "itl_p99_server_s": 0.2713,
-      "queue_p99_server_s": 39.0458,
-      "req_latency_p99_server_s": 14.9458
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 38.4875,
-      "ttft_p50_server_s": 0.4159,
-      "tpot_p99_server_s": 0.0729,
-      "itl_p99_server_s": 0.2714,
-      "queue_p99_server_s": 38.9917,
-      "req_latency_p99_server_s": 14.9833
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 38.4562,
-      "ttft_p50_server_s": 0.4216,
-      "tpot_p99_server_s": 0.0728,
-      "itl_p99_server_s": 0.2694,
-      "queue_p99_server_s": 38.9708,
-      "req_latency_p99_server_s": 16.325
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 78.5067,
-      "ttft_p50_server_s": 0.4911,
-      "tpot_p99_server_s": 0.0719,
-      "itl_p99_server_s": 0.2816,
-      "queue_p99_server_s": 108.3,
-      "req_latency_p99_server_s": 14.9968
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 78.5067,
-      "ttft_p50_server_s": 0.4911,
-      "tpot_p99_server_s": 0.0719,
-      "itl_p99_server_s": 0.2816,
-      "queue_p99_server_s": 108.3,
-      "req_latency_p99_server_s": 14.9968
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 42.5067,
-      "ttft_p50_server_s": 0.4276,
-      "tpot_p99_server_s": 0.148,
-      "itl_p99_server_s": 0.1919,
-      "queue_p99_server_s": 42.35,
-      "req_latency_p99_server_s": 294.6462
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:agent": {
-      "ttft_p99_server_s": 39.9,
-      "ttft_p50_server_s": 0.4206,
-      "tpot_p99_server_s": 0.1475,
-      "itl_p99_server_s": 0.1912,
-      "queue_p99_server_s": 39.925,
-      "req_latency_p99_server_s": 281.6
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -11461,76 +11461,76 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 77.9778,
-      "ttft_p50_server_s": 4.0179,
-      "tpot_p99_server_s": 0.0924,
-      "itl_p99_server_s": 0.4853,
-      "queue_p99_server_s": 49.35,
-      "req_latency_p99_server_s": 25.45
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 76.5333,
-      "ttft_p50_server_s": 0.6818,
-      "tpot_p99_server_s": 0.0953,
-      "itl_p99_server_s": 0.4257,
-      "queue_p99_server_s": 48.8857,
-      "req_latency_p99_server_s": 27.2
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 74.9111,
-      "ttft_p50_server_s": 0.4273,
-      "tpot_p99_server_s": 0.0919,
-      "itl_p99_server_s": 0.4237,
-      "queue_p99_server_s": 48.3643,
-      "req_latency_p99_server_s": 23.55
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 74.6222,
-      "ttft_p50_server_s": 0.4419,
-      "tpot_p99_server_s": 0.0911,
-      "itl_p99_server_s": 0.4307,
-      "queue_p99_server_s": 48.2714,
-      "req_latency_p99_server_s": 27.16
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 74.5111,
-      "ttft_p50_server_s": 0.4482,
-      "tpot_p99_server_s": 0.0908,
-      "itl_p99_server_s": 0.4263,
-      "queue_p99_server_s": 48.2357,
-      "req_latency_p99_server_s": 27.55
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 128.8,
-      "ttft_p50_server_s": 0.7273,
-      "tpot_p99_server_s": 0.0867,
-      "itl_p99_server_s": 0.4477,
-      "queue_p99_server_s": 112.2,
-      "req_latency_p99_server_s": 26.4667
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 128.8,
-      "ttft_p50_server_s": 0.7273,
-      "tpot_p99_server_s": 0.0867,
-      "itl_p99_server_s": 0.4477,
-      "queue_p99_server_s": 112.2,
-      "req_latency_p99_server_s": 26.4667
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 69.6558,
-      "ttft_p50_server_s": 0.4791,
-      "tpot_p99_server_s": 0.2859,
-      "itl_p99_server_s": 0.3314,
-      "queue_p99_server_s": 72.2,
-      "req_latency_p99_server_s": 22.425
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:agent": {
-      "ttft_p99_server_s": 67.693,
-      "ttft_p50_server_s": 0.4621,
-      "tpot_p99_server_s": 0.2844,
-      "itl_p99_server_s": 0.2953,
-      "queue_p99_server_s": 66.925,
-      "req_latency_p99_server_s": 22.0944
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -13119,84 +13119,84 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 78.8375,
-      "ttft_p50_server_s": 3.9844,
-      "tpot_p99_server_s": 0.1422,
-      "itl_p99_server_s": 0.7038,
-      "queue_p99_server_s": 117.675,
-      "req_latency_p99_server_s": 29.8823
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 78.025,
-      "ttft_p50_server_s": 1.2647,
-      "tpot_p99_server_s": 0.1477,
-      "itl_p99_server_s": 0.661,
-      "queue_p99_server_s": 116.05,
-      "req_latency_p99_server_s": 37.3667
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 77.1125,
-      "ttft_p50_server_s": 0.8417,
-      "tpot_p99_server_s": 0.423,
-      "itl_p99_server_s": 0.6614,
-      "queue_p99_server_s": 114.225,
-      "req_latency_p99_server_s": 36.15
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 76.95,
-      "ttft_p50_server_s": 0.8722,
-      "tpot_p99_server_s": 0.4187,
-      "itl_p99_server_s": 0.6627,
-      "queue_p99_server_s": 113.9,
-      "req_latency_p99_server_s": 36.5143
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 76.8875,
-      "ttft_p50_server_s": 0.8806,
-      "tpot_p99_server_s": 0.417,
-      "itl_p99_server_s": 0.6587,
-      "queue_p99_server_s": 113.775,
-      "req_latency_p99_server_s": 36.8875
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 451.6,
-      "ttft_p50_server_s": 1.5625,
-      "tpot_p99_server_s": 0.193,
-      "itl_p99_server_s": 0.6867,
-      "queue_p99_server_s": 220.1684,
-      "req_latency_p99_server_s": 36.075
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 451.6,
-      "ttft_p50_server_s": 1.5625,
-      "tpot_p99_server_s": 0.193,
-      "itl_p99_server_s": 0.6867,
-      "queue_p99_server_s": 220.1684,
-      "req_latency_p99_server_s": 36.075
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 82.9,
-      "ttft_p50_server_s": 0.9296,
-      "tpot_p99_server_s": 0.5849,
-      "itl_p99_server_s": 0.4332,
-      "queue_p99_server_s": 103.8267,
-      "req_latency_p99_server_s": 648.7
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:agent": {
-      "ttft_p99_server_s": 79.1525,
-      "ttft_p50_server_s": 0.9115,
-      "tpot_p99_server_s": 0.5684,
-      "itl_p99_server_s": 0.4303,
-      "queue_p99_server_s": 101.0,
-      "req_latency_p99_server_s": 627.5
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:soak": {
-      "ttft_p99_server_s": 392.2,
-      "ttft_p50_server_s": 4.5536,
-      "tpot_p99_server_s": 0.1859,
-      "itl_p99_server_s": 0.7093,
-      "queue_p99_server_s": 213.9158,
-      "req_latency_p99_server_s": 102.3
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -14881,84 +14881,84 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 156.28,
-      "ttft_p50_server_s": 3.8393,
-      "tpot_p99_server_s": 0.1487,
-      "itl_p99_server_s": 0.4691,
-      "queue_p99_server_s": 117.675,
-      "req_latency_p99_server_s": 38.9667
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 153.68,
-      "ttft_p50_server_s": 0.7161,
-      "tpot_p99_server_s": 0.1737,
-      "itl_p99_server_s": 0.4425,
-      "queue_p99_server_s": 116.05,
-      "req_latency_p99_server_s": 42.1
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 150.76,
-      "ttft_p50_server_s": 0.6365,
-      "tpot_p99_server_s": 0.1918,
-      "itl_p99_server_s": 0.4416,
-      "queue_p99_server_s": 114.225,
-      "req_latency_p99_server_s": 39.8931
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 150.24,
-      "ttft_p50_server_s": 0.6505,
-      "tpot_p99_server_s": 0.1913,
-      "itl_p99_server_s": 0.4402,
-      "queue_p99_server_s": 113.9,
-      "req_latency_p99_server_s": 39.8581
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 150.04,
-      "ttft_p50_server_s": 0.6543,
-      "tpot_p99_server_s": 0.1911,
-      "itl_p99_server_s": 0.4385,
-      "queue_p99_server_s": 113.775,
-      "req_latency_p99_server_s": 39.8469
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 532.3429,
-      "ttft_p50_server_s": 0.7255,
-      "tpot_p99_server_s": 0.1888,
-      "itl_p99_server_s": 0.454,
-      "queue_p99_server_s": 224.3,
-      "req_latency_p99_server_s": 39.7286
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 532.3429,
-      "ttft_p50_server_s": 0.7255,
-      "tpot_p99_server_s": 0.1888,
-      "itl_p99_server_s": 0.454,
-      "queue_p99_server_s": 224.3,
-      "req_latency_p99_server_s": 39.7286
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 128.1302,
-      "ttft_p50_server_s": 0.6788,
-      "tpot_p99_server_s": 0.7138,
-      "itl_p99_server_s": 0.3254,
-      "queue_p99_server_s": 109.5659,
-      "req_latency_p99_server_s": 344.352
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:agent": {
-      "ttft_p99_server_s": 124.186,
-      "ttft_p50_server_s": 0.6621,
-      "tpot_p99_server_s": 0.7063,
-      "itl_p99_server_s": 0.3217,
-      "queue_p99_server_s": 106.4634,
-      "req_latency_p99_server_s": 324.0
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:soak": {
-      "ttft_p99_server_s": 498.4,
-      "ttft_p50_server_s": 4.1071,
-      "tpot_p99_server_s": 0.3957,
-      "itl_p99_server_s": 0.4606,
-      "queue_p99_server_s": 219.35,
-      "req_latency_p99_server_s": 89.025
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -16648,84 +16648,84 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 39.4313,
-      "ttft_p50_server_s": 3.0357,
-      "tpot_p99_server_s": 0.0737,
-      "itl_p99_server_s": 0.2895,
-      "queue_p99_server_s": 39.6208,
-      "req_latency_p99_server_s": 19.35
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 39.025,
-      "ttft_p50_server_s": 0.4632,
-      "tpot_p99_server_s": 0.0736,
-      "itl_p99_server_s": 0.2727,
-      "queue_p99_server_s": 39.35,
-      "req_latency_p99_server_s": 19.2909
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 38.5688,
-      "ttft_p50_server_s": 0.3971,
-      "tpot_p99_server_s": 0.0734,
-      "itl_p99_server_s": 0.2722,
-      "queue_p99_server_s": 39.0458,
-      "req_latency_p99_server_s": 18.9591
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 38.4875,
-      "ttft_p50_server_s": 0.4093,
-      "tpot_p99_server_s": 0.074,
-      "itl_p99_server_s": 0.276,
-      "queue_p99_server_s": 38.9917,
-      "req_latency_p99_server_s": 21.9333
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 38.4562,
-      "ttft_p50_server_s": 0.4148,
-      "tpot_p99_server_s": 0.074,
-      "itl_p99_server_s": 0.2746,
-      "queue_p99_server_s": 38.9708,
-      "req_latency_p99_server_s": 23.825
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 128.8,
-      "ttft_p50_server_s": 0.4825,
-      "tpot_p99_server_s": 0.0741,
-      "itl_p99_server_s": 0.2896,
-      "queue_p99_server_s": 112.2,
-      "req_latency_p99_server_s": 22.2
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 128.8,
-      "ttft_p50_server_s": 0.4825,
-      "tpot_p99_server_s": 0.0741,
-      "itl_p99_server_s": 0.2896,
-      "queue_p99_server_s": 112.2,
-      "req_latency_p99_server_s": 22.2
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 43.1333,
-      "ttft_p50_server_s": 0.4411,
-      "tpot_p99_server_s": 0.1494,
-      "itl_p99_server_s": 0.199,
-      "queue_p99_server_s": 49.4,
-      "req_latency_p99_server_s": 315.7091
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:agent": {
-      "ttft_p99_server_s": 39.9,
-      "ttft_p50_server_s": 0.4322,
-      "tpot_p99_server_s": 0.1491,
-      "itl_p99_server_s": 0.1989,
-      "queue_p99_server_s": 39.925,
-      "req_latency_p99_server_s": 304.1455
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:soak": {
-      "ttft_p99_server_s": 42.4889,
-      "ttft_p50_server_s": 0.4388,
-      "tpot_p99_server_s": 0.1977,
-      "itl_p99_server_s": 0.1991,
-      "queue_p99_server_s": 39.5875,
-      "req_latency_p99_server_s": 298.2545
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -18411,84 +18411,84 @@
     },
     "histograms": {
      "phase:w1": {
-      "ttft_p99_server_s": 149.3714,
-      "ttft_p50_server_s": 3.8393,
-      "tpot_p99_server_s": 0.1473,
-      "itl_p99_server_s": 0.4675,
-      "queue_p99_server_s": 117.675,
-      "req_latency_p99_server_s": 30.7
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w2": {
-      "ttft_p99_server_s": 141.9429,
-      "ttft_p50_server_s": 0.6898,
-      "tpot_p99_server_s": 0.1737,
-      "itl_p99_server_s": 0.4421,
-      "queue_p99_server_s": 116.05,
-      "req_latency_p99_server_s": 38.2444
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w3": {
-      "ttft_p99_server_s": 133.6,
-      "ttft_p50_server_s": 0.6224,
-      "tpot_p99_server_s": 0.1807,
-      "itl_p99_server_s": 0.4412,
-      "queue_p99_server_s": 114.225,
-      "req_latency_p99_server_s": 37.4333
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w4": {
-      "ttft_p99_server_s": 132.1143,
-      "ttft_p50_server_s": 0.6366,
-      "tpot_p99_server_s": 0.1797,
-      "itl_p99_server_s": 0.4407,
-      "queue_p99_server_s": 113.9,
-      "req_latency_p99_server_s": 37.7818
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w5": {
-      "ttft_p99_server_s": 131.5429,
-      "ttft_p50_server_s": 0.6405,
-      "tpot_p99_server_s": 0.1792,
-      "itl_p99_server_s": 0.4388,
-      "queue_p99_server_s": 113.775,
-      "req_latency_p99_server_s": 37.925
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:w6": {
-      "ttft_p99_server_s": 451.6,
-      "ttft_p50_server_s": 0.7191,
-      "tpot_p99_server_s": 0.1738,
-      "itl_p99_server_s": 0.4566,
-      "queue_p99_server_s": 223.6174,
-      "req_latency_p99_server_s": 37.7571
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:probe": {
-      "ttft_p99_server_s": 451.6,
-      "ttft_p50_server_s": 0.7191,
-      "tpot_p99_server_s": 0.1738,
-      "itl_p99_server_s": 0.4566,
-      "queue_p99_server_s": 223.6174,
-      "req_latency_p99_server_s": 37.7571
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:cap": {
-      "ttft_p99_server_s": 102.175,
-      "ttft_p50_server_s": 0.6595,
-      "tpot_p99_server_s": 0.4472,
-      "itl_p99_server_s": 0.3195,
-      "queue_p99_server_s": 108.1024,
-      "req_latency_p99_server_s": 358.96
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:agent": {
-      "ttft_p99_server_s": 96.875,
-      "ttft_p50_server_s": 0.6443,
-      "tpot_p99_server_s": 0.4436,
-      "itl_p99_server_s": 0.3158,
-      "queue_p99_server_s": 105.0,
-      "req_latency_p99_server_s": 342.0
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      },
      "phase:soak": {
-      "ttft_p99_server_s": 392.2,
-      "ttft_p50_server_s": 3.9375,
-      "tpot_p99_server_s": 0.187,
-      "itl_p99_server_s": 0.4598,
-      "queue_p99_server_s": 218.4522,
-      "req_latency_p99_server_s": 103.48
+      "ttft_p99_server_s": null,
+      "ttft_p50_server_s": null,
+      "tpot_p99_server_s": null,
+      "itl_p99_server_s": null,
+      "queue_p99_server_s": null,
+      "req_latency_p99_server_s": null
      }
     },
     "host_per_machine": {}
@@ -19903,29 +19903,37 @@
        "path": "score",
        "value": 0.666
       }
+     },
+     {
+      "text": "归一化口径: 各指标对全部参评 complete 场景做 min-max(单场景=1.0 基线); KV 容量缺失的场景该项按 0 计入并在此披露",
+      "check": null
      }
     ],
-    "runner_up": null
+    "runner_up": {
+     "scenario_id": "3552466c",
+     "label": "Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+40960)",
+     "score": 0.614
+    }
    },
    {
     "profile": "延迟敏感",
-    "winner": "e64080d1",
-    "winner_label": "Qwen3.6-35B-A3B-NVFP4-Fast(TP2+EP+MTP2+1M)",
+    "winner": "080ea122",
+    "winner_label": "Qwen3.8-27B-NVFP4(TP2+40960)",
     "reasons": [
      {
-      "text": "c1 TPOT p50 ms (越低越好): 7.774 vs 次优 10.82(Qwen3.6-35B-A3B-NVFP4-Fast(TP2+40960))",
+      "text": "真实负载 c1 goodput % (TTFT≤500 且 TPOT≤100 的请求占比): 100 vs 次优 100(Qwen3.6-35B-A3B-NVFP4-Fast(TP2+40960))",
       "check": {
-       "scenario": "e64080d1",
-       "path": "tpot_c1",
-       "value": 7.774
+       "scenario": "080ea122",
+       "path": "goodput_c1_real",
+       "value": 100.0
       }
      },
      {
-      "text": "差距: -3.05 (-28.2%)",
+      "text": "差距: +0 (+0.0%)",
       "check": {
-       "scenario": "e64080d1",
-       "path": "tpot_c1",
-       "value": 7.774
+       "scenario": "080ea122",
+       "path": "goodput_c1_real",
+       "value": 100.0
       }
      }
     ],
@@ -19967,7 +19975,7 @@
     "winner_label": "Qwen3.8-Flash-Next-NVFP4(TP2+MTP2+40960)",
     "reasons": [
      {
-      "text": "三套件(gsm8k/mmlu/arc)均分: 0.9417 vs 次优 0.9367(Qwen3.8-Flash-Next-NVFP4(TP2+EP+MTP2+1M))",
+      "text": "三套件(gsm8k/mmlu/arc)均分: 0.9417 vs 次优 0.9367(Qwen3.8-Flash-Next-NVFP4(TP2+EP+MTP2+1M)) ⚠差距<1.5%% 处于抽样噪声带(单套件±2题即±1%%), 不足以判优——建议并列看待",
       "check": {
        "scenario": "85429e59",
        "path": "cap_avg",

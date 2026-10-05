@@ -460,14 +460,36 @@ def recommend(scs):
                            "path": "score", "value": round(scores[bi], 3)}},
                 {"text": f"c32 出流 {c32s[bi]:.1f} tok/s, c1 出流 {c1s[bi]:.1f} tok/s, 三套件均分 {caps[bi]:.3f}",
                  "check": {"scenario": win["scenario_id"],
-                           "path": "score", "value": round(scores[bi], 3)}}],
-            "runner_up": None})
-    mk("延迟敏感", lambda s: c1(s) and c1(s)["tpot_ms"]["p50"] or 9e9,
-       "min", "c1 TPOT p50 ms (越低越好)", "tpot_c1")
+                           "path": "score", "value": round(scores[bi], 3)}},
+                {"text": "归一化口径: 各指标对全部参评 complete 场景做 min-max"
+                         "(单场景=1.0 基线); KV 容量缺失的场景该项按 0 计入并在此披露",
+                 "check": None}],
+            "runner_up": ({"scenario_id": ok[scores.index(sorted(scores)[-2])]["scenario_id"],
+                           "label": label_of(ok[scores.index(sorted(scores)[-2])]),
+                           "score": round(sorted(scores)[-2], 3)}
+                          if len(ok) > 1 else None)})
+    def w2c1_gp(s):
+        for x in s["perf_metrics"]["workloads"]:
+            if x.get("workload_id") == "w2":
+                for lvv in x["levels"]:
+                    if lvv["concurrency"] == 1:
+                        return (lvv.get("slo") or {}).get("goodput_pct")
+        return None
+    mk("延迟敏感", w2c1_gp, "max", "真实负载 c1 goodput % (TTFT≤500 且 TPOT≤100 的请求占比)",
+       "goodput_c1_real")
     mk("吞吐优先", lambda s: c32(s) and c32(s)["agg"]["output_tok_s"] or 0,
        "max", "c32 出流 tok/s", "c32_out")
     mk("能力优先", lambda s: cap_avg(s, SUITES_P0) or 0,
        "max", "三套件(gsm8k/mmlu/arc)均分", "cap_avg")
+    _cap = next((pp for pp in profiles if pp["profile"] == "能力优先"), None)
+    if _cap and _cap.get("runner_up"):
+        _w = next((s for s in ok if s["scenario_id"] == _cap["winner"]), None)
+        _r = next((s for s in ok if s["scenario_id"] == _cap["runner_up"]["scenario_id"]), None)
+        if _w and _r:
+            _dw, _dr = cap_avg(_w, SUITES_P0) or 0, cap_avg(_r, SUITES_P0) or 0
+            if abs(_dw - _dr) < 0.015:
+                _cap["reasons"][0]["text"] += (
+                    " ⚠差距<1.5%% 处于抽样噪声带(单套件±2题即±1%%), 不足以判优——建议并列看待")
     solo_ok = [s for s in ok if s["deployment"]["mode"] == "single-node"]
     if solo_ok:
         best = max(solo_ok, key=lambda s: num(c32(s)["agg"]["output_tok_s"]))
