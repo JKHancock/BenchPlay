@@ -123,3 +123,8 @@ bash scripts/make_cell.sh bindings/<格子id>.env    # → scripts/cell_<格子i
 详见 [docs/SCRIPTS.md](docs/SCRIPTS.md)——每个阶段该用哪个脚本、怎么调、门禁是什么。
 Agent 在进入任何阶段前先查此表，不要凭记忆调脚本名。
 核心规则: cell4/5/6/7 是编排脚本(内部调 serve/verify/bench 工具链); bench/ 工具与数据集已收编进本仓库(bench/ + data/cap/, 详见 SCRIPTS.md 规则4)。
+
+## 机型分支制（2026-10-10）
+
+一型一分支：Main/V1.0=历史基线；GX10=GB10双机工作线。新机型拉新分支，改
+cluster.sh + bindings + serve 参数即可。各分支流程独立自动演进，无跨分支规则。
