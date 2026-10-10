@@ -1,0 +1,18 @@
+[10-09 07:23:42] DsFlashN-TP2-1M-stress 清场+ray完成, serve发起(166.9GB加载预计10-20min)...
+[10-09 07:33:53] DsFlashN-TP2-1M-stress serve就绪(约520s)
+[10-09 07:33:58] DsFlashN-TP2-1M-stress 四关全过
+[10-09 07:33:58] DsFlashN-TP2-1M-stress 电池开始
+[10-09 07:33:59] DsFlashN-TP2-1M-stress w13-stampede 开始
+[10-09 07:34:32] DsFlashN-TP2-1M-stress w7-long128k 开始
+[10-09 07:36:19] DsFlashN-TP2-1M-stress w8-long256k-c4 开始
+[10-09 07:52:28] DsFlashN-TP2-1M-stress w9-long500k 开始
+[10-09 08:07:29] DsFlashN-TP2-1M-stress w9-long500k FAIL
+[10-09 08:07:33] DsFlashN-TP2-1M-stress w10-interfere 开始
+[10-09 08:07:58] DsFlashN-TP2-1M-stress w10-interfere FAIL
+[10-09 08:08:03] DsFlashN-TP2-1M-stress w11-overflow 开始
+[10-09 08:08:27] DsFlashN-TP2-1M-stress w11-overflow FAIL
+[10-09 08:08:32] DsFlashN-TP2-1M-stress w12-marathon 开始
+[10-09 08:08:57] DsFlashN-TP2-1M-stress w12-marathon FAIL
+[10-09 08:09:01] DsFlashN-TP2-1M-stress probes 开始
+[10-09 08:14:24] DsFlashN-TP2-1M-stress DONE(全流程电池完成)
+[10-09 08:14:25] DsFlashN-TP2-1M-stress 电池含FAIL标记, 判失败

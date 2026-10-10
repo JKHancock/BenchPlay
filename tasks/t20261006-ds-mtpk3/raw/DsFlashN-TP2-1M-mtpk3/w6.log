@@ -1,0 +1,2 @@
+  w6 c=64  n=64  TTFT 93396.2/195476.2 TPOT 100.9/128.4 ITLp99 471.5 out 75.5 tok/s goodput 0.0% ok/f=64/0
+PASS w6 1档 → D:/CSharpProject/BenchPlaybook/tasks/t20261006-ds-mtpk3/raw/DsFlashN-TP2-1M-mtpk3/w6.json

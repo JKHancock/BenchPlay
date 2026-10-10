@@ -1,0 +1,1 @@
+FAIL warmup: ConnectionError: HTTPConnectionPool(host='192.168.199.129', port=8000): Max retries exceeded with url: /v1/chat/completions (Caused by NewConnectionError("HTTPConnection(host='192.168.199.129', port=8000): Failed to e

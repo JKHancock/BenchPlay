@@ -1,0 +1,2 @@
+  w13-stampede c=8   n=8   TTFT 14346.2/20322.0 TPOT 183.4/353.7 ITLp99 3167.1 out 19.5 tok/s goodput 0.0% ok/f=8/0
+PASS w13-stampede 1档 → D:/CSharpProject/BenchPlaybook/tasks/t20261006-ds-stress/raw/DsFlashN-TP2-1M-stress/w13-stampede.json

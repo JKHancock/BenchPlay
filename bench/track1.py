@@ -8,6 +8,15 @@
   w4 long-4096x256   长文预填      c1/c4       n 4/8
   w5 outladder       TTFT/长输出   c1 n1/out_len
   w6 c64             满序列批      c64 n64
+  w7 long-128k       超长冷prefill  c1 n1
+  w8 long-256k-c4    严苛角: 多路×冷×超大  c4 n4 (4×256K同时灌入, chunked交错)
+  w9 long-500k       超大档(≥500K)  c1/c2 n1/2 (2×500K=1M并发边界;
+                       input=500000绝对值口径, 兼容flash-next 524288窗口)
+  w10 interfere      干扰战: 巨型冷prefill进行中×短对话c8, 量化TTFT干扰比
+  w11 overflow       池溢出: 4×500K冷prompt灌1.41M池, 抢占/雪崩行为观测
+  w12 marathon       长输出马拉松: c8×16384输出, decode长跑稳定性
+  w13 stampede       冷踩踏: 跳过warmup首打c8×4K, 服务就绪第0秒的TTFT
+                       (注意: 四门verify已发过小请求, 实测为"首个真实负载"口径)
 指标族: ttft/tpot{mean,p50,p90,p99,max} · itl{p50,p99,max} · e2e{p50,p90,p99}
         · per_stream{p50,p99} · agg · slo.goodput · reliability · roofline(c1)
 
@@ -45,6 +54,14 @@ WORKLOADS = {
     "w2s": {"prompts_file": True, "levels": [1, 2, 4, 8, 16, 32],
             "np": [8, 8, 16, 16, 32, 48]},
     "w7-long128k": {"input_len": 131072, "output_len": 64, "levels": [1], "np": [1]},
+    "w8-long256k-c4": {"input_len": 262144, "output_len": 64, "levels": [4], "np": [4]},
+    "w9-long500k": {"input_len": 500000, "output_len": 32, "levels": [1, 2], "np": [1, 2]},
+    "w10-interfere": {"interfere": True, "giant_len": 500000,
+                      "input_len": 32, "output_len": 8, "levels": [8], "np": [32]},
+    "w11-overflow": {"input_len": 500000, "output_len": 32, "levels": [4], "np": [4]},
+    "w12-marathon": {"input_len": 512, "output_len": 16384, "levels": [8], "np": [8]},
+    "w13-stampede": {"input_len": 4096, "output_len": 64, "levels": [8], "np": [8],
+                     "cold": True},
 }
 
 SLO = {"ttft_ms": 500.0, "tpot_ms": 100.0}
@@ -168,7 +185,9 @@ def main():
     ap.add_argument("--workload", required=True, choices=sorted(WORKLOADS))
     ap.add_argument("--request-timeout-s", type=int, default=600)
     ap.add_argument("--cooldown-s", type=int, default=10)
-    ap.add_argument("--seed", type=int, default=20260930)
+    # seed: 显式传参=可复现; 缺省=时间派生(口径修正2026-10-06: 固定seed重跑时prompt逐字
+    # 复现, 第二次运行起prefill前缀全命中APC, TTFT偏乐观; 实际seed记录在输出spec里可复现)
+    ap.add_argument("--seed", type=int, default=None)
     ap.add_argument("--weights-active-gb", type=float, default=0.0)
     ap.add_argument("--bw-gbps", type=float, default=273.0)
     ap.add_argument("--data-dir", default=os.path.dirname(
@@ -176,6 +195,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--evidence-dir", default=None)
     args = ap.parse_args()
+    if args.seed is None:
+        args.seed = int(time.time()) % 100000000
 
     wl = dict(WORKLOADS[args.workload])
     if args.evidence_dir:
@@ -208,6 +229,55 @@ def main():
               else "FAIL %s 存在失败" % args.workload)
         raise SystemExit(0 if result["gate_pass"] else 1)
 
+    # w10: 干扰战 — 巨型冷prefill进行中打短对话, 量化chunked-prefill的干扰比
+    if wl.get("interfere"):
+        import threading
+        conc, n = wl["levels"][0], wl["np"][0]
+        prompts = [make_prompt(args.seed + 2000 + i, wl["input_len"]) for i in range(n)]
+        olens = [wl["output_len"]] * n
+        warm = client.chat_stream([{"role": "user", "content": make_prompt(1, 512)}],
+                                  max_tokens=16, ignore_eos=True)
+        if not warm["ok"]:
+            raise SystemExit("FAIL warmup: %s" % warm["error"])
+        pa = []
+        run_level(client, conc, n, prompts, olens, args.seed + 3000, pa,
+                  args.evidence_dir, args.workload + "-ctrl", 0)
+        box = {}
+
+        def _giant():
+            box["r"] = client.chat_stream(
+                [{"role": "user", "content": make_prompt(args.seed + 4000,
+                                                         wl["giant_len"])}],
+                max_tokens=16, ignore_eos=True)
+        th = threading.Thread(target=_giant)
+        th.start()
+        time.sleep(1.0)  # 让巨型请求进入prefill中段再开始干扰测量
+        pb = []
+        run_level(client, conc, n, prompts, olens, args.seed + 5000, pb,
+                  args.evidence_dir, args.workload + "-load", 1)
+        th.join(timeout=args.request_timeout_s)
+        g = box.get("r") or {"ok": False, "error": "giant-thread-timeout"}
+        ratio = None
+        if pa[0]["ttft_ms"]["p50"] and pb[0]["ttft_ms"]["p50"]:
+            ratio = round(pb[0]["ttft_ms"]["p50"] / pa[0]["ttft_ms"]["p50"], 2)
+        gate = (pa[0]["reliability"]["failed"] == 0
+                and pb[0]["reliability"]["failed"] == 0 and g["ok"] is True)
+        result = {"workload_id": args.workload, "kind": "interfere",
+                  "spec": {"giant_len": wl["giant_len"],
+                           "input_len": wl["input_len"], "output_len": wl["output_len"],
+                           "concurrency": conc, "n": n, "seed": args.seed,
+                           "warmup": 1},
+                  "control": pa[0], "under_load": pb[0],
+                  "giant": {"ok": g.get("ok"), "ttft_ms": g.get("ttft_ms"),
+                            "wall_ms": g.get("wall_ms"), "finish": g.get("finish")},
+                  "interference_ratio_p50": ratio, "duration_s": 0,
+                  "gate_pass": gate}
+        with open(args.out, "w", encoding="utf-8") as f:
+            json.dump(result, f, **UTF8JSON)
+        print("PASS %s 干扰比p50=%s (giant ttft=%.0fms)" % (
+            args.workload, ratio, g.get("ttft_ms") or 0))
+        raise SystemExit(0 if gate else 1)
+
     # prompts 数据集(w2) or 合成
     if wl.get("prompts_file"):
         rows = load_prompts(args.data_dir)
@@ -219,10 +289,13 @@ def main():
         dataset = "random-%d" % wl["input_len"]
 
     phases = []
-    warm = client.chat_stream([{"role": "user", "content": make_prompt(1, 512)}],
-                              max_tokens=16, ignore_eos=True)
-    if not warm["ok"]:
-        raise SystemExit("FAIL warmup: %s" % warm["error"])
+    # w13-stampede: cold=True 跳过warmup, 测"服务就绪后首个真实负载"的TTFT
+    # (四门verify已发过小请求, 故口径为首个负载而非绝对第0请求)
+    if not wl.get("cold"):
+        warm = client.chat_stream([{"role": "user", "content": make_prompt(1, 512)}],
+                                  max_tokens=16, ignore_eos=True)
+        if not warm["ok"]:
+            raise SystemExit("FAIL warmup: %s" % warm["error"])
 
     t_start = time.time()
     for li, conc in enumerate(wl["levels"]):
@@ -265,7 +338,8 @@ def main():
         "spec": {"input_len": wl.get("input_len"), "output_len": wl.get("output_len"),
                  "dataset": dataset, "levels": wl["levels"], "np": wl["np"],
                  "seed": args.seed, "temperature": 0.0, "ignore_eos": True,
-                 "no_think": True, "warmup": 1, "cooldown_s": args.cooldown_s},
+                 "no_think": True, "warmup": 0 if wl.get("cold") else 1,
+                 "cooldown_s": args.cooldown_s},
         "levels": phases, "duration_s": dur, "roofline": roofline,
         "gate_pass": not bad,
     }

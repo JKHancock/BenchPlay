@@ -1,0 +1,146 @@
+{
+  "workload_id": "w9-long500k",
+  "spec": {
+    "input_len": 500000,
+    "output_len": 32,
+    "dataset": "random-500000",
+    "levels": [
+      1,
+      2
+    ],
+    "np": [
+      1,
+      2
+    ],
+    "seed": 91503550,
+    "temperature": 0.0,
+    "ignore_eos": true,
+    "no_think": true,
+    "warmup": 1,
+    "cooldown_s": 10
+  },
+  "levels": [
+    {
+      "concurrency": 1,
+      "num_prompts": 1,
+      "retried": 2,
+      "ttft_ms": {
+        "mean": null,
+        "p50": null,
+        "p90": null,
+        "p99": null,
+        "max": null
+      },
+      "tpot_ms": {
+        "mean": null,
+        "p50": null,
+        "p90": null,
+        "p99": null,
+        "max": null
+      },
+      "itl_ms": {
+        "p50": null,
+        "p99": null,
+        "max": null
+      },
+      "e2e_ms": {
+        "p50": null,
+        "p90": null,
+        "p99": null
+      },
+      "per_stream_out_tok_s": {
+        "p50": null,
+        "p99": null
+      },
+      "agg": {
+        "output_tok_s": 0.0,
+        "total_tok_s": 0.0,
+        "qps": 0.0
+      },
+      "slo": {
+        "ttft_le_ms": 500.0,
+        "tpot_le_ms": 100.0,
+        "goodput_pct": null,
+        "met": null
+      },
+      "reliability": {
+        "completed": 0,
+        "failed": 1,
+        "rejected": 0,
+        "timeout": 1
+      },
+      "wall_s": 824.8,
+      "gauge_peaks": {
+        "kv_peak": 0.669,
+        "gpu_cache_peak": 0.0,
+        "running_peak": 1.0,
+        "samples": 377
+      }
+    },
+    {
+      "concurrency": 2,
+      "num_prompts": 2,
+      "retried": 4,
+      "ttft_ms": {
+        "mean": null,
+        "p50": null,
+        "p90": null,
+        "p99": null,
+        "max": null
+      },
+      "tpot_ms": {
+        "mean": null,
+        "p50": null,
+        "p90": null,
+        "p99": null,
+        "max": null
+      },
+      "itl_ms": {
+        "p50": null,
+        "p99": null,
+        "max": null
+      },
+      "e2e_ms": {
+        "p50": null,
+        "p90": null,
+        "p99": null
+      },
+      "per_stream_out_tok_s": {
+        "p50": null,
+        "p99": null
+      },
+      "agg": {
+        "output_tok_s": 0.0,
+        "total_tok_s": 0.0,
+        "qps": 0.0
+      },
+      "slo": {
+        "ttft_le_ms": 500.0,
+        "tpot_le_ms": 100.0,
+        "goodput_pct": null,
+        "met": null
+      },
+      "reliability": {
+        "completed": 0,
+        "failed": 2,
+        "rejected": 0,
+        "timeout": 2
+      },
+      "wall_s": 60.8,
+      "gauge_peaks": {
+        "kv_peak": 0.0,
+        "gpu_cache_peak": 0.0,
+        "running_peak": 0.0,
+        "samples": 0
+      }
+    }
+  ],
+  "duration_s": 895.9,
+  "roofline": {
+    "ceiling_tok_s": 91.0,
+    "c1_output_tok_s": 0.0,
+    "utilization": null,
+    "warning": null
+  },
+  "gate_pass": false
+}

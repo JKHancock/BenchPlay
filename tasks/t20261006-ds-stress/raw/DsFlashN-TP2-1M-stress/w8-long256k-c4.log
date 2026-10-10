@@ -1,0 +1,2 @@
+  w8-long256k-c4 c=4   n=4   TTFT 599953.5/951254.8 TPOT 2990.7/3121.9 ITLp99 6135.9 out 0.3 tok/s goodput 0.0% ok/f=4/0
+PASS w8-long256k-c4 1档 → D:/CSharpProject/BenchPlaybook/tasks/t20261006-ds-stress/raw/DsFlashN-TP2-1M-stress/w8-long256k-c4.json

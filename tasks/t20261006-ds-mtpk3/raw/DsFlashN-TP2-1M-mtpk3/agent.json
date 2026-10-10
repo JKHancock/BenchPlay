@@ -1,0 +1,84 @@
+{
+  "track": "track3",
+  "api_base": "http://192.168.199.129:8000/v1",
+  "model": "ds-nvfp4",
+  "metrics": {
+    "selection_acc": 1.0,
+    "args_acc": 1.0,
+    "restraint_included": true,
+    "n": 8,
+    "loop_success": 1.0,
+    "n_loops": 2
+  },
+  "details": [
+    {
+      "id": "w1",
+      "sel": true,
+      "args": true,
+      "ms": 2332.0,
+      "got": "get_weather"
+    },
+    {
+      "id": "w2",
+      "sel": true,
+      "args": true,
+      "ms": 3112.0,
+      "got": "search_docs"
+    },
+    {
+      "id": "w3",
+      "sel": true,
+      "args": true,
+      "ms": 2186.0,
+      "got": "calc"
+    },
+    {
+      "id": "w4",
+      "sel": true,
+      "args": true,
+      "ms": 2454.0,
+      "got": "get_weather"
+    },
+    {
+      "id": "w5",
+      "sel": true,
+      "args": true,
+      "ms": 3574.0,
+      "got": "send_email"
+    },
+    {
+      "id": "n1",
+      "sel": true,
+      "args": null,
+      "ms": 13069.0,
+      "got": null
+    },
+    {
+      "id": "n2",
+      "sel": true,
+      "args": null,
+      "ms": 2750.0,
+      "got": null
+    },
+    {
+      "id": "w6",
+      "sel": true,
+      "args": true,
+      "ms": 3381.0,
+      "got": "search_docs"
+    }
+  ],
+  "loops": [
+    {
+      "id": "l1",
+      "loop_ok": true,
+      "e2e_ms": 6372.0
+    },
+    {
+      "id": "l2",
+      "loop_ok": true,
+      "e2e_ms": 3121.0
+    }
+  ],
+  "gate_pass": true
+}

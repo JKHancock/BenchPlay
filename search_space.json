@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "updated": "2026-10-09",
+  "scope": "GX10双机集群(192.168.199.129/134, GB10×2)。本表=部署方案搜索引擎的状态: 全部维度、已测格子(带证据指针)、未测格子(带假设与优先级)。选格子方法论见 AGENTS.md §部署方案搜索。",
+  "policy": {
+    "cell_generation": "未测格子 → 写 bindings/<id>.env → bash scripts/make_cell.sh bindings/<id>.env → 生成 cell 跑完 → 结果回填本表(tested区)+verdict",
+    "no_handwritten_cells": "新cell一律经生成器(未替换token门禁/语法门禁/防覆盖门禁); 历史cell(cell4-15)保留为存量, 不再手写新增",
+    "evidence_rule": "verdict必须指向 tasks/<id>/ 证据; 无实测不写结论(宪法)"
+  },
+  "dimensions": {
+    "model_quant": {
+      "DeepSeek-V4-Flash": [
+        "NVFP4",
+        "FP8"
+      ],
+      "Qwen3.8-Flash-Next": [
+        "NVFP4",
+        "FP8"
+      ],
+      "Qwen3.6-35B-A3B": [
+        "NVFP4-Fast"
+      ],
+      "Qwen3.8-27B": [
+        "NVFP4"
+      ]
+    },
+    "parallel": [
+      "TP1",
+      "TP2",
+      "TP2+EP2",
+      "PP2",
+      "TP2+EP2+PP2"
+    ],
+    "mtp": {
+      "DeepSeek(NVFP4)": [
+        "off",
+        "dspark-k2",
+        "dspark-k3",
+        "dspark-k4"
+      ],
+      "DeepSeek(FP8)": [
+        "deepseek_mtp-k2"
+      ],
+      "Flash-Next": [
+        "off",
+        "qwen4exp-k2",
+        "qwen4exp-k3"
+      ]
+    },
+    "gpu_mem_util": [
+      "0.80",
+      "0.85",
+      "0.90"
+    ],
+    "batched_prefill_tokens": [
+      "8192",
+      "16384",
+      "32768"
+    ],
+    "context_x_seqs": [
+      "500Kx3",
+      "1Mx3",
+      "1Mx8",
+      "1Mx2",
+      "250Kx6"
+    ],
+    "thinking_default": [
+      "off(产品口径)",
+      "on"
+    ]
+  },
+  "tested": [
+    {
+      "id": "matrix-20260930",
+      "config": "12场景矩阵: Qwen3.6×4(TP1/TP2/TP2EP2) + Qwen3.8-27B×2 + FlashNext×2(TP1/TP2) + DS-FP8 + DS-NVFP4",
+      "evidence": "tasks/t20260930-matrix-full/ (含raw4/, report_doc.json)",
+      "verdict": "全场景报告与场景卡片; 部分组合因内存/兼容排除(见 scripts/excluded_scenarios.json)"
+    },
+    {
+      "id": "dsflash-nvfp4-fp8-20261004",
+      "config": "DS-V4-Flash NVFP4 vs FP8 对照",
+      "evidence": "tasks/t20261004-dsflash-fp8/, tasks/t20261004-dsflash-nvfp4/",
+      "verdict": "NVFP4 性能最高(用户裁决口径)"
+    },
+    {
+      "id": "soak-500k-20261004",
+      "config": "soak: 3路×52万上下文长期浸泡",
+      "evidence": "tasks/t20261004-soak/",
+      "verdict": "3×52万 零抢占零熔断; 1M len+seqs3 准入控制可行"
+    },
+    {
+      "id": "ds-nvfp4-1m-ep2-k2",
+      "config": "DS NVFP4 TP2+EP2+DSpark k2, 原生1M, batched8192",
+      "evidence": "tasks/t20261005-dsnvfp4-1m-ep2/ (cell15)",
+      "verdict": "EP2聚合+6~9%; 产品口径 1M×3(KV池1,411,656; 注意: 降500K反使池缩水35%)"
+    },
+    {
+      "id": "flashnext-1m-ep2-k2",
+      "config": "FlashNext NVFP4 TP2+EP2+qwen4exp k2, YaRN4x→1M, batched8192",
+      "evidence": "tasks/t20261005-flashnext-1m-ep2/ (cell14)",
+      "verdict": "产品口径 500K×3(KV池1,919,532, 3×500K=1.57M留8%余量; 4×500K超池8.5%不可承诺); 单流46tok/s"
+    },
+    {
+      "id": "ds-nvfp4-mtpk3",
+      "config": "DS NVFP4 TP2+EP2+DSpark k3, 原生1M(其余同cell15)",
+      "evidence": "tasks/t20261006-ds-mtpk3/ (全电池绿: 3h23m)",
+      "verdict": "k3无增益且并发档略差于k2: c1持平(TTFT461/459ms), c8吞吐71.0 vs 80.3(-12%), c32 75.4 vs 79.3(-5%), goodput c32 2.1%→0; k2保持最优, k4曲线关闭"
+    },
+    {
+      "id": "ds-nvfp4-stress-battery",
+      "config": "产品口径k2 + 压力专项(w13/w7/w8/w9)",
+      "evidence": "tasks/t20261006-ds-stress/",
+      "verdict": "部分完成:w13冷踩踏33s/w7 128K 1.8min/w8 4×256K冷prefill被调度器串行化(16min, 有效~10K tok/s, chunked-prefill预算被单请求独占=多用户巨贴互相排队); ★w9 c2(2×500K并发)→08:02:17 134整机宕机(QSFP双链路先断,管理网亦失联), vLLM EngineDead为从属症状(RuntimeError:cancelled=TP对端消失)——池边界行为=断崖(节点死亡)而非优雅抢占, 疑似GB10统一内存极限压力致内核级崩溃; w10/w11/w12未跑"
+    }
+  ],
+  "untested": [
+    {
+      "id": "stress-rerun-w10-w12",
+      "priority": 1,
+      "hypothesis": "干扰战+马拉松画像(独立于崩溃段); w8串行化发现后, w10干扰比的解读需结合该行为",
+      "baseline": "ds-nvfp4-stress-battery(部分)",
+      "binding": "可由ds-stress绑定改WLOADS为 w10-interfere w12-marathon 重新生成"
+    },
+    {
+      "id": "ds-nvfp4-mtpk4",
+      "priority": 2,
+      "hypothesis": "k收益曲线终点; 若k3已无增益则本格降级为'仅曲线补点'",
+      "baseline": "ds-nvfp4-mtpk3",
+      "binding": null
+    },
+    {
+      "id": "flashnext-mtpk3",
+      "priority": 3,
+      "hypothesis": "qwen4exp k3 与 dspark k3 曲线对照(两种草稿拓扑的k敏感性)",
+      "baseline": "flashnext-1m-ep2-k2",
+      "binding": null
+    },
+    {
+      "id": "envelope-1Mx2",
+      "priority": 4,
+      "hypothesis": "1M×2: 深上下文少并发SLA的吞吐上限; 与1M×3对比单位算力收益",
+      "baseline": "ds-nvfp4-1m-ep2-k2",
+      "binding": null
+    },
+    {
+      "id": "envelope-250Kx6",
+      "priority": 5,
+      "hypothesis": "浅上下文高并发: KV池利用率与goodput的最优比; 验证seqs放宽后的抢占边界",
+      "baseline": "flashnext-1m-ep2-k2(池更大更适合)",
+      "binding": null
+    },
+    {
+      "id": "memutil-090",
+      "priority": 6,
+      "hypothesis": "0.85→0.90: KV池+~15%? 但激活/CUDA图余量压缩, OOM风险点探测",
+      "baseline": "ds-nvfp4-1m-ep2-k2",
+      "binding": null
+    },
+    {
+      "id": "batched-16384",
+      "priority": 7,
+      "hypothesis": "chunked prefill粒度翻倍: TTFT(c1)恶化 vs 吞吐(c32)提升的trade; 抢占频率变化",
+      "baseline": "ds-nvfp4-1m-ep2-k2",
+      "binding": null
+    },
+    {
+      "id": "flashnext-fp8",
+      "priority": 8,
+      "hypothesis": "FlashNext量化对照补全(DS侧已有NVFP4>FP8结论, 本格验证是否泛化)",
+      "baseline": "flashnext-1m-ep2-k2",
+      "binding": null
+    },
+    {
+      "id": "pp2",
+      "priority": 9,
+      "hypothesis": "流水线并行 vs TP2: 双机互联带宽瓶颈下的延迟/吞吐对比(低优先: TP2已够用, PP价值待业务诉求)",
+      "baseline": "ds-nvfp4-1m-ep2-k2",
+      "binding": null
+    }
+  ],
+  "deferred": [
+    {
+      "id": "thinking-on-cost",
+      "reason": "用户裁决暂不量化(2026-10-06); 产品口径已定默认关(vllm parser补丁)",
+      "reopen_if": "老板侧重新反馈思考耗时问题"
+    },
+    {
+      "id": "mla-kv-accounting",
+      "reason": "MLA的KV记账矛盾(测量精度欠账), 影响池利用率类结论, 需先修再信",
+      "reopen_if": "任何涉及KV池容量结论的格子开跑前"
+    },
+    {
+      "id": "w11-overflow-rerun",
+      "reason": "4×500K预计复现节点死亡(w9c2的1M已致134宕机); 在根因查明(134现场检查+内存护栏方案)前禁止重跑",
+      "reopen_if": "134恢复且查明宕机根因, 或加内存护栏(如降mem-util/加请求级长度准入)后经评审"
+    },
+    {
+      "id": "node134-outage-20261009",
+      "reason": "★运维事故: 10-09 08:02:17 134在2×500K并发prefill下整机失联(129侧QSFP双链路Link down同时刻), 需现场检查电源/内核panic记录; 集群当前半瘫(129单机无法装载双机模型), 服务中断, newapi已复启但后端渠道不可用",
+      "reopen_if": "现场恢复134后: 查journalctl -k -b -1定位panic/OOM → 单验QSFP → 重跑cluster.sh → 恢复flash-next双机服务"
+    }
+  ]
+}

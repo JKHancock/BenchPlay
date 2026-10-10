@@ -1,0 +1,3 @@
+  w9-long500k c=1   n=1   TTFT —/— TPOT —/— ITLp99 — out 0.0 tok/s goodput —% ok/f=0/1
+  w9-long500k c=2   n=2   TTFT —/— TPOT —/— ITLp99 — out 0.0 tok/s goodput —% ok/f=0/2
+FAIL w9-long500k 失败/空档: [(1, {'completed': 0, 'failed': 1, 'rejected': 0, 'timeout': 1}), (2, {'completed': 0, 'failed': 2, 'rejected': 0, 'timeout': 2})]

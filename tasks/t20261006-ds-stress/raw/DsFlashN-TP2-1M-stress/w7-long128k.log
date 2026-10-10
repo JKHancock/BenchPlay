@@ -1,0 +1,2 @@
+  w7-long128k c=1   n=1   TTFT 97633.9/97633.9 TPOT 40.4/40.4 ITLp99 94.1 out 0.6 tok/s goodput 0.0% ok/f=1/0
+PASS w7-long128k 1档 → D:/CSharpProject/BenchPlaybook/tasks/t20261006-ds-stress/raw/DsFlashN-TP2-1M-stress/w7-long128k.json
